@@ -79,3 +79,29 @@
 - T2（書誌情報の取得），T3（リンク切れ確認），T4（新着論文の自動取り込み），T5（GitHubの設定），T6（データレビュー），
   T7（組み合わせ提案v1の実装）は，ネットワークアクセスを伴う処理や，GitHub側の設定，ユーザーによるデータレビューを
   要するため，本セッションでは未実施である．詳細は`document.md`の「残課題」に記載した．
+
+## 追加指示（6回目）: GitHub Pagesでの公開
+
+ユーザーが公開先のGitHubリポジトリ（https://github.com/yryo1005/optimizer_map ）を既に用意しており，
+pushはユーザー自身がGitHub Desktopから行う方針であることを確認した．そのためClaude Codeからのpushは行わず，
+push後にGitHub側で必要な設定（Settings → Pages の Source を GitHub Actions にする等）をチャット上で案内した．
+
+## 追加指示（7回目）: UIの文字サイズとホバー時の注釈の修正
+
+ユーザーから，（1）マップ全体の文字が小さい，（2）ノード（円）にマウスホバーした際にブラウザの機能と思われる注釈が
+出て文字と重なり読みにくい，という2点の指摘を受けた．
+
+調査の結果，(2)は`site/assets/app.js`でノードに対しSVGの`<title>`要素を付与していたことが原因であり，ブラウザの
+ネイティブツールチップが表示される挙動だった．既に同等以上の情報（Citation数・発表年・分野タグ）を表示する独自の
+ツールチップ（`showNodeTooltip`）が実装済みだったため，冗長な`<title>`要素を削除して解消した．
+
+(1)は`site/assets/style.css`内の`font-size`指定（本文14px，補足情報11〜13px等）を全体的に引き上げた
+（本文16px，補足情報13〜14px等）．SVG上のノードラベル・改良パターンのバッジ（略号）については，文字幅・高さを
+JavaScript側で計算してラベルの重なり回避やバッジの矩形サイズを決めている箇所（`site/assets/app.js`の
+`CONFIG.labelFont`，`updateLabels`，`renderBadges`）があったため，CSSのフォントサイズ変更と整合するよう
+該当箇所の数値も合わせて更新した．
+
+変更後，`tools/validate_nodes.py`，`tools/check_formulas.mjs`，`tools/build_graph.py`，
+`tools/precompute_layout.mjs`，E2Eスモークテスト（11/11成功）を再実行し，回帰がないことを確認した．また
+Playwrightのヘッドレスブラウザで，ノード要素に`<title>`が存在しないこと（0件），ノードラベルのフォントサイズが
+13pxに変更されていること，コンソール・ページエラーがないことを確認した．
