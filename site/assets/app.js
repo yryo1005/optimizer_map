@@ -20,7 +20,7 @@ const CONFIG = {
   dataUrl: "data/graph.json",
   labelTopN: 45,
   zoomLabelK: 1.6,
-  labelFont: '11px system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif',
+  labelFont: '13px system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif',
   badgeMaxEdges: 200,
   compareMax: 3,
   playIntervalMs: 350,
@@ -257,7 +257,6 @@ function setupSvg() {
   nodeSel.append("g").attr("class", "ring");
   nodeSel.append("circle").attr("class", "body").style("fill", (n) => groupColor(n.group));
   nodeSel.append("text").attr("y", 4).text((n) => n.short_name);
-  nodeSel.append("title").text((n) => `${n.name}（${n.year}）`);
 
   let raf = 0;
   zoom = d3.zoom().scaleExtent([0.1, 6]).on("zoom", (ev) => {
@@ -382,7 +381,7 @@ function updateLabels() {
     if (!selected && !(focus ? related : (zoomed || rank.get(n.id) < CONFIG.labelTopN))) return;
     const pri = (selected ? 1e7 : 0) + (related ? 1e6 : 0) + (n.citations ?? 0);
     const x = t.applyX(n.x + n.r + (n.groups.length > 1 ? 7 : 4)), y = t.applyY(n.y);
-    const w = textWidth(n.short_name) * k, h = 13 * k;
+    const w = textWidth(n.short_name) * k, h = 15 * k;
     cands.push({ n, pri, box: [x, y - h / 2, x + w, y + h / 2], circle: [t.applyX(n.x), t.applyY(n.y), n.r * k] });
   });
   cands.sort((a, b) => b.pri - a.pri);
@@ -413,7 +412,7 @@ function renderBadges(edges) {
       const p = paths.get(edgeKey(e));
       const len = p.getTotalLength();
       const label = e.types.map((t) => state.typeById.get(t)?.badge ?? t).join("·");
-      const w = label.length * 6.4 + 6, h = 13;
+      const w = label.length * 7.2 + 6, h = 15;
       // 中点から少しずつずらして空いている位置を探す
       let pos = null;
       for (const f of [0.5, 0.4, 0.6, 0.3, 0.7]) {
@@ -426,8 +425,8 @@ function renderBadges(edges) {
   }
   const sel = badgeLayer.selectAll("g.badge").data(items, (d) => edgeKey(d.e)).join((enter) => {
     const g = enter.append("g").attr("class", "badge");
-    g.append("rect").attr("rx", 3).attr("height", 13).attr("y", -7);
-    g.append("text").attr("y", 3);
+    g.append("rect").attr("rx", 3).attr("height", 15).attr("y", -7.5);
+    g.append("text").attr("y", 3.5);
     return g;
   });
   sel.attr("transform", (d) => `translate(${d.x},${d.y})`);
