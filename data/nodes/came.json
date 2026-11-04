@@ -1,0 +1,44 @@
+{
+  "id": "came",
+  "name": "CAME (Confidence-guided Adaptive Memory Efficient Optimization)",
+  "short_name": "CAME",
+  "year": 2023,
+  "citations": 150,
+  "categories": [
+    "メモリ効率",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/2307.02047",
+  "summary": "Adafactorはメモリ効率に優れる一方，2次モーメントの因子分解近似の誤差により学習が不安定になることがある．本手法は，更新量とその指数移動平均との差（更新の信頼度）を同様に因子分解して推定し，信頼度の低い更新を抑制することで，Adafactorと同等のメモリ使用量でAdam並みの性能を達成する．",
+  "update_rule": "{\\mathbf U}_t = \\frac{{\\mathbf G}_t}{\\sqrt{\\hat{\\mathbf V}_t}}, \\quad {\\mathbf M}_t = \\beta_1 {\\mathbf M}_{t-1} + (1 - \\beta_1) \\hat{\\mathbf U}_t, \\quad {\\mathbf S}_t \\approx \\mathrm{Factorize}\\left( \\beta_3 {\\mathbf S}_{t-1} + (1 - \\beta_3) (\\hat{\\mathbf U}_t - {\\mathbf M}_t)^2 \\right), \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta \\frac{{\\mathbf M}_t}{\\sqrt{{\\mathbf S}_t}}",
+  "parents": [
+    {
+      "id": "adafactor",
+      "types": [
+        "compression",
+        "stabilization"
+      ],
+      "improvement": "更新量の信頼度（更新量と移動平均の差）の因子分解推定による不安定な更新の抑制"
+    }
+  ],
+  "practical": {
+    "state": "compressed",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "β3"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  },
+  "deep_dive": {
+    "why": "更新量とその移動平均の差（更新の信頼度）を因子分解して推定し，信頼度の低い更新を抑えることで，Adafactor のメモリ効率のまま Adam 並みに安定させる．",
+    "weaknesses": "Adafactor よりわずかに状態量が多い．",
+    "settings": "β1=0.9，β2=0.999，β3=0.9999，η は Adafactor より小さめ（2e-4 程度）．"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "id": "amos",
+  "name": "Amos",
+  "short_name": "Amos",
+  "year": 2022,
+  "citations": 30,
+  "categories": [
+    "適応的学習率",
+    "正則化"
+  ],
+  "reference": "https://arxiv.org/abs/2210.11693",
+  "summary": "モデルの構造から決まる各パラメータの望ましいスケールの情報を用い，そのスケールに向けて重みを引き寄せる適応的な重み減衰と，学習率の自動的な減衰を組み合わせたAdam型の手法である．BERTやT5の事前学習において，AdamWの最良設定より少ないステップ数と，より少ないオプティマイザ状態のメモリで同等以上の損失に到達する．",
+  "update_rule": "\\hat v_t = \\beta \\hat v_{t-1} + (1 - \\beta) \\, \\mathrm{mean}({\\mathbf g}_t^2), \\quad \\gamma_t = \\frac{c \\, \\eta_t^2}{\\hat v_t} \\|{\\mathbf g}_t\\|^2 \\;\\; (\\text{適応的な重み減衰係数}), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\frac{\\eta \\, \\tilde\\eta}{\\sqrt{\\hat v_t}} \\, d_t \\, {\\mathbf g}_t - \\frac{1}{2} \\gamma_t {\\mathbf w}_t \\quad (\\tilde\\eta : \\text{モデルが定めるスケール})",
+  "parents": [
+    {
+      "id": "adamw",
+      "types": [
+        "regularization",
+        "lr_automation"
+      ],
+      "improvement": "モデル由来のスケールに基づく適応的な重み減衰と学習率の自動減衰"
+    },
+    {
+      "id": "adafactor",
+      "types": [
+        "compression"
+      ],
+      "improvement": "スカラーに縮約した2次モーメントによるメモリ削減"
+    }
+  ],
+  "practical": {
+    "state": "compressed",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "η̃（モデル由来のスケール）",
+      "c"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  },
+  "notes": "更新式は論文の手続きを簡略化した表記である．"
+}

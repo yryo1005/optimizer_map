@@ -1,0 +1,46 @@
+{
+  "id": "adafactor",
+  "name": "Adafactor",
+  "short_name": "Adafactor",
+  "year": 2018,
+  "citations": 1500,
+  "categories": [
+    "メモリ効率",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/1804.04235",
+  "summary": "Adamの2次モーメントは全パラメータと同サイズのメモリを必要とする問題に対し，行列形状のパラメータについて2次モーメントを行方向・列方向の和の外積で低ランク近似（因子分解）する手法である．加えて，更新量のRMSによるクリッピングとパラメータのスケールに比例する相対的なステップ幅を導入し，1次モーメントを省略しても安定に学習できるようにしている．",
+  "update_rule": "{\\mathbf G}_t = \\nabla f_t({\\mathbf W}_t), \\quad {\\mathbf R}_t = \\hat\\beta_{2t} {\\mathbf R}_{t-1} + (1 - \\hat\\beta_{2t}) ({\\mathbf G}_t^2) {\\mathbf 1}_m, \\quad {\\mathbf C}_t = \\hat\\beta_{2t} {\\mathbf C}_{t-1} + (1 - \\hat\\beta_{2t}) {\\mathbf 1}_n^\\top ({\\mathbf G}_t^2), \\quad \\hat{\\mathbf V}_t = \\frac{{\\mathbf R}_t {\\mathbf C}_t}{{\\mathbf 1}_n^\\top {\\mathbf R}_t}, \\quad {\\mathbf U}_t = \\frac{{\\mathbf G}_t}{\\sqrt{\\hat{\\mathbf V}_t}}, \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\alpha_t \\frac{{\\mathbf U}_t}{\\max(1, \\mathrm{RMS}({\\mathbf U}_t) / d)}",
+  "parents": [
+    {
+      "id": "adam",
+      "types": [
+        "compression",
+        "stabilization"
+      ],
+      "improvement": "2次モーメントの行・列方向への因子分解によるメモリ削減と，更新量のクリッピング・相対的なステップ幅の導入"
+    }
+  ],
+  "practical": {
+    "state": "compressed",
+    "implementations": [
+      "pytorch",
+      "optax",
+      "keras",
+      "library"
+    ],
+    "hyperparameters": [
+      "η（相対ステップ）",
+      "β2の減衰",
+      "d（クリップ閾値）"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  },
+  "deep_dive": {
+    "why": "2次モーメントを行・列の和に因子分解することで，状態量を O(n+m) に抑える．更新量の RMS によるクリッピングと相対的なステップ幅で，1次モーメントなしでも安定する．",
+    "weaknesses": "因子分解の近似誤差や β2 のスケジュールにより，Adam より不安定になる場合がある．小さなモデルでは利点が小さい．",
+    "settings": "T5 では相対ステップ（η=min(1e-2, 1/√t)），d=1.0，1次モーメントなし．固定学習率で使う場合は relative_step=False とする．"
+  }
+}

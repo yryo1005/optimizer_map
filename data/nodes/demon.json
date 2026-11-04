@@ -1,0 +1,44 @@
+{
+  "id": "demon",
+  "name": "Demon (Decaying Momentum)",
+  "short_name": "Demon",
+  "year": 2019,
+  "citations": 100,
+  "categories": [
+    "高速化"
+  ],
+  "reference": "https://arxiv.org/abs/1910.04952",
+  "summary": "慣性項の係数を学習の進行に応じて減衰させる手法である．各勾配が将来の更新に与える総寄与が線形に減少するように係数のスケジュールを設計することで，学習率のスケジュール調整への依存を減らし，SGDとAdamの双方に適用できる．",
+  "update_rule": "\\beta_t = \\beta_{\\mathrm{init}} \\frac{1 - t/T}{(1 - \\beta_{\\mathrm{init}}) + \\beta_{\\mathrm{init}} (1 - t/T)}, \\quad {\\mathbf v}_{t+1} = \\beta_t {\\mathbf v}_t - \\eta \\nabla f_t({\\mathbf w}_t), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t + {\\mathbf v}_{t+1}",
+  "parents": [
+    {
+      "id": "momentum",
+      "types": [
+        "momentum",
+        "lr_automation"
+      ],
+      "improvement": "慣性項の係数の減衰スケジュールの導入"
+    },
+    {
+      "id": "adam",
+      "types": [
+        "momentum",
+        "lr_automation"
+      ],
+      "improvement": "1次モーメントの減衰率への同一スケジュールの適用"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "β_init",
+      "T"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

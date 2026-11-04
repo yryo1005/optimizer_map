@@ -1,0 +1,16 @@
+{
+  "name": "optimizer-map",
+  "private": true,
+  "type": "module",
+  "description": "Optimizer Map のビルド用ツール（配置の事前計算・更新式の検証・E2Eテスト）",
+  "scripts": {
+    "check:formulas": "node tools/check_formulas.mjs",
+    "build:layout": "node tools/precompute_layout.mjs",
+    "test:e2e": "node tests/e2e/smoke.cjs"
+  },
+  "devDependencies": {
+    "d3": "7.9.0",
+    "katex": "0.16.11",
+    "playwright": "1.63.0"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "nesterov",
+  "name": "Nesterovの加速勾配法 (Nesterov Accelerated Gradient Method, NAG)",
+  "year": 1983,
+  "citation_count": 12000,
+  "category": ["高速化"],
+  "summary": "モーメント法では現在の位置における勾配を用いて慣性項と合成するのに対し，本手法では慣性項に従って一度先読みした位置における勾配を用いて更新する．この先読みにより，目的関数の曲率変化をより早く捉えられるため，モーメント法よりも理論的な収束率が改善される．",
+  "update_rule": "{\\mathbf v}_{t+1} = \\beta {\\mathbf v}_t - \\eta \\nabla f_t({\\mathbf w}_t + \\beta {\\mathbf v}_t), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t + {\\mathbf v}_{t+1}",
+  "paper_url": "https://mathnet.ru/eng/dan46009",
+  "derived_from": [
+    {
+      "parent_id": "momentum",
+      "relation": "慣性項に基づく先読み位置での勾配評価"
+    }
+  ]
+}

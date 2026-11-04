@@ -1,0 +1,34 @@
+{
+  "id": "gradient_centralization",
+  "name": "勾配中心化 (Gradient Centralization)",
+  "short_name": "勾配中心化",
+  "year": 2020,
+  "citations": 400,
+  "categories": [
+    "正則化",
+    "学習安定化"
+  ],
+  "reference": "https://arxiv.org/abs/2004.01461",
+  "summary": "重み行列の勾配について，各出力ニューロンに対応する勾配ベクトルの平均を0にする（中心化する）操作を，最適化手法の更新前に加える手法である．重み空間と出力特徴空間に対する正則化として働き，1行の修正で既存のSGDやAdamに適用でき，学習を安定化し汎化性能を改善する．",
+  "update_rule": "\\Phi_{\\mathrm{GC}}(\\nabla_{{\\mathbf w}_i} f) = \\nabla_{{\\mathbf w}_i} f - \\frac{1}{M} \\sum_{j=1}^{M} \\nabla_{w_{i,j}} f, \\quad {\\mathbf w}_{i,t+1} = {\\mathbf w}_{i,t} - \\eta \\, \\Phi_{\\mathrm{GC}}(\\nabla_{{\\mathbf w}_i} f_t)",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "normalization",
+        "regularization"
+      ],
+      "improvement": "出力ニューロンごとの勾配ベクトルの中心化（平均0化）"
+    }
+  ],
+  "practical": {
+    "state": "na",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [],
+    "tasks": [
+      "vision"
+    ]
+  }
+}

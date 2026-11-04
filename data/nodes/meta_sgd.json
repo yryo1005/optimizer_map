@@ -1,0 +1,43 @@
+{
+  "id": "meta_sgd",
+  "name": "Meta-SGD",
+  "short_name": "Meta-SGD",
+  "year": 2017,
+  "citations": 1000,
+  "categories": [
+    "自動探索・メタ学習",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/1707.09835",
+  "summary": "MAMLの初期パラメータに加えて，内側ループのパラメータごとの学習率ベクトル（更新の方向と大きさ）もメタ学習する手法である．1ステップの内側更新で少数ショット学習に適応でき，MAMLより高い性能を示す．",
+  "update_rule": "\\boldsymbol\\theta'_i = \\boldsymbol\\theta - \\boldsymbol\\alpha \\odot \\nabla_{\\boldsymbol\\theta} \\mathcal{L}_{\\mathcal{T}_i}(\\boldsymbol\\theta), \\quad (\\boldsymbol\\theta, \\boldsymbol\\alpha) \\leftarrow (\\boldsymbol\\theta, \\boldsymbol\\alpha) - \\beta \\nabla_{(\\boldsymbol\\theta, \\boldsymbol\\alpha)} \\sum_{\\mathcal{T}_i} \\mathcal{L}_{\\mathcal{T}_i}(\\boldsymbol\\theta'_i)",
+  "parents": [
+    {
+      "id": "maml",
+      "types": [
+        "problem_transfer",
+        "adaptive"
+      ],
+      "improvement": "パラメータごとの学習率ベクトルのメタ学習"
+    },
+    {
+      "id": "l2l",
+      "types": [
+        "problem_transfer"
+      ],
+      "improvement": "更新則（学習率）そのもののメタ学習"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "β"
+    ],
+    "tasks": [
+      "meta"
+    ]
+  }
+}

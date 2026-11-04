@@ -1,0 +1,33 @@
+{
+  "id": "coordinate_descent",
+  "name": "ランダム座標降下法 (Randomized Coordinate Descent)",
+  "short_name": "ランダム座標降下法",
+  "year": 2012,
+  "citations": 2500,
+  "categories": [
+    "高速化",
+    "メモリ効率"
+  ],
+  "reference": "https://doi.org/10.1137/100802001",
+  "summary": "各反復でランダムに選んだ1つの座標（またはブロック）のみについて，その座標方向の偏微分を用いて更新する手法である．超大規模な問題では全勾配の計算より1座標の偏微分の計算が格段に安価であり，座標ごとのリプシッツ定数に応じたステップ幅により，全体の計算量で勾配法を上回る収束保証が得られることを示した．",
+  "update_rule": "i_t \\sim p_i \\propto L_i^{\\alpha}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\frac{1}{L_{i_t}} \\nabla_{i_t} f({\\mathbf w}_t) \\, {\\mathbf e}_{i_t}",
+  "parents": [
+    {
+      "id": "gd",
+      "types": [
+        "stochastic"
+      ],
+      "improvement": "ランダムに選んだ座標（ブロック）のみの更新"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [],
+    "hyperparameters": [
+      "座標ごとのL_i"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

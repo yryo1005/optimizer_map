@@ -1,0 +1,38 @@
+{
+  "id": "swag",
+  "name": "SWAG (SWA-Gaussian)",
+  "short_name": "SWAG",
+  "year": 2019,
+  "citations": 1200,
+  "categories": [
+    "ベイズ推論",
+    "重み平均化"
+  ],
+  "reference": "https://arxiv.org/abs/1902.02476",
+  "summary": "SWAで重みの平均を求める過程で，重みの2次モーメントと直近の偏差からなる低ランク行列も同時に記録し，平均と対角＋低ランクの共分散を持つガウス分布で重みの事後分布を近似する手法である．追加のコストをほとんど伴わずに，不確実性の推定や較正，分布外検知の性能を改善する．",
+  "update_rule": "\\bar{\\mathbf w} = \\frac{1}{T} \\sum_{i} {\\mathbf w}_i, \\quad \\Sigma_{\\mathrm{diag}} = \\mathrm{diag}\\left( \\frac{1}{T} \\sum_{i} {\\mathbf w}_i^2 - \\bar{\\mathbf w}^2 \\right), \\quad \\hat{\\mathbf D} = [{\\mathbf w}_{T-K+1} - \\bar{\\mathbf w}, \\dots, {\\mathbf w}_T - \\bar{\\mathbf w}], \\quad {\\mathbf w} \\sim \\mathcal{N}\\left( \\bar{\\mathbf w}, \\frac{1}{2} \\left( \\Sigma_{\\mathrm{diag}} + \\frac{\\hat{\\mathbf D} \\hat{\\mathbf D}^\\top}{K - 1} \\right) \\right)",
+  "parents": [
+    {
+      "id": "swa",
+      "types": [
+        "problem_transfer",
+        "averaging"
+      ],
+      "improvement": "重みの2次モーメントと偏差の記録によるガウス事後分布の近似"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "K（偏差の数）",
+      "c"
+    ],
+    "tasks": [
+      "bayes",
+      "vision"
+    ]
+  }
+}

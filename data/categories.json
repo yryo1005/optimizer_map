@@ -1,0 +1,112 @@
+[
+  {
+    "id": "高速化",
+    "description": "慣性項・加速法などにより収束を高速化する手法",
+    "group": "acceleration"
+  },
+  {
+    "id": "適応的学習率",
+    "description": "勾配の統計量に基づきパラメータごとの学習率を調整する手法",
+    "group": "adaptive"
+  },
+  {
+    "id": "2次手法",
+    "description": "ヘッセ行列・フィッシャー情報行列・行列前処理など曲率情報を利用する手法",
+    "group": "second_order"
+  },
+  {
+    "id": "勾配分散低減",
+    "description": "確率的勾配の分散を制御変量・再帰推定等で低減する手法",
+    "group": "variance"
+  },
+  {
+    "id": "正則化",
+    "description": "重み減衰・ノルム制御など正則化の扱いを改善する手法",
+    "group": "generalization"
+  },
+  {
+    "id": "平坦解探索",
+    "description": "損失地形の平坦な最小値を探索し汎化性能を高める手法",
+    "group": "generalization"
+  },
+  {
+    "id": "重み平均化",
+    "description": "反復列や重みの平均・補間を利用する手法",
+    "group": "acceleration"
+  },
+  {
+    "id": "大規模バッチ",
+    "description": "大規模ミニバッチ・分散学習での安定化や通信削減を目的とする手法",
+    "group": "scale"
+  },
+  {
+    "id": "メモリ効率",
+    "description": "オプティマイザの状態量のメモリを削減する手法",
+    "group": "scale"
+  },
+  {
+    "id": "符号ベース",
+    "description": "勾配や慣性項の符号のみを用いて更新する手法",
+    "group": "adaptive"
+  },
+  {
+    "id": "学習率自動調整",
+    "description": "学習率やスケジュールの手動調整を不要にする手法",
+    "group": "lr_design"
+  },
+  {
+    "id": "学習安定化",
+    "description": "勾配爆発・損失スパイク等を抑え学習を安定化する手法",
+    "group": "lr_design"
+  },
+  {
+    "id": "分散学習",
+    "description": "分散・連合学習における通信量削減や並列化を目的とする手法",
+    "group": "scale"
+  },
+  {
+    "id": "ゼロ次手法",
+    "description": "勾配を用いず関数値のみから勾配を推定する手法",
+    "group": "variance"
+  },
+  {
+    "id": "学習率スケジュール",
+    "description": "学習率の時間変化（ウォームアップ・減衰・周期）を設計する手法",
+    "group": "lr_design"
+  },
+  {
+    "id": "自動探索・メタ学習",
+    "description": "更新則そのものを探索・メタ学習によって獲得する手法",
+    "group": "applied"
+  },
+  {
+    "id": "ベイズ推論",
+    "description": "事後分布のサンプリングや変分推論を最適化手法の形で行う手法",
+    "group": "generalization"
+  },
+  {
+    "id": "オンライン学習",
+    "description": "オンライン凸最適化・リグレット解析の枠組みに基づく手法",
+    "group": "lr_design"
+  },
+  {
+    "id": "差分プライバシー",
+    "description": "学習データのプライバシーを保証しながら最適化を行う手法",
+    "group": "generalization"
+  },
+  {
+    "id": "マルチタスク・多目的",
+    "description": "複数の目的関数・タスクの勾配を結合して最適化する手法",
+    "group": "applied"
+  },
+  {
+    "id": "ミニマックス最適化",
+    "description": "鞍点問題・ゲーム（GAN等）の最適化を安定化する手法",
+    "group": "applied"
+  },
+  {
+    "id": "方策最適化",
+    "description": "強化学習の方策の最適化に特化した勾配法",
+    "group": "applied"
+  }
+]

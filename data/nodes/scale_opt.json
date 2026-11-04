@@ -1,0 +1,43 @@
+{
+  "id": "scale_opt",
+  "name": "SCALE (Stochastic Column-normalized Last-layer Momentum)",
+  "short_name": "SCALE",
+  "year": 2025,
+  "citations": 10,
+  "categories": [
+    "メモリ効率"
+  ],
+  "reference": "https://arxiv.org/abs/2506.16659",
+  "summary": "大規模言語モデルの事前学習に必要な最適化手法の最小限の構成要素を調べ，勾配の列ごとの正規化と，最も勾配の雑音が大きい出力層のみに慣性項を用いることの2つで十分であることを示した手法である．SGDに近いメモリ量で，Adamと同等以上の性能を，AdamやMuonより少ないメモリで達成する．",
+  "update_rule": "\\tilde{\\mathbf G}_t = {\\mathbf G}_t \\, \\mathrm{diag}\\left( \\frac{1}{\\|{\\mathbf G}_{t,:,j}\\|} \\right)_j, \\quad {\\mathbf M}_t = \\begin{cases} \\beta {\\mathbf M}_{t-1} + (1 - \\beta) \\tilde{\\mathbf G}_t & (\\text{出力層}) \\\\ \\tilde{\\mathbf G}_t & (\\text{その他}) \\end{cases}, \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta {\\mathbf M}_t",
+  "parents": [
+    {
+      "id": "normalized_sgd_momentum",
+      "types": [
+        "normalization",
+        "compression"
+      ],
+      "improvement": "列ごとの正規化と出力層のみへの慣性項の限定"
+    },
+    {
+      "id": "sinkgd",
+      "types": [
+        "normalization"
+      ],
+      "improvement": "状態を持たない勾配の正規化による簡素化"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "id": "pcgrad",
+  "name": "PCGrad (Projecting Conflicting Gradients)",
+  "short_name": "PCGrad",
+  "year": 2020,
+  "citations": 1500,
+  "categories": [
+    "マルチタスク・多目的"
+  ],
+  "reference": "https://arxiv.org/abs/2001.06782",
+  "summary": "マルチタスク学習で，あるタスクの勾配が別のタスクの勾配と負の内積を持つ（衝突する）場合に，その勾配を衝突する勾配の法平面へ射影して衝突成分を除去する「勾配手術」の手法である．衝突・大きさの差・高い曲率が重なる状況での学習の停滞を防ぎ，マルチタスク学習やマルチタスク強化学習の性能を改善する．",
+  "update_rule": "\\text{for } j \\neq k : \\;\\; \\text{if } {\\mathbf g}_k^\\top {\\mathbf g}_j < 0 : \\; {\\mathbf g}_k \\leftarrow {\\mathbf g}_k - \\frac{{\\mathbf g}_k^\\top {\\mathbf g}_j}{\\|{\\mathbf g}_j\\|^2} {\\mathbf g}_j, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\sum_{k} {\\mathbf g}_k",
+  "parents": [
+    {
+      "id": "mgda",
+      "types": [
+        "problem_transfer"
+      ],
+      "improvement": "最小ノルム方向の代わりに衝突する勾配成分の射影による除去"
+    },
+    {
+      "id": "sgd",
+      "types": [
+        "problem_transfer"
+      ],
+      "improvement": "タスク勾配の衝突の解消（勾配手術）"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [],
+    "tasks": [
+      "multitask",
+      "rl"
+    ]
+  }
+}

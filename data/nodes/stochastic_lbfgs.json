@@ -1,0 +1,51 @@
+{
+  "id": "stochastic_lbfgs",
+  "name": "確率的L-BFGS法 (Stochastic L-BFGS with Variance Reduction)",
+  "short_name": "確率的L-BFGS",
+  "year": 2015,
+  "citations": 300,
+  "categories": [
+    "2次手法",
+    "勾配分散低減"
+  ],
+  "reference": "https://arxiv.org/abs/1508.02087",
+  "summary": "L-BFGS法をミニバッチの確率的勾配で用いると，雑音によりヘッセ逆行列の近似が不安定になる問題に対し，曲率対をサブサンプリングしたヘッセ行列とベクトルの積から計算し，勾配にはSVRGの分散低減を適用した手法である．減衰する学習率を用いずに，強凸な問題で線形収束を達成する．",
+  "update_rule": "{\\mathbf v}_t = \\nabla f_{S}({\\mathbf w}_t) - \\nabla f_{S}(\\tilde{\\mathbf w}) + \\nabla F(\\tilde{\\mathbf w}), \\quad {\\mathbf y}_r = \\nabla^2 f_{T}(\\bar{\\mathbf w}_r) \\, {\\mathbf s}_r \\;\\; (\\text{サブサンプルしたヘッセ行列との積}), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\, {\\mathbf H}^{(m)}_r {\\mathbf v}_t",
+  "parents": [
+    {
+      "id": "lbfgs",
+      "types": [
+        "stochastic",
+        "curvature"
+      ],
+      "improvement": "サブサンプルしたヘッセ行列とベクトルの積による安定した曲率対の計算"
+    },
+    {
+      "id": "svrg",
+      "types": [
+        "variance_reduction"
+      ],
+      "improvement": "分散低減した勾配推定の準ニュートン法への適用"
+    },
+    {
+      "id": "olbfgs",
+      "types": [
+        "stabilization",
+        "curvature"
+      ],
+      "improvement": "確率的L-BFGSの曲率対の安定化"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [],
+    "hyperparameters": [
+      "m",
+      "L",
+      "b"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

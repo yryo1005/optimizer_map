@@ -1,0 +1,35 @@
+{
+  "id": "sinkgd",
+  "name": "SinkGD (Sinkhorn Gradient Descent)",
+  "short_name": "SinkGD",
+  "year": 2025,
+  "citations": 20,
+  "categories": [
+    "メモリ効率"
+  ],
+  "reference": "https://arxiv.org/abs/2502.06742",
+  "summary": "勾配を複数のノルムの下で同時に正規化する多重正規化勾配降下法の枠組みを提案し，その実例として，勾配行列の行方向と列方向の正規化を交互に繰り返す手法である．この反復はSinkhornアルゴリズムの平方根反復に一致し，SWANの白色化を安価な正規化に置き換えることで，SGDと同じメモリとAdam程度の計算量で大規模言語モデルを効率的に学習する．",
+  "update_rule": "{\\mathbf X} \\leftarrow {\\mathbf G}_t, \\quad \\text{for } \\ell = 1, \\dots, L : \\;\\; {\\mathbf X} \\leftarrow \\sqrt{n} \\, Q({\\mathbf X})^{-1} {\\mathbf X}, \\;\\; {\\mathbf X} \\leftarrow \\sqrt{m} \\, {\\mathbf X} R({\\mathbf X})^{-1}, \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta {\\mathbf X} \\;\\; (Q, R : \\text{行・列ノルムの対角行列})",
+  "parents": [
+    {
+      "id": "swan",
+      "types": [
+        "normalization"
+      ],
+      "improvement": "白色化の行・列の交互正規化（Sinkhorn反復）への置き換え"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "L（反復数）"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  }
+}

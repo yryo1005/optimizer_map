@@ -1,0 +1,11 @@
+{
+  "nodes": [
+    "sgd",
+    "momentum",
+    "nesterov",
+    "adagrad",
+    "rmsprop",
+    "adam",
+    "adamw"
+  ]
+}

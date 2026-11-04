@@ -1,0 +1,35 @@
+{
+  "id": "frank_wolfe",
+  "name": "Frank-Wolfe法 (Conditional Gradient Method)",
+  "short_name": "Frank-Wolfe法",
+  "year": 1956,
+  "citations": 5000,
+  "categories": [
+    "正則化"
+  ],
+  "reference": "https://doi.org/10.1002/nav.3800030109",
+  "summary": "制約集合上の最適化において，射影の代わりに，制約集合上で勾配との内積を最小にする点を求める線形最小化オラクル（LMO）を解き，現在の点とその点の凸結合で更新する手法である．射影が高コストな制約（核ノルム球など）でも効率的で，反復点が少数の端点の凸結合となるため疎な解が得られる．近年のLMOに基づく深層学習の最適化手法（Scion等）の源流である．",
+  "update_rule": "{\\mathbf s}_t = \\arg\\min_{{\\mathbf s} \\in \\mathcal{C}} \\langle \\nabla f({\\mathbf w}_t), {\\mathbf s} \\rangle, \\quad {\\mathbf w}_{t+1} = (1 - \\gamma_t) {\\mathbf w}_t + \\gamma_t {\\mathbf s}_t, \\quad \\gamma_t = \\frac{2}{t + 2}",
+  "parents": [
+    {
+      "id": "gd",
+      "types": [
+        "normalization",
+        "reinterpretation"
+      ],
+      "improvement": "射影の代わりに線形最小化オラクル（LMO）を用いた制約付き最適化"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "γ_t"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

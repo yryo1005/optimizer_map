@@ -1,0 +1,45 @@
+{
+  "id": "splus",
+  "name": "SPlus",
+  "short_name": "SPlus",
+  "year": 2025,
+  "citations": 20,
+  "categories": [
+    "2次手法",
+    "学習安定化"
+  ],
+  "reference": "https://arxiv.org/abs/2506.07254",
+  "summary": "Shampoo系の手法の不安定性やハイパーパラメータの転移の難しさに対し，前処理行列の固有基底で回転した勾配の符号をとる正規化，行列の形状に応じた学習率のスケーリング，パラメータの反復平均の3つを導入した手法である．Transformerの言語モデル・画像分類・拡散モデルにおいて，Adamより少ないステップ数で同等の性能に到達する．",
+  "update_rule": "{\\mathbf L}_t = \\beta {\\mathbf L}_{t-1} + (1-\\beta) {\\mathbf G}_t {\\mathbf G}_t^\\top, \\;\\; {\\mathbf R}_t = \\beta {\\mathbf R}_{t-1} + (1-\\beta) {\\mathbf G}_t^\\top {\\mathbf G}_t, \\quad {\\mathbf U}_t = {\\mathbf Q}_L \\, \\mathrm{sign}({\\mathbf Q}_L^\\top {\\mathbf M}_t {\\mathbf Q}_R) \\, {\\mathbf Q}_R^\\top, \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\frac{2 \\eta}{m + n} {\\mathbf U}_t, \\quad \\bar{\\mathbf W}_{t+1} = \\mathrm{EMA}({\\mathbf W}_{t+1})",
+  "parents": [
+    {
+      "id": "shampoo",
+      "types": [
+        "normalization",
+        "curvature"
+      ],
+      "improvement": "固有基底上での符号による正規化（瞬時の符号正規化）と形状に応じたスケーリング"
+    },
+    {
+      "id": "polyak_averaging",
+      "types": [
+        "averaging"
+      ],
+      "improvement": "パラメータの反復平均による雑音の抑制"
+    }
+  ],
+  "practical": {
+    "state": "matrix",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β"
+    ],
+    "tasks": [
+      "llm",
+      "vision"
+    ]
+  }
+}

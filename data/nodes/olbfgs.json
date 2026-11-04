@@ -1,0 +1,44 @@
+{
+  "id": "olbfgs",
+  "name": "oLBFGS (Online L-BFGS)",
+  "short_name": "oLBFGS",
+  "year": 2007,
+  "citations": 500,
+  "categories": [
+    "2次手法",
+    "オンライン学習"
+  ],
+  "reference": "https://proceedings.mlr.press/v2/schraudolph07a.html",
+  "summary": "L-BFGS法をミニバッチの確率的勾配によるオンライン学習に適用するため，曲率対（パラメータと勾配の変化量）を同一のミニバッチで計算し，ステップ幅をゲインの減衰スケジュールで与え，曲率の推定を正則化する等の修正を加えた手法である．確率的な準ニュートン法の先駆けとなった．",
+  "update_rule": "{\\mathbf s}_t = {\\mathbf w}_{t+1} - {\\mathbf w}_t, \\quad {\\mathbf y}_t = \\nabla f_{B_t}({\\mathbf w}_{t+1}) - \\nabla f_{B_t}({\\mathbf w}_t) + \\lambda {\\mathbf s}_t \\;\\; (\\text{同一ミニバッチ}), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\frac{\\eta_t}{c} {\\mathbf H}^{(m)}_t \\nabla f_{B_t}({\\mathbf w}_t)",
+  "parents": [
+    {
+      "id": "lbfgs",
+      "types": [
+        "stochastic",
+        "curvature"
+      ],
+      "improvement": "同一ミニバッチでの曲率対の計算と正則化による確率的設定への適用"
+    },
+    {
+      "id": "sgd",
+      "types": [
+        "curvature",
+        "stochastic"
+      ],
+      "improvement": "ミニバッチの確率的勾配への準ニュートン法の適用"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [],
+    "hyperparameters": [
+      "m",
+      "c",
+      "λ"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

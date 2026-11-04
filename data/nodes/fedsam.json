@@ -1,0 +1,43 @@
+{
+  "id": "fedsam",
+  "name": "FedSAM / MoFedSAM",
+  "short_name": "FedSAM",
+  "year": 2022,
+  "citations": 300,
+  "categories": [
+    "分散学習",
+    "平坦解探索"
+  ],
+  "reference": "https://arxiv.org/abs/2206.02618",
+  "summary": "連合学習でローカルの最適化に通常の経験損失最小化を用いると，グローバルモデルが鋭い谷に導かれ，一部のクライアントで性能のばらつきが大きくなる問題に対し，ローカルの最適化手法としてSAMを用いる手法である．ローカルとグローバルのモデルを慣性項で結び付けた変種（MoFedSAM）も提案し，非IIDのデータで汎化性能を改善する．",
+  "update_rule": "{\\mathbf w}^{k}_{t,i+1} = {\\mathbf w}^{k}_{t,i} - \\eta \\nabla f_k\\left( {\\mathbf w}^{k}_{t,i} + \\rho \\frac{\\nabla f_k({\\mathbf w}^{k}_{t,i})}{\\|\\nabla f_k({\\mathbf w}^{k}_{t,i})\\|} \\right), \\quad {\\mathbf w}_{t+1} = \\frac{1}{K} \\sum_{k} {\\mathbf w}^{k}_{t,E}",
+  "parents": [
+    {
+      "id": "fedavg",
+      "types": [
+        "flatness"
+      ],
+      "improvement": "ローカル最適化のSAMへの置き換え"
+    },
+    {
+      "id": "sam",
+      "types": [
+        "flatness",
+        "problem_transfer"
+      ],
+      "improvement": "平坦解探索の連合学習への適用"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "ρ"
+    ],
+    "tasks": [
+      "distributed"
+    ]
+  }
+}

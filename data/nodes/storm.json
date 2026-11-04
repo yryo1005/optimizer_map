@@ -1,0 +1,44 @@
+{
+  "id": "storm",
+  "name": "STORM (STOchastic Recursive Momentum)",
+  "short_name": "STORM",
+  "year": 2019,
+  "citations": 400,
+  "categories": [
+    "勾配分散低減",
+    "高速化"
+  ],
+  "reference": "https://arxiv.org/abs/1905.10018",
+  "summary": "SARAH/SPIDERの再帰的な分散低減と慣性項を統合し，定期的な全勾配（大バッチ）の計算を不要にした手法である．慣性項の更新に，同一サンプルで評価した現在と直前の勾配の差による補正項を加えることで，小さなバッチのみで分散低減を実現し，学習率も勾配の大きさから適応的に決定する．",
+  "update_rule": "{\\mathbf d}_t = \\nabla f({\\mathbf w}_t; \\xi_t) + (1 - a_t) \\left( {\\mathbf d}_{t-1} - \\nabla f({\\mathbf w}_{t-1}; \\xi_t) \\right), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta_t {\\mathbf d}_t",
+  "parents": [
+    {
+      "id": "sarah",
+      "types": [
+        "variance_reduction",
+        "momentum"
+      ],
+      "improvement": "再帰的な補正の慣性項への統合による全勾配計算の不要化"
+    },
+    {
+      "id": "momentum",
+      "types": [
+        "momentum",
+        "variance_reduction"
+      ],
+      "improvement": "同一サンプルでの勾配差による慣性項の補正（分散低減付き慣性）"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [],
+    "hyperparameters": [
+      "k",
+      "w",
+      "c"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

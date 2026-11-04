@@ -1,0 +1,48 @@
+{
+  "id": "adan",
+  "name": "Adan (Adaptive Nesterov Momentum)",
+  "short_name": "Adan",
+  "year": 2022,
+  "citations": 400,
+  "categories": [
+    "適応的学習率",
+    "高速化"
+  ],
+  "reference": "https://arxiv.org/abs/2208.06677",
+  "summary": "Nesterovの加速勾配法では先読み位置での勾配評価のために追加の計算が必要となる問題に対し，勾配の差分を用いて先読み勾配を近似する再定式化を導入した手法である．勾配，勾配差分，先読み勾配の2乗のそれぞれに指数移動平均を取り，分離型の重み減衰と組み合わせることで，視覚・言語モデルの学習を高速化する．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad {\\mathbf m}_t = (1 - \\beta_1) {\\mathbf m}_{t-1} + \\beta_1 {\\mathbf g}_t, \\quad {\\mathbf d}_t = (1 - \\beta_2) {\\mathbf d}_{t-1} + \\beta_2 ({\\mathbf g}_t - {\\mathbf g}_{t-1}), \\quad {\\mathbf n}_t = (1 - \\beta_3) {\\mathbf n}_{t-1} + \\beta_3 [{\\mathbf g}_t + (1 - \\beta_2)({\\mathbf g}_t - {\\mathbf g}_{t-1})]^2, \\quad {\\mathbf w}_{t+1} = \\frac{1}{1 + \\lambda \\eta} \\left[ {\\mathbf w}_t - \\frac{\\eta}{\\sqrt{{\\mathbf n}_t} + \\epsilon} \\odot ({\\mathbf m}_t + (1 - \\beta_2) {\\mathbf d}_t) \\right]",
+  "parents": [
+    {
+      "id": "nesterov",
+      "types": [
+        "momentum"
+      ],
+      "improvement": "勾配差分による先読み勾配の近似（追加の勾配計算が不要なNesterov型慣性）"
+    },
+    {
+      "id": "adamw",
+      "types": [
+        "momentum",
+        "adaptive"
+      ],
+      "improvement": "Nesterov型慣性の適応的学習率・分離型重み減衰との統合"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "β3",
+      "λ"
+    ],
+    "tasks": [
+      "llm",
+      "vision"
+    ]
+  }
+}

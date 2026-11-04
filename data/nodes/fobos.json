@@ -1,0 +1,42 @@
+{
+  "id": "fobos",
+  "name": "FOBOS (Forward-Backward Splitting, 近接SGD)",
+  "short_name": "FOBOS",
+  "year": 2009,
+  "citations": 1200,
+  "categories": [
+    "オンライン学習",
+    "正則化"
+  ],
+  "reference": "https://jmlr.org/papers/v10/duchi09a.html",
+  "summary": "正則化付きのオンライン学習・確率的最適化において，損失の（劣）勾配による更新の後に，正則化項の近接写像を適用する2段階の更新を行う手法である．L1正則化では各更新の後に軟閾値処理が行われ，確率的な設定でも疎な解が得られる．近接SGDの代表的な形式である．",
+  "update_rule": "{\\mathbf w}_{t+1/2} = {\\mathbf w}_t - \\eta_t \\nabla f_t({\\mathbf w}_t), \\quad {\\mathbf w}_{t+1} = \\arg\\min_{{\\mathbf w}} \\left\\{ \\frac{1}{2} \\|{\\mathbf w} - {\\mathbf w}_{t+1/2}\\|^2 + \\eta_{t+1/2} \\, r({\\mathbf w}) \\right\\}",
+  "parents": [
+    {
+      "id": "ista",
+      "types": [
+        "regularization",
+        "stochastic"
+      ],
+      "improvement": "近接勾配法の確率的・オンライン設定への拡張"
+    },
+    {
+      "id": "ogd",
+      "types": [
+        "regularization"
+      ],
+      "improvement": "オンライン学習における正則化項の近接写像による扱い"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [],
+    "hyperparameters": [
+      "η",
+      "λ"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

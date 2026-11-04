@@ -1,0 +1,37 @@
+{
+  "id": "eva",
+  "name": "Eva (Kronecker-vectorized Second-order Optimization)",
+  "short_name": "Eva",
+  "year": 2023,
+  "citations": 40,
+  "categories": [
+    "2次手法",
+    "メモリ効率"
+  ],
+  "reference": "https://mlanthology.org/iclr/2023/zhang2023iclr-eva/",
+  "summary": "K-FACのクロネッカー因子（層への入力と出力側の勾配の共分散行列）を，ミニバッチ平均した小さなベクトルのクロネッカー積で近似し，Sherman-Morrisonの公式で逆行列を陽に計算せずに前処理を行う手法である．K-FACやShampooより少ないメモリと計算量で，SGDやK-FACより短い学習時間を達成する．",
+  "update_rule": "\\bar{\\mathbf a} = \\mathbb{E}[{\\mathbf a}], \\;\\; \\bar{\\mathbf g} = \\mathbb{E}[{\\mathbf g}], \\quad ({\\mathbf C} + \\gamma {\\mathbf I})^{-1} {\\mathbf v} = \\frac{1}{\\gamma} \\left( {\\mathbf v} - \\frac{\\bar{\\mathbf c}^\\top {\\mathbf v}}{\\gamma + \\bar{\\mathbf c}^\\top \\bar{\\mathbf c}} \\bar{\\mathbf c} \\right) \\;\\; (\\bar{\\mathbf c} \\in \\{\\bar{\\mathbf a}, \\bar{\\mathbf g}\\}), \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta (\\bar{\\mathbf g}\\bar{\\mathbf g}^\\top + \\gamma {\\mathbf I})^{-1} \\nabla_{\\mathbf W} f (\\bar{\\mathbf a}\\bar{\\mathbf a}^\\top + \\gamma {\\mathbf I})^{-1}",
+  "parents": [
+    {
+      "id": "kfac",
+      "types": [
+        "curvature",
+        "compression"
+      ],
+      "improvement": "クロネッカー因子のベクトル近似とSherman-Morrisonによる逆行列計算の回避"
+    }
+  ],
+  "practical": {
+    "state": "compressed",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "ダンピング"
+    ],
+    "tasks": [
+      "vision"
+    ]
+  }
+}

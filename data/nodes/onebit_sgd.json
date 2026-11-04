@@ -1,0 +1,36 @@
+{
+  "id": "onebit_sgd",
+  "name": "1-bit SGD",
+  "short_name": "1-bit SGD",
+  "year": 2014,
+  "citations": 1200,
+  "categories": [
+    "分散学習",
+    "符号ベース"
+  ],
+  "reference": "https://www.isca-archive.org/interspeech_2014/seide14_interspeech.html",
+  "summary": "データ並列の分散学習において，勾配を1要素あたり1bitに量子化して通信し，量子化で生じた誤差を次のミニバッチの勾配に加えて持ち越す（誤差フィードバック）手法である．誤差を持ち越すことで精度をほとんど落とさずに通信量を大幅に削減し，音声認識のDNNの学習を複数のGPUで大幅に高速化した．誤差フィードバックの起源とされる．",
+  "update_rule": "\\tilde{\\mathbf g}^k_t = {\\mathbf g}^k_t + {\\mathbf e}^k_t, \\quad {\\mathbf q}^k_t = Q_{1\\mathrm{bit}}(\\tilde{\\mathbf g}^k_t), \\quad {\\mathbf e}^k_{t+1} = \\tilde{\\mathbf g}^k_t - {\\mathbf q}^k_t, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\sum_k {\\mathbf q}^k_t",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "compression",
+        "communication"
+      ],
+      "improvement": "勾配の1bit量子化と量子化誤差の次ステップへの持ち越し（誤差フィードバック）"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η"
+    ],
+    "tasks": [
+      "distributed"
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "state": [
+    {"id": "none", "label": "なし", "description": "パラメータと勾配以外の状態量を持たない（SGD 等）"},
+    {"id": "one", "label": "1倍", "description": "パラメータと同じ大きさの状態量を1つ持つ（慣性項等）"},
+    {"id": "two", "label": "2倍", "description": "パラメータと同じ大きさの状態量を2つ持つ（Adam 等）"},
+    {"id": "more", "label": "3倍以上", "description": "パラメータと同じ大きさの状態量を3つ以上，または過去の勾配・反復を複数保持する"},
+    {"id": "compressed", "label": "圧縮", "description": "状態量を因子分解・低ランク近似・量子化・一部の層のみに限定して削減する"},
+    {"id": "matrix", "label": "行列", "description": "行列形状の前処理行列や曲率行列（ヘッセ・フィッシャー等）を保持する"},
+    {"id": "na", "label": "該当なし", "description": "スケジュール・分散プロトコル・枠組みなど，状態量が基礎手法に依存するもの"}
+  ],
+  "implementations": [
+    {"id": "pytorch", "label": "PyTorch標準", "description": "torch.optim（オプション指定を含む）や torch の標準機能で使える"},
+    {"id": "optax", "label": "Optax", "description": "JAX の Optax（optax.contrib を含む）で使える"},
+    {"id": "keras", "label": "Keras標準", "description": "keras.optimizers や Keras の標準機能で使える"},
+    {"id": "library", "label": "主要ライブラリ", "description": "timm，pytorch-optimizer，bitsandbytes，DeepSpeed，Hugging Face，公式実装の配布パッケージ等で使える"}
+  ],
+  "tasks": [
+    {"id": "general", "label": "汎用（深層学習）"},
+    {"id": "llm", "label": "LLM事前学習"},
+    {"id": "vision", "label": "画像"},
+    {"id": "finetune", "label": "ファインチューニング"},
+    {"id": "rl", "label": "強化学習"},
+    {"id": "distributed", "label": "分散・連合学習"},
+    {"id": "convex", "label": "凸最適化・理論"},
+    {"id": "privacy", "label": "プライバシー"},
+    {"id": "game", "label": "ゲーム・GAN"},
+    {"id": "multitask", "label": "マルチタスク"},
+    {"id": "meta", "label": "メタ学習"},
+    {"id": "bayes", "label": "ベイズ推論"}
+  ]
+}

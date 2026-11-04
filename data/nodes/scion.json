@@ -1,0 +1,60 @@
+{
+  "id": "scion",
+  "name": "Scion (Stochastic Conditional Gradient with Norm-Constrained LMOs)",
+  "short_name": "Scion",
+  "year": 2025,
+  "citations": 80,
+  "categories": [
+    "2次手法",
+    "メモリ効率"
+  ],
+  "reference": "https://arxiv.org/abs/2502.07529",
+  "summary": "ノルム球上の線形最小化オラクル（LMO）に基づく確率的最適化手法の枠組みを提案し，層ごとに適切なノルム（隠れ層にはスペクトルノルム，入出力層には∞ノルム等）を選ぶことで，Muonや符号ベースの手法を統一的に扱う手法である．ノルムの明示的な選択によりハイパーパラメータがモデルサイズ間で転移し，Adamを用いずにnanoGPTの学習を高速化する．",
+  "update_rule": "{\\mathbf M}_t = (1 - \\alpha) {\\mathbf M}_{t-1} + \\alpha \\nabla f_t({\\mathbf W}_t), \\quad \\mathrm{lmo}({\\mathbf M}) = \\arg\\min_{\\|{\\mathbf S}\\| \\le \\rho} \\langle {\\mathbf M}, {\\mathbf S} \\rangle, \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t + \\eta \\, \\mathrm{lmo}({\\mathbf M}_t)",
+  "parents": [
+    {
+      "id": "muon",
+      "types": [
+        "normalization",
+        "reinterpretation"
+      ],
+      "improvement": "スペクトルノルム球上のLMOとしての解釈と層ごとのノルム選択への一般化"
+    },
+    {
+      "id": "signsgd",
+      "types": [
+        "normalization",
+        "reinterpretation"
+      ],
+      "improvement": "∞ノルム球上のLMO（符号更新）の統一的な扱い"
+    },
+    {
+      "id": "modular_duality",
+      "types": [
+        "normalization"
+      ],
+      "improvement": "層ごとのノルム選択とLMOによる双対化の実装"
+    },
+    {
+      "id": "frank_wolfe",
+      "types": [
+        "normalization"
+      ],
+      "improvement": "線形最小化オラクル（条件付き勾配法）に基づく更新"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "ρ",
+      "α"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  }
+}

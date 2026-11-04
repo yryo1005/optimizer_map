@@ -1,0 +1,42 @@
+{
+  "id": "sgd",
+  "name": "確率的勾配降下法 (Stochastic Gradient Descent, SGD)",
+  "short_name": "SGD",
+  "year": 1951,
+  "citations": 25000,
+  "categories": [
+    "高速化"
+  ],
+  "reference": "https://www.jstor.org/stable/2236626",
+  "summary": "目的関数全体の勾配の代わりに，1サンプルまたは少数のミニバッチから計算した勾配の推定値を用いてパラメータを更新する確率的近似法である．全データを用いる最急降下法と比べ，1回の更新に要する計算量を大幅に削減できるため，大規模データセットに対する最適化の基礎となった．",
+  "update_rule": "{\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\nabla f_t({\\mathbf w}_t)",
+  "parents": [
+    {
+      "id": "gd",
+      "types": [
+        "stochastic"
+      ],
+      "improvement": "全データの勾配の代わりにミニバッチによる確率的な勾配推定を用いた更新"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "pytorch",
+      "optax",
+      "keras"
+    ],
+    "hyperparameters": [
+      "η"
+    ],
+    "tasks": [
+      "general"
+    ]
+  },
+  "deep_dive": {
+    "why": "ミニバッチ勾配は全勾配の不偏推定量であり，学習率を適切に減衰させれば期待値の意味で最適解へ近づく．勾配の雑音は鋭い最小値から抜け出す効果も持ち，汎化性能に寄与するとされる．",
+    "weaknesses": "学習率の設定と減衰スケジュールに敏感である．曲率が方向によって大きく異なる問題（悪条件）では収束が遅い．",
+    "settings": "画像分類では慣性項付きで η=0.1（バッチ256あたり），重み減衰 1e-4〜5e-4，コサイン減衰が定番．"
+  },
+  "notes": "Robbins & Monro（1951）の確率的近似法を起点とする．"
+}

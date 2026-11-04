@@ -1,0 +1,41 @@
+{
+  "id": "saga",
+  "name": "SAGA",
+  "short_name": "SAGA",
+  "year": 2014,
+  "citations": 2000,
+  "categories": [
+    "勾配分散低減"
+  ],
+  "reference": "https://arxiv.org/abs/1407.0202",
+  "summary": "SAGのようにサンプルごとの過去の勾配を記憶しつつ，SVRGと同様の不偏な補正を用いる手法である．SAGの勾配推定がバイアスを持つのに対し，本手法は不偏な推定量を用いるため解析が簡潔になり，近接作用素を用いて非平滑な正則化項を含む問題にも適用できる．",
+  "update_rule": "{\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\left( \\nabla f_{j}({\\mathbf w}_t) - \\nabla f_{j}(\\boldsymbol\\phi_{j}) + \\frac{1}{n} \\sum_{i=1}^{n} \\nabla f_i(\\boldsymbol\\phi_i) \\right), \\quad \\boldsymbol\\phi_{j} \\leftarrow {\\mathbf w}_t",
+  "parents": [
+    {
+      "id": "sag",
+      "types": [
+        "variance_reduction"
+      ],
+      "improvement": "記憶した勾配を用いた不偏な勾配推定への変更"
+    },
+    {
+      "id": "svrg",
+      "types": [
+        "variance_reduction"
+      ],
+      "improvement": "基準点の全勾配の，記憶した勾配の平均による置き換え"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

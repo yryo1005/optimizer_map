@@ -1,0 +1,34 @@
+{
+  "id": "armijo",
+  "name": "Armijo直線探索 (Armijo Line Search / Backtracking)",
+  "short_name": "Armijo直線探索",
+  "year": 1966,
+  "citations": 3000,
+  "categories": [
+    "学習率自動調整"
+  ],
+  "reference": "https://doi.org/10.2140/pjm.1966.16.1",
+  "summary": "探索方向に沿って，関数値が勾配から予測される減少量の一定割合以上減少するという十分減少条件（Armijo条件）を満たすまで，ステップ幅を一定の比率で縮小していく直線探索法である．滑らかさの定数を知らなくても，各反復で適切なステップ幅を自動的に選べる．",
+  "update_rule": "\\eta \\leftarrow \\eta_0, \\quad \\text{while } f({\\mathbf w}_t - \\eta \\nabla f({\\mathbf w}_t)) > f({\\mathbf w}_t) - c \\, \\eta \\|\\nabla f({\\mathbf w}_t)\\|^2 : \\; \\eta \\leftarrow \\rho \\eta, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\nabla f({\\mathbf w}_t)",
+  "parents": [
+    {
+      "id": "gd",
+      "types": [
+        "lr_automation"
+      ],
+      "improvement": "十分減少条件に基づくステップ幅の自動的な縮小（バックトラッキング）"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [],
+    "hyperparameters": [
+      "η0",
+      "c",
+      "ρ"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

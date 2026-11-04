@@ -1,0 +1,50 @@
+{
+  "id": "moonlight_muon",
+  "name": "Muon (Moonlight版，Muon is Scalable)",
+  "short_name": "Muon (Moonlight)",
+  "year": 2025,
+  "citations": 300,
+  "categories": [
+    "2次手法",
+    "大規模バッチ"
+  ],
+  "reference": "https://arxiv.org/abs/2502.16982",
+  "summary": "Muonを大規模言語モデルの学習に拡張するため，分離型の重み減衰を追加し，パラメータごとの更新量のRMSをAdamWと一致するようにスケーリングした手法である．これによりAdamWのハイパーパラメータをそのまま流用でき，計算最適な学習においてAdamWの約2倍の計算効率を示した．16B規模のMoEモデル（Moonlight）の学習に用いられた．",
+  "update_rule": "{\\mathbf M}_t = \\mu {\\mathbf M}_{t-1} + \\nabla f_t({\\mathbf W}_t), \\quad {\\mathbf O}_t = \\mathrm{NewtonSchulz5}({\\mathbf M}_t) \\cdot 0.2 \\sqrt{\\max(m, n)}, \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta ({\\mathbf O}_t + \\lambda {\\mathbf W}_t)",
+  "parents": [
+    {
+      "id": "muon",
+      "types": [
+        "regularization",
+        "adaptive"
+      ],
+      "improvement": "分離型重み減衰の追加と更新量のRMSのAdamWへの整合"
+    },
+    {
+      "id": "adamw",
+      "types": [
+        "regularization"
+      ],
+      "improvement": "AdamWとのハイパーパラメータ互換性の確保"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "μ",
+      "λ"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  },
+  "deep_dive": {
+    "why": "Muon に重み減衰を加え，更新量の RMS を AdamW と一致させることで，AdamW のハイパーパラメータをそのまま流用でき，大規模でも安定する．",
+    "weaknesses": "Attention のロジットの増大など，大規模での不安定性への対策が別途必要になる場合がある（MuonClip）．",
+    "settings": "更新量を 0.2·√max(m,n) 倍，λ=0.1，学習率は AdamW と同じ値を用いる．"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "radam",
+  "name": "RAdam (Rectified Adam)",
+  "short_name": "RAdam",
+  "year": 2019,
+  "citations": 3000,
+  "categories": [
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/1908.03265",
+  "summary": "Adamの学習初期において，2次モーメントの推定に用いるサンプル数が少ないために適応的学習率の分散が大きくなり，不安定な更新を招く問題を指摘した手法である．適応的学習率の分散を解析的に評価して補正項で整流し，分散が十分小さくなるまでは慣性項付きSGDとして振る舞うことで，ウォームアップを不要にする．",
+  "update_rule": "\\rho_\\infty = \\frac{2}{1 - \\beta_2} - 1, \\quad \\rho_t = \\rho_\\infty - \\frac{2 t \\beta_2^t}{1 - \\beta_2^t}, \\quad {\\mathbf w}_{t+1} = \\begin{cases} {\\mathbf w}_t - \\eta \\, r_t \\frac{\\hat{\\mathbf m}_t}{\\sqrt{\\hat{\\mathbf v}_t} + \\epsilon}, \\;\\; r_t = \\sqrt{\\frac{(\\rho_t - 4)(\\rho_t - 2) \\rho_\\infty}{(\\rho_\\infty - 4)(\\rho_\\infty - 2) \\rho_t}} & (\\rho_t > 4) \\\\ {\\mathbf w}_t - \\eta \\, \\hat{\\mathbf m}_t & (\\mathrm{otherwise}) \\end{cases}",
+  "parents": [
+    {
+      "id": "adam",
+      "types": [
+        "stabilization"
+      ],
+      "improvement": "適応的学習率の分散の整流（ウォームアップの不要化）"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "pytorch",
+      "optax",
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2"
+    ],
+    "tasks": [
+      "general"
+    ]
+  },
+  "deep_dive": {
+    "why": "学習初期に2次モーメントの推定に使える標本が少ないことによる適応的学習率の分散の大きさを解析的に補正し，ウォームアップなしでも安定させる．",
+    "weaknesses": "効果の本質は単純なウォームアップと同等であるとの指摘がある．",
+    "settings": "Adam と同じ（η=1e-3，β1=0.9，β2=0.999）．"
+  }
+}

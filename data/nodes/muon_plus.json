@@ -1,0 +1,42 @@
+{
+  "id": "muon_plus",
+  "name": "Muon+",
+  "short_name": "Muon+",
+  "year": 2026,
+  "citations": 5,
+  "categories": [
+    "2次手法"
+  ],
+  "reference": "https://arxiv.org/abs/2602.21545",
+  "summary": "Muonで直交化した更新量に対して，さらに列ごと（または行ごと）の正規化を1回加える手法である．直交化された更新量は行や列のスケールが不均一になり得ることを補正し，追加の最適化状態なしで，60Mから7B規模のGPT・LLaMAモデルの学習においてMuonより一貫して低いパープレキシティを示す．",
+  "update_rule": "{\\mathbf O}_t = \\mathrm{NewtonSchulz5}({\\mathbf M}_t), \\quad \\hat{\\mathbf O}_t = {\\mathbf O}_t \\, \\mathrm{diag}\\left( \\frac{1}{\\|{\\mathbf O}_{t,:,j}\\|} \\right)_j \\;\\; (\\text{列正規化}), \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta \\, \\hat{\\mathbf O}_t",
+  "parents": [
+    {
+      "id": "muon",
+      "types": [
+        "normalization"
+      ],
+      "improvement": "直交化後の列・行ごとの正規化の追加"
+    },
+    {
+      "id": "normuon",
+      "types": [
+        "normalization"
+      ],
+      "improvement": "直交化後の正規化を状態量なしで行う簡略化"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "μ"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  }
+}

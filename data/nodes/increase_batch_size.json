@@ -1,0 +1,33 @@
+{
+  "id": "increase_batch_size",
+  "name": "バッチサイズの増加 (Don't Decay the Learning Rate, Increase the Batch Size)",
+  "short_name": "バッチサイズ増加",
+  "year": 2017,
+  "citations": 1200,
+  "categories": [
+    "学習率スケジュール",
+    "大規模バッチ"
+  ],
+  "reference": "https://arxiv.org/abs/1711.00489",
+  "summary": "SGDの雑音の大きさが学習率とバッチサイズの比で決まることに着目し，学習率を減衰させる代わりに同じ比率でバッチサイズを増加させることで，同等の汎化性能をより少ないパラメータ更新回数で得られることを示した研究である．大規模なバッチでの並列化効率を高め，ImageNetの学習時間を大幅に短縮した．",
+  "update_rule": "g \\approx \\frac{\\eta N}{B} \\;\\; (\\text{SGDの雑音の大きさ}), \\quad \\eta_t \\leftarrow \\eta_t / \\alpha \\;\\; \\Longrightarrow \\;\\; B_t \\leftarrow \\alpha B_t, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\frac{\\eta_t}{B_t} \\sum_{x \\in B_t} \\nabla l(x, {\\mathbf w}_t)",
+  "parents": [
+    {
+      "id": "linear_scaling_warmup",
+      "types": [
+        "lr_automation"
+      ],
+      "improvement": "学習率の減衰のバッチサイズの増加への置き換え"
+    }
+  ],
+  "practical": {
+    "state": "na",
+    "implementations": [],
+    "hyperparameters": [
+      "バッチの増加率"
+    ],
+    "tasks": [
+      "vision"
+    ]
+  }
+}

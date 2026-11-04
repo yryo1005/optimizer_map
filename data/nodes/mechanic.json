@@ -1,0 +1,35 @@
+{
+  "id": "mechanic",
+  "name": "Mechanic",
+  "short_name": "Mechanic",
+  "year": 2023,
+  "citations": 60,
+  "categories": [
+    "学習率自動調整"
+  ],
+  "reference": "https://arxiv.org/abs/2306.00144",
+  "summary": "任意の最適化手法と学習率スケジュールに対し，その更新量全体にかかるスケール係数を，オンライン凸最適化への帰着とパラメータフリーなチューナー（コインベッティング型）によって学習中に自動調整する手法である．多様な大規模タスクで，手動で調整した学習率に近いか，それを上回る性能を示す．",
+  "update_rule": "\\boldsymbol\\Delta_t = \\mathrm{Base}({\\mathbf g}_t), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_{\\mathrm{ref}} + s_{t+1} \\sum_{i \\le t} \\boldsymbol\\Delta_i, \\quad s_{t+1} = \\mathrm{Tuner}\\left( h_t = \\langle \\textstyle\\sum_{i<t} \\boldsymbol\\Delta_i, {\\mathbf g}_t \\rangle \\right)",
+  "parents": [
+    {
+      "id": "cocob",
+      "types": [
+        "lr_automation"
+      ],
+      "improvement": "パラメータフリーなチューナーによる任意の最適化手法の学習率スケールの自動調整"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [
+      "optax",
+      "library"
+    ],
+    "hyperparameters": [
+      "（自動）"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": "stable_adamw",
+  "name": "StableAdamW",
+  "short_name": "StableAdamW",
+  "year": 2023,
+  "citations": 200,
+  "categories": [
+    "学習安定化",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/2304.13013",
+  "summary": "大規模な視覚言語モデルの学習で生じる損失スパイクが，AdamWの2次モーメントが勾配の2乗を過小評価した数ステップ後に起こることを示し，AdafactorのUpdate Clippingを組み合わせた手法である．勾配の2乗と2次モーメントの比が大きい場合にテンソルごとに学習率を下げることで，勾配クリッピングより効果的に損失スパイクを抑える．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad \\mathrm{RMS}_t = \\sqrt{\\mathbb{E}\\left[ {\\mathbf g}_t^2 / \\hat{\\mathbf v}_t \\right]}, \\quad \\eta_t = \\frac{\\eta}{\\max(1, \\mathrm{RMS}_t)}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta_t \\left( \\frac{\\hat{\\mathbf m}_t}{\\sqrt{\\hat{\\mathbf v}_t} + \\epsilon} + \\lambda {\\mathbf w}_t \\right)",
+  "parents": [
+    {
+      "id": "adamw",
+      "types": [
+        "stabilization"
+      ],
+      "improvement": "テンソルごとの学習率の自動縮小による損失スパイクの抑制"
+    },
+    {
+      "id": "adafactor",
+      "types": [
+        "stabilization"
+      ],
+      "improvement": "Update Clipping（勾配2乗と2次モーメントの比によるクリッピング）の導入"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "λ"
+    ],
+    "tasks": [
+      "vision",
+      "llm"
+    ]
+  },
+  "notes": "低精度学習（SwitchBack）と併せて提案された論文であり，Citation数は論文全体の概算である．"
+}

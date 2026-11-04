@@ -1,0 +1,43 @@
+{
+  "id": "swan",
+  "name": "SWAN (SGD with Whitening And Normalization)",
+  "short_name": "SWAN",
+  "year": 2024,
+  "citations": 30,
+  "categories": [
+    "メモリ効率",
+    "2次手法"
+  ],
+  "reference": "https://arxiv.org/abs/2412.13148",
+  "summary": "Adamのモーメントを一切保持せず，各ステップの確率的勾配そのものに行ごとの正規化と白色化（行列の逆平方根による変換）を適用する，状態を持たない最適化手法である．正規化が勾配分布を安定させ，白色化が損失地形の局所的な曲率を打ち消すことで，SGDと同じメモリ使用量でAdamと同等以上の性能を示す．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad \\tilde{\\mathbf G}_t = \\mathrm{RowNorm}({\\mathbf G}_t) = \\frac{{\\mathbf G}_t - \\mathrm{mean}_{\\mathrm{row}}({\\mathbf G}_t)}{\\mathrm{std}_{\\mathrm{row}}({\\mathbf G}_t)}, \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta \\, (\\tilde{\\mathbf G}_t \\tilde{\\mathbf G}_t^\\top)^{-1/2} \\tilde{\\mathbf G}_t",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "normalization",
+        "curvature"
+      ],
+      "improvement": "状態を持たない勾配の正規化と白色化の前処理"
+    },
+    {
+      "id": "muon",
+      "types": [
+        "normalization"
+      ],
+      "improvement": "勾配の白色化（直交化に相当）による曲率の打ち消し"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  }
+}

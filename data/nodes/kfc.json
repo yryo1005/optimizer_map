@@ -1,0 +1,34 @@
+{
+  "id": "kfc",
+  "name": "KFC (Kronecker Factors for Convolution)",
+  "short_name": "KFC",
+  "year": 2016,
+  "citations": 300,
+  "categories": [
+    "2次手法"
+  ],
+  "reference": "https://arxiv.org/abs/1602.01407",
+  "summary": "K-FACは全結合層を対象としていたため，畳み込み層に対して，空間的な位置ごとの活性と勾配の統計に関する独立性・空間的な均質性などの仮定を置くことで，フィッシャー情報行列のクロネッカー因子近似を導出した手法である．畳み込みネットワークの学習をSGDより少ない反復回数で行える．",
+  "update_rule": "{\\mathbf F}_\\ell \\approx \\boldsymbol\\Omega_{\\ell-1} \\otimes \\boldsymbol\\Gamma_\\ell, \\quad \\boldsymbol\\Omega_{\\ell-1} = \\mathbb{E}\\left[ \\sum_{t \\in \\mathcal{T}} \\llbracket {\\mathbf a}_{\\ell-1} \\rrbracket_t \\llbracket {\\mathbf a}_{\\ell-1} \\rrbracket_t^\\top \\right], \\quad \\boldsymbol\\Gamma_\\ell = \\frac{1}{|\\mathcal{T}|} \\mathbb{E}\\left[ \\sum_{t \\in \\mathcal{T}} \\mathcal{D}{\\mathbf s}_{\\ell,t} \\mathcal{D}{\\mathbf s}_{\\ell,t}^\\top \\right]",
+  "parents": [
+    {
+      "id": "kfac",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "畳み込み層へのクロネッカー因子近似の拡張（空間的な均質性の仮定）"
+    }
+  ],
+  "practical": {
+    "state": "matrix",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "ダンピング"
+    ],
+    "tasks": [
+      "vision"
+    ]
+  }
+}

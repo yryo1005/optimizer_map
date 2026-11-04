@@ -1,0 +1,39 @@
+{
+  "id": "adabound",
+  "name": "AdaBound",
+  "short_name": "AdaBound",
+  "year": 2019,
+  "citations": 1000,
+  "categories": [
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/1902.09843",
+  "summary": "Adamなどの適応的手法は学習初期の収束が速い一方で汎化性能がSGDに劣ることがある．本手法は，パラメータごとの学習率に時間とともに狭まる上下限を設けて切り詰めることで，学習初期はAdamのように振る舞い，学習後半は一定の学習率を持つSGDへと滑らかに移行させる．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad \\hat{\\boldsymbol\\eta}_t = \\mathrm{clip}\\left( \\frac{\\eta}{\\sqrt{{\\mathbf v}_t}}, \\, \\eta_l(t), \\, \\eta_u(t) \\right), \\quad \\eta_l(t) = \\eta^{*} \\left( 1 - \\frac{1}{(1 - \\beta_2) t + 1} \\right), \\quad \\eta_u(t) = \\eta^{*} \\left( 1 + \\frac{1}{(1 - \\beta_2) t} \\right), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\frac{\\hat{\\boldsymbol\\eta}_t}{\\sqrt{t}} \\odot {\\mathbf m}_t",
+  "parents": [
+    {
+      "id": "adam",
+      "types": [
+        "stabilization"
+      ],
+      "improvement": "学習率への動的な上下限の導入によるSGDへの滑らかな移行"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "η*（最終学習率）",
+      "β1",
+      "β2",
+      "γ"
+    ],
+    "tasks": [
+      "general",
+      "vision"
+    ]
+  }
+}

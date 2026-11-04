@@ -1,0 +1,41 @@
+{
+  "id": "l4",
+  "name": "L4 (Practical Loss-based Stepsize Adaptation)",
+  "short_name": "L4",
+  "year": 2018,
+  "citations": 100,
+  "categories": [
+    "学習率自動調整"
+  ],
+  "reference": "https://arxiv.org/abs/1802.05074",
+  "summary": "損失を1ステップで目標値（これまでの最小損失より一定割合だけ小さい値）まで線形近似で下げるように学習率を決める手法である．Polyakステップサイズの考え方を，Adam等の任意の更新方向に適用でき，学習率の調整なしで調整済みの手法と同等以上の性能を示す．",
+  "update_rule": "\\eta_t = \\alpha \\frac{f({\\mathbf w}_t) - \\hat f_{\\min}}{{\\mathbf g}_t^\\top {\\mathbf v}_t}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta_t {\\mathbf v}_t \\quad ({\\mathbf v}_t : \\text{Adam等による更新方向})",
+  "parents": [
+    {
+      "id": "polyak_step",
+      "types": [
+        "lr_automation"
+      ],
+      "improvement": "目標損失の推定と任意の更新方向への適用"
+    },
+    {
+      "id": "adam",
+      "types": [
+        "lr_automation"
+      ],
+      "improvement": "Adamの更新方向に対する学習率の自動設定"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "α"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

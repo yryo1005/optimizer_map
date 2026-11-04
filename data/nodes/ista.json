@@ -1,0 +1,35 @@
+{
+  "id": "ista",
+  "name": "ISTA (Iterative Shrinkage-Thresholding Algorithm, 近接勾配法)",
+  "short_name": "ISTA",
+  "year": 2004,
+  "citations": 7000,
+  "categories": [
+    "正則化"
+  ],
+  "reference": "https://doi.org/10.1002/cpa.20042",
+  "summary": "L1正則化のような微分不可能な正則化項を含む目的関数に対し，滑らかな部分で勾配降下を行った後，正則化項の近接写像（L1の場合は軟閾値処理）を適用する手法である．スパースな解を効率的に求めることができ，圧縮センシングやLassoの最適化で広く用いられる．",
+  "update_rule": "{\\mathbf w}_{t+1} = \\mathrm{prox}_{\\eta \\lambda \\|\\cdot\\|_1}\\left( {\\mathbf w}_t - \\eta \\nabla f({\\mathbf w}_t) \\right), \\quad [\\mathrm{prox}_{\\tau \\|\\cdot\\|_1}({\\mathbf u})]_i = \\mathrm{sign}(u_i) \\max(|u_i| - \\tau, 0)",
+  "parents": [
+    {
+      "id": "gd",
+      "types": [
+        "regularization"
+      ],
+      "improvement": "微分不可能な正則化項に対する近接写像（軟閾値処理）の導入"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "λ"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

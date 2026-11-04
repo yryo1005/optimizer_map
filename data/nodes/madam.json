@@ -1,0 +1,49 @@
+{
+  "id": "madam",
+  "name": "Madam (Multiplicative Adam)",
+  "short_name": "Madam",
+  "year": 2020,
+  "citations": 50,
+  "categories": [
+    "学習安定化",
+    "メモリ効率"
+  ],
+  "reference": "https://arxiv.org/abs/2006.14560",
+  "summary": "合成関数としてのネットワークの性質から，重みを加算的ではなく乗法的に更新すべきであると論じ，Adam型の正規化を行った勾配の符号付きの値で重みの大きさを指数的に更新する手法である．重みの表現が対数スケールとなるため，低精度の対数数値表現（8bit等）での学習とも相性がよい．",
+  "update_rule": "\\bar{\\mathbf g}_t = \\frac{{\\mathbf g}_t}{\\sqrt{\\hat{\\mathbf v}_t}}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t \\odot \\exp\\left( -\\eta \\, \\mathrm{sign}({\\mathbf w}_t) \\odot \\bar{\\mathbf g}_t \\right)",
+  "parents": [
+    {
+      "id": "fromage",
+      "types": [
+        "normalization"
+      ],
+      "improvement": "相対的な更新の乗法的な更新への置き換え"
+    },
+    {
+      "id": "exponentiated_gradient",
+      "types": [
+        "reinterpretation"
+      ],
+      "improvement": "勾配の指数による乗法的な更新の深層学習への適用"
+    },
+    {
+      "id": "adam",
+      "types": [
+        "adaptive"
+      ],
+      "improvement": "2次モーメントによる勾配の正規化"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

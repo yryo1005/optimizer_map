@@ -1,0 +1,43 @@
+{
+  "id": "adabelief",
+  "name": "AdaBelief",
+  "short_name": "AdaBelief",
+  "year": 2020,
+  "citations": 1000,
+  "categories": [
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/2010.07468",
+  "summary": "Adamの2次モーメントに勾配の2乗ではなく，観測された勾配と1次モーメント（勾配の予測値）との差の2乗の指数移動平均を用いる手法である．勾配が予測通りであれば大きなステップを，予測から外れれば小さなステップを取ることで，Adamの高速な収束とSGDの汎化性能の両立を狙う．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad {\\mathbf m}_t = \\beta_1 {\\mathbf m}_{t-1} + (1 - \\beta_1) {\\mathbf g}_t, \\quad {\\mathbf s}_t = \\beta_2 {\\mathbf s}_{t-1} + (1 - \\beta_2) ({\\mathbf g}_t - {\\mathbf m}_t)^2 + \\epsilon, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\frac{\\eta}{\\sqrt{\\hat{\\mathbf s}_t} + \\epsilon} \\hat{\\mathbf m}_t",
+  "parents": [
+    {
+      "id": "adam",
+      "types": [
+        "adaptive"
+      ],
+      "improvement": "2次モーメントを勾配と1次モーメントの差（予測誤差）の分散に置き換え"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "ε"
+    ],
+    "tasks": [
+      "general",
+      "vision"
+    ]
+  },
+  "deep_dive": {
+    "why": "勾配そのものではなく予測（慣性項）からのずれの分散で正規化するため，勾配が安定している方向には大きく，ばらつく方向には小さく進む．",
+    "weaknesses": "ε の値の影響が Adam より大きい．大規模な比較では AdamW との差が小さいとされる．",
+    "settings": "η=1e-3，β1=0.9，β2=0.999，ε=1e-16（論文の推奨は Adam より小さい）．"
+  }
+}

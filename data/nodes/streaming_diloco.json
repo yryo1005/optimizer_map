@@ -1,0 +1,36 @@
+{
+  "id": "streaming_diloco",
+  "name": "Streaming DiLoCo",
+  "short_name": "Streaming DiLoCo",
+  "year": 2025,
+  "citations": 60,
+  "categories": [
+    "分散学習"
+  ],
+  "reference": "https://arxiv.org/abs/2501.18512",
+  "summary": "DiLoCoでは同期の際に全パラメータを一度に交換するため，ピーク帯域が大きくなる問題に対し，パラメータの一部（層の断片）ずつを時間をずらして同期し，通信を計算と重ね合わせ，交換するデータを低ビットに量子化する手法である．データ並列の学習と同等の性能を，必要な帯域を数百分の1にして達成する．",
+  "update_rule": "\\text{断片} \\; p \\; \\text{を} \\; t \\equiv t_p \\pmod H \\; \\text{で同期} : \\;\\; \\Delta^{(p)} = Q\\left( \\frac{1}{K} \\sum_k ({\\mathbf w}^{(p)}_{\\mathrm{global}} - {\\mathbf w}^{k,(p)}) \\right), \\quad {\\mathbf w}^{(p)} \\leftarrow \\mathrm{Nesterov}({\\mathbf w}^{(p)}_{\\mathrm{global}}, \\Delta^{(p)}) \\;\\; (\\text{計算と重ね合わせて通信})",
+  "parents": [
+    {
+      "id": "diloco",
+      "types": [
+        "communication",
+        "compression"
+      ],
+      "improvement": "パラメータ断片ごとの時間差同期，通信と計算の重ね合わせ，通信の量子化"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [],
+    "hyperparameters": [
+      "H",
+      "断片数",
+      "量子化ビット数"
+    ],
+    "tasks": [
+      "llm",
+      "distributed"
+    ]
+  }
+}

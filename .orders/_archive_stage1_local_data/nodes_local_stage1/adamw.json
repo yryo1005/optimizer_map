@@ -1,0 +1,16 @@
+{
+  "id": "adamw",
+  "name": "AdamW (Adam with Decoupled Weight Decay)",
+  "year": 2017,
+  "citation_count": 16000,
+  "category": ["適応的学習率", "正則化"],
+  "summary": "Adamにおいて重み減衰（Weight Decay）をL2正則化として損失関数に加える実装では，Adamの適応的な学習率のスケーリングが重み減衰の効果にも影響してしまい，正則化の強さが意図した通りに働かない問題がある．本手法は，重み減衰の項をモーメントの計算から分離し，パラメータ更新時に直接適用することで，学習率と正則化の強さを独立に制御できるようにする．",
+  "update_rule": "{\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\left( \\frac{\\hat{\\mathbf m}_t}{\\sqrt{\\hat{\\mathbf v}_t} + \\epsilon} + \\lambda {\\mathbf w}_t \\right)",
+  "paper_url": "https://arxiv.org/abs/1711.05101",
+  "derived_from": [
+    {
+      "parent_id": "adam",
+      "relation": "重み減衰(Weight Decay)のモーメント計算からの分離"
+    }
+  ]
+}

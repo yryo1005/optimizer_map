@@ -1,0 +1,37 @@
+{
+  "id": "cocob",
+  "name": "COCOB (COntinuous COin Betting)",
+  "short_name": "COCOB",
+  "year": 2017,
+  "citations": 150,
+  "categories": [
+    "学習率自動調整",
+    "オンライン学習"
+  ],
+  "reference": "https://arxiv.org/abs/1705.07795",
+  "summary": "最適化をコイン投げの賭けの問題に帰着させる，学習率を一切持たない手法である．各パラメータについて，これまでの勾配から得た「報酬」に応じて賭け金（初期点からの変位）を決めることで，学習率の調整なしに最適な学習率を用いた場合に近い収束保証を得る．",
+  "update_rule": "L_{t,i} = \\max(L_{t-1,i}, |g_{t,i}|), \\quad G_{t,i} = G_{t-1,i} + |g_{t,i}|, \\quad R_{t,i} = \\max(R_{t-1,i} - g_{t,i}(w_{t,i} - w_{1,i}), 0), \\quad w_{t+1,i} = w_{1,i} + \\frac{-\\sum_{s \\le t} g_{s,i}}{L_{t,i} \\max(G_{t,i} + L_{t,i}, \\alpha L_{t,i})} (L_{t,i} + R_{t,i})",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "lr_automation",
+        "reinterpretation"
+      ],
+      "improvement": "コイン投げの賭けへの帰着による学習率の完全な除去"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [
+      "optax",
+      "library"
+    ],
+    "hyperparameters": [
+      "α"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

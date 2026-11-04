@@ -1,0 +1,56 @@
+{
+  "id": "one_cycle",
+  "name": "1cycle方策 (One Cycle Policy, Super-Convergence)",
+  "short_name": "1cycle方策",
+  "year": 2017,
+  "citations": 1500,
+  "categories": [
+    "学習率スケジュール",
+    "高速化"
+  ],
+  "reference": "https://arxiv.org/abs/1708.07120",
+  "summary": "学習全体で学習率を小さな値から非常に大きな値まで増加させた後に再び減少させる1周期のスケジュールを，慣性項の係数を逆向きに変化させることと組み合わせる手法である．大きな学習率が正則化として働き，従来より1桁少ない反復回数で同等の精度に到達する現象（Super-Convergence）を示した．",
+  "update_rule": "\\eta_t = \\begin{cases} \\eta_{\\min} + (\\eta_{\\max} - \\eta_{\\min}) \\frac{t}{T/2} & (t \\le T/2) \\\\ \\eta_{\\max} - (\\eta_{\\max} - \\eta_{\\min}) \\frac{t - T/2}{T/2} & (t > T/2) \\end{cases}, \\quad \\beta_t : \\beta_{\\max} \\to \\beta_{\\min} \\to \\beta_{\\max}",
+  "parents": [
+    {
+      "id": "momentum",
+      "types": [
+        "lr_automation",
+        "momentum"
+      ],
+      "improvement": "学習率と慣性項の係数の逆位相の1周期スケジュール"
+    },
+    {
+      "id": "sgdr",
+      "types": [
+        "lr_automation"
+      ],
+      "improvement": "周期的な学習率変化の単一周期・大振幅への変更"
+    },
+    {
+      "id": "clr",
+      "types": [
+        "lr_automation"
+      ],
+      "improvement": "周期的学習率の単一周期化"
+    }
+  ],
+  "practical": {
+    "state": "na",
+    "implementations": [
+      "pytorch"
+    ],
+    "hyperparameters": [
+      "η_max",
+      "周期"
+    ],
+    "tasks": [
+      "vision"
+    ]
+  },
+  "deep_dive": {
+    "why": "学習初期に学習率を大きくして平坦な領域を探索し，最後に小さくして収束させる．大きな学習率が正則化として働く．",
+    "weaknesses": "最大学習率の探索（学習率レンジテスト）が必要である．",
+    "settings": "η_max は学習率レンジテストで決定，慣性項は 0.95→0.85→0.95，最後に η_max の 1/1e4 まで減衰．"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "id": "sgd",
+  "name": "確率的勾配降下法 (Stochastic Gradient Descent, SGD)",
+  "year": 1951,
+  "citation_count": 25000,
+  "category": ["高速化"],
+  "summary": "目的関数全体の勾配の代わりに，1サンプルまたは少数のミニバッチから計算した勾配の推定値を用いてパラメータを更新する確率的近似法である．全データを用いる最急降下法と比べ，1回の更新に要する計算量を大幅に削減できるため，大規模データセットに対する最適化の基礎となった．",
+  "update_rule": "{\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\nabla f_t({\\mathbf w}_t)",
+  "paper_url": "https://www.jstor.org/stable/2236626",
+  "derived_from": []
+}

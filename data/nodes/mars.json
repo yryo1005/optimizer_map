@@ -1,0 +1,52 @@
+{
+  "id": "mars",
+  "name": "MARS (Make vAriance Reduction Shine)",
+  "short_name": "MARS",
+  "year": 2024,
+  "citations": 60,
+  "categories": [
+    "勾配分散低減",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/2411.10438",
+  "summary": "分散低減手法は深層学習ではあまり有効でないとされてきたが，STORM型の再帰的な分散低減とAdamW等の前処理付き最適化手法を統合した枠組みにより，大規模言語モデルの事前学習でAdamWを上回る性能を示した手法である．同一バッチで評価した勾配差による補正をスケーリング・クリッピングした上で，Adam型の1次・2次モーメントを計算する．",
+  "update_rule": "{\\mathbf c}_t = \\nabla f({\\mathbf w}_t; \\xi_t) + \\gamma \\frac{\\beta_1}{1 - \\beta_1} \\left( \\nabla f({\\mathbf w}_t; \\xi_t) - \\nabla f({\\mathbf w}_{t-1}; \\xi_t) \\right), \\quad \\tilde{\\mathbf c}_t = \\mathrm{clip}({\\mathbf c}_t, 1), \\quad {\\mathbf m}_t = \\beta_1 {\\mathbf m}_{t-1} + (1 - \\beta_1) \\tilde{\\mathbf c}_t, \\quad {\\mathbf v}_t = \\beta_2 {\\mathbf v}_{t-1} + (1 - \\beta_2) \\tilde{\\mathbf c}_t^2, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\left( \\frac{\\hat{\\mathbf m}_t}{\\sqrt{\\hat{\\mathbf v}_t} + \\epsilon} + \\lambda {\\mathbf w}_t \\right)",
+  "parents": [
+    {
+      "id": "storm",
+      "types": [
+        "variance_reduction",
+        "stabilization"
+      ],
+      "improvement": "再帰的分散低減のスケーリング・クリッピングによる深層学習向けの安定化"
+    },
+    {
+      "id": "adamw",
+      "types": [
+        "adaptive",
+        "variance_reduction"
+      ],
+      "improvement": "分散低減した勾配推定値への前処理（適応的学習率）の適用"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "γ",
+      "β1",
+      "β2"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  },
+  "deep_dive": {
+    "why": "同一バッチでの勾配差により慣性項の雑音を補正する分散低減を，適応的な前処理と組み合わせることで，LLM の事前学習で AdamW より速く損失が下がる．",
+    "weaknesses": "同一バッチで前ステップのパラメータの勾配を再計算する完全版は計算量が2倍になる（近似版では前ステップの勾配を用いる）．",
+    "settings": "γ=0.025，β1=0.95，β2=0.99，近似版（MARS-approx）が実用的．"
+  }
+}

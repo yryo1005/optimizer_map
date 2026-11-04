@@ -1,0 +1,36 @@
+{
+  "id": "q_galore",
+  "name": "Q-GaLore",
+  "short_name": "Q-GaLore",
+  "year": 2024,
+  "citations": 40,
+  "categories": [
+    "メモリ効率"
+  ],
+  "reference": "https://arxiv.org/abs/2407.08296",
+  "summary": "GaLoreの射影行列の計算（SVD）のコストとメモリをさらに削減するため，層ごとの勾配の部分空間の収束の速さに応じてSVDの頻度を適応的に減らし，射影行列を4bit，重みを8bitで保持する手法である．低精度の重みの更新には確率的丸めを用い，16GBのGPUでLLaMA-7Bを事前学習可能にした．",
+  "update_rule": "{\\mathbf P}_t = Q_4(\\mathrm{SVD}_r({\\mathbf G}_t)) \\;\\; (\\text{部分空間の変化が大きい層のみ更新}), \\quad {\\mathbf N}_t = \\mathrm{Adam}({\\mathbf P}_t^\\top {\\mathbf G}_t), \\quad {\\mathbf W}^{\\mathrm{int8}}_{t+1} = \\mathrm{SR}\\left( {\\mathbf W}_t - \\eta \\, {\\mathbf P}_t {\\mathbf N}_t \\right) \\quad (\\mathrm{SR} : \\text{確率的丸め})",
+  "parents": [
+    {
+      "id": "galore",
+      "types": [
+        "compression"
+      ],
+      "improvement": "射影行列・重みの低ビット量子化と層ごとに適応的なSVD頻度"
+    }
+  ],
+  "practical": {
+    "state": "compressed",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "ランク"
+    ],
+    "tasks": [
+      "llm",
+      "finetune"
+    ]
+  }
+}

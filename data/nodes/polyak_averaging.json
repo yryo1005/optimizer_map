@@ -1,0 +1,41 @@
+{
+  "id": "polyak_averaging",
+  "name": "Polyak-Ruppert平均化 (Polyak-Ruppert Averaging)",
+  "short_name": "Polyak-Ruppert平均化",
+  "year": 1992,
+  "citations": 3000,
+  "categories": [
+    "重み平均化",
+    "高速化"
+  ],
+  "reference": "https://doi.org/10.1137/0330046",
+  "summary": "SGDの反復列そのものではなく，反復列の算術平均を最終的な解として出力する手法である．比較的大きな学習率でSGDを実行しつつ平均を取ることで，確率的勾配のノイズによる揺らぎが打ち消され，漸近的に最適な収束率が得られることが示されている．",
+  "update_rule": "{\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta_t \\nabla f_t({\\mathbf w}_t), \\quad \\bar{\\mathbf w}_T = \\frac{1}{T} \\sum_{t=1}^{T} {\\mathbf w}_t",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "averaging"
+      ],
+      "improvement": "反復列の算術平均による確率的ノイズの抑制"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "pytorch"
+    ],
+    "hyperparameters": [
+      "平均の開始時刻"
+    ],
+    "tasks": [
+      "convex",
+      "general"
+    ]
+  },
+  "deep_dive": {
+    "why": "SGD の反復列は最適解の周りで雑音により揺らぐが，その平均をとることで揺らぎが打ち消され，漸近的に最適な統計効率が得られる．",
+    "weaknesses": "初期の反復を含めると平均が初期点に引きずられるため，平均の開始時刻を選ぶ必要がある．",
+    "settings": "学習後半からの平均，または指数移動平均（EMA，減衰率 0.999〜0.9999）で代用する．"
+  }
+}

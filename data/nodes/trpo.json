@@ -1,0 +1,43 @@
+{
+  "id": "trpo",
+  "name": "TRPO (Trust Region Policy Optimization)",
+  "short_name": "TRPO",
+  "year": 2015,
+  "citations": 9000,
+  "categories": [
+    "方策最適化",
+    "2次手法"
+  ],
+  "reference": "https://arxiv.org/abs/1502.05477",
+  "summary": "方策の更新前後のKLダイバージェンスが一定値以下という信頼領域の制約の下で，代理目的関数を最大化する方策最適化手法である．単調な性能改善の理論保証に基づき，共役勾配法とフィッシャー行列とベクトルの積で自然勾配方向を求め，直線探索で制約を満たすステップ幅を選ぶことで，大きなニューラルネットワーク方策を安定に学習する．",
+  "update_rule": "\\max_{\\boldsymbol\\theta} \\; \\mathbb{E}\\left[ \\frac{\\pi_{\\boldsymbol\\theta}(a|s)}{\\pi_{\\boldsymbol\\theta_t}(a|s)} \\hat A_t(s, a) \\right] \\;\\; \\mathrm{s.t.} \\;\\; \\mathbb{E}\\left[ \\mathrm{KL}(\\pi_{\\boldsymbol\\theta_t}(\\cdot|s) \\, \\| \\, \\pi_{\\boldsymbol\\theta}(\\cdot|s)) \\right] \\le \\delta, \\quad \\boldsymbol\\theta_{t+1} = \\boldsymbol\\theta_t + \\alpha^j \\sqrt{\\frac{2\\delta}{{\\mathbf s}^\\top {\\mathbf F} {\\mathbf s}}} \\, {\\mathbf s}, \\;\\; {\\mathbf s} = {\\mathbf F}^{-1} {\\mathbf g}",
+  "parents": [
+    {
+      "id": "natural_policy_gradient",
+      "types": [
+        "stabilization",
+        "curvature"
+      ],
+      "improvement": "KLダイバージェンスの信頼領域制約と直線探索による単調改善の保証"
+    },
+    {
+      "id": "hessian_free",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "共役勾配法とフィッシャー行列とベクトルの積による自然勾配の計算"
+    }
+  ],
+  "practical": {
+    "state": "na",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "δ（信頼領域）"
+    ],
+    "tasks": [
+      "rl"
+    ]
+  }
+}

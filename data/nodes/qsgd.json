@@ -1,0 +1,35 @@
+{
+  "id": "qsgd",
+  "name": "QSGD (Quantized SGD)",
+  "short_name": "QSGD",
+  "year": 2016,
+  "citations": 2000,
+  "categories": [
+    "分散学習"
+  ],
+  "reference": "https://arxiv.org/abs/1610.02132",
+  "summary": "データ並列の分散学習で通信のボトルネックとなる勾配の送受信に対し，勾配をノルムと符号，少数の量子化レベルからなる不偏な確率的量子化で圧縮する手法である．量子化レベル数により通信量と勾配の分散のトレードオフを調整でき，収束保証を保ちつつ通信量を大幅に削減する．",
+  "update_rule": "Q_s(g_i) = \\|{\\mathbf g}\\|_2 \\, \\mathrm{sign}(g_i) \\, \\xi_i({\\mathbf g}, s), \\quad \\xi_i = \\begin{cases} (\\ell + 1)/s & (\\text{確率 } p = s |g_i| / \\|{\\mathbf g}\\| - \\ell) \\\\ \\ell / s & (\\mathrm{otherwise}) \\end{cases}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\frac{\\eta}{K} \\sum_{k=1}^{K} Q_s({\\mathbf g}^k_t)",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "compression",
+        "communication"
+      ],
+      "improvement": "勾配の不偏な確率的量子化による通信量の削減"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "s（量子化レベル）"
+    ],
+    "tasks": [
+      "distributed"
+    ]
+  }
+}

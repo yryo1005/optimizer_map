@@ -1,0 +1,54 @@
+{
+  "id": "schedule_free",
+  "name": "Schedule-Free (Schedule-Free SGD / AdamW)",
+  "short_name": "Schedule-Free",
+  "year": 2024,
+  "citations": 150,
+  "categories": [
+    "重み平均化",
+    "学習率自動調整"
+  ],
+  "reference": "https://arxiv.org/abs/2405.15682",
+  "summary": "学習率スケジュール（コサイン減衰等）を不要にする手法である．勾配を評価する点を，SGDで更新される系列と，その平均系列との補間点とすることで，Polyak平均化とモーメント法を統一的に扱う．学習の停止時刻を事前に決めずとも，スケジュールを用いた場合と同等以上の性能が得られる．AdamWへの適用版（Schedule-Free AdamW）も提案されている．",
+  "update_rule": "{\\mathbf y}_t = (1 - \\beta) {\\mathbf z}_t + \\beta {\\mathbf x}_t, \\quad {\\mathbf z}_{t+1} = {\\mathbf z}_t - \\eta \\nabla f_t({\\mathbf y}_t), \\quad {\\mathbf x}_{t+1} = (1 - c_{t+1}) {\\mathbf x}_t + c_{t+1} {\\mathbf z}_{t+1}, \\quad c_{t+1} = \\frac{1}{t+1}",
+  "parents": [
+    {
+      "id": "polyak_averaging",
+      "types": [
+        "averaging",
+        "lr_automation"
+      ],
+      "improvement": "平均系列と更新系列の補間点での勾配評価による学習率スケジュールの不要化"
+    },
+    {
+      "id": "momentum",
+      "types": [
+        "averaging",
+        "momentum"
+      ],
+      "improvement": "補間による慣性効果の置き換え（モーメント法と平均化の統一）"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "optax",
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β",
+      "λ",
+      "ウォームアップ"
+    ],
+    "tasks": [
+      "general",
+      "llm"
+    ]
+  },
+  "deep_dive": {
+    "why": "勾配を評価する点を平均系列と更新系列の補間とすることで，学習率スケジュールなしで最後の反復の性能が最適化され，学習の終了時刻を事前に決める必要がない．",
+    "weaknesses": "評価時には平均系列 x に切り替える必要がある（バッチ正規化の統計量にも注意）．ウォームアップは依然として必要である．",
+    "settings": "β=0.9，ウォームアップあり，学習率は通常のスケジュール付き手法の 1〜10 倍程度から探索する．"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "id": "dp_ftrl",
+  "name": "DP-FTRL (Differentially Private Follow-The-Regularized-Leader)",
+  "short_name": "DP-FTRL",
+  "year": 2021,
+  "citations": 300,
+  "categories": [
+    "差分プライバシー",
+    "オンライン学習"
+  ],
+  "reference": "https://arxiv.org/abs/2103.00039",
+  "summary": "DP-SGDのプライバシー保証は，データのランダムなサンプリング（シャッフル）によるプライバシー増幅に依存するが，連合学習などではこれを保証しにくい問題に対し，FTRLの勾配の累積和に木構造集約（tree aggregation）で相関のある雑音を加える手法である．サンプリングに依存せずに，DP-SGDと同等以上のプライバシーと精度のトレードオフを達成し，実運用の連合学習（Gboard）に用いられた．",
+  "update_rule": "{\\mathbf s}_t = \\sum_{i \\le t} \\bar{\\mathbf g}_i + \\mathrm{TreeNoise}_t \\;\\; (\\text{木構造集約による相関雑音}), \\quad {\\mathbf w}_{t+1} = \\arg\\min_{{\\mathbf w}} \\left\\{ \\langle {\\mathbf s}_t, {\\mathbf w} \\rangle + \\frac{\\lambda}{2} \\|{\\mathbf w} - {\\mathbf w}_0\\|^2 \\right\\}",
+  "parents": [
+    {
+      "id": "ftrl",
+      "types": [
+        "problem_transfer"
+      ],
+      "improvement": "勾配の累積和に基づく更新への差分プライバシーの導入"
+    },
+    {
+      "id": "dp_sgd",
+      "types": [
+        "problem_transfer"
+      ],
+      "improvement": "サンプリングに依存しない木構造集約による雑音付加への置き換え"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "C（クリップ閾値）",
+      "σ（雑音）"
+    ],
+    "tasks": [
+      "privacy",
+      "distributed"
+    ]
+  }
+}

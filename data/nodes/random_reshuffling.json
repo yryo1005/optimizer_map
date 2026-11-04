@@ -1,0 +1,33 @@
+{
+  "id": "random_reshuffling",
+  "name": "ランダムリシャッフリング (Random Reshuffling)",
+  "short_name": "ランダムリシャッフリング",
+  "year": 2020,
+  "citations": 200,
+  "categories": [
+    "勾配分散低減"
+  ],
+  "reference": "https://arxiv.org/abs/2006.05988",
+  "summary": "SGDで各ステップ独立にサンプルを選ぶ（復元抽出）代わりに，エポックごとにデータをランダムに並べ替えて重複なく順に用いる手法である．実践では標準的に用いられてきたが，その優位性の理論は複雑であった．本研究は簡潔な解析により，強凸問題などでSGDより良い収束率が得られることを示した．",
+  "update_rule": "\\pi^k \\sim \\mathrm{Perm}(n), \\quad {\\mathbf w}^{k}_{i+1} = {\\mathbf w}^{k}_{i} - \\eta \\nabla f_{\\pi^k_i}({\\mathbf w}^{k}_{i}) \\;\\; (i = 0, \\dots, n-1), \\quad {\\mathbf w}^{k+1}_0 = {\\mathbf w}^{k}_n",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "stochastic"
+      ],
+      "improvement": "エポックごとのランダムな並べ替えによる非復元抽出"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "pytorch"
+    ],
+    "hyperparameters": [],
+    "tasks": [
+      "general"
+    ]
+  },
+  "notes": "手法自体は古くから実践で用いられており，参考文献は簡潔な収束解析を与えた論文（Mishchenko et al., 2020）とした．"
+}

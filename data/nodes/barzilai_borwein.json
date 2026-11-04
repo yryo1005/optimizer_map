@@ -1,0 +1,39 @@
+{
+  "id": "barzilai_borwein",
+  "name": "Barzilai-Borwein法 (BB Step Size)",
+  "short_name": "Barzilai-Borwein法",
+  "year": 1988,
+  "citations": 3500,
+  "categories": [
+    "学習率自動調整",
+    "2次手法"
+  ],
+  "reference": "https://doi.org/10.1093/imanum/8.1.141",
+  "summary": "直前2回の反復におけるパラメータの変化量と勾配の変化量から，セカント条件をスカラーの最小2乗で近似的に満たすステップ幅を計算する勾配法である．ヘッセ行列をスカラー倍の単位行列で近似する準ニュートン法とみなせ，関数値が単調に減少しない場合もあるが，最急降下法より大幅に高速に収束することが多い．",
+  "update_rule": "{\\mathbf s}_{t-1} = {\\mathbf w}_t - {\\mathbf w}_{t-1}, \\quad {\\mathbf y}_{t-1} = \\nabla f({\\mathbf w}_t) - \\nabla f({\\mathbf w}_{t-1}), \\quad \\eta_t = \\frac{{\\mathbf s}_{t-1}^\\top {\\mathbf s}_{t-1}}{{\\mathbf s}_{t-1}^\\top {\\mathbf y}_{t-1}}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta_t \\nabla f({\\mathbf w}_t)",
+  "parents": [
+    {
+      "id": "gd",
+      "types": [
+        "lr_automation",
+        "curvature"
+      ],
+      "improvement": "セカント条件のスカラー近似によるステップ幅の自動設定"
+    },
+    {
+      "id": "newton",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "ヘッセ行列のスカラー倍の単位行列による近似"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [],
+    "hyperparameters": [],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

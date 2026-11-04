@@ -1,0 +1,42 @@
+{
+  "id": "shampoo_4bit",
+  "name": "4-bit Shampoo",
+  "short_name": "4-bit Shampoo",
+  "year": 2024,
+  "citations": 20,
+  "categories": [
+    "2次手法",
+    "メモリ効率"
+  ],
+  "reference": "https://arxiv.org/abs/2405.18144",
+  "summary": "Shampooの前処理行列を4bitで保持する，初の4bitの2次最適化手法である．前処理行列そのものを量子化すると小さな特異値が大きく変化して性能が劣化することを示し，代わりに前処理行列の固有ベクトル行列を量子化し，直交性を補正して復元することで，32bit版に近い性能を保ちつつメモリを削減する．",
+  "update_rule": "{\\mathbf L}_t = {\\mathbf U}_t \\boldsymbol\\Lambda_t {\\mathbf U}_t^\\top, \\quad \\bar{\\mathbf U}_t = Q_4({\\mathbf U}_t), \\quad \\hat{\\mathbf U}_t = \\mathrm{OrthRect}(Q_4^{-1}(\\bar{\\mathbf U}_t)), \\quad {\\mathbf L}_t^{-1/4} \\approx \\hat{\\mathbf U}_t \\boldsymbol\\Lambda_t^{-1/4} \\hat{\\mathbf U}_t^\\top, \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta \\, {\\mathbf L}_t^{-1/4} {\\mathbf G}_t {\\mathbf R}_t^{-1/4}",
+  "parents": [
+    {
+      "id": "shampoo",
+      "types": [
+        "compression"
+      ],
+      "improvement": "前処理行列の固有ベクトル行列の4bit量子化と直交性の補正"
+    },
+    {
+      "id": "adam_4bit",
+      "types": [
+        "compression"
+      ],
+      "improvement": "1次手法の低ビット量子化の2次手法への拡張"
+    }
+  ],
+  "practical": {
+    "state": "matrix",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η"
+    ],
+    "tasks": [
+      "vision"
+    ]
+  }
+}

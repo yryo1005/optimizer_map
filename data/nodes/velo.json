@@ -1,0 +1,35 @@
+{
+  "id": "velo",
+  "name": "VeLO (Versatile Learned Optimizer)",
+  "short_name": "VeLO",
+  "year": 2022,
+  "citations": 150,
+  "categories": [
+    "自動探索・メタ学習",
+    "学習率自動調整"
+  ],
+  "reference": "https://arxiv.org/abs/2211.09760",
+  "summary": "ニューラルネットワークで表現した最適化手法を，従来より3桁多い数のタスクと2桁多い計算資源でメタ学習した，汎用の学習された最適化手法である．テンソルごとのLSTMが小さなMLP型の更新則の重みを生成する階層的な構造をとり，ハイパーパラメータの調整なしで，多くのタスクで学習率を調整したAdam系の手法より高速に学習する．",
+  "update_rule": "\\boldsymbol\\theta^{\\mathrm{MLP}}_{\\ell, t} = \\mathrm{LSTM}_{\\mathrm{tensor}}(\\text{テンソル単位の統計量}), \\quad {\\mathbf w}^\\ell_{t+1} = {\\mathbf w}^\\ell_t - \\mathrm{MLP}({\\mathbf g}^\\ell_t, {\\mathbf m}^\\ell_t, {\\mathbf v}^\\ell_t, \\dots; \\boldsymbol\\theta^{\\mathrm{MLP}}_{\\ell, t})",
+  "parents": [
+    {
+      "id": "l2l",
+      "types": [
+        "problem_transfer"
+      ],
+      "improvement": "大規模なメタ学習とテンソル単位LSTM・パラメータ単位MLPの階層的構造"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "（メタ学習済み）"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

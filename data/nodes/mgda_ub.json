@@ -1,0 +1,32 @@
+{
+  "id": "mgda_ub",
+  "name": "MGDA-UB (Multi-Task Learning as Multi-Objective Optimization)",
+  "short_name": "MGDA-UB",
+  "year": 2018,
+  "citations": 1800,
+  "categories": [
+    "マルチタスク・多目的"
+  ],
+  "reference": "https://arxiv.org/abs/1810.04650",
+  "summary": "深層学習のマルチタスク学習を多目的最適化として定式化し，MGDAを適用する際に，タスクごとの勾配を全パラメータについて計算するコストを避けるため，共有表現（エンコーダ出力）に関する勾配で上界を最小化する近似を導入した手法である．単一の逆伝播でMGDAの重みを求められ，タスクの重みの手動調整なしにパレート最適解を得る．",
+  "update_rule": "\\boldsymbol\\alpha^* = \\arg\\min_{\\boldsymbol\\alpha \\in \\Delta_K} \\left\\| \\sum_{k=1}^{K} \\alpha_k \\nabla_{{\\mathbf Z}} f_k \\right\\|^2 \\;\\; ({\\mathbf Z} : \\text{共有表現}), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\nabla_{{\\mathbf w}} \\sum_{k} \\alpha^*_k f_k({\\mathbf w}_t)",
+  "parents": [
+    {
+      "id": "mgda",
+      "types": [
+        "problem_transfer"
+      ],
+      "improvement": "共有表現に関する勾配による上界の最小化（深層学習への効率的な適用）"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [],
+    "tasks": [
+      "multitask"
+    ]
+  }
+}

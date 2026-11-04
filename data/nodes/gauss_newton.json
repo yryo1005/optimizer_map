@@ -1,0 +1,33 @@
+{
+  "id": "gauss_newton",
+  "name": "ガウス・ニュートン法 (Gauss-Newton Method)",
+  "short_name": "ガウス・ニュートン法",
+  "year": 1809,
+  "citations": null,
+  "categories": [
+    "2次手法"
+  ],
+  "reference": "https://en.wikipedia.org/wiki/Gauss%E2%80%93Newton_algorithm",
+  "summary": "非線形最小2乗問題において，ヘッセ行列を残差のヤコビ行列の積で近似し，2階微分を用いずにニュートン法に近い更新を行う手法である．近似行列は常に半正定値となるため，ニュートン法より安定であり，深層学習における2次手法（Hessian-Free，K-FAC等）で用いられる一般化ガウス・ニュートン行列の起源となった．",
+  "update_rule": "{\\mathbf w}_{t+1} = {\\mathbf w}_t - ({\\mathbf J}_t^\\top {\\mathbf J}_t)^{-1} {\\mathbf J}_t^\\top {\\mathbf r}({\\mathbf w}_t), \\quad {\\mathbf J}_t = \\frac{\\partial {\\mathbf r}}{\\partial {\\mathbf w}}({\\mathbf w}_t)",
+  "parents": [
+    {
+      "id": "newton",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "ヘッセ行列のヤコビ行列の積（半正定値）による近似"
+    }
+  ],
+  "practical": {
+    "state": "matrix",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [],
+    "tasks": [
+      "convex"
+    ]
+  },
+  "notes": "Gaussの最小2乗法（1809）に遡る．単一の参照可能な原典URL・Citation数がないためWikipediaを参照し，Citation数はnullとした．"
+}

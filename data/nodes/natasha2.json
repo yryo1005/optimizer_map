@@ -1,0 +1,40 @@
+{
+  "id": "natasha2",
+  "name": "Natasha2",
+  "short_name": "Natasha2",
+  "year": 2017,
+  "citations": 250,
+  "categories": [
+    "2次手法",
+    "勾配分散低減"
+  ],
+  "reference": "https://arxiv.org/abs/1708.08694",
+  "summary": "非凸な確率的最適化において，SVRG型の分散低減と，ヘッセ行列とベクトルの積のみを用いて負の曲率方向を見つけるOja法を組み合わせ，鞍点を回避して近似的な局所最適解（2次の停留点）を求める手法である．SGDより良い計算量で局所最適解に到達することを示した．",
+  "update_rule": "\\text{if } \\lambda_{\\min}(\\nabla^2 f({\\mathbf w}_t)) < -\\delta : \\; {\\mathbf w}_{t+1} = {\\mathbf w}_t \\pm \\frac{\\delta}{L_2} {\\mathbf v} \\;\\; ({\\mathbf v} : \\text{Oja法による負の曲率方向}), \\quad \\text{else} : \\; {\\mathbf w}_{t+1} = \\mathrm{SVRG}\\text{型の正則化付き更新}({\\mathbf w}_t)",
+  "parents": [
+    {
+      "id": "svrg",
+      "types": [
+        "variance_reduction",
+        "curvature"
+      ],
+      "improvement": "分散低減と負の曲率方向の探索の組み合わせによる鞍点回避"
+    },
+    {
+      "id": "cubic_newton",
+      "types": [
+        "curvature",
+        "reinterpretation"
+      ],
+      "improvement": "2次の停留点（局所最適解）への収束保証の1次手法での実現"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [],
+    "hyperparameters": [],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

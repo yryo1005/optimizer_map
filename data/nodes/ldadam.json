@@ -1,0 +1,43 @@
+{
+  "id": "ldadam",
+  "name": "LDAdam (Low-Dimensional Adam)",
+  "short_name": "LDAdam",
+  "year": 2024,
+  "citations": 30,
+  "categories": [
+    "メモリ効率",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/2410.16103",
+  "summary": "GaLoreと同様に勾配を低次元の部分空間に射影して最適化状態を保持するが，射影の部分空間を変更する際に，最適化状態（モーメント）を新しい部分空間へ射影し直して引き継ぐ手法である．射影で失われた勾配の成分は誤差フィードバックで次ステップに持ち越し，AMSGradと同じ漸近的な収束率を保つ．",
+  "update_rule": "{\\mathbf P}_t = \\mathrm{PowerIter}({\\mathbf G}_t + {\\mathbf E}_t), \\quad {\\mathbf m}_{t} = \\beta_1 {\\mathbf P}_t^\\top {\\mathbf P}_{t-1} {\\mathbf m}_{t-1} + (1 - \\beta_1) {\\mathbf P}_t^\\top ({\\mathbf G}_t + {\\mathbf E}_t), \\quad {\\mathbf E}_{t+1} = ({\\mathbf G}_t + {\\mathbf E}_t) - {\\mathbf P}_t {\\mathbf P}_t^\\top ({\\mathbf G}_t + {\\mathbf E}_t), \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta \\, {\\mathbf P}_t \\frac{{\\mathbf m}_t}{\\sqrt{{\\mathbf v}_t} + \\epsilon}",
+  "parents": [
+    {
+      "id": "galore",
+      "types": [
+        "compression"
+      ],
+      "improvement": "部分空間変更時の最適化状態の射影による引き継ぎ"
+    },
+    {
+      "id": "ef_signsgd",
+      "types": [
+        "compression"
+      ],
+      "improvement": "射影誤差の誤差フィードバックによる持ち越し"
+    }
+  ],
+  "practical": {
+    "state": "compressed",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "ランク"
+    ],
+    "tasks": [
+      "finetune"
+    ]
+  }
+}

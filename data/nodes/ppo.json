@@ -1,0 +1,47 @@
+{
+  "id": "ppo",
+  "name": "PPO (Proximal Policy Optimization)",
+  "short_name": "PPO",
+  "year": 2017,
+  "citations": 25000,
+  "categories": [
+    "方策最適化"
+  ],
+  "reference": "https://arxiv.org/abs/1707.06347",
+  "summary": "TRPOの信頼領域制約を，新旧の方策の確率比をクリッピングした代理目的関数に置き換えた方策最適化手法である．2次の計算を必要とせず，同じデータで複数エポックのミニバッチSGD（Adam）による更新が可能となり，実装の簡単さと安定性から，強化学習や大規模言語モデルのRLHFで最も広く用いられる手法の一つとなった．",
+  "update_rule": "r_t(\\boldsymbol\\theta) = \\frac{\\pi_{\\boldsymbol\\theta}(a_t|s_t)}{\\pi_{\\boldsymbol\\theta_{\\mathrm{old}}}(a_t|s_t)}, \\quad L^{\\mathrm{CLIP}}(\\boldsymbol\\theta) = \\mathbb{E}_t\\left[ \\min\\left( r_t(\\boldsymbol\\theta) \\hat A_t, \\; \\mathrm{clip}(r_t(\\boldsymbol\\theta), 1 - \\epsilon, 1 + \\epsilon) \\hat A_t \\right) \\right], \\quad \\boldsymbol\\theta \\leftarrow \\mathrm{Adam}(\\nabla_{\\boldsymbol\\theta} L^{\\mathrm{CLIP}})",
+  "parents": [
+    {
+      "id": "trpo",
+      "types": [
+        "stabilization"
+      ],
+      "improvement": "信頼領域制約の確率比のクリッピングによる1次手法での近似"
+    },
+    {
+      "id": "adam",
+      "types": [
+        "problem_transfer"
+      ],
+      "improvement": "代理目的関数の複数エポックのミニバッチ最適化"
+    }
+  ],
+  "practical": {
+    "state": "na",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "ε（クリップ）",
+      "エポック数"
+    ],
+    "tasks": [
+      "rl"
+    ]
+  },
+  "deep_dive": {
+    "why": "新旧の方策の確率比をクリップすることで，1回の更新で方策が大きく変わりすぎることを防ぎつつ，同じデータで複数エポック学習できる．",
+    "weaknesses": "実装上の細かな工夫（アドバンテージの正規化，価値関数のクリップ等）に性能が大きく依存する．",
+    "settings": "ε=0.2，GAE λ=0.95，割引率 0.99，エポック数 3〜10，Adam η=3e-4．"
+  }
+}

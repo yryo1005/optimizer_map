@@ -1,0 +1,43 @@
+{
+  "id": "rwp",
+  "name": "RWP (Random Weight Perturbation)",
+  "short_name": "RWP",
+  "year": 2022,
+  "citations": 60,
+  "categories": [
+    "平坦解探索"
+  ],
+  "reference": "https://arxiv.org/abs/2211.11489",
+  "summary": "SAMの2回の逐次的な勾配計算を不要にするため，フィルタ単位でスケーリングしたランダムな重みの摂動の下での損失と元の損失の和を最小化する手法である．2つの勾配は独立に並列計算できるため通常の学習とほぼ同じ速度で学習でき，SAMの半分の学習時間で同等以上の汎化性能を示す．",
+  "update_rule": "\\boldsymbol\\epsilon \\sim \\mathcal{N}({\\mathbf 0}, \\sigma^2 \\mathrm{diag}(\\|{\\mathbf W}_{j}\\|^2)), \\quad {\\mathbf g}_t = \\lambda \\nabla f({\\mathbf w}_t + \\boldsymbol\\epsilon) + (1 - \\lambda) \\nabla f({\\mathbf w}_t) \\;\\; (\\text{並列計算}), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta {\\mathbf g}_t",
+  "parents": [
+    {
+      "id": "sam",
+      "types": [
+        "flatness",
+        "stochastic"
+      ],
+      "improvement": "敵対的な摂動のランダムな摂動への置き換えによる並列化"
+    },
+    {
+      "id": "gradient_noise",
+      "types": [
+        "flatness"
+      ],
+      "improvement": "フィルタ単位でスケーリングした重み空間の雑音の利用"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "σ",
+      "λ"
+    ],
+    "tasks": [
+      "vision"
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "id": "zero_one_adam",
+  "name": "0/1 Adam",
+  "short_name": "0/1 Adam",
+  "year": 2022,
+  "citations": 40,
+  "categories": [
+    "分散学習",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/2202.06009",
+  "summary": "1-bit Adamはウォームアップ期間に非圧縮の通信を必要とし，その後も毎ステップ通信する問題に対し，2次モーメントを適応的に固定（凍結）し，さらにローカルステップを導入して通信自体を省略できるようにした手法である．Adamと同等の性能を保ちつつ，通信量と通信回数を1-bit Adamよりさらに削減する．",
+  "update_rule": "{\\mathbf v}_t = \\begin{cases} \\mathrm{update}({\\mathbf v}_{t-1}) & (t \\in \\mathcal{T}_v) \\\\ {\\mathbf v}_{t-1} & (\\mathrm{otherwise}) \\end{cases}, \\quad {\\mathbf m}_t = \\begin{cases} \\mathrm{EF\\text{-}1bit\\text{-}AllReduce}({\\mathbf m}^k_t) & (t \\in \\mathcal{T}_u) \\\\ {\\mathbf m}^k_t \\;\\; (\\text{ローカルステップ}) & (\\mathrm{otherwise}) \\end{cases}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\frac{{\\mathbf m}_t}{\\sqrt{{\\mathbf v}_t} + \\epsilon}",
+  "parents": [
+    {
+      "id": "onebit_adam",
+      "types": [
+        "communication",
+        "compression"
+      ],
+      "improvement": "2次モーメントの適応的な凍結とローカルステップによる通信回数の削減"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "ウォームアップ長"
+    ],
+    "tasks": [
+      "llm",
+      "distributed"
+    ]
+  }
+}

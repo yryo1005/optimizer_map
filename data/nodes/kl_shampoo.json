@@ -1,0 +1,44 @@
+{
+  "id": "kl_shampoo",
+  "name": "KL-Shampoo / KL-SOAP",
+  "short_name": "KL-Shampoo",
+  "year": 2025,
+  "citations": 20,
+  "categories": [
+    "2次手法"
+  ],
+  "reference": "https://arxiv.org/abs/2509.03378",
+  "summary": "Shampooの2次モーメントの推定を，KLダイバージェンスの最小化による構造化された共分散推定として再解釈し，その観点から従来の推定則の限界を指摘して，QR分解を用いたKLに基づく推定則に置き換えた手法である．Shampooで通常必要なAdamによるステップ幅のグラフティングが不要となりメモリを削減しつつ，SOAPやShampooを上回る性能を示す．SOAPへの同様の改良版（KL-SOAP）も提案されている．",
+  "update_rule": "({\\mathbf L}_t, {\\mathbf R}_t) = \\arg\\min_{{\\mathbf L}, {\\mathbf R}} \\mathrm{KL}\\left( \\mathcal{N}({\\mathbf 0}, \\mathbb{E}[\\mathrm{vec}({\\mathbf G})\\mathrm{vec}({\\mathbf G})^\\top]) \\, \\| \\, \\mathcal{N}({\\mathbf 0}, {\\mathbf R} \\otimes {\\mathbf L}) \\right), \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta \\, {\\mathbf L}_t^{-1/2} {\\mathbf G}_t {\\mathbf R}_t^{-1/2}",
+  "parents": [
+    {
+      "id": "shampoo",
+      "types": [
+        "curvature",
+        "reinterpretation"
+      ],
+      "improvement": "KLダイバージェンス最小化に基づく前処理行列の推定則への置き換え"
+    },
+    {
+      "id": "soap",
+      "types": [
+        "curvature",
+        "reinterpretation"
+      ],
+      "improvement": "固有基底上の推定へのKL推定の適用（KL-SOAP）"
+    }
+  ],
+  "practical": {
+    "state": "matrix",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β2"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "dowg",
+  "name": "DoWG (Distance over Weighted Gradients)",
+  "short_name": "DoWG",
+  "year": 2023,
+  "citations": 50,
+  "categories": [
+    "学習率自動調整"
+  ],
+  "reference": "https://arxiv.org/abs/2305.16284",
+  "summary": "DoGの学習率の分母である勾配ノルムの2乗和を，初期点からの到達距離で重み付けした和に置き換えた手法である．滑らかな問題と非滑らかな問題の双方で，学習率の調整なしに，最適な学習率を用いた勾配降下法と対数因子を除いて同等の収束率を達成する（普遍性）．",
+  "update_rule": "\\bar r_t = \\max(\\|{\\mathbf w}_t - {\\mathbf w}_0\\|, \\bar r_{t-1}), \\quad v_t = v_{t-1} + \\bar r_t^2 \\|{\\mathbf g}_t\\|^2, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\frac{\\bar r_t^2}{\\sqrt{v_t}} {\\mathbf g}_t",
+  "parents": [
+    {
+      "id": "dog",
+      "types": [
+        "lr_automation"
+      ],
+      "improvement": "到達距離で重み付けした勾配ノルムの累積による学習率の普遍化"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "optax",
+      "library"
+    ],
+    "hyperparameters": [
+      "r_ε"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

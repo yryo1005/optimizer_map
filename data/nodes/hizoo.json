@@ -1,0 +1,45 @@
+{
+  "id": "hizoo",
+  "name": "HiZOO (Hessian Informed Zeroth-Order Optimizer)",
+  "short_name": "HiZOO",
+  "year": 2024,
+  "citations": 50,
+  "categories": [
+    "ゼロ次手法",
+    "2次手法"
+  ],
+  "reference": "https://arxiv.org/abs/2402.15173",
+  "summary": "ゼロ次最適化は次元ごとの曲率の違い（異質性）により収束が遅くなる問題に対し，関数値のみからヘッセ行列の対角成分を推定し，それを前処理として摂動の分布と更新に用いる手法である．MeZOと比べ1ステップあたり1回の順伝播を追加するだけで，大規模言語モデルのファインチューニングを大幅に高速化する．",
+  "update_rule": "{\\mathbf u} \\sim \\mathcal{N}({\\mathbf 0}, {\\mathbf I}), \\quad \\hat{\\mathbf g}_t = \\frac{f({\\mathbf w}_t + \\mu \\boldsymbol\\Sigma_t^{1/2} {\\mathbf u}) - f({\\mathbf w}_t - \\mu \\boldsymbol\\Sigma_t^{1/2} {\\mathbf u})}{2\\mu} \\boldsymbol\\Sigma_t^{1/2} {\\mathbf u}, \\quad \\boldsymbol\\Sigma_{t+1}^{-1} = (1 - \\alpha) \\boldsymbol\\Sigma_t^{-1} + \\alpha \\, \\widehat{\\mathrm{diag}}(\\nabla^2 f), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\hat{\\mathbf g}_t",
+  "parents": [
+    {
+      "id": "mezo",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "関数値から推定したヘッセ対角による前処理"
+    },
+    {
+      "id": "adahessian",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "ヘッセ行列の対角推定の移動平均による前処理"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "μ",
+      "α"
+    ],
+    "tasks": [
+      "finetune",
+      "llm"
+    ]
+  }
+}

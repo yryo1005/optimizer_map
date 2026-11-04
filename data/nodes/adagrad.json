@@ -1,0 +1,59 @@
+{
+  "id": "adagrad",
+  "name": "AdaGrad (Adaptive Gradient Algorithm)",
+  "short_name": "AdaGrad",
+  "year": 2011,
+  "citations": 17000,
+  "categories": [
+    "適応的学習率"
+  ],
+  "reference": "https://jmlr.org/papers/v12/duchi11a.html",
+  "summary": "各パラメータの勾配の2乗を学習開始から累積し，その累積値の平方根で学習率を割ることで，パラメータごとに異なる学習率を自動的に調整する手法である．勾配が頻繁に更新されるパラメータの学習率を小さく，稀にしか更新されないパラメータの学習率を大きくするため，疎なデータに対して有効である．",
+  "update_rule": "{\\mathbf r}_t = {\\mathbf r}_{t-1} + \\nabla f_t({\\mathbf w}_t)^2, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\frac{\\eta}{\\sqrt{{\\mathbf r}_t} + \\epsilon} \\nabla f_t({\\mathbf w}_t)",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "adaptive"
+      ],
+      "improvement": "勾配2乗の累積によるパラメータごとの学習率スケジューリング"
+    },
+    {
+      "id": "mirror_descent",
+      "types": [
+        "adaptive",
+        "reinterpretation"
+      ],
+      "improvement": "勾配履歴に基づくデータ依存の近接項（Bregmanダイバージェンス）の導入"
+    },
+    {
+      "id": "ogd",
+      "types": [
+        "adaptive",
+        "reinterpretation"
+      ],
+      "improvement": "オンライン凸最適化のリグレット解析に基づく適応的学習率の設計"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "pytorch",
+      "optax",
+      "keras"
+    ],
+    "hyperparameters": [
+      "η",
+      "ε"
+    ],
+    "tasks": [
+      "general",
+      "convex"
+    ]
+  },
+  "deep_dive": {
+    "why": "これまでの勾配の大きさに応じてパラメータごとに学習率を下げるため，まれに現れる特徴（疎な特徴）に大きな学習率が割り当てられる．オンライン凸最適化でリグレット最適である．",
+    "weaknesses": "勾配2乗の累積が単調に増えるため学習率が減衰し続け，深層学習の長い学習では途中で停滞しやすい．",
+    "settings": "η=0.01〜0.1，ε=1e-10 程度．初期累積値を 0.1 などにする実装もある．"
+  }
+}

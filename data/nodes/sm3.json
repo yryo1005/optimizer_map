@@ -1,0 +1,42 @@
+{
+  "id": "sm3",
+  "name": "SM3 (Square-root of Minima of Sums of Maxima of Squared-gradients Method)",
+  "short_name": "SM3",
+  "year": 2019,
+  "citations": 200,
+  "categories": [
+    "メモリ効率",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/1901.11150",
+  "summary": "AdaGradの勾配2乗の累積をパラメータごとに保持する代わりに，パラメータを覆う部分集合（例えば行列の各行・各列）ごとに累積値を保持し，各パラメータについてそれを含む部分集合の累積値の最小値を用いる手法である．AdaGradと同等の収束保証を保ちつつ，オプティマイザの状態量をパラメータ数より大幅に少なくできる．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad \\mu_t(r) = \\mu_{t-1}(r) + \\max_{j \\in S_r} g_{t,j}^2, \\quad \\nu_t(i) = \\min_{r : S_r \\ni i} \\mu_t(r), \\quad w_{t+1,i} = w_{t,i} - \\eta \\frac{g_{t,i}}{\\sqrt{\\nu_t(i)}}",
+  "parents": [
+    {
+      "id": "adagrad",
+      "types": [
+        "compression"
+      ],
+      "improvement": "パラメータを覆う部分集合ごとの勾配2乗累積によるメモリ削減"
+    }
+  ],
+  "practical": {
+    "state": "compressed",
+    "implementations": [
+      "optax",
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  },
+  "deep_dive": {
+    "why": "パラメータを覆う部分集合（行・列）ごとに勾配2乗の最大値を累積し，その最小値を各パラメータの累積値とすることで，AdaGrad の保証を保ちつつ状態量を O(n+m) にする．",
+    "weaknesses": "AdaGrad 型のため学習率の減衰が続く（慣性項付きの変種で緩和）．",
+    "settings": "η=0.1 前後（タスク依存），慣性項 β=0.9．"
+  }
+}

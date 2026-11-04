@@ -1,0 +1,33 @@
+name: Refresh paper metadata (Semantic Scholar)
+
+on:
+  schedule:
+    - cron: "17 3 1 * *"   # 毎月1日 03:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Fetch metadata
+        env:
+          S2_API_KEY: ${{ secrets.S2_API_KEY }}
+        run: python tools/fetch_metadata.py
+      - name: Rebuild review
+        run: python tools/build_review_md.py
+      - uses: peter-evans/create-pull-request@v6
+        with:
+          branch: bot/metadata-refresh
+          title: "書誌情報の更新（Semantic Scholar）"
+          commit-message: "Refresh paper metadata from Semantic Scholar"
+          body: |
+            `tools/fetch_metadata.py` による月次の書誌情報（Citation数・著者・掲載先・PDFリンク）の更新．
+            `needs_review` が付いたものはタイトル検索の結果が疑わしいため，`data/metadata_overrides.json` で論文を指定すること．

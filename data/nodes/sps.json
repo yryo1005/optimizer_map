@@ -1,0 +1,44 @@
+{
+  "id": "sps",
+  "name": "SPS (Stochastic Polyak Step-size)",
+  "short_name": "SPS",
+  "year": 2020,
+  "citations": 250,
+  "categories": [
+    "学習率自動調整"
+  ],
+  "reference": "https://arxiv.org/abs/2002.10542",
+  "summary": "Polyakステップサイズを確率的勾配法に拡張し，各ミニバッチの損失とその最小値（過剰パラメータ化されたモデルでは0とみなせる）から学習率を計算する手法である．上限値で学習率を切り詰めることで安定化し，学習率の調整なしに補間条件下で高速な収束を示す．",
+  "update_rule": "\\eta_t = \\min\\left( \\frac{f_{i_t}({\\mathbf w}_t) - f_{i_t}^*}{c \\, \\|\\nabla f_{i_t}({\\mathbf w}_t)\\|^2}, \\, \\eta_{\\max} \\right), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta_t \\nabla f_{i_t}({\\mathbf w}_t)",
+  "parents": [
+    {
+      "id": "polyak_step",
+      "types": [
+        "stochastic",
+        "lr_automation"
+      ],
+      "improvement": "ミニバッチ損失を用いた確率的な拡張と学習率の上限の導入"
+    },
+    {
+      "id": "sgd",
+      "types": [
+        "lr_automation"
+      ],
+      "improvement": "SGDへの自動的な学習率設定の導入"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "optax",
+      "library"
+    ],
+    "hyperparameters": [
+      "c",
+      "η_max"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

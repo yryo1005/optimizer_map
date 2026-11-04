@@ -1,0 +1,45 @@
+{
+  "id": "adamuon",
+  "name": "AdaMuon",
+  "short_name": "AdaMuon",
+  "year": 2025,
+  "citations": 40,
+  "categories": [
+    "2次手法",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/2507.11005",
+  "summary": "Muonで直交化された更新量に対して，要素ごとの2次モーメントによる適応的なスケーリングを加え，さらに更新量のRMSをAdamに合わせて再スケーリングする手法である．Muonの行列構造に基づく更新とAdamの要素ごとの適応性を組み合わせることで，Muonより高速に収束する．",
+  "update_rule": "{\\mathbf O}_t = \\mathrm{NewtonSchulz5}({\\mathbf M}_t), \\quad {\\mathbf V}_t = \\beta_2 {\\mathbf V}_{t-1} + (1 - \\beta_2) {\\mathbf O}_t^2, \\quad \\hat{\\mathbf O}_t = \\frac{{\\mathbf O}_t}{\\sqrt{{\\mathbf V}_t} + \\epsilon}, \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta \\frac{0.2 \\sqrt{mn}}{\\|\\hat{\\mathbf O}_t\\|_F} \\hat{\\mathbf O}_t",
+  "parents": [
+    {
+      "id": "muon",
+      "types": [
+        "adaptive"
+      ],
+      "improvement": "直交化された更新量への要素ごとの2次モーメントによる適応化"
+    },
+    {
+      "id": "adam",
+      "types": [
+        "adaptive",
+        "normalization"
+      ],
+      "improvement": "2次モーメントによる正規化とRMSの整合"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "celo",
+  "name": "Celo",
+  "short_name": "Celo",
+  "year": 2025,
+  "citations": 10,
+  "categories": [
+    "自動探索・メタ学習"
+  ],
+  "reference": "https://arxiv.org/abs/2501.12670",
+  "summary": "学習された最適化手法のメタ学習に莫大な計算資源を要する問題に対し，更新則の構造の設計（学習率スケジュールの分離，正規化等）とメタ学習の手順の工夫により，約24GPU時間のメタ学習で，分布外の多様なタスクにおいて調整済みの既存の最適化手法を上回る性能を示した研究である．",
+  "update_rule": "{\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta_t \\cdot \\mathrm{normalize}\\left( \\mathrm{MLP}_{\\boldsymbol\\phi}({\\mathbf g}_t, {\\mathbf m}_t, {\\mathbf v}_t, \\dots) \\right) \\quad (\\eta_t : \\text{学習されたスケジュールとは分離した学習率})",
+  "parents": [
+    {
+      "id": "velo",
+      "types": [
+        "problem_transfer"
+      ],
+      "improvement": "メタ学習の計算量を大幅に削減する更新則の構造と手順の設計"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "（メタ学習済み）"
+    ],
+    "tasks": [
+      "general"
+    ]
+  },
+  "notes": "更新式は論文の構造を簡略化した表記である．"
+}

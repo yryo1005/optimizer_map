@@ -1,0 +1,45 @@
+{
+  "id": "scaffold",
+  "name": "SCAFFOLD (Stochastic Controlled Averaging)",
+  "short_name": "SCAFFOLD",
+  "year": 2019,
+  "citations": 3000,
+  "categories": [
+    "分散学習",
+    "勾配分散低減"
+  ],
+  "reference": "https://arxiv.org/abs/1910.06378",
+  "summary": "非IIDなデータの下でFedAvgの各クライアントのローカル更新が自身の最適解へ偏る（クライアントドリフト）問題に対し，SVRGと同様の制御変量を用いて各クライアントの勾配を補正する手法である．サーバーとクライアントがそれぞれ勾配の推定値（制御変量）を保持し，その差でローカル勾配を補正することで，データの異質性によらず少ない通信回数で収束する．",
+  "update_rule": "{\\mathbf y}_k \\leftarrow {\\mathbf y}_k - \\eta_l \\left( \\nabla f_k({\\mathbf y}_k) - {\\mathbf c}_k + {\\mathbf c} \\right) \\;\\; (K\\text{ステップ}), \\quad {\\mathbf c}_k^{+} = {\\mathbf c}_k - {\\mathbf c} + \\frac{1}{K \\eta_l} ({\\mathbf w} - {\\mathbf y}_k), \\quad {\\mathbf w} \\leftarrow {\\mathbf w} + \\frac{\\eta_g}{|S|} \\sum_{k \\in S} ({\\mathbf y}_k - {\\mathbf w})",
+  "parents": [
+    {
+      "id": "fedavg",
+      "types": [
+        "variance_reduction",
+        "communication"
+      ],
+      "improvement": "制御変量によるクライアントドリフトの補正"
+    },
+    {
+      "id": "svrg",
+      "types": [
+        "variance_reduction",
+        "problem_transfer"
+      ],
+      "improvement": "制御変量による分散低減の連合学習への適用"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "ローカルη",
+      "グローバルη"
+    ],
+    "tasks": [
+      "distributed"
+    ]
+  }
+}

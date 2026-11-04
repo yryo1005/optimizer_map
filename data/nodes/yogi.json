@@ -1,0 +1,39 @@
+{
+  "id": "yogi",
+  "name": "Yogi",
+  "short_name": "Yogi",
+  "year": 2018,
+  "citations": 1500,
+  "categories": [
+    "適応的学習率"
+  ],
+  "reference": "https://proceedings.neurips.cc/paper_files/paper/2018/hash/90365351ccc7437a1309dc64e4db32a3-Abstract.html",
+  "summary": "Adamの2次モーメントの指数移動平均では，勾配が疎な場合などに過去の情報を急速に忘却し，実効的な学習率が急激に増加し得る問題を解決する手法である．2次モーメントを乗法的ではなく加法的に更新し，その変化量を勾配2乗の大きさで制限することで，実効的な学習率の増加を穏やかに制御する．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad {\\mathbf m}_t = \\beta_1 {\\mathbf m}_{t-1} + (1 - \\beta_1) {\\mathbf g}_t, \\quad {\\mathbf v}_t = {\\mathbf v}_{t-1} - (1 - \\beta_2) \\, \\mathrm{sign}({\\mathbf v}_{t-1} - {\\mathbf g}_t^2) \\, {\\mathbf g}_t^2, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\frac{\\eta}{\\sqrt{{\\mathbf v}_t} + \\epsilon} {\\mathbf m}_t",
+  "parents": [
+    {
+      "id": "adam",
+      "types": [
+        "adaptive",
+        "stabilization"
+      ],
+      "improvement": "2次モーメントの加法的な更新による実効的な学習率の急増の抑制"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "optax",
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "ε"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

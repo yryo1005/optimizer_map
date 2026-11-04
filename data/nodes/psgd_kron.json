@@ -1,0 +1,37 @@
+{
+  "id": "psgd_kron",
+  "name": "PSGD Kron (Lie Group Preconditioners)",
+  "short_name": "PSGD Kron",
+  "year": 2022,
+  "citations": 30,
+  "categories": [
+    "2次手法"
+  ],
+  "reference": "https://arxiv.org/abs/2211.04422",
+  "summary": "PSGDの前処理行列を連結なリー群（三角行列のクロネッカー積等）に制約し，群の構造を保つ更新でオンラインに推定する手法である．群の不変性により減衰（ダンピング）の調整が不要となり，直線探索を必要とせず勾配の雑音にも頑健である．実装のKron版は大規模学習でもShampooやSOAPと並ぶ性能を示している．",
+  "update_rule": "{\\mathbf P} = {\\mathbf Q}^\\top {\\mathbf Q}, \\;\\; {\\mathbf Q} = {\\mathbf Q}_1 \\otimes {\\mathbf Q}_2 \\;\\; ({\\mathbf Q}_i : \\text{上三角}), \\quad {\\mathbf Q} \\leftarrow {\\mathbf Q} - \\eta_Q \\frac{\\nabla_{\\mathcal{E}} c({\\mathbf Q})}{\\|\\nabla_{\\mathcal{E}} c({\\mathbf Q})\\|} {\\mathbf Q}, \\quad c({\\mathbf Q}) = \\mathbb{E}[\\delta{\\mathbf g}^\\top {\\mathbf P} \\delta{\\mathbf g} + \\delta{\\mathbf w}^\\top {\\mathbf P}^{-1} \\delta{\\mathbf w}], \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta {\\mathbf P} {\\mathbf g}_t",
+  "parents": [
+    {
+      "id": "psgd",
+      "types": [
+        "curvature",
+        "compression"
+      ],
+      "improvement": "前処理行列のリー群への制約とクロネッカー因子化"
+    }
+  ],
+  "practical": {
+    "state": "matrix",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "前処理の学習率",
+      "更新確率"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  }
+}

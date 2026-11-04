@@ -1,0 +1,44 @@
+{
+  "id": "entropy_sgd",
+  "name": "Entropy-SGD",
+  "short_name": "Entropy-SGD",
+  "year": 2016,
+  "citations": 900,
+  "categories": [
+    "平坦解探索"
+  ],
+  "reference": "https://arxiv.org/abs/1611.01838",
+  "summary": "損失そのものではなく，パラメータ近傍で損失を平滑化した局所エントロピーを最小化することで，平坦な領域の解へ誘導する手法である．局所エントロピーの勾配を，内側ループのLangevin動力学（確率的勾配に雑音を加えた更新）によるサンプリングで推定する．",
+  "update_rule": "{\\mathbf w}'_{k+1} = {\\mathbf w}'_k - \\eta' \\left[ \\nabla f({\\mathbf w}'_k) - \\gamma ({\\mathbf w}_t - {\\mathbf w}'_k) \\right] + \\sqrt{\\eta'} \\, \\varepsilon \\, \\boldsymbol\\xi_k, \\quad \\boldsymbol\\mu \\leftarrow \\alpha \\boldsymbol\\mu + (1 - \\alpha) {\\mathbf w}'_{k+1}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\gamma ({\\mathbf w}_t - \\boldsymbol\\mu)",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "flatness"
+      ],
+      "improvement": "局所エントロピーの最小化（Langevin動力学による内側ループ）"
+    },
+    {
+      "id": "sgld",
+      "types": [
+        "flatness"
+      ],
+      "improvement": "内側ループでのLangevin動力学によるサンプリング"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "γ",
+      "内側ステップ数",
+      "ε"
+    ],
+    "tasks": [
+      "vision"
+    ]
+  }
+}

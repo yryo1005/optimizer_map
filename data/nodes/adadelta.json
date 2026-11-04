@@ -1,0 +1,39 @@
+{
+  "id": "adadelta",
+  "name": "AdaDelta",
+  "short_name": "AdaDelta",
+  "year": 2012,
+  "citations": 12000,
+  "categories": [
+    "適応的学習率",
+    "学習率自動調整"
+  ],
+  "reference": "https://arxiv.org/abs/1212.5701",
+  "summary": "AdaGradの学習率の過度な減衰を，勾配2乗の指数移動平均を用いることで解決する手法である．さらに，過去の更新量の2乗の指数移動平均を分子に用いることで，更新量の単位をパラメータの単位と一致させ，大域的な学習率の設定を不要にしている．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad {\\mathbf r}_t = \\rho {\\mathbf r}_{t-1} + (1 - \\rho) {\\mathbf g}_t^2, \\quad \\Delta {\\mathbf w}_t = - \\frac{\\sqrt{{\\mathbf s}_{t-1} + \\epsilon}}{\\sqrt{{\\mathbf r}_t + \\epsilon}} {\\mathbf g}_t, \\quad {\\mathbf s}_t = \\rho {\\mathbf s}_{t-1} + (1 - \\rho) \\Delta {\\mathbf w}_t^2, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t + \\Delta {\\mathbf w}_t",
+  "parents": [
+    {
+      "id": "adagrad",
+      "types": [
+        "adaptive",
+        "lr_automation"
+      ],
+      "improvement": "勾配2乗の指数移動平均と更新量の2乗の移動平均による単位補正（大域的な学習率の不要化）"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "pytorch",
+      "optax",
+      "keras"
+    ],
+    "hyperparameters": [
+      "ρ",
+      "ε"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

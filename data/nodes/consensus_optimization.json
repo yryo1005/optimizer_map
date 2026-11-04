@@ -1,0 +1,35 @@
+{
+  "id": "consensus_optimization",
+  "name": "コンセンサス最適化 (Consensus Optimization, The Numerics of GANs)",
+  "short_name": "コンセンサス最適化",
+  "year": 2017,
+  "citations": 500,
+  "categories": [
+    "ミニマックス最適化",
+    "学習安定化"
+  ],
+  "reference": "https://arxiv.org/abs/1705.10461",
+  "summary": "GANの学習の力学のヤコビ行列が，実部が0に近く虚部が大きい固有値を持つために，同時勾配降下が均衡の周りで回転して収束しないことを示し，各プレイヤーの勾配の大きさの2乗を共通の正則化項として加える手法である．均衡付近の固有値の実部を負に押し下げることで収束を安定化する．",
+  "update_rule": "L({\\mathbf z}) = \\frac{1}{2} \\|F({\\mathbf z})\\|^2, \\quad {\\mathbf z}_{t+1} = {\\mathbf z}_t - \\eta \\left( F({\\mathbf z}_t) + \\gamma \\nabla L({\\mathbf z}_t) \\right)",
+  "parents": [
+    {
+      "id": "gd",
+      "types": [
+        "regularization",
+        "problem_transfer"
+      ],
+      "improvement": "勾配ノルムの2乗による正則化を加えた同時勾配降下"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [],
+    "hyperparameters": [
+      "η",
+      "γ"
+    ],
+    "tasks": [
+      "game"
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "mirror_descent",
+  "name": "ミラー降下法 (Mirror Descent)",
+  "short_name": "ミラー降下法",
+  "year": 1983,
+  "citations": 4000,
+  "categories": [
+    "オンライン学習",
+    "適応的学習率"
+  ],
+  "reference": "https://en.wikipedia.org/wiki/Mirror_descent",
+  "summary": "ユークリッド距離の代わりに，問題の幾何構造に合わせたBregmanダイバージェンスを近接項として用いる勾配法である．確率単体上の最適化などで次元依存性を大きく改善でき，AdaGradやオンライン学習アルゴリズムの理論的な基盤となった．",
+  "update_rule": "{\\mathbf w}_{t+1} = \\arg\\min_{{\\mathbf w}} \\left\\{ \\eta \\langle \\nabla f_t({\\mathbf w}_t), {\\mathbf w} \\rangle + D_\\psi({\\mathbf w}, {\\mathbf w}_t) \\right\\}, \\quad D_\\psi({\\mathbf w}, {\\mathbf v}) = \\psi({\\mathbf w}) - \\psi({\\mathbf v}) - \\langle \\nabla \\psi({\\mathbf v}), {\\mathbf w} - {\\mathbf v} \\rangle",
+  "parents": [
+    {
+      "id": "gd",
+      "types": [
+        "reinterpretation"
+      ],
+      "improvement": "ユークリッド距離のBregmanダイバージェンスへの一般化"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [],
+    "hyperparameters": [
+      "η",
+      "ψ（距離生成関数）"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  },
+  "notes": "NemirovskiとYudinの書籍（1983）で体系化された．単一の参照可能な原典URLがないためWikipediaを参照した．"
+}

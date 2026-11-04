@@ -1,0 +1,37 @@
+{
+  "id": "adashift",
+  "name": "AdaShift",
+  "short_name": "AdaShift",
+  "year": 2018,
+  "citations": 100,
+  "categories": [
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/1810.00143",
+  "summary": "Adamが収束しない原因を，現在の勾配と2次モーメントの推定値との相関にあると分析し，n ステップ前の勾配を用いて2次モーメントを計算する（時間的にずらす）ことで両者の相関を除去する手法である．2次モーメントを空間方向にもまとめることで，実効的な学習率の偏りを抑える．",
+  "update_rule": "{\\mathbf m}_t = \\frac{\\sum_{i=0}^{n-1} \\beta_1^i {\\mathbf g}_{t-i}}{\\sum_{i=0}^{n-1} \\beta_1^i}, \\quad v_t = \\beta_2 v_{t-1} + (1 - \\beta_2) \\, \\phi({\\mathbf g}_{t-n}^2), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\frac{\\eta}{\\sqrt{v_t}} {\\mathbf m}_t",
+  "parents": [
+    {
+      "id": "adam",
+      "types": [
+        "adaptive"
+      ],
+      "improvement": "2次モーメントの計算に過去の勾配を用いた相関の除去"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "n"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

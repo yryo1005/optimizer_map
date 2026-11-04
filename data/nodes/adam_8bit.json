@@ -1,0 +1,44 @@
+{
+  "id": "adam_8bit",
+  "name": "8-bit Adam (Block-wise Quantized Adam)",
+  "short_name": "8-bit Adam",
+  "year": 2021,
+  "citations": 500,
+  "categories": [
+    "メモリ効率",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/2110.02861",
+  "summary": "Adamの1次・2次モーメントを32bit浮動小数点ではなく8bitに量子化して保持する手法である．テンソルを小さなブロックに分割してブロックごとに正規化する量子化と，値の分布に適した動的な量子化表現を組み合わせることで，量子化誤差による性能劣化を抑えつつ，オプティマイザの状態量のメモリを約1/4に削減する．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad {\\mathbf m}_t = \\beta_1 Q^{-1}(\\bar{\\mathbf m}_{t-1}) + (1 - \\beta_1) {\\mathbf g}_t, \\quad {\\mathbf v}_t = \\beta_2 Q^{-1}(\\bar{\\mathbf v}_{t-1}) + (1 - \\beta_2) {\\mathbf g}_t^2, \\quad \\bar{\\mathbf m}_t = Q({\\mathbf m}_t), \\quad \\bar{\\mathbf v}_t = Q({\\mathbf v}_t), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\frac{\\eta}{\\sqrt{\\hat{\\mathbf v}_t} + \\epsilon} \\hat{\\mathbf m}_t \\quad (Q : \\text{ブロック単位の8bit動的量子化})",
+  "parents": [
+    {
+      "id": "adam",
+      "types": [
+        "compression"
+      ],
+      "improvement": "モーメントのブロック単位8bit量子化によるメモリ削減"
+    }
+  ],
+  "practical": {
+    "state": "compressed",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "ε"
+    ],
+    "tasks": [
+      "llm",
+      "finetune"
+    ]
+  },
+  "deep_dive": {
+    "why": "ブロック単位の動的量子化により，外れ値の影響を局所化しつつモーメントを8bitで保持し，精度をほぼ保ったまま状態量のメモリを約1/4にする．",
+    "weaknesses": "埋め込み層など一部のパラメータは32bitのままにする方が安定する．量子化・逆量子化の計算が加わる．",
+    "settings": "bitsandbytes の Adam8bit/AdamW8bit を Adam/AdamW と同じハイパーパラメータで使う．"
+  }
+}

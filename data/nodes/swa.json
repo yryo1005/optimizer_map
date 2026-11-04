@@ -1,0 +1,42 @@
+{
+  "id": "swa",
+  "name": "確率的重み平均化 (Stochastic Weight Averaging, SWA)",
+  "short_name": "SWA",
+  "year": 2018,
+  "citations": 2500,
+  "categories": [
+    "重み平均化",
+    "平坦解探索"
+  ],
+  "reference": "https://arxiv.org/abs/1803.05407",
+  "summary": "周期的または一定の比較的大きな学習率でSGDを実行し，学習後半の一定間隔ごとの重みを平均する手法である．平均された重みは損失地形の平坦な領域の中心付近に位置する傾向があり，追加の計算コストをほとんど伴わずに汎化性能を改善する．平均後はバッチ正規化の統計量を再計算する必要がある．",
+  "update_rule": "{\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta_t \\nabla f_t({\\mathbf w}_t), \\quad {\\mathbf w}_{\\mathrm{SWA}} \\leftarrow \\frac{n \\, {\\mathbf w}_{\\mathrm{SWA}} + {\\mathbf w}_t}{n + 1} \\quad (t \\bmod c = 0)",
+  "parents": [
+    {
+      "id": "polyak_averaging",
+      "types": [
+        "averaging",
+        "flatness"
+      ],
+      "improvement": "周期的・大きな学習率下での深層学習向け重み平均化（平坦解への誘導）"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "pytorch"
+    ],
+    "hyperparameters": [
+      "η_SWA",
+      "c（平均の間隔）"
+    ],
+    "tasks": [
+      "vision"
+    ]
+  },
+  "deep_dive": {
+    "why": "大きめの学習率で探索した重みを平均すると，損失地形の平坦な領域の中心付近に到達しやすく，追加の学習コストなしで汎化性能が向上する．",
+    "weaknesses": "バッチ正規化の統計量を平均後に再計算する必要がある．平均の開始時期と学習率の設定に依存する．",
+    "settings": "学習の最後の 25% 程度で一定（または周期的）な学習率にして毎エポック平均，torch.optim.swa_utils を用いる．"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "sam",
+  "name": "SAM (Sharpness-Aware Minimization)",
+  "short_name": "SAM",
+  "year": 2020,
+  "citations": 2500,
+  "categories": [
+    "平坦解探索",
+    "正則化"
+  ],
+  "reference": "https://arxiv.org/abs/2010.01412",
+  "summary": "損失の値だけでなく，パラメータの近傍における損失の最大値（鋭さ）も同時に小さくする，平坦な最小値を探索する手法である．勾配方向に一定半径だけ摂動させた点で勾配を計算し，その勾配で元の点を更新する2段階の手続きにより，min-max問題を効率的に近似的に解き，汎化性能を改善する．",
+  "update_rule": "\\hat{\\boldsymbol\\epsilon}({\\mathbf w}_t) = \\rho \\frac{\\nabla f_t({\\mathbf w}_t)}{\\|\\nabla f_t({\\mathbf w}_t)\\|}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\nabla f_t({\\mathbf w}_t + \\hat{\\boldsymbol\\epsilon}({\\mathbf w}_t))",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "flatness"
+      ],
+      "improvement": "近傍での最悪ケースの損失（鋭さ）の最小化による平坦解の探索"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "ρ"
+    ],
+    "tasks": [
+      "vision",
+      "general"
+    ]
+  },
+  "deep_dive": {
+    "why": "近傍で最も損失が大きくなる方向へ摂動した点の勾配で更新するため，鋭い最小値を避けて平坦な最小値へ向かい，汎化性能が向上する．",
+    "weaknesses": "1ステップに2回の順伝播・逆伝播が必要で計算量が約2倍になる．ρ の調整が必要である．",
+    "settings": "ρ=0.05（ImageNet の ResNet），ViT では 0.05〜0.2．ベースの最適化手法（SGD/AdamW）はそのまま使う．"
+  }
+}

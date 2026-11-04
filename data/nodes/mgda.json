@@ -1,0 +1,32 @@
+{
+  "id": "mgda",
+  "name": "MGDA (Multiple-Gradient Descent Algorithm)",
+  "short_name": "MGDA",
+  "year": 2012,
+  "citations": 800,
+  "categories": [
+    "マルチタスク・多目的"
+  ],
+  "reference": "https://doi.org/10.1016/j.crma.2012.03.014",
+  "summary": "複数の目的関数を同時に最小化する多目的最適化において，各目的関数の勾配の凸包の中で最小ノルムとなる点を共通の降下方向として求める手法である．その方向に沿って更新するとすべての目的関数が同時に減少し（またはパレート停留点に到達し），パレート最適解に収束する．",
+  "update_rule": "\\boldsymbol\\alpha^* = \\arg\\min_{\\boldsymbol\\alpha \\in \\Delta_K} \\left\\| \\sum_{k=1}^{K} \\alpha_k \\nabla f_k({\\mathbf w}_t) \\right\\|^2, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\sum_{k=1}^{K} \\alpha^*_k \\nabla f_k({\\mathbf w}_t)",
+  "parents": [
+    {
+      "id": "gd",
+      "types": [
+        "problem_transfer"
+      ],
+      "improvement": "複数の目的関数の勾配の凸包における最小ノルム点を共通の降下方向とする多目的化"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [],
+    "tasks": [
+      "multitask"
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "id": "online_newton_step",
+  "name": "Online Newton Step (ONS)",
+  "short_name": "Online Newton Step",
+  "year": 2007,
+  "citations": 1300,
+  "categories": [
+    "オンライン学習",
+    "2次手法"
+  ],
+  "reference": "https://doi.org/10.1007/s10994-007-5016-8",
+  "summary": "指数凹関数のオンライン最適化において，これまでの勾配の外積の累積を前処理行列として用いるニュートン法型の更新を行う手法である．リグレットを対数オーダーO(log T)に抑えられ，勾配の外積の累積を前処理に用いるという考え方は，後の全行列版AdaGradやShampooの先駆けとなった．",
+  "update_rule": "{\\mathbf A}_t = {\\mathbf A}_{t-1} + \\nabla f_t({\\mathbf w}_t) \\nabla f_t({\\mathbf w}_t)^\\top, \\quad {\\mathbf w}_{t+1} = \\Pi^{{\\mathbf A}_t}_{\\mathcal{K}}\\left( {\\mathbf w}_t - \\frac{1}{\\gamma} {\\mathbf A}_t^{-1} \\nabla f_t({\\mathbf w}_t) \\right)",
+  "parents": [
+    {
+      "id": "ogd",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "勾配の外積の累積による前処理（対数リグレットの達成）"
+    },
+    {
+      "id": "newton",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "ヘッセ行列の勾配の外積による近似のオンライン学習への導入"
+    }
+  ],
+  "practical": {
+    "state": "matrix",
+    "implementations": [],
+    "hyperparameters": [
+      "γ"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

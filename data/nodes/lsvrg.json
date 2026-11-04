@@ -1,0 +1,34 @@
+{
+  "id": "lsvrg",
+  "name": "L-SVRG (Loopless SVRG)",
+  "short_name": "L-SVRG",
+  "year": 2019,
+  "citations": 250,
+  "categories": [
+    "勾配分散低減"
+  ],
+  "reference": "https://arxiv.org/abs/1901.08689",
+  "summary": "SVRGの外側・内側の2重ループ構造を廃し，毎ステップ小さな確率で基準点を現在の点に更新（全勾配を再計算）する単一ループの手法である．内側ループの長さという調整の難しいハイパーパラメータを不要にし，解析も簡潔になる一方で，SVRGと同等の収束率を保つ．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_{i_t}({\\mathbf w}_t) - \\nabla f_{i_t}(\\tilde{\\mathbf w}_t) + \\nabla F(\\tilde{\\mathbf w}_t), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta {\\mathbf g}_t, \\quad \\tilde{\\mathbf w}_{t+1} = \\begin{cases} {\\mathbf w}_t & (\\text{確率 } p) \\\\ \\tilde{\\mathbf w}_t & (\\text{確率 } 1-p) \\end{cases}",
+  "parents": [
+    {
+      "id": "svrg",
+      "types": [
+        "variance_reduction",
+        "stochastic"
+      ],
+      "improvement": "2重ループの確率的な基準点更新による単一ループ化"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [],
+    "hyperparameters": [
+      "η",
+      "p"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

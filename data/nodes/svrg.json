@@ -1,0 +1,46 @@
+{
+  "id": "svrg",
+  "name": "SVRG (Stochastic Variance Reduced Gradient)",
+  "short_name": "SVRG",
+  "year": 2013,
+  "citations": 3500,
+  "categories": [
+    "勾配分散低減"
+  ],
+  "reference": "https://papers.nips.cc/paper/2013/hash/ac1dd209cbcc5e5d1c6e28598e8cbbe8-Abstract.html",
+  "summary": "定期的に計算した基準点での全勾配を用いて，確率的勾配を「現在の点と基準点での確率的勾配の差」と「基準点の全勾配」の和に補正する手法である．補正後の勾配は不偏かつ分散が最適解に近づくにつれて0に近づくため，一定の学習率で線形収束する．SAGと異なりサンプルごとの勾配を記憶する必要がない．",
+  "update_rule": "\\tilde{\\boldsymbol\\mu} = \\nabla F(\\tilde{\\mathbf w}) = \\frac{1}{n} \\sum_{i=1}^{n} \\nabla f_i(\\tilde{\\mathbf w}), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\left( \\nabla f_{i_t}({\\mathbf w}_t) - \\nabla f_{i_t}(\\tilde{\\mathbf w}) + \\tilde{\\boldsymbol\\mu} \\right)",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "variance_reduction"
+      ],
+      "improvement": "基準点の全勾配を用いた制御変量による確率的勾配の分散低減"
+    },
+    {
+      "id": "sag",
+      "types": [
+        "variance_reduction",
+        "compression"
+      ],
+      "improvement": "サンプルごとの勾配記憶の，定期的な全勾配計算への置き換え"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [],
+    "hyperparameters": [
+      "η",
+      "m（内側ループ長）"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  },
+  "deep_dive": {
+    "why": "基準点の全勾配を用いた制御変量で確率的勾配の分散を減らすため，一定の学習率で線形収束する．",
+    "weaknesses": "全勾配の計算が定期的に必要であり，深層学習ではデータ拡張やバッチ正規化により効果が出にくい．",
+    "settings": "内側ループ長 m=2n 程度，η=1/(10L) 程度（理論値）．"
+  }
+}

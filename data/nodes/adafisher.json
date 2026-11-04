@@ -1,0 +1,44 @@
+{
+  "id": "adafisher",
+  "name": "AdaFisher",
+  "short_name": "AdaFisher",
+  "year": 2024,
+  "citations": 20,
+  "categories": [
+    "2次手法",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/2405.16397",
+  "summary": "Adamの2次モーメントを，フィッシャー情報行列の対角ブロック・クロネッカー積による近似で置き換えた適応的な2次最適化手法である．クロネッカー因子の対角成分のみを用いることで，1次手法と同程度のメモリと計算時間で，画像分類や言語モデルにおいてAdam系の手法より高い精度と速い収束を示す．",
+  "update_rule": "\\tilde{\\mathbf F}_t = \\mathrm{diag}(\\mathbb{E}[{\\mathbf a}^2]) \\otimes \\mathrm{diag}(\\mathbb{E}[{\\mathbf g}^2]), \\quad \\hat{\\mathbf F}_t = \\beta_2 \\hat{\\mathbf F}_{t-1} + (1 - \\beta_2) \\tilde{\\mathbf F}_t, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\frac{\\hat{\\mathbf m}_t}{\\hat{\\mathbf F}_t + \\epsilon}",
+  "parents": [
+    {
+      "id": "adam",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "2次モーメントのフィッシャー情報行列の近似への置き換え"
+    },
+    {
+      "id": "kfac",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "フィッシャー情報行列の対角ブロック・クロネッカー近似"
+    }
+  ],
+  "practical": {
+    "state": "compressed",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β",
+      "γ（減衰）"
+    ],
+    "tasks": [
+      "vision"
+    ]
+  }
+}

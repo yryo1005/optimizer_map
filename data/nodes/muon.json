@@ -1,0 +1,58 @@
+{
+  "id": "muon",
+  "name": "Muon (MomentUm Orthogonalized by Newton-Schulz)",
+  "short_name": "Muon",
+  "year": 2024,
+  "citations": 400,
+  "categories": [
+    "2次手法",
+    "高速化"
+  ],
+  "reference": "https://kellerjordan.github.io/posts/muon/",
+  "summary": "行列形状のパラメータについて，慣性項付きの勾配をNewton-Schulz反復によって近似的に直交化（特異値をすべて1にする）した行列を更新量とする手法である．更新量の特異値を揃えることで，勾配で支配的な少数の方向以外も学習が進み，スペクトルノルムに関する最急降下法とみなせる．NanoGPTの学習速度記録の更新や大規模言語モデルの事前学習で注目されており，埋め込み層・出力層などにはAdamWを併用する．",
+  "update_rule": "{\\mathbf M}_t = \\mu {\\mathbf M}_{t-1} + \\nabla f_t({\\mathbf W}_t), \\quad {\\mathbf O}_t = \\mathrm{NewtonSchulz5}({\\mathbf M}_t) \\approx {\\mathbf U}{\\mathbf V}^\\top \\;\\; ({\\mathbf M}_t = {\\mathbf U} \\boldsymbol\\Sigma {\\mathbf V}^\\top), \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta \\, {\\mathbf O}_t",
+  "parents": [
+    {
+      "id": "shampoo",
+      "types": [
+        "normalization",
+        "curvature"
+      ],
+      "improvement": "前処理行列の累積を省いた勾配の直交化（累積なしのShampooに相当）"
+    },
+    {
+      "id": "nesterov",
+      "types": [
+        "momentum"
+      ],
+      "improvement": "Nesterov型慣性項を直交化の対象とすることによる加速"
+    },
+    {
+      "id": "old_optimizer_new_norm",
+      "types": [
+        "reinterpretation"
+      ],
+      "improvement": "スペクトルノルムの下での最急降下法という理論的な位置付け"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "μ",
+      "Newton-Schulz反復数"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  },
+  "deep_dive": {
+    "why": "更新行列の特異値を1にそろえることで，勾配で支配的な少数の方向だけでなく全方向に学習が進む．スペクトルノルムの下での最急降下法と解釈できる．",
+    "weaknesses": "行列形状のパラメータ専用であり，埋め込み・出力層・バイアス等には AdamW を併用する．分散学習では直交化のための通信が必要になる．",
+    "settings": "μ=0.95（Nesterov 型），Newton-Schulz 5 反復，η=0.02（更新量の RMS を AdamW に合わせる実装では AdamW と同程度），重み減衰 0.1．"
+  },
+  "notes": "原典は論文ではなく著者（Keller Jordan）のブログ記事であり，Citation数は引用文献数の概算である．"
+}

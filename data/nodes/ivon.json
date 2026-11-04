@@ -1,0 +1,48 @@
+{
+  "id": "ivon",
+  "name": "IVON (Improved Variational Online Newton)",
+  "short_name": "IVON",
+  "year": 2024,
+  "citations": 60,
+  "categories": [
+    "ベイズ推論",
+    "2次手法"
+  ],
+  "reference": "https://arxiv.org/abs/2402.17641",
+  "summary": "変分学習（重みの事後分布をガウス分布で近似する学習）を，Adamとほぼ同じ計算コスト・メモリでGPT-2やResNetなどの大規模なネットワークに適用可能にした手法である．Hessの対角推定を再パラメータ化トリックで求め，更新の安定化の工夫を加えることで，Adamと同等以上の精度とより良い較正・不確実性推定を示した．",
+  "update_rule": "{\\mathbf w} \\sim \\mathcal{N}({\\mathbf m}_t, \\boldsymbol\\sigma_t^2), \\;\\; \\boldsymbol\\sigma_t^2 = \\frac{1}{\\lambda ({\\mathbf h}_t + \\delta)}, \\quad \\hat{\\mathbf h} = \\nabla f({\\mathbf w}) \\odot \\frac{{\\mathbf w} - {\\mathbf m}_t}{\\boldsymbol\\sigma_t^2}, \\quad {\\mathbf h}_{t+1} = \\beta_2 {\\mathbf h}_t + (1 - \\beta_2) \\hat{\\mathbf h} + \\frac{(1 - \\beta_2)^2}{2} \\frac{({\\mathbf h}_t - \\hat{\\mathbf h})^2}{{\\mathbf h}_t + \\delta}, \\quad {\\mathbf m}_{t+1} = {\\mathbf m}_t - \\eta \\frac{\\hat{\\mathbf g}_t + \\delta {\\mathbf m}_t}{{\\mathbf h}_{t+1} + \\delta}",
+  "parents": [
+    {
+      "id": "vadam",
+      "types": [
+        "curvature",
+        "stabilization"
+      ],
+      "improvement": "再パラメータ化によるヘッセ対角推定と安定化による大規模ネットワークへの適用"
+    },
+    {
+      "id": "adahessian",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "勾配のみを用いたヘッセ対角の推定"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "h0",
+      "λ"
+    ],
+    "tasks": [
+      "llm",
+      "vision"
+    ]
+  }
+}

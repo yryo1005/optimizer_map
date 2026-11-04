@@ -1,0 +1,36 @@
+{
+  "id": "ttur",
+  "name": "TTUR (Two Time-Scale Update Rule)",
+  "short_name": "TTUR",
+  "year": 2017,
+  "citations": 10000,
+  "categories": [
+    "ミニマックス最適化",
+    "学習率スケジュール"
+  ],
+  "reference": "https://arxiv.org/abs/1706.08500",
+  "summary": "GANの生成器と識別器に異なる学習率（2つの時間スケール）を用いて更新する手法である．確率近似の2時間スケール理論に基づき，識別器を生成器より速く学習させることで，局所ナッシュ均衡への収束が保証されることを示した．同論文では生成画像の品質評価指標FIDも提案されている．",
+  "update_rule": "{\\mathbf w}_{t+1} = {\\mathbf w}_t - b(t) \\, \\tilde{\\mathbf g}_{\\mathbf w}({\\mathbf w}_t, \\boldsymbol\\theta_t), \\quad \\boldsymbol\\theta_{t+1} = \\boldsymbol\\theta_t - a(t) \\, \\tilde{\\mathbf g}_{\\boldsymbol\\theta}({\\mathbf w}_t, \\boldsymbol\\theta_t), \\quad \\frac{a(t)}{b(t)} \\to 0 \\quad ({\\mathbf w} : \\text{識別器}, \\; \\boldsymbol\\theta : \\text{生成器})",
+  "parents": [
+    {
+      "id": "adam",
+      "types": [
+        "lr_automation",
+        "problem_transfer"
+      ],
+      "improvement": "生成器と識別器での異なる学習率（2時間スケール）の利用"
+    }
+  ],
+  "practical": {
+    "state": "na",
+    "implementations": [],
+    "hyperparameters": [
+      "生成器η",
+      "識別器η"
+    ],
+    "tasks": [
+      "game"
+    ]
+  },
+  "notes": "同論文で提案された評価指標FIDの引用が大半を占めるため，Citation数はTTURの影響力を過大に表す．"
+}

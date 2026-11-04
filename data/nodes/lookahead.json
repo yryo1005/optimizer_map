@@ -1,0 +1,42 @@
+{
+  "id": "lookahead",
+  "name": "Lookahead",
+  "short_name": "Lookahead",
+  "year": 2019,
+  "citations": 1200,
+  "categories": [
+    "重み平均化",
+    "高速化"
+  ],
+  "reference": "https://arxiv.org/abs/1907.08610",
+  "summary": "SGDやAdamなど任意の内側の最適化手法で「速い重み」をkステップ更新した後，その到達点に向けて「遅い重み」を一定割合だけ補間する手法である．速い重みが探索した方向を平滑化して取り込むことで，内側の最適化手法の振動を抑え，ハイパーパラメータへの頑健性と収束の安定性を改善する．",
+  "update_rule": "\\boldsymbol\\theta_{t,0} = \\boldsymbol\\phi_t, \\quad \\boldsymbol\\theta_{t,i} = \\boldsymbol\\theta_{t,i-1} + A(f, \\boldsymbol\\theta_{t,i-1}) \\;\\; (i = 1, \\dots, k), \\quad \\boldsymbol\\phi_{t+1} = \\boldsymbol\\phi_t + \\alpha (\\boldsymbol\\theta_{t,k} - \\boldsymbol\\phi_t)",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "averaging"
+      ],
+      "improvement": "内側の最適化手法によるkステップ先の重みと遅い重みとの補間"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "optax",
+      "library"
+    ],
+    "hyperparameters": [
+      "k",
+      "α"
+    ],
+    "tasks": [
+      "general"
+    ]
+  },
+  "deep_dive": {
+    "why": "内側の最適化手法で k ステップ探索した後に遅い重みを補間するため，内側の手法の振動が平滑化され，ハイパーパラメータに頑健になる．",
+    "weaknesses": "遅い重みの分だけメモリが増える．効果の大きさはタスクにより差がある．",
+    "settings": "k=5，α=0.5（RAdam と組み合わせた Ranger が知られる）．"
+  }
+}

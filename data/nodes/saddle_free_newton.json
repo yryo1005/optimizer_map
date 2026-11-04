@@ -1,0 +1,32 @@
+{
+  "id": "saddle_free_newton",
+  "name": "Saddle-Free Newton法",
+  "short_name": "Saddle-Free Newton法",
+  "year": 2014,
+  "citations": 1700,
+  "categories": [
+    "2次手法"
+  ],
+  "reference": "https://arxiv.org/abs/1406.2572",
+  "summary": "高次元の非凸最適化では局所最適解よりも鞍点が学習を妨げる主な要因であることを示し，ヘッセ行列の固有値をその絶対値に置き換えた行列で勾配を前処理する手法である．ニュートン法が鞍点に引き寄せられ，勾配法が鞍点付近で停滞するのに対し，負の曲率の方向から素早く離脱できる．",
+  "update_rule": "\\nabla^2 f({\\mathbf w}_t) = {\\mathbf U} \\boldsymbol\\Lambda {\\mathbf U}^\\top, \\quad |{\\mathbf H}| = {\\mathbf U} |\\boldsymbol\\Lambda| {\\mathbf U}^\\top, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - |{\\mathbf H}|^{-1} \\nabla f({\\mathbf w}_t) \\;\\; (\\text{クリロフ部分空間で近似})",
+  "parents": [
+    {
+      "id": "newton",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "ヘッセ行列の固有値の絶対値化による鞍点からの離脱"
+    }
+  ],
+  "practical": {
+    "state": "matrix",
+    "implementations": [],
+    "hyperparameters": [
+      "ダンピング"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

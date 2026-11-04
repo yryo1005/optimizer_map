@@ -1,0 +1,16 @@
+{
+  "id": "adagrad",
+  "name": "AdaGrad (Adaptive Gradient Algorithm)",
+  "year": 2011,
+  "citation_count": 17000,
+  "category": ["適応的学習率"],
+  "summary": "各パラメータの勾配の2乗を学習開始から累積し，その累積値の平方根で学習率を割ることで，パラメータごとに異なる学習率を自動的に調整する手法である．勾配が頻繁に更新されるパラメータの学習率を小さく，稀にしか更新されないパラメータの学習率を大きくするため，疎なデータに対して有効である．",
+  "update_rule": "{\\mathbf r}_t = {\\mathbf r}_{t-1} + \\nabla f_t({\\mathbf w}_t)^2, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\frac{\\eta}{\\sqrt{{\\mathbf r}_t} + \\epsilon} \\nabla f_t({\\mathbf w}_t)",
+  "paper_url": "https://jmlr.org/papers/v12/duchi11a.html",
+  "derived_from": [
+    {
+      "parent_id": "sgd",
+      "relation": "勾配2乗の累積によるパラメータごとの学習率スケジューリング"
+    }
+  ]
+}

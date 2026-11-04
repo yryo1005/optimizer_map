@@ -1,0 +1,44 @@
+{
+  "id": "katyusha",
+  "name": "Katyusha",
+  "short_name": "Katyusha",
+  "year": 2016,
+  "citations": 600,
+  "categories": [
+    "勾配分散低減",
+    "高速化"
+  ],
+  "reference": "https://arxiv.org/abs/1603.05953",
+  "summary": "SVRGにNesterov型の加速を直接組み合わせた初めての手法である．確率的勾配の雑音によって加速が打ち消される問題に対し，基準点の方向へ引き戻す負の慣性項（Katyusha運動量）を導入することで，有限和の強凸問題に対し最適な加速された収束率を達成する．",
+  "update_rule": "{\\mathbf x}_{t+1} = \\tau_1 {\\mathbf z}_t + \\tau_2 \\tilde{\\mathbf w} + (1 - \\tau_1 - \\tau_2) {\\mathbf y}_t, \\quad \\tilde\\nabla_{t+1} = \\nabla F(\\tilde{\\mathbf w}) + \\nabla f_i({\\mathbf x}_{t+1}) - \\nabla f_i(\\tilde{\\mathbf w}), \\quad {\\mathbf z}_{t+1} = {\\mathbf z}_t - \\alpha \\tilde\\nabla_{t+1}, \\quad {\\mathbf y}_{t+1} = {\\mathbf x}_{t+1} - \\frac{1}{3L} \\tilde\\nabla_{t+1}",
+  "parents": [
+    {
+      "id": "svrg",
+      "types": [
+        "variance_reduction",
+        "momentum"
+      ],
+      "improvement": "分散低減された勾配推定の加速法への組み込み"
+    },
+    {
+      "id": "nesterov",
+      "types": [
+        "momentum",
+        "variance_reduction"
+      ],
+      "improvement": "基準点への引き戻しを伴う加速（Katyusha運動量）"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [],
+    "hyperparameters": [
+      "τ1",
+      "τ2",
+      "α"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

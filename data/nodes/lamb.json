@@ -1,0 +1,53 @@
+{
+  "id": "lamb",
+  "name": "LAMB (Layer-wise Adaptive Moments optimizer for Batch training)",
+  "short_name": "LAMB",
+  "year": 2019,
+  "citations": 1500,
+  "categories": [
+    "大規模バッチ",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/1904.00962",
+  "summary": "LARSの層ごとの学習率スケーリングをAdam（AdamW）に適用した手法である．Adamによる更新量を層ごとに重みのノルムとの比で正規化することで，BERTの事前学習をバッチサイズ数万規模で安定に行うことを可能にし，学習時間を大幅に短縮した．",
+  "update_rule": "{\\mathbf r}_t = \\frac{\\hat{\\mathbf m}_t}{\\sqrt{\\hat{\\mathbf v}_t} + \\epsilon}, \\quad {\\mathbf w}^l_{t+1} = {\\mathbf w}^l_t - \\eta \\frac{\\phi(\\|{\\mathbf w}^l_t\\|)}{\\|{\\mathbf r}^l_t + \\lambda {\\mathbf w}^l_t\\|} ({\\mathbf r}^l_t + \\lambda {\\mathbf w}^l_t)",
+  "parents": [
+    {
+      "id": "adamw",
+      "types": [
+        "adaptive",
+        "normalization"
+      ],
+      "improvement": "層ごとの信頼比（重みと更新量のノルム比）による更新量の正規化"
+    },
+    {
+      "id": "lars",
+      "types": [
+        "adaptive"
+      ],
+      "improvement": "層ごとの学習率スケーリングの適応的学習率手法への拡張"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "optax",
+      "keras",
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "λ"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  },
+  "deep_dive": {
+    "why": "層ごとに更新量を重みのノルムに比例させるため，大きなバッチで学習率を大きくしても特定の層が発散しにくい．",
+    "weaknesses": "小さなバッチでは AdamW に対する利点が小さい．信頼比の上限・下限の設定に実装差がある．",
+    "settings": "BERT 事前学習ではバッチ 32k〜64k で η=1e-3〜1e-2 程度，λ=0.01，ウォームアップが必須．"
+  }
+}

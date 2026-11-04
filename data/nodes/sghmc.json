@@ -1,0 +1,44 @@
+{
+  "id": "sghmc",
+  "name": "SGHMC (Stochastic Gradient Hamiltonian Monte Carlo)",
+  "short_name": "SGHMC",
+  "year": 2014,
+  "citations": 1500,
+  "categories": [
+    "ベイズ推論",
+    "高速化"
+  ],
+  "reference": "https://arxiv.org/abs/1402.4102",
+  "summary": "ハミルトニアン・モンテカルロ法をミニバッチの確率的勾配で実行する手法である．確率的勾配の雑音により目標の分布からずれてしまう問題に対し，摩擦項を加えて雑音の影響を打ち消すことで，正しい事後分布からのサンプリングを可能にする．更新式は慣性項付きSGDに適切な雑音を加えた形となり，SGLDより効率的に事後分布を探索する．",
+  "update_rule": "{\\mathbf v}_{t+1} = (1 - \\alpha) {\\mathbf v}_t - \\eta \\nabla \\tilde U({\\mathbf w}_t) + \\mathcal{N}({\\mathbf 0}, 2 (\\alpha - \\hat\\beta) \\eta {\\mathbf I}), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t + {\\mathbf v}_{t+1}",
+  "parents": [
+    {
+      "id": "sgld",
+      "types": [
+        "momentum"
+      ],
+      "improvement": "運動量変数の導入（ハミルトニアン動力学）と摩擦項による雑音補正"
+    },
+    {
+      "id": "momentum",
+      "types": [
+        "momentum",
+        "problem_transfer"
+      ],
+      "improvement": "慣性項付きSGDへの適切な雑音の付加によるサンプリングへの拡張"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "α"
+    ],
+    "tasks": [
+      "bayes"
+    ]
+  }
+}

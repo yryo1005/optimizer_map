@@ -1,0 +1,43 @@
+{
+  "id": "swats",
+  "name": "SWATS (Switching from Adam to SGD)",
+  "short_name": "SWATS",
+  "year": 2017,
+  "citations": 600,
+  "categories": [
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/1712.07628",
+  "summary": "学習初期はAdamで高速に学習し，適切な時点でSGDに切り替えることで，Adamの収束の速さとSGDの汎化性能を両立させる手法である．Adamの更新量を勾配方向へ射影した値の移動平均から，切り替え後のSGDの学習率を自動的に推定し，その推定値が安定した時点で切り替える．",
+  "update_rule": "{\\mathbf p}_t = -\\eta \\frac{\\hat{\\mathbf m}_t}{\\sqrt{\\hat{\\mathbf v}_t} + \\epsilon}, \\quad \\gamma_t = \\frac{{\\mathbf p}_t^\\top {\\mathbf p}_t}{-{\\mathbf p}_t^\\top {\\mathbf g}_t}, \\quad \\lambda_t = \\beta_2 \\lambda_{t-1} + (1 - \\beta_2) \\gamma_t, \\quad \\text{if } \\left| \\frac{\\lambda_t}{1 - \\beta_2^t} - \\gamma_t \\right| < \\epsilon : \\; \\text{SGD}(\\eta_{\\mathrm{SGD}} = \\lambda_t / (1 - \\beta_2^t)) \\text{へ切替}",
+  "parents": [
+    {
+      "id": "adam",
+      "types": [
+        "lr_automation"
+      ],
+      "improvement": "学習途中でのSGDへの切り替え"
+    },
+    {
+      "id": "sgd",
+      "types": [
+        "lr_automation"
+      ],
+      "improvement": "Adamの更新量から推定した学習率によるSGDへの移行"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2"
+    ],
+    "tasks": [
+      "vision"
+    ]
+  }
+}

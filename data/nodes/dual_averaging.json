@@ -1,0 +1,34 @@
+{
+  "id": "dual_averaging",
+  "name": "双対平均化法 (Dual Averaging)",
+  "short_name": "双対平均化法",
+  "year": 2009,
+  "citations": 1500,
+  "categories": [
+    "適応的学習率",
+    "重み平均化"
+  ],
+  "reference": "https://doi.org/10.1007/s10107-007-0149-x",
+  "summary": "過去のすべての（劣）勾配の重み付き和を保持し，それに強凸な近接関数を加えた問題の最小化として次の点を決める手法である．新しい勾配ほど重みを小さくしてしまうミラー降下法の欠点を解消し，正則化双対平均化（RDA）など疎な解を得る手法やD-Adaptationの基盤となった．",
+  "update_rule": "{\\mathbf s}_t = \\sum_{i=1}^{t} \\lambda_i \\nabla f_i({\\mathbf w}_i), \\quad {\\mathbf w}_{t+1} = \\arg\\min_{{\\mathbf w}} \\left\\{ \\langle {\\mathbf s}_t, {\\mathbf w} \\rangle + \\beta_t \\, d({\\mathbf w}) \\right\\}",
+  "parents": [
+    {
+      "id": "mirror_descent",
+      "types": [
+        "averaging",
+        "reinterpretation"
+      ],
+      "improvement": "過去の勾配の重み付き和と近接関数による次の点の決定（勾配の重みの均一化）"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [],
+    "hyperparameters": [
+      "β_t"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

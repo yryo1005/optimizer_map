@@ -1,0 +1,43 @@
+{
+  "id": "mulo",
+  "name": "μLO (μP Learned Optimizers)",
+  "short_name": "μLO",
+  "year": 2024,
+  "citations": 20,
+  "categories": [
+    "自動探索・メタ学習"
+  ],
+  "reference": "https://arxiv.org/abs/2406.00153",
+  "summary": "学習された最適化手法が，メタ学習時より大きなモデルや長い学習に汎化しにくい問題に対し，ハイパーパラメータのゼロショット転移を可能にする最大更新パラメータ化（μP）を学習された最適化手法に拡張した研究である．約100GPU時間のメタ学習で，4000TPU月のメタ学習を要したVeLOに幅の大きなモデルで匹敵する性能を示す．",
+  "update_rule": "{\\mathbf w}^\\ell_{t+1} = {\\mathbf w}^\\ell_t - s_\\ell \\cdot \\mathrm{LO}_{\\boldsymbol\\phi}({\\mathbf g}^\\ell_t, \\dots) \\quad (s_\\ell : \\mu\\text{Pに基づく層ごとの更新量のスケーリング})",
+  "parents": [
+    {
+      "id": "velo",
+      "types": [
+        "problem_transfer",
+        "lr_automation"
+      ],
+      "improvement": "μPに基づく層ごとのスケーリングによる大きなモデルへのメタ汎化"
+    },
+    {
+      "id": "mup",
+      "types": [
+        "lr_automation",
+        "problem_transfer"
+      ],
+      "improvement": "μPの学習された最適化手法への拡張"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "（メタ学習済み）"
+    ],
+    "tasks": [
+      "meta"
+    ]
+  }
+}

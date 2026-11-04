@@ -1,0 +1,37 @@
+{
+  "id": "lion_k",
+  "name": "Lion-K (Lion as Constrained Optimization)",
+  "short_name": "Lion-K",
+  "year": 2023,
+  "citations": 50,
+  "categories": [
+    "符号ベース",
+    "正則化"
+  ],
+  "reference": "https://arxiv.org/abs/2310.05898",
+  "summary": "Lionが，分離型の重み減衰と組み合わせることで，∞ノルムが重み減衰係数の逆数以下という制約の下での最適化を暗黙的に解いていることを，リアプノフ関数を用いて示した研究である．符号関数を一般の凸関数の劣勾配に置き換えたLion-Kという族に一般化し，異なる制約や正則化を持つ手法を系統的に導出する．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad {\\mathbf c}_t = \\beta_1 {\\mathbf m}_{t-1} - (1 - \\beta_1) {\\mathbf g}_t, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t + \\eta \\left( \\nabla K({\\mathbf c}_t) - \\lambda {\\mathbf w}_t \\right), \\quad {\\mathbf m}_t = \\beta_2 {\\mathbf m}_{t-1} - (1 - \\beta_2) {\\mathbf g}_t \\quad (K = \\|\\cdot\\|_1 \\Rightarrow \\text{Lion})",
+  "parents": [
+    {
+      "id": "lion",
+      "types": [
+        "reinterpretation"
+      ],
+      "improvement": "∞ノルム制約付き最適化としての理論的解釈と一般の凸関数Kへの拡張"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "λ",
+      "K"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

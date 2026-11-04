@@ -1,0 +1,33 @@
+{
+  "id": "sarah",
+  "name": "SARAH (StochAstic Recursive grAdient algoritHm)",
+  "short_name": "SARAH",
+  "year": 2017,
+  "citations": 800,
+  "categories": [
+    "勾配分散低減"
+  ],
+  "reference": "https://arxiv.org/abs/1703.00102",
+  "summary": "SVRGが固定した基準点の全勾配を用いて補正するのに対し，直前の反復の勾配推定値を再帰的に更新して用いる手法である．推定量はバイアスを持つが，内側ループの中で推定値の分散が減少していくため，非凸問題を含めてより良い計算量が得られる．",
+  "update_rule": "{\\mathbf v}_0 = \\nabla F({\\mathbf w}_0), \\quad {\\mathbf v}_t = \\nabla f_{i_t}({\\mathbf w}_t) - \\nabla f_{i_t}({\\mathbf w}_{t-1}) + {\\mathbf v}_{t-1}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\, {\\mathbf v}_t",
+  "parents": [
+    {
+      "id": "svrg",
+      "types": [
+        "variance_reduction"
+      ],
+      "improvement": "固定基準点ではなく直前の推定値を用いる再帰的な勾配推定"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [],
+    "hyperparameters": [
+      "η",
+      "内側ループ長"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

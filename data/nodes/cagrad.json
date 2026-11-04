@@ -1,0 +1,42 @@
+{
+  "id": "cagrad",
+  "name": "CAGrad (Conflict-Averse Gradient Descent)",
+  "short_name": "CAGrad",
+  "year": 2021,
+  "citations": 400,
+  "categories": [
+    "マルチタスク・多目的"
+  ],
+  "reference": "https://arxiv.org/abs/2110.14048",
+  "summary": "平均損失の勾配の近傍の中で，最も改善の小さいタスクの改善量を最大化する方向を更新方向とする手法である．近傍の半径により，平均損失の勾配降下（半径0）とMGDA（半径大）の間を連続的に補間でき，平均損失の最小化への収束を保証しつつタスク間の衝突を緩和する．",
+  "update_rule": "{\\mathbf d}^* = \\arg\\max_{{\\mathbf d} : \\|{\\mathbf d} - {\\mathbf g}_0\\| \\le c \\|{\\mathbf g}_0\\|} \\; \\min_{k} \\, {\\mathbf g}_k^\\top {\\mathbf d}, \\quad {\\mathbf g}_0 = \\frac{1}{K} \\sum_{k} {\\mathbf g}_k, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\, {\\mathbf d}^*",
+  "parents": [
+    {
+      "id": "mgda",
+      "types": [
+        "problem_transfer"
+      ],
+      "improvement": "平均勾配の近傍での最悪タスクの改善最大化（MGDAとの補間）"
+    },
+    {
+      "id": "pcgrad",
+      "types": [
+        "problem_transfer",
+        "reinterpretation"
+      ],
+      "improvement": "衝突の緩和と平均損失への収束保証の両立"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "c（近傍の半径）"
+    ],
+    "tasks": [
+      "multitask"
+    ]
+  }
+}

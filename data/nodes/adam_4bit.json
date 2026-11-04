@@ -1,0 +1,39 @@
+{
+  "id": "adam_4bit",
+  "name": "4-bit Adam (Memory Efficient Optimizers with 4-bit States)",
+  "short_name": "4-bit Adam",
+  "year": 2023,
+  "citations": 60,
+  "categories": [
+    "メモリ効率",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/2309.01507",
+  "summary": "8-bit Adamをさらに推し進め，Adamのモーメントを4bitで保持する手法である．2次モーメントの量子化で0付近の値が0に丸められることが不安定性の主因であることを示し，0を除外した線形量子化と，行・列の外れ値に対応する小さなブロックサイズ・ランク1の正規化を導入することで，精度を保ったまま状態量のメモリをさらに半減する．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad {\\mathbf m}_t = \\beta_1 Q_4^{-1}(\\bar{\\mathbf m}_{t-1}) + (1 - \\beta_1) {\\mathbf g}_t, \\quad {\\mathbf v}_t = \\beta_2 Q_4^{-1}(\\bar{\\mathbf v}_{t-1}) + (1 - \\beta_2) {\\mathbf g}_t^2, \\quad \\bar{\\mathbf m}_t, \\bar{\\mathbf v}_t = Q_4({\\mathbf m}_t), Q_4({\\mathbf v}_t), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\frac{\\hat{\\mathbf m}_t}{\\sqrt{\\hat{\\mathbf v}_t} + \\epsilon} \\quad (Q_4 : \\text{4bit量子化})",
+  "parents": [
+    {
+      "id": "adam_8bit",
+      "types": [
+        "compression"
+      ],
+      "improvement": "4bitへの量子化と0点を除外した2次モーメントの量子化"
+    }
+  ],
+  "practical": {
+    "state": "compressed",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "ε"
+    ],
+    "tasks": [
+      "llm",
+      "finetune"
+    ]
+  }
+}

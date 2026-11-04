@@ -1,0 +1,43 @@
+{
+  "id": "fedavgm",
+  "name": "FedAvgM (Federated Averaging with Server Momentum)",
+  "short_name": "FedAvgM",
+  "year": 2019,
+  "citations": 1000,
+  "categories": [
+    "分散学習",
+    "高速化"
+  ],
+  "reference": "https://arxiv.org/abs/1909.06335",
+  "summary": "クライアント間でデータ分布が異なる（非IID）場合のFedAvgの性能劣化を体系的に評価し，サーバー側での集約にクライアントの変化量の平均に対する慣性項を導入した手法である．単純な修正でありながら，非IIDのデータでの精度と収束を大きく改善する．",
+  "update_rule": "\\Delta_t = \\sum_{k} \\frac{n_k}{n} ({\\mathbf w}_t - {\\mathbf w}^{k}_{t}), \\quad {\\mathbf v}_{t+1} = \\beta {\\mathbf v}_t + \\Delta_t, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - {\\mathbf v}_{t+1}",
+  "parents": [
+    {
+      "id": "fedavg",
+      "types": [
+        "momentum"
+      ],
+      "improvement": "サーバー側の集約への慣性項の導入"
+    },
+    {
+      "id": "momentum",
+      "types": [
+        "momentum",
+        "communication"
+      ],
+      "improvement": "サーバーでのパラメータ変化量への慣性項の適用"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "β（サーバー慣性）"
+    ],
+    "tasks": [
+      "distributed"
+    ]
+  }
+}

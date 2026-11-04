@@ -1,0 +1,36 @@
+{
+  "id": "lisa",
+  "name": "LISA (Layerwise Importance Sampled AdamW)",
+  "short_name": "LISA",
+  "year": 2024,
+  "citations": 100,
+  "categories": [
+    "メモリ効率"
+  ],
+  "reference": "https://arxiv.org/abs/2403.17919",
+  "summary": "LoRAで学習した際の層ごとの重みの変化量が埋め込み層と出力層に偏っていることに着目し，埋め込み層と出力層は常に更新しつつ，中間層はランダムに選んだ少数の層のみを一定期間ごとに切り替えながらAdamWで更新する手法である．LoRAと同程度のメモリで，LoRAや全パラメータ学習を上回るファインチューニング性能を示す．",
+  "update_rule": "\\mathcal{S}_k \\subset \\{1, \\dots, L\\}, \\; |\\mathcal{S}_k| = \\gamma \\;\\; (K\\text{ステップごとに一様に再サンプリング}), \\quad {\\mathbf W}^\\ell_{t+1} = \\begin{cases} \\mathrm{AdamW}({\\mathbf W}^\\ell_t) & (\\ell \\in \\mathcal{S}_k \\cup \\{\\mathrm{emb}, \\mathrm{head}\\}) \\\\ {\\mathbf W}^\\ell_t & (\\mathrm{otherwise}) \\end{cases}",
+  "parents": [
+    {
+      "id": "adamw",
+      "types": [
+        "compression",
+        "stochastic"
+      ],
+      "improvement": "層の重要度サンプリングによる一部の層のみの更新"
+    }
+  ],
+  "practical": {
+    "state": "compressed",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "γ（更新する層数）",
+      "K（切り替え間隔）"
+    ],
+    "tasks": [
+      "finetune"
+    ]
+  }
+}

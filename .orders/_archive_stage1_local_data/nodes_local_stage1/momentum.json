@@ -1,0 +1,16 @@
+{
+  "id": "momentum",
+  "name": "モーメント法 (Momentum，Heavy Ball法)",
+  "year": 1964,
+  "citation_count": 9000,
+  "category": ["高速化"],
+  "summary": "勾配方向への更新に，過去の更新方向を一定の割合で保持する慣性項を加える手法である．谷状の目的関数において，勾配が小さい方向への更新を蓄積して加速し，振動しやすい方向への更新を打ち消すことで，SGDに比べ収束を高速化する．",
+  "update_rule": "{\\mathbf v}_{t+1} = \\beta {\\mathbf v}_t - \\eta \\nabla f_t({\\mathbf w}_t), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t + {\\mathbf v}_{t+1}",
+  "paper_url": "https://doi.org/10.1016/0041-5553(64)90137-5",
+  "derived_from": [
+    {
+      "parent_id": "sgd",
+      "relation": "慣性項（過去の更新方向の蓄積）の追加"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "id": "lomo",
+  "name": "LOMO (LOw-Memory Optimization)",
+  "short_name": "LOMO",
+  "year": 2023,
+  "citations": 200,
+  "categories": [
+    "メモリ効率"
+  ],
+  "reference": "https://arxiv.org/abs/2306.09782",
+  "summary": "大規模言語モデルの全パラメータのファインチューニングにおいて，全パラメータの勾配を保持してから更新するのではなく，誤差逆伝播で各層の勾配が計算された直後にその層のパラメータをSGDで更新して勾配を破棄する手法である．勾配のメモリをほぼ不要にし，限られたGPU資源で数百億パラメータ規模のモデルの全パラメータ学習を可能にした．",
+  "update_rule": "\\text{for } \\ell = L, \\dots, 1 : \\;\\; {\\mathbf g}^\\ell_t = \\nabla_{{\\mathbf w}^\\ell} f_t, \\quad {\\mathbf w}^\\ell_{t+1} = {\\mathbf w}^\\ell_t - \\eta \\, {\\mathbf g}^\\ell_t, \\quad \\text{直後に} \\; {\\mathbf g}^\\ell_t \\; \\text{を破棄}",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "compression"
+      ],
+      "improvement": "勾配計算とパラメータ更新の融合による勾配メモリの削減"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η"
+    ],
+    "tasks": [
+      "finetune"
+    ]
+  }
+}

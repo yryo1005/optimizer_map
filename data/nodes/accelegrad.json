@@ -1,0 +1,42 @@
+{
+  "id": "accelegrad",
+  "name": "AcceleGrad",
+  "short_name": "AcceleGrad",
+  "year": 2018,
+  "citations": 200,
+  "categories": [
+    "高速化",
+    "学習率自動調整"
+  ],
+  "reference": "https://arxiv.org/abs/1809.02864",
+  "summary": "AdaGrad型の適応的学習率と，2つの系列を線形に結合する加速勾配法型の更新を組み合わせた手法である．滑らかさの定数を事前に知らなくても，滑らかな場合は加速された収束率O(1/T^2)を，一般の場合はO(1/√T)を達成する（普遍性）．",
+  "update_rule": "\\tau_t = \\frac{1}{\\alpha_t}, \\quad {\\mathbf x}_{t+1} = \\tau_t {\\mathbf z}_t + (1 - \\tau_t) {\\mathbf y}_t, \\quad \\eta_t = \\frac{2D}{\\sqrt{G^2 + \\sum_{i \\le t} \\alpha_i^2 \\|{\\mathbf g}_i\\|^2}}, \\quad {\\mathbf z}_{t+1} = \\Pi_{\\mathcal{K}}({\\mathbf z}_t - \\alpha_t \\eta_t {\\mathbf g}_t), \\quad {\\mathbf y}_{t+1} = {\\mathbf x}_{t+1} - \\eta_t {\\mathbf g}_t",
+  "parents": [
+    {
+      "id": "adagrad_norm",
+      "types": [
+        "momentum",
+        "lr_automation"
+      ],
+      "improvement": "AdaGrad型の適応的学習率の加速法への組み込み"
+    },
+    {
+      "id": "nesterov",
+      "types": [
+        "momentum"
+      ],
+      "improvement": "2系列の線形結合による加速（滑らかさの定数が未知でも成立）"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [],
+    "hyperparameters": [
+      "D",
+      "G"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

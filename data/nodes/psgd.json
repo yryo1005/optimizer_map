@@ -1,0 +1,42 @@
+{
+  "id": "psgd",
+  "name": "PSGD (Preconditioned Stochastic Gradient Descent)",
+  "short_name": "PSGD",
+  "year": 2015,
+  "citations": 150,
+  "categories": [
+    "2次手法"
+  ],
+  "reference": "https://arxiv.org/abs/1512.04202",
+  "summary": "パラメータの摂動と勾配の摂動の対応関係から，前処理行列を確率的勾配のみを用いてオンラインで推定する手法である．ニュートン法のように前処理後の勾配の摂動がパラメータの摂動と同じスケールになるように前処理行列を学習し，凸・非凸を問わず，また勾配の雑音を自然に抑制できる．後年のKronecker因子版（PSGD Kron）は大規模学習でも用いられる．",
+  "update_rule": "\\delta{\\mathbf g} = \\nabla f({\\mathbf w}_t + \\delta{\\mathbf w}) - \\nabla f({\\mathbf w}_t), \\quad {\\mathbf P} = \\arg\\min_{{\\mathbf P}} \\mathbb{E}\\left[ \\delta{\\mathbf g}^\\top {\\mathbf P} \\, \\delta{\\mathbf g} + \\delta{\\mathbf w}^\\top {\\mathbf P}^{-1} \\delta{\\mathbf w} \\right], \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\, {\\mathbf P} \\nabla f_t({\\mathbf w}_t)",
+  "parents": [
+    {
+      "id": "newton",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "勾配とパラメータの摂動の対応による前処理行列のオンライン推定"
+    },
+    {
+      "id": "sgd",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "確率的勾配への前処理の適用"
+    }
+  ],
+  "practical": {
+    "state": "matrix",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "前処理の学習率"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "gd",
+  "name": "最急降下法 (Gradient Descent)",
+  "short_name": "最急降下法",
+  "year": 1847,
+  "citations": null,
+  "categories": [
+    "高速化"
+  ],
+  "reference": "https://en.wikipedia.org/wiki/Gradient_descent",
+  "summary": "目的関数の勾配の逆方向（関数値が最も急に減少する方向）に，一定の学習率でパラメータを繰り返し更新する，勾配に基づく最適化手法の原点である．各ステップで目的関数全体の勾配を計算するため，データ数に比例した計算量を要する．",
+  "update_rule": "{\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\nabla f({\\mathbf w}_t)",
+  "parents": [],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "pytorch"
+    ],
+    "hyperparameters": [
+      "η"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  },
+  "notes": "Cauchy（1847）がComptes Rendusで提案した．単一の参照可能な原典URL・Citation数がないためWikipediaを参照し，Citation数はnullとした．"
+}

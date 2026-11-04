@@ -1,0 +1,28 @@
+{
+  "id": "newton",
+  "name": "ニュートン法 (Newton's Method)",
+  "short_name": "ニュートン法",
+  "year": 1740,
+  "citations": null,
+  "categories": [
+    "2次手法"
+  ],
+  "reference": "https://en.wikipedia.org/wiki/Newton%27s_method_in_optimization",
+  "summary": "目的関数を現在の点の周りで2次のテイラー展開により近似し，その近似関数の最小点へ移動する手法である．ヘッセ行列（2階微分）の逆行列で勾配を変換することで曲率に応じた更新が可能となり，最適解の近傍で2次収束する．一方で，ヘッセ行列の計算・逆行列の計算コストが大きく，大規模な問題への直接の適用は困難である．",
+  "update_rule": "{\\mathbf w}_{t+1} = {\\mathbf w}_t - \\left[ \\nabla^2 f({\\mathbf w}_t) \\right]^{-1} \\nabla f({\\mathbf w}_t)",
+  "parents": [],
+  "practical": {
+    "state": "matrix",
+    "implementations": [],
+    "hyperparameters": [],
+    "tasks": [
+      "convex"
+    ]
+  },
+  "deep_dive": {
+    "why": "2次近似の最小点に直接移動するため，最適解の近傍で2次収束し，反復回数が極めて少ない．",
+    "weaknesses": "ヘッセ行列の計算・記憶・逆行列が O(d²)〜O(d³) で大規模問題に適用できない．非凸問題では鞍点に引き寄せられる．",
+    "settings": "直線探索や信頼領域と組み合わせて用いる．"
+  },
+  "notes": "方程式の求根法としてはNewton（1669頃）・Raphson（1690）に遡るが，最適化への適用はSimpson（1740）によるとされるため1740年とした．単一の原典論文がないためCitation数はnullとした．"
+}

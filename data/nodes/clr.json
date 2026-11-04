@@ -1,0 +1,37 @@
+{
+  "id": "clr",
+  "name": "周期的学習率 (Cyclical Learning Rates, CLR)",
+  "short_name": "CLR",
+  "year": 2015,
+  "citations": 3000,
+  "categories": [
+    "学習率スケジュール"
+  ],
+  "reference": "https://arxiv.org/abs/1506.01186",
+  "summary": "学習率を単調に減衰させるのではなく，下限と上限の間で三角波状に周期的に変化させるスケジュールである．学習率を一時的に大きくすることで鞍点の付近から抜け出しやすくなり，学習率の細かな調整なしで良好な精度が得られる．学習率を徐々に増やしながら損失を観察して適切な範囲を決める学習率レンジテストも提案された．",
+  "update_rule": "c = \\left\\lfloor 1 + \\frac{t}{2s} \\right\\rfloor, \\quad x = \\left| \\frac{t}{s} - 2c + 1 \\right|, \\quad \\eta_t = \\eta_{\\min} + (\\eta_{\\max} - \\eta_{\\min}) \\max(0, 1 - x)",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "lr_automation"
+      ],
+      "improvement": "上下限の間での三角波状の周期的な学習率変化"
+    }
+  ],
+  "practical": {
+    "state": "na",
+    "implementations": [
+      "pytorch",
+      "keras"
+    ],
+    "hyperparameters": [
+      "η_min",
+      "η_max",
+      "半周期"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

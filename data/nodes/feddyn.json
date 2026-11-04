@@ -1,0 +1,35 @@
+{
+  "id": "feddyn",
+  "name": "FedDyn (Federated Dynamic Regularization)",
+  "short_name": "FedDyn",
+  "year": 2021,
+  "citations": 800,
+  "categories": [
+    "分散学習",
+    "正則化"
+  ],
+  "reference": "https://arxiv.org/abs/2111.04263",
+  "summary": "各クライアントのローカル目的関数に，過去の勾配情報から動的に更新される線形項と近接項からなる正則化を加えることで，ローカルの最適解がグローバルな目的関数の停留点と一致するようにする手法である．クライアントが部分的にしか参加しない場合や非IIDのデータでも，通信回数を大幅に削減する．",
+  "update_rule": "{\\mathbf w}^{k}_{t} = \\arg\\min_{{\\mathbf w}} \\left\\{ f_k({\\mathbf w}) - \\langle \\nabla f_k({\\mathbf w}^{k}_{t-1}), {\\mathbf w} \\rangle + \\frac{\\alpha}{2} \\|{\\mathbf w} - {\\mathbf w}_{t-1}\\|^2 \\right\\}, \\quad \\nabla f_k({\\mathbf w}^{k}_{t}) = \\nabla f_k({\\mathbf w}^{k}_{t-1}) - \\alpha ({\\mathbf w}^{k}_{t} - {\\mathbf w}_{t-1})",
+  "parents": [
+    {
+      "id": "fedprox",
+      "types": [
+        "regularization"
+      ],
+      "improvement": "過去の勾配に基づく動的な線形項の追加（ローカル最適解とグローバル停留点の一致）"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "α"
+    ],
+    "tasks": [
+      "distributed"
+    ]
+  }
+}

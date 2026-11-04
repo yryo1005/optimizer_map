@@ -1,0 +1,35 @@
+{
+  "id": "gsam",
+  "name": "GSAM (Surrogate Gap Guided Sharpness-Aware Minimization)",
+  "short_name": "GSAM",
+  "year": 2022,
+  "citations": 300,
+  "categories": [
+    "平坦解探索"
+  ],
+  "reference": "https://arxiv.org/abs/2203.08065",
+  "summary": "SAMの摂動後の損失は，鋭い最小値と平坦な最小値の双方で小さくなり得るため，平坦な解を必ずしも見つけられない問題を指摘した手法である．摂動後の損失と元の損失の差（サロゲートギャップ）を鋭さの指標とし，SAMの勾配に直交する方向でこれを最小化する上昇ステップを加えることで，汎化性能を改善する．",
+  "update_rule": "\\nabla f_p = \\nabla f({\\mathbf w}_t + \\hat{\\boldsymbol\\epsilon}), \\quad \\nabla f_{\\perp} = \\nabla f({\\mathbf w}_t) - \\frac{\\langle \\nabla f({\\mathbf w}_t), \\nabla f_p \\rangle}{\\|\\nabla f_p\\|^2} \\nabla f_p, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta (\\nabla f_p - \\alpha \\nabla f_{\\perp})",
+  "parents": [
+    {
+      "id": "sam",
+      "types": [
+        "flatness"
+      ],
+      "improvement": "サロゲートギャップを最小化する直交方向の上昇ステップの追加"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "ρ",
+      "α"
+    ],
+    "tasks": [
+      "vision"
+    ]
+  }
+}

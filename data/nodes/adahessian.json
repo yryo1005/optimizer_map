@@ -1,0 +1,47 @@
+{
+  "id": "adahessian",
+  "name": "AdaHessian",
+  "short_name": "AdaHessian",
+  "year": 2020,
+  "citations": 400,
+  "categories": [
+    "2次手法",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/2006.00719",
+  "summary": "Adamの2次モーメントに用いる勾配の2乗を，Hutchinson法によって推定したヘッセ行列の対角成分の2乗に置き換えた手法である．ヘッセ行列とベクトルの積のみで対角成分を推定し，さらに空間的な平均化と指数移動平均によって推定値の分散を抑えることで，曲率情報を取り入れた適応的学習率を実現する．",
+  "update_rule": "{\\mathbf D}_t = \\mathrm{diag}(\\nabla^2 f_t({\\mathbf w}_t)) \\approx \\mathbb{E}_{\\mathbf z}[{\\mathbf z} \\odot (\\nabla^2 f_t({\\mathbf w}_t) {\\mathbf z})], \\quad {\\mathbf m}_t = \\beta_1 {\\mathbf m}_{t-1} + (1 - \\beta_1) \\nabla f_t({\\mathbf w}_t), \\quad {\\mathbf v}_t = \\beta_2 {\\mathbf v}_{t-1} + (1 - \\beta_2) {\\mathbf D}_t^{2}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\frac{\\hat{\\mathbf m}_t}{(\\sqrt{\\hat{\\mathbf v}_t})^k + \\epsilon}",
+  "parents": [
+    {
+      "id": "adam",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "2次モーメントのヘッセ行列の対角推定（Hutchinson法）への置き換え"
+    },
+    {
+      "id": "newton",
+      "types": [
+        "curvature",
+        "stochastic"
+      ],
+      "improvement": "ヘッセ行列の対角近似と移動平均による確率的な2次情報の活用"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "k（ヘッセのべき）"
+    ],
+    "tasks": [
+      "general",
+      "vision"
+    ]
+  }
+}

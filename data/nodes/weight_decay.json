@@ -1,0 +1,41 @@
+{
+  "id": "weight_decay",
+  "name": "重み減衰 (Weight Decay)",
+  "short_name": "重み減衰",
+  "year": 1991,
+  "citations": 2500,
+  "categories": [
+    "正則化"
+  ],
+  "reference": "https://papers.nips.cc/paper/1991/hash/8eefcfdf5990e441f0fb6f3fad709e21-Abstract.html",
+  "summary": "各更新で重みを一定の割合だけ0に向けて縮小させる正則化手法である．SGDでは損失関数にL2正則化項を加えることと等価であり，不要な重み成分を抑制し，ラベルの雑音の影響を低減することで汎化性能を改善することが示された．",
+  "update_rule": "{\\mathbf w}_{t+1} = (1 - \\eta \\lambda) {\\mathbf w}_t - \\eta \\nabla f_t({\\mathbf w}_t)",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "regularization"
+      ],
+      "improvement": "各更新での重みの縮小（L2正則化）の導入"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "pytorch",
+      "optax",
+      "keras"
+    ],
+    "hyperparameters": [
+      "λ"
+    ],
+    "tasks": [
+      "general"
+    ]
+  },
+  "deep_dive": {
+    "why": "重みを0に向けて縮小することで不要な成分を抑え，正規化層を持つネットワークでは実効的な学習率を制御する役割も持つ．",
+    "weaknesses": "適応的な手法では L2 正則化として加えると効果が変わる（AdamW を用いる）．バイアス・正規化層には適用しないのが通例である．",
+    "settings": "SGD では 1e-4〜5e-4，AdamW では 0.01〜0.1．"
+  }
+}

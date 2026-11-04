@@ -1,0 +1,60 @@
+{
+  "id": "shampoo",
+  "name": "Shampoo",
+  "short_name": "Shampoo",
+  "year": 2018,
+  "citations": 400,
+  "categories": [
+    "2次手法",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/1802.09568",
+  "summary": "全行列版AdaGradの前処理行列（勾配の外積の累積）を，行列形状のパラメータについて行方向と列方向の2つの小さな前処理行列のクロネッカー積で近似する手法である．各前処理行列の-1/4乗を勾配の左右から掛けることで，パラメータ間の相関を考慮した前処理を現実的な計算量で実現する．近年は大規模学習の最適化手法ベンチマークで高い性能を示している．",
+  "update_rule": "{\\mathbf G}_t = \\nabla f_t({\\mathbf W}_t), \\quad {\\mathbf L}_t = {\\mathbf L}_{t-1} + {\\mathbf G}_t {\\mathbf G}_t^\\top, \\quad {\\mathbf R}_t = {\\mathbf R}_{t-1} + {\\mathbf G}_t^\\top {\\mathbf G}_t, \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta \\, {\\mathbf L}_t^{-1/4} {\\mathbf G}_t {\\mathbf R}_t^{-1/4}",
+  "parents": [
+    {
+      "id": "adagrad",
+      "types": [
+        "curvature",
+        "compression"
+      ],
+      "improvement": "全行列版の前処理行列の行・列方向のクロネッカー積近似"
+    },
+    {
+      "id": "kfac",
+      "types": [
+        "curvature",
+        "reinterpretation"
+      ],
+      "improvement": "クロネッカー積構造による前処理のモデル非依存なテンソル一般化"
+    },
+    {
+      "id": "online_newton_step",
+      "types": [
+        "curvature",
+        "compression"
+      ],
+      "improvement": "勾配の外積の累積による前処理の行列構造を用いた近似"
+    }
+  ],
+  "practical": {
+    "state": "matrix",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "ε",
+      "前処理の更新頻度"
+    ],
+    "tasks": [
+      "llm",
+      "vision"
+    ]
+  },
+  "deep_dive": {
+    "why": "行列形状のパラメータの行方向・列方向の相関を考慮した前処理を行い，全行列版 AdaGrad の近似として曲率に適応した更新を得る．",
+    "weaknesses": "前処理行列の逆4乗根の計算が重く，数値的に不安定になりやすい．実用にはグラフティング・低頻度更新・ブロック分割などの工夫が必要である．",
+    "settings": "前処理の更新は 10〜100 ステップごと，ε=1e-12〜1e-6，Adam の更新量の大きさにグラフティング．大規模実装は Distributed Shampoo を用いる．"
+  }
+}

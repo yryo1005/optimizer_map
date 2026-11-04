@@ -1,0 +1,52 @@
+{
+  "id": "nadam",
+  "name": "Nadam (Nesterov-accelerated Adaptive Moment Estimation)",
+  "short_name": "Nadam",
+  "year": 2016,
+  "citations": 2500,
+  "categories": [
+    "適応的学習率",
+    "高速化"
+  ],
+  "reference": "https://openreview.net/forum?id=OM0jvwB8jIp57ZJjtNEZ",
+  "summary": "Adamの1次モーメント（慣性項）を，Nesterovの加速勾配法と同様の先読み型に置き換えた手法である．次ステップの慣性項を現在の更新に前倒しで反映することで，Adamより高速な収束を狙う．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad {\\mathbf m}_t = \\beta_1 {\\mathbf m}_{t-1} + (1 - \\beta_1) {\\mathbf g}_t, \\quad {\\mathbf v}_t = \\beta_2 {\\mathbf v}_{t-1} + (1 - \\beta_2) {\\mathbf g}_t^2, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\frac{\\eta}{\\sqrt{\\hat{\\mathbf v}_t} + \\epsilon} \\left( \\beta_1 \\hat{\\mathbf m}_t + \\frac{(1 - \\beta_1) {\\mathbf g}_t}{1 - \\beta_1^t} \\right)",
+  "parents": [
+    {
+      "id": "adam",
+      "types": [
+        "momentum"
+      ],
+      "improvement": "1次モーメントのNesterov型（先読み型）への置き換え"
+    },
+    {
+      "id": "nesterov",
+      "types": [
+        "momentum"
+      ],
+      "improvement": "先読みによる加速の適応的学習率手法への導入"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "pytorch",
+      "optax",
+      "keras"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "ε"
+    ],
+    "tasks": [
+      "general"
+    ]
+  },
+  "deep_dive": {
+    "why": "Adam の慣性項を Nesterov 型にすることで，次の更新方向を先取りし収束を速める．",
+    "weaknesses": "Adam との差は多くのタスクで小さい．",
+    "settings": "Adam と同じ設定．Keras/PyTorch の Nadam は μ の減衰スケジュールの有無に実装差がある．"
+  }
+}

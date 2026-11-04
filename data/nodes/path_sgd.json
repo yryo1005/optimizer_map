@@ -1,0 +1,34 @@
+{
+  "id": "path_sgd",
+  "name": "Path-SGD",
+  "short_name": "Path-SGD",
+  "year": 2015,
+  "citations": 400,
+  "categories": [
+    "学習安定化",
+    "2次手法"
+  ],
+  "reference": "https://arxiv.org/abs/1506.02617",
+  "summary": "ReLUネットワークでは層間で重みを再スケーリングしても関数が変わらないにもかかわらず，ユークリッド幾何に基づくSGDの更新はこの再スケーリングに依存してしまう問題に対し，入力から出力への全経路の重みの積に基づくパスノルムの下での最急降下法を近似する手法である．再スケーリング不変な更新により，SGDやAdaGradより安定に学習する．",
+  "update_rule": "\\gamma(w_e) = \\sum_{\\text{path } p \\ni e} \\prod_{e' \\in p, e' \\neq e} w_{e'}^2, \\quad w_{e,t+1} = w_{e,t} - \\frac{\\eta}{\\gamma(w_{e,t})} \\frac{\\partial f}{\\partial w_e}({\\mathbf w}_t)",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "normalization",
+        "reinterpretation"
+      ],
+      "improvement": "パスノルムの下での最急降下法による再スケーリング不変な更新"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [],
+    "hyperparameters": [
+      "η"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

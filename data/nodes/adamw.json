@@ -1,0 +1,54 @@
+{
+  "id": "adamw",
+  "name": "AdamW (Adam with Decoupled Weight Decay)",
+  "short_name": "AdamW",
+  "year": 2017,
+  "citations": 16000,
+  "categories": [
+    "適応的学習率",
+    "正則化"
+  ],
+  "reference": "https://arxiv.org/abs/1711.05101",
+  "summary": "Adamにおいて重み減衰（Weight Decay）をL2正則化として損失関数に加える実装では，Adamの適応的な学習率のスケーリングが重み減衰の効果にも影響してしまい，正則化の強さが意図した通りに働かない問題がある．本手法は，重み減衰の項をモーメントの計算から分離し，パラメータ更新時に直接適用することで，学習率と正則化の強さを独立に制御できるようにする．",
+  "update_rule": "{\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\left( \\frac{\\hat{\\mathbf m}_t}{\\sqrt{\\hat{\\mathbf v}_t} + \\epsilon} + \\lambda {\\mathbf w}_t \\right)",
+  "parents": [
+    {
+      "id": "adam",
+      "types": [
+        "regularization"
+      ],
+      "improvement": "重み減衰(Weight Decay)のモーメント計算からの分離"
+    },
+    {
+      "id": "weight_decay",
+      "types": [
+        "regularization"
+      ],
+      "improvement": "重み減衰の適応的学習率手法への正しい（分離した）適用"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "pytorch",
+      "optax",
+      "keras"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "ε",
+      "λ"
+    ],
+    "tasks": [
+      "general",
+      "llm"
+    ]
+  },
+  "deep_dive": {
+    "why": "重み減衰を適応的なスケーリングから切り離すため，正則化の強さが勾配の大きさに依存せず意図どおりに働く．学習率と重み減衰を独立に調整できる．",
+    "weaknesses": "λ の最適値は学習率・学習ステップ数・モデルサイズに依存する（スケーリング則が研究されている）．状態量は Adam と同じく2倍である．",
+    "settings": "LLM 事前学習では η=3e-4 前後，β1=0.9，β2=0.95，λ=0.1，ウォームアップ＋コサイン減衰（または WSD）．"
+  }
+}

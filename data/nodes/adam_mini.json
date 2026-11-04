@@ -1,0 +1,44 @@
+{
+  "id": "adam_mini",
+  "name": "Adam-mini",
+  "short_name": "Adam-mini",
+  "year": 2024,
+  "citations": 150,
+  "categories": [
+    "メモリ効率",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/2406.16793",
+  "summary": "Adamのパラメータごとの学習率（2次モーメント）の大部分は冗長であるという観察に基づき，ヘッシアンの構造に沿ってパラメータをブロックに分割し，ブロックごとに単一の2次モーメント（勾配2乗の平均）を共有する手法である．Adamと同等以上の性能を保ちながら，2次モーメントのメモリをほぼ不要にする．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad {\\mathbf m}_t = \\beta_1 {\\mathbf m}_{t-1} + (1 - \\beta_1) {\\mathbf g}_t, \\quad v_{t,b} = \\beta_2 v_{t-1,b} + (1 - \\beta_2) \\, \\mathrm{mean}({\\mathbf g}_{t,b}^2), \\quad {\\mathbf w}_{t+1,b} = {\\mathbf w}_{t,b} - \\frac{\\eta}{\\sqrt{\\hat v_{t,b}} + \\epsilon} \\hat{\\mathbf m}_{t,b} \\quad (b : \\text{パラメータブロック})",
+  "parents": [
+    {
+      "id": "adam",
+      "types": [
+        "adaptive",
+        "compression"
+      ],
+      "improvement": "ヘッシアン構造に基づくパラメータブロックごとの2次モーメントの共有"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "ε"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  },
+  "deep_dive": {
+    "why": "Adam の2次モーメントの多くは冗長であり，ヘッセ行列のブロック構造に沿ってブロックごとに1つの値を共有しても性能がほぼ変わらないため，状態量を大幅に減らせる．",
+    "weaknesses": "ブロックの分割方法（ヘッド単位・ニューロン単位など）をアーキテクチャに合わせて決める必要がある．",
+    "settings": "AdamW と同じハイパーパラメータで置き換えて使う．"
+  }
+}

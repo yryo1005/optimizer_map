@@ -1,0 +1,43 @@
+{
+  "id": "sls",
+  "name": "SLS (Stochastic Line Search, Painless SGD)",
+  "short_name": "SLS",
+  "year": 2019,
+  "citations": 300,
+  "categories": [
+    "学習率自動調整"
+  ],
+  "reference": "https://arxiv.org/abs/1905.09997",
+  "summary": "過剰パラメータ化されたモデルが満たす補間条件の下で，各ミニバッチの損失に対してArmijo直線探索を行って学習率を決める手法である．補間条件の下では確率的な直線探索でも決定的な場合と同様の収束率が保証され，学習率の調整なしにSGDやAdamを調整した場合と同等以上の性能を示す．",
+  "update_rule": "\\eta_t = \\max \\left\\{ \\eta : f_{i_t}({\\mathbf w}_t - \\eta \\nabla f_{i_t}({\\mathbf w}_t)) \\le f_{i_t}({\\mathbf w}_t) - c \\, \\eta \\|\\nabla f_{i_t}({\\mathbf w}_t)\\|^2 \\right\\}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta_t \\nabla f_{i_t}({\\mathbf w}_t)",
+  "parents": [
+    {
+      "id": "armijo",
+      "types": [
+        "lr_automation",
+        "stochastic"
+      ],
+      "improvement": "ミニバッチ損失に対する確率的な直線探索（補間条件下での収束保証）"
+    },
+    {
+      "id": "sgd",
+      "types": [
+        "lr_automation"
+      ],
+      "improvement": "SGDの学習率の直線探索による自動設定"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "c",
+      "η_max"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

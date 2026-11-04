@@ -1,0 +1,42 @@
+{
+  "id": "hessian_free",
+  "name": "Hessian-Free最適化 (Hessian-Free Optimization)",
+  "short_name": "Hessian-Free",
+  "year": 2010,
+  "citations": 1500,
+  "categories": [
+    "2次手法"
+  ],
+  "reference": "https://icml.cc/imls/conferences/2010/papers/458.pdf",
+  "summary": "ヘッセ行列を明示的に構成・保持せず，ヘッセ行列（またはガウス・ニュートン行列）とベクトルの積のみを効率的に計算し，共役勾配法でニュートン方程式を近似的に解く手法である．減衰（ダンピング）付きのガウス・ニュートン行列を用いることで，事前学習なしに深いオートエンコーダを学習できることを示し，深層学習における2次手法の有効性を示した．",
+  "update_rule": "({\\mathbf G}({\\mathbf w}_t) + \\lambda {\\mathbf I}) \\, {\\mathbf d}_t = - \\nabla f({\\mathbf w}_t) \\;\\; \\text{を共役勾配法で近似的に解く（行列ベクトル積のみ使用）}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t + {\\mathbf d}_t",
+  "parents": [
+    {
+      "id": "newton",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "行列ベクトル積と共役勾配法によるヘッセ行列の明示的計算の回避，ガウス・ニュートン行列とダンピングの導入"
+    },
+    {
+      "id": "gauss_newton",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "一般化ガウス・ニュートン行列による曲率の近似"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "ダンピングλ",
+      "CG反復数"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

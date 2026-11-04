@@ -1,0 +1,35 @@
+{
+  "id": "relora",
+  "name": "ReLoRA (High-Rank Training Through Low-Rank Updates)",
+  "short_name": "ReLoRA",
+  "year": 2023,
+  "citations": 150,
+  "categories": [
+    "メモリ効率"
+  ],
+  "reference": "https://arxiv.org/abs/2307.05695",
+  "summary": "低ランクの更新（LoRA）を一定ステップごとに元の重みに統合（マージ）し，新しい低ランク行列で学習を再開することを繰り返すことで，低ランクの更新の積み重ねにより高ランクの更新を実現する事前学習手法である．統合時にはオプティマイザの状態量の部分的なリセットと学習率の再ウォームアップを行う．",
+  "update_rule": "{\\mathbf W} = {\\mathbf W}_0 + {\\mathbf B}{\\mathbf A}, \\quad ({\\mathbf A}, {\\mathbf B}) \\leftarrow \\mathrm{AdamW}({\\mathbf A}, {\\mathbf B}), \\quad \\text{every } T : \\; {\\mathbf W}_0 \\leftarrow {\\mathbf W}_0 + {\\mathbf B}{\\mathbf A}, \\;\\; {\\mathbf A}, {\\mathbf B} \\leftarrow \\text{再初期化}, \\;\\; \\text{状態量の部分リセット}",
+  "parents": [
+    {
+      "id": "adamw",
+      "types": [
+        "compression"
+      ],
+      "improvement": "低ランク更新の周期的な統合と再初期化による高ランク化"
+    }
+  ],
+  "practical": {
+    "state": "compressed",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "ランク",
+      "統合間隔"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  }
+}

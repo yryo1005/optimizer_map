@@ -1,0 +1,33 @@
+{
+  "id": "sga",
+  "name": "SGA (Symplectic Gradient Adjustment)",
+  "short_name": "SGA",
+  "year": 2018,
+  "citations": 300,
+  "categories": [
+    "ミニマックス最適化"
+  ],
+  "reference": "https://arxiv.org/abs/1802.05642",
+  "summary": "多人数の微分可能なゲームの力学を，ヤコビ行列の対称部分（ポテンシャルゲーム）と反対称部分（ハミルトニアンゲーム）に分解し，回転を生む反対称部分を打ち消す方向に勾配を調整する手法である．調整の符号を自動的に選ぶことで，安定な固定点に引き寄せられ不安定な固定点からは離れる．",
+  "update_rule": "{\\mathbf J} = {\\mathbf S} + {\\mathbf A}, \\;\\; {\\mathbf A} = \\frac{{\\mathbf J} - {\\mathbf J}^\\top}{2}, \\quad \\boldsymbol\\xi_\\lambda = \\boldsymbol\\xi + \\lambda {\\mathbf A}^\\top \\boldsymbol\\xi, \\quad {\\mathbf z}_{t+1} = {\\mathbf z}_t - \\eta \\, \\boldsymbol\\xi_\\lambda({\\mathbf z}_t)",
+  "parents": [
+    {
+      "id": "consensus_optimization",
+      "types": [
+        "problem_transfer",
+        "reinterpretation"
+      ],
+      "improvement": "ヤコビ行列の反対称部分のみによる回転の打ち消し"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [],
+    "hyperparameters": [
+      "λ"
+    ],
+    "tasks": [
+      "game"
+    ]
+  }
+}

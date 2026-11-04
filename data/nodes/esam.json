@@ -1,0 +1,36 @@
+{
+  "id": "esam",
+  "name": "ESAM (Efficient Sharpness-Aware Minimization)",
+  "short_name": "ESAM",
+  "year": 2021,
+  "citations": 250,
+  "categories": [
+    "平坦解探索"
+  ],
+  "reference": "https://arxiv.org/abs/2110.03141",
+  "summary": "SAMは1ステップに2回の勾配計算を必要とし，計算コストが約2倍になる問題に対し，摂動を一部のパラメータのみにランダムに加える確率的重み摂動と，鋭さへの寄与の大きいデータのみを選んで2回目の勾配を計算するデータ選択の2つの工夫により，SAMの効果を保ちつつ計算コストを削減した手法である．",
+  "update_rule": "\\hat{\\boldsymbol\\epsilon} = \\rho \\frac{{\\mathbf a} \\odot \\nabla f_{B}({\\mathbf w}_t)}{\\|\\nabla f_{B}({\\mathbf w}_t)\\|}, \\;\\; a_i \\sim \\mathrm{Bernoulli}(\\beta), \\quad B^+ = \\{ i : f_i({\\mathbf w}_t + \\hat{\\boldsymbol\\epsilon}) - f_i({\\mathbf w}_t) \\text{が上位} \\}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\nabla f_{B^+}({\\mathbf w}_t + \\hat{\\boldsymbol\\epsilon})",
+  "parents": [
+    {
+      "id": "sam",
+      "types": [
+        "flatness",
+        "stochastic"
+      ],
+      "improvement": "確率的な重み摂動と鋭さに敏感なデータ選択による計算コストの削減"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "ρ",
+      "β"
+    ],
+    "tasks": [
+      "vision"
+    ]
+  }
+}

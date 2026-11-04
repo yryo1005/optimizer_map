@@ -1,0 +1,32 @@
+{
+  "id": "hogwild",
+  "name": "Hogwild!",
+  "short_name": "Hogwild!",
+  "year": 2011,
+  "citations": 2500,
+  "categories": [
+    "分散学習"
+  ],
+  "reference": "https://arxiv.org/abs/1106.5730",
+  "summary": "共有メモリ上のパラメータを複数のプロセッサがロックを用いずに非同期にSGDで更新する手法である．問題が疎で各更新が触れるパラメータが少ない場合には，更新の衝突がまれであり，ロックなしでもほぼ線形の高速化と収束が得られることを示した．",
+  "update_rule": "\\text{各スレッド並列に} : \\;\\; i \\sim \\mathrm{Unif}(n), \\quad \\text{for } v \\in e_i : \\; w_v \\leftarrow w_v - \\eta \\, [\\nabla f_i({\\mathbf w})]_v \\quad (\\text{ロックなし・非同期})",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "communication"
+      ],
+      "improvement": "ロックを用いない共有メモリ上の非同期並列化"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [],
+    "hyperparameters": [
+      "η"
+    ],
+    "tasks": [
+      "distributed"
+    ]
+  }
+}

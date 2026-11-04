@@ -1,0 +1,44 @@
+{
+  "id": "levenberg_marquardt",
+  "name": "Levenberg-Marquardt法",
+  "short_name": "Levenberg-Marquardt法",
+  "year": 1963,
+  "citations": 25000,
+  "categories": [
+    "2次手法"
+  ],
+  "reference": "https://doi.org/10.1137/0111030",
+  "summary": "非線形最小2乗問題に対し，ヤコビ行列から構成したガウス・ニュートン行列に減衰項（単位行列の定数倍）を加えて解く手法である．減衰係数を適応的に調整することで，最適解から遠い場合は最急降下法に，近い場合はガウス・ニュートン法に近い振る舞いをし，安定性と高速な収束を両立する．",
+  "update_rule": "({\\mathbf J}_t^\\top {\\mathbf J}_t + \\lambda_t {\\mathbf I}) \\, \\boldsymbol\\delta_t = - {\\mathbf J}_t^\\top {\\mathbf r}({\\mathbf w}_t), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t + \\boldsymbol\\delta_t",
+  "parents": [
+    {
+      "id": "newton",
+      "types": [
+        "curvature",
+        "regularization"
+      ],
+      "improvement": "ガウス・ニュートン近似と適応的な減衰項（ダンピング）の導入"
+    },
+    {
+      "id": "gauss_newton",
+      "types": [
+        "regularization",
+        "stabilization"
+      ],
+      "improvement": "ガウス・ニュートン法への減衰項の導入"
+    }
+  ],
+  "practical": {
+    "state": "matrix",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "λ"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  },
+  "notes": "Levenberg（1944）が提案し，Marquardt（1963）が再発見・発展させた．参考文献とCitation数はMarquardt（1963）を代表とした．"
+}

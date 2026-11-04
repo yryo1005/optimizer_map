@@ -1,0 +1,48 @@
+{
+  "id": "d_adaptation",
+  "name": "D-Adaptation",
+  "short_name": "D-Adaptation",
+  "year": 2023,
+  "citations": 250,
+  "categories": [
+    "学習率自動調整"
+  ],
+  "reference": "https://arxiv.org/abs/2301.07733",
+  "summary": "凸なリプシッツ関数に対する最適な学習率が，初期点から最適解までの距離Dに比例することに着目し，Dの下界を学習中に逐次推定して学習率を自動設定する手法である．学習率の調整なしに，Dが既知の場合と同等の漸近的な収束率を達成し，SGDやAdamへの適用版も提案されている．",
+  "update_rule": "\\lambda_t = \\frac{d_t}{G}, \\quad {\\mathbf s}_{t+1} = {\\mathbf s}_t + \\lambda_t {\\mathbf g}_t, \\quad \\hat d_{t+1} = \\frac{\\|{\\mathbf s}_{t+1}\\|^2 - \\sum_{i=0}^{t} \\lambda_i^2 \\|{\\mathbf g}_i\\|^2}{2 \\|{\\mathbf s}_{t+1}\\|}, \\quad d_{t+1} = \\max(d_t, \\hat d_{t+1}), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_0 - {\\mathbf s}_{t+1}",
+  "parents": [
+    {
+      "id": "adagrad",
+      "types": [
+        "lr_automation"
+      ],
+      "improvement": "初期点から最適解までの距離の逐次推定による学習率の自動設定"
+    },
+    {
+      "id": "dual_averaging",
+      "types": [
+        "lr_automation"
+      ],
+      "improvement": "双対平均化の枠組みにおける距離の下界推定"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "d0",
+      "growth_rate"
+    ],
+    "tasks": [
+      "general"
+    ]
+  },
+  "deep_dive": {
+    "why": "最適な学習率が初期点から最適解までの距離に比例することを利用し，その下界を勾配の履歴から推定して学習率を自動設定する．",
+    "weaknesses": "推定値の増加が遅く，学習初期が非効率になる場合がある（Prodigy で改善）．",
+    "settings": "lr=1.0，d0=1e-6，growth_rate=inf（Adam 版は β も Adam と同じ）．"
+  },
+  "notes": "更新式は双対平均化に基づくD-Adapted Dual Averagingの簡略表記である．"
+}

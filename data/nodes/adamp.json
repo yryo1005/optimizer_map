@@ -1,0 +1,40 @@
+{
+  "id": "adamp",
+  "name": "AdamP",
+  "short_name": "AdamP",
+  "year": 2020,
+  "citations": 300,
+  "categories": [
+    "適応的学習率",
+    "正則化"
+  ],
+  "reference": "https://arxiv.org/abs/2006.08217",
+  "summary": "バッチ正規化などにより出力が重みのスケールに不変となるパラメータでは，慣性項を持つ最適化手法が重みのノルムを急速に増大させ，実効的な学習率が過度に減衰する問題を指摘した手法である．スケール不変と判定された重みについて，更新量から重みの方向（半径方向）成分を射影により除去することで，ノルムの増大を抑制する．",
+  "update_rule": "{\\mathbf p}_t = \\frac{\\hat{\\mathbf m}_t}{\\sqrt{\\hat{\\mathbf v}_t} + \\epsilon}, \\quad {\\mathbf q}_t = \\begin{cases} {\\mathbf p}_t - \\frac{{\\mathbf w}_t^\\top {\\mathbf p}_t}{\\|{\\mathbf w}_t\\|^2} {\\mathbf w}_t & (\\cos({\\mathbf w}_t, \\nabla f_t({\\mathbf w}_t)) < \\delta / \\sqrt{\\dim({\\mathbf w})}) \\\\ {\\mathbf p}_t & (\\mathrm{otherwise}) \\end{cases}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\, {\\mathbf q}_t",
+  "parents": [
+    {
+      "id": "adamw",
+      "types": [
+        "regularization",
+        "normalization"
+      ],
+      "improvement": "スケール不変な重みに対する更新量の半径方向成分の射影除去"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "δ",
+      "λ"
+    ],
+    "tasks": [
+      "vision"
+    ]
+  }
+}

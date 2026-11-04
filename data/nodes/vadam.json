@@ -1,0 +1,46 @@
+{
+  "id": "vadam",
+  "name": "Vadam (Variational Adam)",
+  "short_name": "Vadam",
+  "year": 2018,
+  "citations": 350,
+  "categories": [
+    "ベイズ推論",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/1806.04854",
+  "summary": "平均場ガウス変分推論の自然勾配法による更新が，重みに雑音を加えて勾配を評価するAdamの更新と同じ形で書けることを示し，Adamの実装をわずかに変更するだけで変分推論を行う手法である．2次モーメントが事後分布の精度（分散の逆数）の推定に対応し，不確実性の推定を安価に得られる．",
+  "update_rule": "\\boldsymbol\\sigma_t = \\frac{1}{\\sqrt{N {\\mathbf s}_t + \\tilde\\lambda}}, \\quad {\\mathbf w} \\sim \\mathcal{N}(\\boldsymbol\\mu_t, \\boldsymbol\\sigma_t^2), \\quad {\\mathbf g} = \\nabla f({\\mathbf w}), \\quad {\\mathbf m}_{t+1} = \\beta_1 {\\mathbf m}_t + (1 - \\beta_1) ({\\mathbf g} + \\tilde\\lambda \\boldsymbol\\mu_t / N), \\quad {\\mathbf s}_{t+1} = \\beta_2 {\\mathbf s}_t + (1 - \\beta_2) {\\mathbf g}^2, \\quad \\boldsymbol\\mu_{t+1} = \\boldsymbol\\mu_t - \\alpha \\frac{\\hat{\\mathbf m}_{t+1}}{\\sqrt{\\hat{\\mathbf s}_{t+1}} + \\tilde\\lambda / N}",
+  "parents": [
+    {
+      "id": "adam",
+      "types": [
+        "problem_transfer",
+        "flatness"
+      ],
+      "improvement": "重みへの雑音の付加による変分推論への拡張（2次モーメントの事後精度としての解釈）"
+    },
+    {
+      "id": "natural_gradient",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "変分分布のパラメータに対する自然勾配の近似"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "λ̃"
+    ],
+    "tasks": [
+      "bayes"
+    ]
+  }
+}

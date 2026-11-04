@@ -1,0 +1,36 @@
+{
+  "id": "gradnorm",
+  "name": "GradNorm",
+  "short_name": "GradNorm",
+  "year": 2017,
+  "citations": 1800,
+  "categories": [
+    "マルチタスク・多目的",
+    "学習安定化"
+  ],
+  "reference": "https://arxiv.org/abs/1711.02257",
+  "summary": "マルチタスク学習において，各タスクの損失の重みを，共有層に関する各タスクの勾配のノルムが，そのタスクの相対的な学習の進み具合に応じた目標値に揃うように勾配法で動的に調整する手法である．学習の遅いタスクの勾配を大きくすることで，タスク間の学習速度の不均衡を解消する．",
+  "update_rule": "G_k = \\|\\nabla_{{\\mathbf W}} \\, \\alpha_k f_k\\|, \\quad r_k = \\frac{\\tilde f_k}{\\mathbb{E}_j[\\tilde f_j]}, \\;\\; \\tilde f_k = \\frac{f_k(t)}{f_k(0)}, \\quad \\mathcal{L}_{\\mathrm{grad}} = \\sum_{k} \\left| G_k - \\bar G \\cdot r_k^{\\alpha} \\right|_1, \\quad \\alpha_k \\leftarrow \\alpha_k - \\eta_\\alpha \\nabla_{\\alpha_k} \\mathcal{L}_{\\mathrm{grad}}",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "problem_transfer",
+        "adaptive"
+      ],
+      "improvement": "タスクごとの勾配ノルムの均衡化によるタスク重みの動的な調整"
+    }
+  ],
+  "practical": {
+    "state": "na",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "α"
+    ],
+    "tasks": [
+      "multitask"
+    ]
+  }
+}

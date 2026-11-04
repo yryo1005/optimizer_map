@@ -1,0 +1,45 @@
+{
+  "id": "zo_adamm",
+  "name": "ZO-AdaMM (Zeroth-Order Adaptive Momentum Method)",
+  "short_name": "ZO-AdaMM",
+  "year": 2019,
+  "citations": 150,
+  "categories": [
+    "ゼロ次手法",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/1910.06513",
+  "summary": "ゼロ次の勾配推定値を用いてAdam型の適応的な慣性項付きの更新を行う手法である．ゼロ次の推定値は分散が大きいため，AMSGrad型の2次モーメントの最大値と，マハラノビス距離に基づく射影を組み合わせて収束を保証し，ブラックボックスな敵対的攻撃の生成などで有効性を示した．",
+  "update_rule": "\\hat{\\mathbf g}_t = \\mathrm{ZO\\text{-}estimate}(f, {\\mathbf w}_t), \\quad {\\mathbf m}_t = \\beta_1 {\\mathbf m}_{t-1} + (1 - \\beta_1) \\hat{\\mathbf g}_t, \\quad {\\mathbf v}_t = \\beta_2 {\\mathbf v}_{t-1} + (1 - \\beta_2) \\hat{\\mathbf g}_t^2, \\quad \\hat{\\mathbf v}_t = \\max(\\hat{\\mathbf v}_{t-1}, {\\mathbf v}_t), \\quad {\\mathbf w}_{t+1} = \\Pi_{\\mathcal{X}, \\sqrt{\\hat{\\mathbf V}_t}}\\left( {\\mathbf w}_t - \\eta \\hat{\\mathbf V}_t^{-1/2} {\\mathbf m}_t \\right)",
+  "parents": [
+    {
+      "id": "zo_sgd",
+      "types": [
+        "momentum",
+        "adaptive"
+      ],
+      "improvement": "ゼロ次の勾配推定値への適応的な慣性項付き更新の適用"
+    },
+    {
+      "id": "amsgrad",
+      "types": [
+        "adaptive",
+        "stabilization"
+      ],
+      "improvement": "2次モーメントの最大値による収束保証"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "μ"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

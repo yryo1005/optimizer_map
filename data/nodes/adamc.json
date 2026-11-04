@@ -1,0 +1,37 @@
+{
+  "id": "adamc",
+  "name": "AdamC (Corrected Weight Decay)",
+  "short_name": "AdamC",
+  "year": 2025,
+  "citations": 20,
+  "categories": [
+    "正則化",
+    "学習安定化"
+  ],
+  "reference": "https://arxiv.org/abs/2506.02285",
+  "summary": "大規模言語モデルの学習終盤に勾配ノルムが急増する現象が，重み減衰・正規化層・学習率スケジュールの意図しない相互作用によって生じることを示し，正規化層の後に続く重みについて，重み減衰の係数を学習率に比例させて補正する手法である．勾配ノルムの急増を解消し，学習全体を通じて損失を改善する．",
+  "update_rule": "\\lambda_t = \\lambda \\frac{\\eta_t}{\\eta_{\\max}}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta_t \\left( \\frac{\\hat{\\mathbf m}_t}{\\sqrt{\\hat{\\mathbf v}_t} + \\epsilon} + \\lambda_t {\\mathbf w}_t \\right) \\quad (\\text{正規化層の後の重みに適用})",
+  "parents": [
+    {
+      "id": "adamw",
+      "types": [
+        "regularization",
+        "lr_automation"
+      ],
+      "improvement": "学習率スケジュールに比例した重み減衰係数の補正"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "λ"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  }
+}

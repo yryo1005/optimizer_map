@@ -1,0 +1,36 @@
+{
+  "id": "extragradient",
+  "name": "Extragradient法 (Extragradient Method)",
+  "short_name": "Extragradient法",
+  "year": 1976,
+  "citations": 3000,
+  "categories": [
+    "ミニマックス最適化"
+  ],
+  "reference": "https://cs.uwaterloo.ca/~y328yu/classics/extragrad.pdf",
+  "summary": "鞍点問題や変分不等式において，現在の点で勾配ステップを行って先読みの点を求め，その先読みの点での勾配を用いて元の点から更新する2段階の手法である．単純な勾配降下・上昇法が双線形な鞍点問題で振動・発散するのに対し，先読みにより回転する力学を打ち消して収束する．GANの学習の安定化に再び注目された．",
+  "update_rule": "{\\mathbf z}_{t+1/2} = {\\mathbf z}_t - \\eta \\, F({\\mathbf z}_t), \\quad {\\mathbf z}_{t+1} = {\\mathbf z}_t - \\eta \\, F({\\mathbf z}_{t+1/2}), \\quad F({\\mathbf x}, {\\mathbf y}) = (\\nabla_{\\mathbf x} f, \\, -\\nabla_{\\mathbf y} f)",
+  "parents": [
+    {
+      "id": "gd",
+      "types": [
+        "problem_transfer",
+        "momentum"
+      ],
+      "improvement": "鞍点問題に対する先読み点での勾配評価による2段階の更新"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η"
+    ],
+    "tasks": [
+      "game"
+    ]
+  },
+  "notes": "Korpelevich（1976, Ekonomika i Matematicheskie Metody）の論文の英訳スキャンを参照した．"
+}

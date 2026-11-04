@@ -1,0 +1,45 @@
+{
+  "id": "natural_gradient",
+  "name": "自然勾配法 (Natural Gradient Descent)",
+  "short_name": "自然勾配法",
+  "year": 1998,
+  "citations": 4500,
+  "categories": [
+    "2次手法"
+  ],
+  "reference": "https://doi.org/10.1162/089976698300017746",
+  "summary": "パラメータ空間をユークリッド空間ではなく，確率モデルの分布間の距離（KLダイバージェンス）に基づくリーマン多様体とみなし，その上での最急降下方向に沿って更新する手法である．フィッシャー情報行列の逆行列で勾配を変換することで，モデルのパラメータ化の仕方に依存しない更新が得られる．",
+  "update_rule": "{\\mathbf F}({\\mathbf w}) = \\mathbb{E}\\left[ \\nabla \\log p({\\mathbf x} | {\\mathbf w}) \\nabla \\log p({\\mathbf x} | {\\mathbf w})^\\top \\right], \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\, {\\mathbf F}({\\mathbf w}_t)^{-1} \\nabla f_t({\\mathbf w}_t)",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "フィッシャー情報行列（分布空間の計量）による勾配の前処理"
+    },
+    {
+      "id": "newton",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "ヘッセ行列のフィッシャー情報行列（常に半正定値）による置き換え"
+    }
+  ],
+  "practical": {
+    "state": "matrix",
+    "implementations": [],
+    "hyperparameters": [
+      "η",
+      "ダンピング"
+    ],
+    "tasks": [
+      "general"
+    ]
+  },
+  "deep_dive": {
+    "why": "パラメータ空間の距離を分布の KL ダイバージェンスで測るため，パラメータ化に依存しない更新となり，プラトーからの脱出が速い．",
+    "weaknesses": "フィッシャー情報行列の計算と逆行列が非常に重く，近似（K-FAC 等）が必要である．",
+    "settings": "実用上は K-FAC 等の近似で用い，ダンピング 1e-3〜1e-1．"
+  }
+}

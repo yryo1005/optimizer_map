@@ -1,0 +1,40 @@
+{
+  "id": "adamax",
+  "name": "AdaMax",
+  "short_name": "AdaMax",
+  "year": 2014,
+  "citations": null,
+  "categories": [
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/1412.6980",
+  "summary": "Adamの2次モーメントがL2ノルムに基づく勾配のスケーリングであることに着目し，これをL∞ノルム（過去の勾配の絶対値の指数重み付き最大値）に一般化した手法である．最大値演算を用いるため2次モーメントのバイアス補正が不要であり，数値的に安定した更新が得られる．",
+  "update_rule": "{\\mathbf m}_t = \\beta_1 {\\mathbf m}_{t-1} + (1 - \\beta_1) \\nabla f_t({\\mathbf w}_t), \\quad {\\mathbf u}_t = \\max(\\beta_2 {\\mathbf u}_{t-1}, |\\nabla f_t({\\mathbf w}_t)|), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\frac{\\eta}{1 - \\beta_1^t} \\frac{{\\mathbf m}_t}{{\\mathbf u}_t}",
+  "parents": [
+    {
+      "id": "adam",
+      "types": [
+        "adaptive",
+        "reinterpretation"
+      ],
+      "improvement": "2次モーメントのL∞ノルム（指数重み付き最大値）への一般化"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "pytorch",
+      "optax",
+      "keras"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2"
+    ],
+    "tasks": [
+      "general"
+    ]
+  },
+  "notes": "Adamと同一論文（Kingma & Ba, 2014）で提案されたため，独立したCitation数は存在しない（null）．表示時は既定サイズ等で扱うこと．"
+}

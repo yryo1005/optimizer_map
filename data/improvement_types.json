@@ -1,0 +1,17 @@
+[
+  {"id": "momentum", "label": "慣性項・加速", "badge": "M", "description": "慣性項（過去の更新方向の蓄積），Nesterov型の先読み，外挿などによる加速"},
+  {"id": "adaptive", "label": "適応的スケーリング", "badge": "A", "description": "勾配の統計量（2次モーメント等）によるパラメータ・層ごとの学習率の調整"},
+  {"id": "curvature", "label": "曲率・前処理", "badge": "C", "description": "ヘッセ行列・フィッシャー情報行列・行列前処理など曲率情報の利用"},
+  {"id": "normalization", "label": "符号化・正規化・直交化", "badge": "N", "description": "勾配や更新量の符号化，ノルムによる正規化，直交化"},
+  {"id": "regularization", "label": "正則化・重み減衰", "badge": "R", "description": "重み減衰，近接項，L1/L2正則化などの導入・改良"},
+  {"id": "averaging", "label": "重みの平均化・補間", "badge": "Av", "description": "反復列・重みの平均，遅い重みとの補間"},
+  {"id": "variance_reduction", "label": "分散低減", "badge": "VR", "description": "制御変量・再帰的推定などによる確率的勾配の分散の低減"},
+  {"id": "compression", "label": "圧縮・量子化・低ランク", "badge": "Q", "description": "状態量や勾配の量子化・低ランク近似・因子分解・射影によるメモリ・通信の削減"},
+  {"id": "stabilization", "label": "クリッピング・安定化", "badge": "S", "description": "クリッピング，スパイク抑制，上下限などによる学習の安定化"},
+  {"id": "lr_automation", "label": "学習率の自動化・スケジュール", "badge": "LR", "description": "学習率やそのスケジュールの自動設定・設計"},
+  {"id": "communication", "label": "分散化・通信削減", "badge": "D", "description": "並列・分散・連合学習への拡張や通信の削減"},
+  {"id": "flatness", "label": "平坦化・雑音", "badge": "F", "description": "鋭さの抑制，摂動・雑音の付加による平坦な解の探索"},
+  {"id": "stochastic", "label": "確率化・部分化", "badge": "St", "description": "ミニバッチ・座標・サンプル・関数値などを確率的・部分的に用いる近似"},
+  {"id": "reinterpretation", "label": "理論的再解釈・一般化", "badge": "T", "description": "既存手法の理論的な再解釈，枠組みの一般化，解析の改良"},
+  {"id": "problem_transfer", "label": "問題設定への適用", "badge": "P", "description": "強化学習・ゲーム・連合学習・多目的・プライバシーなど別の問題設定への適用"}
+]

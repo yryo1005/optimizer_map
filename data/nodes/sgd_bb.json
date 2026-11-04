@@ -1,0 +1,41 @@
+{
+  "id": "sgd_bb",
+  "name": "SGD-BB / SVRG-BB",
+  "short_name": "SGD-BB",
+  "year": 2016,
+  "citations": 250,
+  "categories": [
+    "学習率自動調整",
+    "勾配分散低減"
+  ],
+  "reference": "https://arxiv.org/abs/1605.04131",
+  "summary": "Barzilai-Borwein法のステップ幅を確率的勾配法に適用するため，SVRGの外側ループ（エポック）ごとに，基準点の変化量と全勾配の変化量からBBステップ幅を計算する手法である．学習率の事前設定や減衰スケジュールなしに，調整済みの学習率を用いたSVRGやSGDと同等の性能を示す．",
+  "update_rule": "\\eta_k = \\frac{1}{m} \\frac{\\|\\tilde{\\mathbf w}_k - \\tilde{\\mathbf w}_{k-1}\\|^2}{(\\tilde{\\mathbf w}_k - \\tilde{\\mathbf w}_{k-1})^\\top (\\nabla F(\\tilde{\\mathbf w}_k) - \\nabla F(\\tilde{\\mathbf w}_{k-1}))}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta_k \\left( \\nabla f_{i_t}({\\mathbf w}_t) - \\nabla f_{i_t}(\\tilde{\\mathbf w}_k) + \\nabla F(\\tilde{\\mathbf w}_k) \\right)",
+  "parents": [
+    {
+      "id": "barzilai_borwein",
+      "types": [
+        "lr_automation",
+        "stochastic"
+      ],
+      "improvement": "エポックごとの基準点を用いたBBステップ幅の確率的設定への適用"
+    },
+    {
+      "id": "svrg",
+      "types": [
+        "variance_reduction"
+      ],
+      "improvement": "分散低減した勾配推定との組み合わせ"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [],
+    "hyperparameters": [
+      "m（エポック長）"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

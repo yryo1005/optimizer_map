@@ -1,0 +1,52 @@
+{
+  "id": "dp_sgd",
+  "name": "DP-SGD (Differentially Private SGD)",
+  "short_name": "DP-SGD",
+  "year": 2016,
+  "citations": 7000,
+  "categories": [
+    "差分プライバシー",
+    "学習安定化"
+  ],
+  "reference": "https://arxiv.org/abs/1607.00133",
+  "summary": "学習データの個々のサンプルに関する情報が学習済みモデルから漏れないよう，差分プライバシーを保証しながら深層学習を行う手法である．サンプルごとの勾配のノルムを閾値でクリッピングして1サンプルの影響を有界にし，集約した勾配にガウス雑音を加えて更新する．プライバシー損失の累積はモーメントアカウンタントで厳密に評価する．",
+  "update_rule": "{\\mathbf g}_i = \\nabla f_i({\\mathbf w}_t), \\quad \\bar{\\mathbf g}_i = {\\mathbf g}_i \\Big/ \\max\\left( 1, \\frac{\\|{\\mathbf g}_i\\|}{C} \\right), \\quad \\tilde{\\mathbf g}_t = \\frac{1}{|B|} \\left( \\sum_{i \\in B} \\bar{\\mathbf g}_i + \\mathcal{N}({\\mathbf 0}, \\sigma^2 C^2 {\\mathbf I}) \\right), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\tilde{\\mathbf g}_t",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "problem_transfer",
+        "flatness"
+      ],
+      "improvement": "ガウス雑音の付加による差分プライバシーの保証"
+    },
+    {
+      "id": "gradient_clipping",
+      "types": [
+        "stabilization",
+        "problem_transfer"
+      ],
+      "improvement": "サンプルごとの勾配クリッピングによる感度の有界化"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "optax",
+      "library"
+    ],
+    "hyperparameters": [
+      "C（クリップ閾値）",
+      "σ（雑音）",
+      "η"
+    ],
+    "tasks": [
+      "privacy"
+    ]
+  },
+  "deep_dive": {
+    "why": "サンプルごとの勾配をクリップして1サンプルの影響を有界にし，ガウス雑音を加えることで，学習済みモデルから個々のデータの有無を推測できないことを保証する．",
+    "weaknesses": "サンプルごとの勾配計算でメモリと計算が増え，雑音により精度が低下する．プライバシー予算の会計が必要である．",
+    "settings": "C=1.0 前後，雑音乗数 σ=0.5〜2，大きなバッチほど有利．Opacus（PyTorch）を用いる．"
+  }
+}

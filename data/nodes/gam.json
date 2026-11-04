@@ -1,0 +1,35 @@
+{
+  "id": "gam",
+  "name": "GAM (Gradient Norm Aware Minimization)",
+  "short_name": "GAM",
+  "year": 2023,
+  "citations": 100,
+  "categories": [
+    "平坦解探索"
+  ],
+  "reference": "https://arxiv.org/abs/2303.03108",
+  "summary": "SAMなどが最小化する近傍内の最悪ケースの損失（0次の平坦さ）は鋭さの指標として不十分であるとし，近傍内の勾配ノルムの最大値（1次の平坦さ）を損失に加えて最小化する手法である．勾配ノルムの最大値は確率的な勾配上昇とヘッセ行列とベクトルの積で近似し，SAMと組み合わせることでより平坦な解に到達する．",
+  "update_rule": "\\tilde f({\\mathbf w}) = f({\\mathbf w}) + \\alpha \\, \\rho \\max_{\\|\\boldsymbol\\epsilon\\| \\le \\rho} \\|\\nabla f({\\mathbf w} + \\boldsymbol\\epsilon)\\|, \\quad \\nabla \\|\\nabla f({\\mathbf w})\\| = \\frac{\\nabla^2 f({\\mathbf w}) \\nabla f({\\mathbf w})}{\\|\\nabla f({\\mathbf w})\\|}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\nabla \\tilde f({\\mathbf w}_t)",
+  "parents": [
+    {
+      "id": "sam",
+      "types": [
+        "flatness"
+      ],
+      "improvement": "近傍内の勾配ノルムの最大値（1次の平坦さ）の最小化"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "ρ",
+      "α"
+    ],
+    "tasks": [
+      "vision"
+    ]
+  }
+}

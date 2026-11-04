@@ -1,0 +1,41 @@
+{
+  "id": "muon_cubic_ns",
+  "name": "緩和3次Newton-Schulz版Muon (How Much Orthogonalization Does Muon Need?)",
+  "short_name": "Muon (3次NS)",
+  "year": 2026,
+  "citations": 3,
+  "categories": [
+    "2次手法"
+  ],
+  "reference": "https://arxiv.org/abs/2606.00371",
+  "summary": "Muonの学習品質は直交化（極分解）の精度に単調には依存しないことを示し，特異値を[0.7, 1.3]程度の帯域に収めればよいという緩和した目標の下で，係数を最悪ケースの特異値の下界から決める3次のNewton-Schulz反復を提案した研究である．5ステップの3次反復は，従来の5次の反復より少ない行列積で，約40億パラメータまでのモデルで同等の学習品質を示す．",
+  "update_rule": "{\\mathbf X}_{k+1} = a_k {\\mathbf X}_k + b_k {\\mathbf X}_k {\\mathbf X}_k^\\top {\\mathbf X}_k \\;\\; (k = 1, \\dots, 5), \\quad (a_k, b_k) : \\sigma_i({\\mathbf X}_5) \\in [0.7, 1.3] \\text{となるよう最悪ケースの下界から決定}, \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta {\\mathbf X}_5",
+  "parents": [
+    {
+      "id": "polar_express",
+      "types": [
+        "normalization"
+      ],
+      "improvement": "高精度な極分解から緩和した目標帯域への変更と3次反復による計算量の削減"
+    },
+    {
+      "id": "muon",
+      "types": [
+        "normalization",
+        "reinterpretation"
+      ],
+      "improvement": "直交化の精度と学習品質の関係の再検討"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [],
+    "hyperparameters": [
+      "η",
+      "μ"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  }
+}

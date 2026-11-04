@@ -1,0 +1,37 @@
+{
+  "id": "old_optimizer_new_norm",
+  "name": "Old Optimizer, New Norm (ノルムに基づく最急降下法としての再解釈)",
+  "short_name": "Old Optimizer, New Norm",
+  "year": 2024,
+  "citations": 60,
+  "categories": [
+    "2次手法"
+  ],
+  "reference": "https://arxiv.org/abs/2409.20325",
+  "summary": "Adam，Shampoo，Prodigyなどの手法は，指数移動平均を無効にすると，それぞれ特定のノルム（∞ノルム，スペクトルノルム等）の下での最急降下法に帰着することを示し，凸性を仮定しない1次手法として再解釈した研究である．ネットワーク内の役割に応じてテンソルごとに異なる作用素ノルムを割り当てる設計指針を示し，Muonの理論的な背景となった．",
+  "update_rule": "\\Delta {\\mathbf W} = \\arg\\min_{\\Delta} \\left\\{ \\langle {\\mathbf G}, \\Delta \\rangle + \\frac{\\lambda}{2} \\|\\Delta\\|^2 \\right\\} = -\\frac{\\|{\\mathbf G}\\|^{\\dagger}}{\\lambda} \\cdot \\mathrm{dual}({\\mathbf G}), \\quad \\|\\cdot\\| = \\|\\cdot\\|_{\\infty} \\Rightarrow \\mathrm{sign}({\\mathbf G}), \\quad \\|\\cdot\\| = \\|\\cdot\\|_{2 \\to 2} \\Rightarrow {\\mathbf U}{\\mathbf V}^\\top",
+  "parents": [
+    {
+      "id": "shampoo",
+      "types": [
+        "reinterpretation"
+      ],
+      "improvement": "累積なしのShampooのスペクトルノルムの下での最急降下法としての再解釈"
+    },
+    {
+      "id": "adam",
+      "types": [
+        "reinterpretation"
+      ],
+      "improvement": "慣性なしのAdamの∞ノルムの下での最急降下法（符号更新）としての再解釈"
+    }
+  ],
+  "practical": {
+    "state": "na",
+    "implementations": [],
+    "hyperparameters": [],
+    "tasks": [
+      "general"
+    ]
+  }
+}

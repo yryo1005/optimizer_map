@@ -1,0 +1,44 @@
+{
+  "id": "adopt",
+  "name": "ADOPT (Adaptive Gradient Method with the Optimal Convergence Rate)",
+  "short_name": "ADOPT",
+  "year": 2024,
+  "citations": 60,
+  "categories": [
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/2411.02853",
+  "summary": "Adamが収束しない原因が，現在の勾配と2次モーメントの推定値との相関にあることを指摘した手法である．2次モーメントの推定から現在の勾配を除外し（1ステップ前の推定値で正規化し），さらに正規化を慣性項の計算より前に行うよう順序を入れ替えることで，β2の値によらず最適な収束率を達成する．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad {\\mathbf m}_t = \\beta_1 {\\mathbf m}_{t-1} + (1 - \\beta_1) \\frac{{\\mathbf g}_t}{\\max(\\sqrt{{\\mathbf v}_{t-1}}, \\epsilon)}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\, {\\mathbf m}_t, \\quad {\\mathbf v}_t = \\beta_2 {\\mathbf v}_{t-1} + (1 - \\beta_2) {\\mathbf g}_t^2",
+  "parents": [
+    {
+      "id": "adam",
+      "types": [
+        "adaptive",
+        "reinterpretation"
+      ],
+      "improvement": "2次モーメントからの現在の勾配の除外と，正規化・慣性項の計算順序の入れ替え"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "ε"
+    ],
+    "tasks": [
+      "general",
+      "llm"
+    ]
+  },
+  "deep_dive": {
+    "why": "現在の勾配を2次モーメントの推定から除外し，正規化を慣性項より前に行うことで，Adam の収束の問題を β2 の値によらず解消する．",
+    "weaknesses": "学習初期の正規化の分母が小さく不安定になりやすいため，クリッピングが推奨される．",
+    "settings": "η=1e-3，β1=0.9，β2=0.9999，ε=1e-6，学習初期の正規化された勾配のクリップ．"
+  }
+}

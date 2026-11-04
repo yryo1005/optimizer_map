@@ -1,0 +1,42 @@
+{
+  "id": "cautious_wd",
+  "name": "慎重な重み減衰 (Cautious Weight Decay)",
+  "short_name": "Cautious WD",
+  "year": 2025,
+  "citations": 10,
+  "categories": [
+    "正則化"
+  ],
+  "reference": "https://arxiv.org/abs/2510.12402",
+  "summary": "分離型の重み減衰を全パラメータに一様に適用するのではなく，最適化手法の更新方向とパラメータの符号が一致する座標にのみ適用する，1行の修正で任意の最適化手法に使える手法である．元の損失関数を正則化された代理問題に置き換えることなく，AdamW，Lion，Muonのいずれでも最終的な検証損失と精度を改善する．",
+  "update_rule": "{\\mathbf u}_t = \\mathrm{Optimizer}({\\mathbf g}_t), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta_t \\left( {\\mathbf u}_t + \\lambda \\, \\mathbb{1}[{\\mathbf u}_t \\odot {\\mathbf w}_t > 0] \\odot {\\mathbf w}_t \\right)",
+  "parents": [
+    {
+      "id": "cautious",
+      "types": [
+        "regularization",
+        "normalization"
+      ],
+      "improvement": "符号の一致に基づくマスクの重み減衰への適用"
+    },
+    {
+      "id": "adamw",
+      "types": [
+        "regularization"
+      ],
+      "improvement": "分離型重み減衰の座標ごとの選択的な適用"
+    }
+  ],
+  "practical": {
+    "state": "na",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "λ"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  }
+}

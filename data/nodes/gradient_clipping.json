@@ -1,0 +1,41 @@
+{
+  "id": "gradient_clipping",
+  "name": "勾配クリッピング (Gradient Norm Clipping)",
+  "short_name": "勾配クリッピング",
+  "year": 2012,
+  "citations": 6000,
+  "categories": [
+    "学習安定化"
+  ],
+  "reference": "https://arxiv.org/abs/1211.5063",
+  "summary": "勾配のノルムが閾値を超えた場合に，方向を保ったまま閾値までノルムを縮小する手法である．再帰型ニューラルネットワークの学習で生じる勾配爆発による不安定な更新を防ぐために提案され，現在ではTransformerを含む深層学習全般で標準的に用いられている．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad \\tilde{\\mathbf g}_t = \\min\\left( 1, \\frac{c}{\\|{\\mathbf g}_t\\|} \\right) {\\mathbf g}_t, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\tilde{\\mathbf g}_t",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "stabilization"
+      ],
+      "improvement": "勾配ノルムの上限による勾配爆発の抑制"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "pytorch",
+      "optax",
+      "keras"
+    ],
+    "hyperparameters": [
+      "c（閾値）"
+    ],
+    "tasks": [
+      "general"
+    ]
+  },
+  "deep_dive": {
+    "why": "勾配ノルムの上限を設けることで，勾配爆発やまれな大きな勾配による一度の過大な更新を防ぐ．",
+    "weaknesses": "閾値が小さすぎると実質的に学習率が下がる．Adam 系の手法では効果が限定的な場合がある．",
+    "settings": "全体のノルムで c=1.0 が LLM 事前学習の定番（RNN では 0.25〜5）．"
+  }
+}

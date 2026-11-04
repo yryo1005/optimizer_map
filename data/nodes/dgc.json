@@ -1,0 +1,37 @@
+{
+  "id": "dgc",
+  "name": "DGC (Deep Gradient Compression)",
+  "short_name": "DGC",
+  "year": 2017,
+  "citations": 1500,
+  "categories": [
+    "分散学習"
+  ],
+  "reference": "https://arxiv.org/abs/1712.01887",
+  "summary": "分散学習で各ワーカーが送信する勾配のうち，大きさが上位の成分（0.1%程度）のみを送信し，残りはローカルに蓄積して後のステップで送信する勾配の疎化手法である．蓄積に伴う慣性項のずれを補正する慣性項補正や，局所的な勾配クリッピング等を組み合わせ，精度を落とさずに通信量を数百分の1に削減する．",
+  "update_rule": "{\\mathbf u}^k_t = \\mu {\\mathbf u}^k_{t-1} + {\\mathbf g}^k_t, \\quad {\\mathbf v}^k_t = {\\mathbf v}^k_{t-1} + {\\mathbf u}^k_t, \\quad \\text{送信} : \\mathrm{top}_k({\\mathbf v}^k_t), \\quad {\\mathbf v}^k_t \\leftarrow {\\mathbf v}^k_t \\odot \\neg \\mathrm{mask}, \\;\\; {\\mathbf u}^k_t \\leftarrow {\\mathbf u}^k_t \\odot \\neg \\mathrm{mask}",
+  "parents": [
+    {
+      "id": "momentum",
+      "types": [
+        "compression",
+        "communication"
+      ],
+      "improvement": "慣性項補正を伴う上位成分のみの送信とローカルでの残差蓄積"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "μ",
+      "疎化率"
+    ],
+    "tasks": [
+      "distributed"
+    ]
+  }
+}

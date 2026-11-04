@@ -1,0 +1,33 @@
+{
+  "id": "ad_psgd",
+  "name": "AD-PSGD (Asynchronous Decentralized Parallel SGD)",
+  "short_name": "AD-PSGD",
+  "year": 2017,
+  "citations": 600,
+  "categories": [
+    "分散学習"
+  ],
+  "reference": "https://arxiv.org/abs/1710.06952",
+  "summary": "中央サーバーを持たない分散SGD（D-PSGD）を非同期化し，各ワーカーが他のワーカーの終了を待たずに，ランダムに選んだ近傍のワーカーとのみパラメータを平均する手法である．同期の待ち時間や遅いワーカーの影響を受けにくく，異質な計算環境で高いスループットと収束性を両立する．",
+  "update_rule": "{\\mathbf g}^{k} = \\nabla f_k(\\hat{\\mathbf w}^{k}) \\;\\; (\\text{古い可能性のあるパラメータ}), \\quad j \\sim \\mathcal{N}(k), \\quad {\\mathbf w}^{k}, {\\mathbf w}^{j} \\leftarrow \\frac{{\\mathbf w}^{k} + {\\mathbf w}^{j}}{2}, \\quad {\\mathbf w}^{k} \\leftarrow {\\mathbf w}^{k} - \\eta {\\mathbf g}^{k}",
+  "parents": [
+    {
+      "id": "dpsgd",
+      "types": [
+        "communication"
+      ],
+      "improvement": "非同期なペアごとのゴシップ平均"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [],
+    "hyperparameters": [
+      "η",
+      "混合行列"
+    ],
+    "tasks": [
+      "distributed"
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "bfgs",
+  "name": "BFGS法 (Broyden-Fletcher-Goldfarb-Shanno Method)",
+  "short_name": "BFGS法",
+  "year": 1970,
+  "citations": 5000,
+  "categories": [
+    "2次手法"
+  ],
+  "reference": "https://doi.org/10.1093/comjnl/13.3.317",
+  "summary": "ヘッセ行列を直接計算せず，反復ごとのパラメータの変化量と勾配の変化量から，ヘッセ行列の逆行列の近似を逐次的に更新する準ニュートン法である．近似行列の正定値性を保つランク2の更新式により，ニュートン法に近い超1次収束を，勾配の計算のみで実現する．",
+  "update_rule": "{\\mathbf s}_t = {\\mathbf w}_{t+1} - {\\mathbf w}_t, \\quad {\\mathbf y}_t = \\nabla f({\\mathbf w}_{t+1}) - \\nabla f({\\mathbf w}_t), \\quad \\rho_t = \\frac{1}{{\\mathbf y}_t^\\top {\\mathbf s}_t}, \\quad {\\mathbf H}_{t+1} = ({\\mathbf I} - \\rho_t {\\mathbf s}_t {\\mathbf y}_t^\\top) {\\mathbf H}_t ({\\mathbf I} - \\rho_t {\\mathbf y}_t {\\mathbf s}_t^\\top) + \\rho_t {\\mathbf s}_t {\\mathbf s}_t^\\top, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta_t {\\mathbf H}_t \\nabla f({\\mathbf w}_t)",
+  "parents": [
+    {
+      "id": "newton",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "パラメータと勾配の変化量によるヘッセ逆行列の逐次近似（準ニュートン法）"
+    },
+    {
+      "id": "dfp",
+      "types": [
+        "curvature",
+        "stabilization"
+      ],
+      "improvement": "双対的なランク2更新式による正定値性と数値安定性の改善"
+    }
+  ],
+  "practical": {
+    "state": "matrix",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "直線探索の設定"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  },
+  "notes": "Broyden，Fletcher，Goldfarb，Shannoの4本の論文（いずれも1970年）で独立に提案された．参考文献はFletcherの論文を代表とし，Citation数も代表値の概算である．"
+}

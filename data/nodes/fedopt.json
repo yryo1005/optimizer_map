@@ -1,0 +1,55 @@
+{
+  "id": "fedopt",
+  "name": "FedOpt (Adaptive Federated Optimization: FedAdam / FedYogi / FedAdagrad)",
+  "short_name": "FedOpt",
+  "year": 2020,
+  "citations": 1500,
+  "categories": [
+    "分散学習",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/2003.00295",
+  "summary": "FedAvgのサーバー側の集約を，クライアントのパラメータ変化量の平均を「擬似勾配」とみなした最適化の1ステップとして一般化し，サーバー側にAdam，Yogi，AdaGradなどの適応的な最適化手法を用いる枠組みである．クライアントとサーバーで異なる最適化手法を使い分けることで，連合学習の収束と性能を改善する．",
+  "update_rule": "\\Delta_t = \\frac{1}{|S|} \\sum_{k \\in S} ({\\mathbf w}^{k}_{t} - {\\mathbf w}_t), \\quad {\\mathbf m}_t = \\beta_1 {\\mathbf m}_{t-1} + (1 - \\beta_1) \\Delta_t, \\quad {\\mathbf v}_t = \\beta_2 {\\mathbf v}_{t-1} + (1 - \\beta_2) \\Delta_t^2, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t + \\eta \\frac{{\\mathbf m}_t}{\\sqrt{{\\mathbf v}_t} + \\tau}",
+  "parents": [
+    {
+      "id": "fedavg",
+      "types": [
+        "reinterpretation",
+        "communication"
+      ],
+      "improvement": "サーバー側の集約の擬似勾配による最適化ステップへの一般化"
+    },
+    {
+      "id": "adam",
+      "types": [
+        "adaptive",
+        "communication"
+      ],
+      "improvement": "サーバー側の最適化手法としての適応的学習率手法の利用"
+    },
+    {
+      "id": "yogi",
+      "types": [
+        "adaptive",
+        "communication"
+      ],
+      "improvement": "サーバー側の最適化手法としてのYogiの利用"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "サーバーη",
+      "β1",
+      "β2",
+      "τ"
+    ],
+    "tasks": [
+      "distributed"
+    ]
+  }
+}

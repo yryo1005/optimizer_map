@@ -1,0 +1,42 @@
+{
+  "id": "modular_duality",
+  "name": "モジュラー双対化 (Modular Duality)",
+  "short_name": "モジュラー双対化",
+  "year": 2024,
+  "citations": 40,
+  "categories": [
+    "2次手法"
+  ],
+  "reference": "https://arxiv.org/abs/2410.21265",
+  "summary": "層の意味に基づいて各層に作用素ノルムを割り当て，それらを再帰的に組み合わせてネットワーク全体の重み空間上の双対写像（勾配を更新量に変換する写像）を構成する手順を提案した研究である．勾配を正しい幾何で双対化することで学習率がモデルの幅や深さの間で転移し，その一実装はNanoGPTの学習速度記録の更新に用いられた．",
+  "update_rule": "\\Delta {\\mathbf W} = -\\eta \\, \\mathrm{dualize}_{\\mathcal{M}}(\\nabla f), \\quad \\|{\\mathbf W}\\|_{\\mathcal{M}} = \\max_\\ell \\, s_\\ell \\|{\\mathbf W}_\\ell\\|_{\\ell} \\;\\; (\\text{モジュラーノルム}), \\quad \\text{Linear} : \\|\\cdot\\|_{\\mathrm{RMS} \\to \\mathrm{RMS}} \\Rightarrow \\sqrt{d_{\\mathrm{out}}/d_{\\mathrm{in}}} \\, {\\mathbf U}{\\mathbf V}^\\top",
+  "parents": [
+    {
+      "id": "old_optimizer_new_norm",
+      "types": [
+        "reinterpretation",
+        "normalization"
+      ],
+      "improvement": "層ごとのノルムの再帰的な合成による全体の双対写像の構成"
+    },
+    {
+      "id": "mup",
+      "types": [
+        "reinterpretation"
+      ],
+      "improvement": "幅に対する更新量のスケーリングのノルムによる一般化"
+    }
+  ],
+  "practical": {
+    "state": "na",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  }
+}

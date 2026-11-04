@@ -1,0 +1,40 @@
+{
+  "id": "singd",
+  "name": "SINGD (Structured Inverse-Free Natural Gradient Descent)",
+  "short_name": "SINGD",
+  "year": 2023,
+  "citations": 40,
+  "categories": [
+    "2次手法",
+    "メモリ効率"
+  ],
+  "reference": "https://arxiv.org/abs/2312.05705",
+  "summary": "K-FACの逆行列計算をクロネッカー因子の逆行列の行列対数空間での引き算による直接更新に置き換えた逆行列不要のK-FAC（IKFAC）に，対角・ブロック対角・低ランク・Toeplitz等の構造を課すことで，メモリ効率と数値安定性を改善した手法である．半精度でもしばしばAdamWを上回る性能を示す．",
+  "update_rule": "{\\mathbf K} \\leftarrow {\\mathbf K} \\left( {\\mathbf I} - \\frac{\\beta_1}{2} \\left( {\\mathbf K}^\\top {\\mathbf A} {\\mathbf K} + \\lambda {\\mathbf K}^\\top {\\mathbf K} - {\\mathbf I} \\right) \\right), \\;\\; {\\mathbf C} \\leftarrow \\cdots, \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta \\, {\\mathbf C}{\\mathbf C}^\\top \\nabla_{\\mathbf W} f \\, {\\mathbf K}{\\mathbf K}^\\top \\quad ({\\mathbf K}, {\\mathbf C} : \\text{構造化された因子})",
+  "parents": [
+    {
+      "id": "kfac",
+      "types": [
+        "curvature",
+        "compression"
+      ],
+      "improvement": "逆行列不要な因子の直接更新と因子への構造の付与"
+    }
+  ],
+  "practical": {
+    "state": "matrix",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "ダンピング",
+      "因子の構造"
+    ],
+    "tasks": [
+      "vision",
+      "llm"
+    ]
+  },
+  "notes": "更新式は論文の手続きを簡略化した表記である．"
+}

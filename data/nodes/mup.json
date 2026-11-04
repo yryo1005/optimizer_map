@@ -1,0 +1,45 @@
+{
+  "id": "mup",
+  "name": "μP (Maximal Update Parametrization, μTransfer)",
+  "short_name": "μP",
+  "year": 2022,
+  "citations": 600,
+  "categories": [
+    "学習率スケジュール",
+    "学習率自動調整"
+  ],
+  "reference": "https://arxiv.org/abs/2203.03466",
+  "summary": "モデルの幅を大きくしても各層の特徴量の更新量が一定の大きさに保たれるように，層ごとの初期化の分散と学習率（SGDとAdamで異なる）を幅に応じてスケーリングするパラメータ化である．この下では最適な学習率などのハイパーパラメータが幅によらずほぼ一定となり，小さなモデルで調整した値を大規模モデルにそのまま転移できる．",
+  "update_rule": "\\text{(Adam)} \\;\\; \\eta_{\\ell} = \\begin{cases} \\eta & (\\text{入力層・バイアス}) \\\\ \\eta \\, / \\, \\mathrm{fan\\_in} & (\\text{隠れ層}) \\\\ \\eta \\, / \\, \\mathrm{fan\\_in} & (\\text{出力層，出力乗数 } 1/\\mathrm{fan\\_in}) \\end{cases}, \\quad {\\mathbf W}^\\ell_{t+1} = {\\mathbf W}^\\ell_t - \\eta_\\ell \\frac{\\hat{\\mathbf m}^\\ell_t}{\\sqrt{\\hat{\\mathbf v}^\\ell_t} + \\epsilon}",
+  "parents": [
+    {
+      "id": "adam",
+      "types": [
+        "lr_automation",
+        "adaptive"
+      ],
+      "improvement": "モデル幅に応じた層ごとの学習率のスケーリング"
+    },
+    {
+      "id": "sgd",
+      "types": [
+        "lr_automation",
+        "adaptive"
+      ],
+      "improvement": "モデル幅に応じた層ごとの学習率と初期化のスケーリング"
+    }
+  ],
+  "practical": {
+    "state": "na",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "基準幅"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  },
+  "notes": "Tensor Programs V（Yang et al., 2022）を参考文献とした．更新式はAdamに対するスケーリング規則の簡略表記である．"
+}

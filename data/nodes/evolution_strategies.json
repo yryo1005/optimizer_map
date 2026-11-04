@@ -1,0 +1,38 @@
+{
+  "id": "evolution_strategies",
+  "name": "進化戦略 (Evolution Strategies as a Scalable Alternative to RL)",
+  "short_name": "進化戦略",
+  "year": 2017,
+  "citations": 2500,
+  "categories": [
+    "ゼロ次手法",
+    "分散学習"
+  ],
+  "reference": "https://arxiv.org/abs/1703.03864",
+  "summary": "パラメータにガウス雑音による摂動を加えた多数の個体の報酬（関数値）から，ガウス平滑化した目的関数の勾配を推定してパラメータを更新するゼロ次最適化手法を，強化学習に適用した研究である．各ワーカー間で共有した乱数シードにより，報酬のスカラー値のみを通信すればよく，数千のCPUで線形にスケールすることを示した．",
+  "update_rule": "\\boldsymbol\\epsilon_i \\sim \\mathcal{N}({\\mathbf 0}, {\\mathbf I}) \\;\\; (i = 1, \\dots, n), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t + \\eta \\frac{1}{n \\sigma} \\sum_{i=1}^{n} F({\\mathbf w}_t + \\sigma \\boldsymbol\\epsilon_i) \\, \\boldsymbol\\epsilon_i",
+  "parents": [
+    {
+      "id": "spsa",
+      "types": [
+        "stochastic",
+        "communication"
+      ],
+      "improvement": "ガウス平滑化による多数の摂動からの勾配推定と共有乱数シードによる大規模並列化"
+    }
+  ],
+  "practical": {
+    "state": "na",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "σ",
+      "η",
+      "個体数"
+    ],
+    "tasks": [
+      "rl"
+    ]
+  }
+}

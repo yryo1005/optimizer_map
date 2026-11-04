@@ -1,0 +1,30 @@
+{
+  "id": "snvrg",
+  "name": "SNVRG (Stochastic Nested Variance Reduced Gradient)",
+  "short_name": "SNVRG",
+  "year": 2018,
+  "citations": 200,
+  "categories": [
+    "勾配分散低減"
+  ],
+  "reference": "https://arxiv.org/abs/1806.07811",
+  "summary": "SVRGの単一の基準点の代わりに，異なる更新頻度を持つ複数の基準点を入れ子に保持し，それぞれの差分を用いて勾配推定の分散をより効率的に削減する手法である．非凸な有限和問題において，SVRGより少ない勾配計算回数で停留点に到達する．",
+  "update_rule": "{\\mathbf v}_t = \\nabla f_{I_0}({\\mathbf w}^{(0)}) + \\sum_{l=1}^{K} \\left( \\nabla f_{I_l}({\\mathbf w}^{(l)}) - \\nabla f_{I_l}({\\mathbf w}^{(l-1)}) \\right), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\, {\\mathbf v}_t \\quad ({\\mathbf w}^{(l)} : \\text{更新頻度の異なる基準点})",
+  "parents": [
+    {
+      "id": "svrg",
+      "types": [
+        "variance_reduction"
+      ],
+      "improvement": "更新頻度の異なる複数の入れ子の基準点による分散低減"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [],
+    "hyperparameters": [],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

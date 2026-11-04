@@ -1,0 +1,44 @@
+{
+  "id": "lars",
+  "name": "LARS (Layer-wise Adaptive Rate Scaling)",
+  "short_name": "LARS",
+  "year": 2017,
+  "citations": 1500,
+  "categories": [
+    "大規模バッチ",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/1708.03888",
+  "summary": "大規模なミニバッチで学習する際には学習率を大きくする必要があるが，層ごとに重みと勾配のノルムの比が大きく異なるため学習が不安定になる問題を解決する手法である．層ごとに重みのノルムと勾配のノルムの比に基づく局所的な学習率を導入することで，数万規模のバッチサイズでも畳み込みニューラルネットワークを安定に学習できる．",
+  "update_rule": "\\lambda^l = \\eta \\frac{\\|{\\mathbf w}^l_t\\|}{\\|\\nabla f_t({\\mathbf w}^l_t)\\| + \\beta \\|{\\mathbf w}^l_t\\|}, \\quad {\\mathbf v}^l_{t+1} = \\mu {\\mathbf v}^l_t + \\gamma_t \\lambda^l (\\nabla f_t({\\mathbf w}^l_t) + \\beta {\\mathbf w}^l_t), \\quad {\\mathbf w}^l_{t+1} = {\\mathbf w}^l_t - {\\mathbf v}^l_{t+1}",
+  "parents": [
+    {
+      "id": "momentum",
+      "types": [
+        "adaptive"
+      ],
+      "improvement": "層ごとの重みと勾配のノルム比に基づく局所的な学習率の導入"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "optax",
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "μ",
+      "β",
+      "信頼係数"
+    ],
+    "tasks": [
+      "vision"
+    ]
+  },
+  "deep_dive": {
+    "why": "層ごとの重みと勾配のノルム比で学習率を決めるため，層によって勾配の大きさが大きく異なっても，各層の相対的な更新量をそろえられる．",
+    "weaknesses": "Transformer では効果が小さく LAMB が用いられる．バイアスや正規化層のパラメータは除外する必要がある．",
+    "settings": "ResNet-50 でバッチ 32k，基準 η=0.1×(バッチ/256)，信頼係数 0.001，ウォームアップ 5エポック程度．"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "id": "sutskever_nag",
+  "name": "深層学習におけるNesterov慣性項 (Sutskever et al.)",
+  "short_name": "NAG for DL",
+  "year": 2013,
+  "citations": 6000,
+  "categories": [
+    "高速化"
+  ],
+  "reference": "https://proceedings.mlr.press/v28/sutskever13.html",
+  "summary": "適切な初期化と，徐々に大きくする慣性項の係数のスケジュールを組み合わせれば，慣性項付きSGD（特にNesterov型）だけで，Hessian-Free最適化と同等の性能で深いネットワークや再帰型ネットワークを学習できることを示した研究である．Nesterov法を慣性項付きSGDと同じ形に書き直した定式化は，深層学習フレームワークの標準実装となった．",
+  "update_rule": "{\\mathbf v}_{t+1} = \\mu_t {\\mathbf v}_t - \\eta \\nabla f_t({\\mathbf w}_t + \\mu_t {\\mathbf v}_t), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t + {\\mathbf v}_{t+1}, \\quad \\mu_t = \\min\\left( 1 - 2^{-1 - \\log_2(\\lfloor t/250 \\rfloor + 1)}, \\, \\mu_{\\max} \\right)",
+  "parents": [
+    {
+      "id": "nesterov",
+      "types": [
+        "momentum",
+        "lr_automation"
+      ],
+      "improvement": "慣性項付きSGD形式への書き直しと慣性項の係数のスケジュール"
+    },
+    {
+      "id": "hessian_free",
+      "types": [
+        "momentum",
+        "reinterpretation"
+      ],
+      "improvement": "2次手法と同等の性能の1次手法による達成"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "pytorch",
+      "keras"
+    ],
+    "hyperparameters": [
+      "η",
+      "μ_max"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

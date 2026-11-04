@@ -1,0 +1,40 @@
+{
+  "id": "downpour_sgd",
+  "name": "Downpour SGD (DistBelief)",
+  "short_name": "Downpour SGD",
+  "year": 2012,
+  "citations": 4500,
+  "categories": [
+    "分散学習"
+  ],
+  "reference": "https://papers.nips.cc/paper/4687-large-scale-distributed-deep-networks",
+  "summary": "パラメータサーバーにモデルのパラメータを分割して保持し，多数のモデルの複製（レプリカ）がそれぞれ異なるデータで非同期に勾配を計算・送信する分散学習法である．AdaGradの適応的学習率と組み合わせることで非同期更新の遅延に対して頑健になり，数万コアを用いた大規模な深層ネットワークの学習を可能にした．",
+  "update_rule": "\\text{レプリカ } k : \\;\\; {\\mathbf w}^{k} \\leftarrow \\mathrm{fetch}(\\text{PS}), \\quad {\\mathbf g}^{k} = \\nabla f_{B_k}({\\mathbf w}^{k}), \\quad \\text{PS} : \\; {\\mathbf w} \\leftarrow {\\mathbf w} - \\frac{\\eta}{\\sqrt{{\\mathbf r}} + \\epsilon} {\\mathbf g}^{k} \\;\\; (\\text{非同期，AdaGrad})",
+  "parents": [
+    {
+      "id": "hogwild",
+      "types": [
+        "communication"
+      ],
+      "improvement": "パラメータサーバーと多数のモデル複製による大規模な非同期化"
+    },
+    {
+      "id": "adagrad",
+      "types": [
+        "adaptive",
+        "communication"
+      ],
+      "improvement": "非同期更新の遅延に頑健な適応的学習率の利用"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [],
+    "hyperparameters": [
+      "η"
+    ],
+    "tasks": [
+      "distributed"
+    ]
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "id": "msam",
+  "name": "mSAM (Micro-batch Averaged SAM)",
+  "short_name": "mSAM",
+  "year": 2023,
+  "citations": 60,
+  "categories": [
+    "平坦解探索"
+  ],
+  "reference": "https://arxiv.org/abs/2302.09693",
+  "summary": "ミニバッチをさらに小さなマイクロバッチに分割し，各マイクロバッチで独立にSAMの摂動と勾配を計算して平均する手法である．データ並列のSAMで各デバイスの摂動を共有しない場合の効果の理論的な説明を与え，SAMより平坦な解と良い汎化性能を示す．",
+  "update_rule": "\\hat{\\boldsymbol\\epsilon}_j = \\rho \\frac{\\nabla f_{B_j}({\\mathbf w}_t)}{\\|\\nabla f_{B_j}({\\mathbf w}_t)\\|}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\frac{1}{m} \\sum_{j=1}^{m} \\nabla f_{B_j}({\\mathbf w}_t + \\hat{\\boldsymbol\\epsilon}_j) \\quad (B_j : \\text{マイクロバッチ})",
+  "parents": [
+    {
+      "id": "sam",
+      "types": [
+        "flatness"
+      ],
+      "improvement": "マイクロバッチごとの独立な摂動とその平均"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "ρ"
+    ],
+    "tasks": [
+      "vision"
+    ]
+  }
+}

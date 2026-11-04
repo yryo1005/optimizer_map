@@ -1,0 +1,36 @@
+{
+  "id": "muonbp",
+  "name": "MuonBP (Block-Periodic Orthogonalization)",
+  "short_name": "MuonBP",
+  "year": 2025,
+  "citations": 10,
+  "categories": [
+    "2次手法",
+    "分散学習"
+  ],
+  "reference": "https://arxiv.org/abs/2510.16981",
+  "summary": "テンソル並列等で分割された行列について，通常のステップでは各デバイスが保持するブロック（シャード）ごとに独立に直交化を行い，一定周期ごとにのみ全体を集めて完全な直交化を行う手法である．ブロック直交化と完全な直交化で異なる学習率を用いることで，Muonと同等の性能を保ちつつ通信コストを削減し，スループットを改善する．",
+  "update_rule": "{\\mathbf O}_t = \\begin{cases} \\mathrm{Orth}({\\mathbf M}_t) & (t \\bmod P = 0) \\\\ \\mathrm{blockdiag}\\left( \\mathrm{Orth}({\\mathbf M}_t^{(1)}), \\dots, \\mathrm{Orth}({\\mathbf M}_t^{(k)}) \\right) & (\\mathrm{otherwise}) \\end{cases}, \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta_{(t)} {\\mathbf O}_t",
+  "parents": [
+    {
+      "id": "muon",
+      "types": [
+        "communication"
+      ],
+      "improvement": "シャードごとのブロック直交化と周期的な完全直交化による通信削減"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [],
+    "hyperparameters": [
+      "ブロックη",
+      "全体η",
+      "P（周期）"
+    ],
+    "tasks": [
+      "llm",
+      "distributed"
+    ]
+  }
+}

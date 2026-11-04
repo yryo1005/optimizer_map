@@ -1,0 +1,45 @@
+{
+  "id": "signsgd",
+  "name": "signSGD / Signum",
+  "short_name": "signSGD / Signum",
+  "year": 2018,
+  "citations": 1500,
+  "categories": [
+    "符号ベース",
+    "大規模バッチ"
+  ],
+  "reference": "https://arxiv.org/abs/1802.04434",
+  "summary": "確率的勾配の各成分の符号のみを用いてパラメータを更新する手法であり，慣性項を加えたものはSignumと呼ばれる．勾配を1bitに圧縮できるため分散学習における通信量を大幅に削減でき，さらに勾配の雑音や曲率に関する一定の条件下ではSGDと同等の収束率を持つことが示されている．",
+  "update_rule": "{\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\, \\mathrm{sign}(\\nabla f_t({\\mathbf w}_t)), \\quad \\text{(Signum)} \\;\\; {\\mathbf m}_t = \\beta {\\mathbf m}_{t-1} + (1 - \\beta) \\nabla f_t({\\mathbf w}_t), \\;\\; {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\, \\mathrm{sign}({\\mathbf m}_t)",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "normalization",
+        "compression"
+      ],
+      "improvement": "勾配の符号のみを用いた更新（1bitへの勾配圧縮）"
+    },
+    {
+      "id": "rprop",
+      "types": [
+        "normalization",
+        "stochastic"
+      ],
+      "improvement": "ステップ幅適応を省いた符号ベース更新のミニバッチ学習への適用"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "optax"
+    ],
+    "hyperparameters": [
+      "η",
+      "β（Signum）"
+    ],
+    "tasks": [
+      "distributed"
+    ]
+  }
+}

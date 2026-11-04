@@ -1,0 +1,45 @@
+{
+  "id": "laprop",
+  "name": "LaProp",
+  "short_name": "LaProp",
+  "year": 2020,
+  "citations": 60,
+  "categories": [
+    "適応的学習率",
+    "学習安定化"
+  ],
+  "reference": "https://arxiv.org/abs/2002.04839",
+  "summary": "Adamでは慣性項の計算と2次モーメントによる正規化が不必要に結合しており，これが不安定性の原因になると指摘した手法である．勾配を先に2次モーメントで正規化し，その正規化された勾配に対して慣性項を計算する順序に変えることで，Adamが発散するようなハイパーパラメータでも安定に学習できる．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad {\\mathbf v}_t = \\beta_2 {\\mathbf v}_{t-1} + (1 - \\beta_2) {\\mathbf g}_t^2, \\quad {\\mathbf m}_t = \\beta_1 {\\mathbf m}_{t-1} + (1 - \\beta_1) \\frac{{\\mathbf g}_t}{\\sqrt{\\hat{\\mathbf v}_t} + \\epsilon}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\hat{\\mathbf m}_t",
+  "parents": [
+    {
+      "id": "adam",
+      "types": [
+        "momentum",
+        "stabilization"
+      ],
+      "improvement": "正規化と慣性項の計算順序の入れ替え（慣性項と適応性の分離）"
+    },
+    {
+      "id": "rmsprop",
+      "types": [
+        "momentum"
+      ],
+      "improvement": "RMSpropで正規化した勾配への慣性項の適用"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

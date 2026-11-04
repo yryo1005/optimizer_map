@@ -1,0 +1,46 @@
+{
+  "id": "agc",
+  "name": "AGC (Adaptive Gradient Clipping)",
+  "short_name": "AGC",
+  "year": 2021,
+  "citations": 1200,
+  "categories": [
+    "学習安定化",
+    "大規模バッチ"
+  ],
+  "reference": "https://arxiv.org/abs/2102.06171",
+  "summary": "勾配クリッピングの閾値を固定値ではなく，対応する重みのノルムとの比（ユニットごと）に基づいて適応的に決める手法である．バッチ正規化を用いないNFNetsにおいて，大きなバッチサイズと強いデータ拡張の下でも安定した学習を可能にした．",
+  "update_rule": "G^\\ell_i \\leftarrow \\begin{cases} \\lambda \\frac{\\|W^\\ell_i\\|^\\star}{\\|G^\\ell_i\\|} G^\\ell_i & \\left( \\frac{\\|G^\\ell_i\\|}{\\|W^\\ell_i\\|^\\star} > \\lambda \\right) \\\\ G^\\ell_i & (\\mathrm{otherwise}) \\end{cases}, \\quad \\|W^\\ell_i\\|^\\star = \\max(\\|W^\\ell_i\\|, \\epsilon)",
+  "parents": [
+    {
+      "id": "gradient_clipping",
+      "types": [
+        "stabilization",
+        "adaptive"
+      ],
+      "improvement": "重みのノルムとの比に基づくユニットごとの適応的な閾値"
+    },
+    {
+      "id": "lars",
+      "types": [
+        "adaptive",
+        "stabilization"
+      ],
+      "improvement": "重みと勾配のノルム比に基づく層・ユニットごとの制御"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "optax",
+      "library"
+    ],
+    "hyperparameters": [
+      "λ（クリップ比）"
+    ],
+    "tasks": [
+      "vision"
+    ]
+  },
+  "notes": "NFNets（High-Performance Large-Scale Image Recognition Without Normalization）の論文中で提案された．Citation数は論文全体の概算である．"
+}

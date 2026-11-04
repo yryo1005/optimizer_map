@@ -1,0 +1,33 @@
+{
+  "id": "dfp",
+  "name": "DFP法 (Davidon-Fletcher-Powell Method)",
+  "short_name": "DFP法",
+  "year": 1963,
+  "citations": 5000,
+  "categories": [
+    "2次手法"
+  ],
+  "reference": "https://doi.org/10.1093/comjnl/6.2.163",
+  "summary": "最初に提案された準ニュートン法であり，パラメータの変化量と勾配の変化量から，ヘッセ行列の逆行列の近似をランク2の更新で逐次的に構成する．ニュートン法と異なりヘッセ行列の計算が不要でありながら，2次関数に対しては有限回の反復で収束する．",
+  "update_rule": "{\\mathbf H}_{t+1} = {\\mathbf H}_t + \\frac{{\\mathbf s}_t {\\mathbf s}_t^\\top}{{\\mathbf s}_t^\\top {\\mathbf y}_t} - \\frac{{\\mathbf H}_t {\\mathbf y}_t {\\mathbf y}_t^\\top {\\mathbf H}_t}{{\\mathbf y}_t^\\top {\\mathbf H}_t {\\mathbf y}_t}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta_t {\\mathbf H}_t \\nabla f({\\mathbf w}_t)",
+  "parents": [
+    {
+      "id": "newton",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "勾配の変化量によるヘッセ逆行列のランク2逐次近似（初の準ニュートン法）"
+    }
+  ],
+  "practical": {
+    "state": "matrix",
+    "implementations": [],
+    "hyperparameters": [
+      "直線探索の設定"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  },
+  "notes": "Davidonの技術報告（1959）をFletcherとPowell（1963）が発展させた．参考文献はFletcher & Powell（1963）とした．"
+}

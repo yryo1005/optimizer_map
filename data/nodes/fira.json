@@ -1,0 +1,44 @@
+{
+  "id": "fira",
+  "name": "Fira",
+  "short_name": "Fira",
+  "year": 2024,
+  "citations": 60,
+  "categories": [
+    "メモリ効率",
+    "学習安定化"
+  ],
+  "reference": "https://arxiv.org/abs/2410.01623",
+  "summary": "GaLoreでは低ランク部分空間の外側の勾配成分が捨てられ，実質的に低ランクの学習になる問題に対し，Adamによる勾配ノルムのスケーリングが低ランクと全ランクで同程度であるという観察に基づき，部分空間外の勾配成分を低ランク空間でのスケーリング係数で補正して加える手法である．勾配ノルムの急増を抑える制限器も導入し，低ランクのメモリ制約下で全ランクの学習を実現する．",
+  "update_rule": "{\\mathbf R}_t = {\\mathbf P}_t^\\top {\\mathbf G}_t, \\quad \\psi_t = \\frac{\\|\\mathrm{Adam}({\\mathbf R}_t)\\|}{\\|{\\mathbf R}_t\\|}, \\quad {\\mathbf S}_t = \\mathrm{Limiter}\\left( {\\mathbf G}_t - {\\mathbf P}_t {\\mathbf R}_t \\right), \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta \\left( {\\mathbf P}_t \\, \\mathrm{Adam}({\\mathbf R}_t) + \\psi_t {\\mathbf S}_t \\right)",
+  "parents": [
+    {
+      "id": "galore",
+      "types": [
+        "compression"
+      ],
+      "improvement": "部分空間外の勾配成分のノルムに基づくスケーリング補正（全ランク学習化）"
+    },
+    {
+      "id": "gradient_clipping",
+      "types": [
+        "stabilization"
+      ],
+      "improvement": "勾配ノルムの相対的な増加を制限する制限器"
+    }
+  ],
+  "practical": {
+    "state": "compressed",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "ランク",
+      "γ（制限器）"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  }
+}

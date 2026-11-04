@@ -1,0 +1,43 @@
+{
+  "id": "adalomo",
+  "name": "AdaLomo",
+  "short_name": "AdaLomo",
+  "year": 2023,
+  "citations": 50,
+  "categories": [
+    "メモリ効率",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/2310.10195",
+  "summary": "LOMOはSGDを用いるため学習率等に敏感であり，Adamに比べ性能が劣る問題に対し，Adafactorと同様に因子分解した2次モーメントによる適応的学習率をLOMOの層ごとの即時更新に組み合わせた手法である．LOMOと同程度の低メモリでAdamWに近い性能を達成する．",
+  "update_rule": "{\\mathbf r}^\\ell_t = \\beta {\\mathbf r}^\\ell_{t-1} + (1 - \\beta) ({\\mathbf G}^{\\ell 2}_t) {\\mathbf 1}, \\quad {\\mathbf c}^\\ell_t = \\beta {\\mathbf c}^\\ell_{t-1} + (1 - \\beta) {\\mathbf 1}^\\top ({\\mathbf G}^{\\ell 2}_t), \\quad {\\mathbf W}^\\ell_{t+1} = {\\mathbf W}^\\ell_t - \\eta \\frac{{\\mathbf G}^\\ell_t}{\\sqrt{{\\mathbf r}^\\ell_t {\\mathbf c}^\\ell_t / {\\mathbf 1}^\\top {\\mathbf r}^\\ell_t}} \\;\\; (\\text{逆伝播中に層ごとに即時更新})",
+  "parents": [
+    {
+      "id": "lomo",
+      "types": [
+        "adaptive"
+      ],
+      "improvement": "層ごとの即時更新への適応的学習率の導入"
+    },
+    {
+      "id": "adafactor",
+      "types": [
+        "adaptive",
+        "compression"
+      ],
+      "improvement": "因子分解した2次モーメントによるメモリ効率の高い適応的学習率"
+    }
+  ],
+  "practical": {
+    "state": "compressed",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η"
+    ],
+    "tasks": [
+      "finetune"
+    ]
+  }
+}

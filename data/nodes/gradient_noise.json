@@ -1,0 +1,43 @@
+{
+  "id": "gradient_noise",
+  "name": "勾配雑音の付加 (Adding Gradient Noise)",
+  "short_name": "勾配雑音の付加",
+  "year": 2015,
+  "citations": 600,
+  "categories": [
+    "正則化",
+    "平坦解探索"
+  ],
+  "reference": "https://arxiv.org/abs/1511.06807",
+  "summary": "各ステップの勾配に，学習の進行とともに分散が減少するガウス雑音を加える手法である．非常に深いネットワークや複雑な構造のモデルにおいて，初期化の悪さによる学習の失敗を減らし，局所解からの脱出を促すことで，最適化と汎化の性能を改善する．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad \\sigma_t^2 = \\frac{\\eta}{(1 + t)^{\\gamma}}, \\quad \\tilde{\\mathbf g}_t = {\\mathbf g}_t + \\mathcal{N}({\\mathbf 0}, \\sigma_t^2 {\\mathbf I}), \\quad {\\mathbf w}_{t+1} = \\mathrm{Optimizer}({\\mathbf w}_t, \\tilde{\\mathbf g}_t)",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "flatness"
+      ],
+      "improvement": "減衰するガウス雑音の勾配への付加"
+    },
+    {
+      "id": "sgld",
+      "types": [
+        "flatness"
+      ],
+      "improvement": "雑音付加の最適化（サンプリングではなく）目的への転用"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "optax"
+    ],
+    "hyperparameters": [
+      "η",
+      "γ"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

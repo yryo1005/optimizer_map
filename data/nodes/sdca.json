@@ -1,0 +1,32 @@
+{
+  "id": "sdca",
+  "name": "SDCA (Stochastic Dual Coordinate Ascent)",
+  "short_name": "SDCA",
+  "year": 2012,
+  "citations": 1200,
+  "categories": [
+    "勾配分散低減"
+  ],
+  "reference": "https://arxiv.org/abs/1209.1873",
+  "summary": "正則化付きの損失最小化問題の双対問題に対し，ランダムに選んだ1つの双対変数を厳密または近似的に最適化する座標上昇法である．主変数は双対変数から復元され，SGDと同程度の1ステップの計算量で，強凸問題に対し線形収束を達成する．",
+  "update_rule": "\\Delta\\alpha_i = \\arg\\max_{\\Delta} \\left\\{ -\\phi_i^*(-(\\alpha_i + \\Delta)) - \\frac{\\lambda n}{2} \\left\\| {\\mathbf w}_t + \\frac{\\Delta}{\\lambda n} {\\mathbf x}_i \\right\\|^2 \\right\\}, \\quad \\alpha_i \\leftarrow \\alpha_i + \\Delta\\alpha_i, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t + \\frac{\\Delta\\alpha_i}{\\lambda n} {\\mathbf x}_i",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "variance_reduction"
+      ],
+      "improvement": "双対問題に対するランダムな座標上昇による分散低減と線形収束"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [],
+    "hyperparameters": [
+      "λ"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

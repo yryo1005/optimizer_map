@@ -1,0 +1,43 @@
+{
+  "id": "sgdr",
+  "name": "SGDR (Stochastic Gradient Descent with Warm Restarts, コサイン減衰)",
+  "short_name": "SGDR",
+  "year": 2016,
+  "citations": 7000,
+  "categories": [
+    "学習率スケジュール"
+  ],
+  "reference": "https://arxiv.org/abs/1608.03983",
+  "summary": "学習率をコサイン関数に従って最大値から最小値まで滑らかに減衰させ，周期の終わりに学習率を最大値に戻して再開（ウォームリスタート）するスケジュールである．再開ごとに周期を伸ばすことができ，各周期の終わりに得られるモデルはスナップショットアンサンブルにも利用できる．ウォームリスタートなしのコサイン減衰は，現在の深層学習で最も標準的な学習率スケジュールとなっている．",
+  "update_rule": "\\eta_t = \\eta_{\\min} + \\frac{1}{2} (\\eta_{\\max} - \\eta_{\\min}) \\left( 1 + \\cos\\left( \\frac{T_{\\mathrm{cur}}}{T_i} \\pi \\right) \\right), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta_t \\nabla f_t({\\mathbf w}_t)",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "lr_automation"
+      ],
+      "improvement": "コサイン減衰と周期的なウォームリスタートによる学習率スケジュール"
+    }
+  ],
+  "practical": {
+    "state": "na",
+    "implementations": [
+      "pytorch",
+      "optax",
+      "keras"
+    ],
+    "hyperparameters": [
+      "T0",
+      "T_mult",
+      "η_min"
+    ],
+    "tasks": [
+      "general"
+    ]
+  },
+  "deep_dive": {
+    "why": "コサイン減衰により学習率を滑らかに小さくし，再開により局所解から抜け出す機会を作る．再開なしのコサイン減衰は最も標準的なスケジュールである．",
+    "weaknesses": "総ステップ数（周期）を事前に決める必要がある．学習の延長や途中からの再開に向かない（WSD で改善）．",
+    "settings": "再開なしのコサイン減衰（最小学習率は最大の 0〜10%）が一般的．再開ありでは T0=10エポック，T_mult=2．"
+  }
+}

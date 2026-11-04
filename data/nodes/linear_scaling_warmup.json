@@ -1,0 +1,41 @@
+{
+  "id": "linear_scaling_warmup",
+  "name": "線形スケーリング則と学習率ウォームアップ (Linear Scaling Rule & Warmup)",
+  "short_name": "線形スケーリング則+Warmup",
+  "year": 2017,
+  "citations": 4000,
+  "categories": [
+    "学習率スケジュール",
+    "大規模バッチ"
+  ],
+  "reference": "https://arxiv.org/abs/1706.02677",
+  "summary": "ミニバッチサイズをk倍にした場合に学習率もk倍にする線形スケーリング則と，学習初期の数エポックで学習率を小さな値から目標値まで徐々に増加させるウォームアップを組み合わせた手法である．これによりバッチサイズ8192でImageNetのResNet-50を1時間で精度を落とさずに学習し，大規模バッチ学習の標準的な手順を確立した．",
+  "update_rule": "\\eta = k \\, \\eta_{\\mathrm{base}} \\;\\; (\\text{バッチサイズ} \\times k), \\quad \\eta_t = \\eta \\cdot \\min\\left( 1, \\frac{t}{T_{\\mathrm{warmup}}} \\right), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta_t \\frac{1}{kn} \\sum_{x \\in B} \\nabla l(x, {\\mathbf w}_t)",
+  "parents": [
+    {
+      "id": "momentum",
+      "types": [
+        "lr_automation"
+      ],
+      "improvement": "バッチサイズに比例した学習率のスケーリングと学習初期のウォームアップ"
+    }
+  ],
+  "practical": {
+    "state": "na",
+    "implementations": [
+      "pytorch"
+    ],
+    "hyperparameters": [
+      "ウォームアップ期間",
+      "基準バッチサイズ"
+    ],
+    "tasks": [
+      "vision"
+    ]
+  },
+  "deep_dive": {
+    "why": "バッチサイズを k 倍にすると勾配の雑音が 1/k になるため，学習率を k 倍にして1エポックあたりの進み方をそろえる．学習初期の不安定さはウォームアップで回避する．",
+    "weaknesses": "非常に大きなバッチ（数万以上）では線形則が破綻する（LARS/LAMB が必要）．Adam 系では平方根則が適する場合もある．",
+    "settings": "基準 η=0.1×(バッチ/256)（SGD），ウォームアップ 5エポック（画像分類），LLM では数千ステップ．"
+  }
+}

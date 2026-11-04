@@ -1,0 +1,16 @@
+{
+  "id": "rmsprop",
+  "name": "RMSprop (Root Mean Square Propagation)",
+  "year": 2012,
+  "citation_count": 22000,
+  "category": ["適応的学習率"],
+  "summary": "AdaGradが学習開始からの勾配2乗を単純に累積するため，学習が進むにつれ学習率が過度に減衰する問題を解決する手法である．勾配の2乗の指数移動平均（直近の勾配を重視した移動平均）を用いて学習率をスケジューリングすることで，非定常な目的関数に対しても学習率が過度に減衰しないようにする．",
+  "update_rule": "{\\mathbf r}_t = \\rho {\\mathbf r}_{t-1} + (1 - \\rho) \\nabla f_t({\\mathbf w}_t)^2, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\frac{\\eta}{\\sqrt{{\\mathbf r}_t} + \\epsilon} \\nabla f_t({\\mathbf w}_t)",
+  "paper_url": "http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf",
+  "derived_from": [
+    {
+      "parent_id": "adagrad",
+      "relation": "勾配2乗の指数移動平均による学習率スケジューリングへの変更"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "id": "ef_signsgd",
+  "name": "EF-SignSGD (Error Feedback)",
+  "short_name": "EF-SignSGD",
+  "year": 2019,
+  "citations": 600,
+  "categories": [
+    "分散学習",
+    "符号ベース"
+  ],
+  "reference": "https://arxiv.org/abs/1901.09847",
+  "summary": "signSGDなどの偏りのある勾配圧縮は，単純な問題でも収束しない場合や汎化性能が劣る場合があることを示し，圧縮で失われた誤差をローカルに保持して次のステップの勾配に加える誤差フィードバック機構を導入した手法である．任意の圧縮演算子に対してSGDと同等の収束率と汎化性能を回復する．",
+  "update_rule": "{\\mathbf p}_t = \\eta {\\mathbf g}_t + {\\mathbf e}_t, \\quad \\boldsymbol\\Delta_t = \\frac{\\|{\\mathbf p}_t\\|_1}{d} \\mathrm{sign}({\\mathbf p}_t), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\boldsymbol\\Delta_t, \\quad {\\mathbf e}_{t+1} = {\\mathbf p}_t - \\boldsymbol\\Delta_t",
+  "parents": [
+    {
+      "id": "signsgd",
+      "types": [
+        "compression"
+      ],
+      "improvement": "圧縮誤差のローカルな保持と次ステップへの加算（誤差フィードバック）"
+    },
+    {
+      "id": "onebit_sgd",
+      "types": [
+        "compression",
+        "reinterpretation"
+      ],
+      "improvement": "誤差フィードバックの任意の圧縮演算子に対する理論的な正当化"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [],
+    "hyperparameters": [
+      "η"
+    ],
+    "tasks": [
+      "distributed"
+    ]
+  }
+}

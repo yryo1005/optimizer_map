@@ -1,0 +1,32 @@
+{
+  "id": "exponentiated_gradient",
+  "name": "指数勾配法 (Exponentiated Gradient, EG)",
+  "short_name": "指数勾配法",
+  "year": 1997,
+  "citations": 1500,
+  "categories": [
+    "オンライン学習"
+  ],
+  "reference": "https://doi.org/10.1006/inco.1996.2612",
+  "summary": "パラメータを加算的に更新する勾配降下法の代わりに，勾配の指数関数を乗じて乗法的に更新し，和が1になるよう正規化する手法である．相対エントロピーを距離とするミラー降下法に相当し，関連する特徴が少数（疎）の場合に，勾配降下法より次元への依存性が大幅に小さい誤差限界を達成する．",
+  "update_rule": "w_{t+1,i} = \\frac{w_{t,i} \\exp(-\\eta \\, g_{t,i})}{\\sum_{j} w_{t,j} \\exp(-\\eta \\, g_{t,j})}",
+  "parents": [
+    {
+      "id": "mirror_descent",
+      "types": [
+        "reinterpretation"
+      ],
+      "improvement": "相対エントロピーを用いた乗法的な更新"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [],
+    "hyperparameters": [
+      "η"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

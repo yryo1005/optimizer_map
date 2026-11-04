@@ -1,0 +1,43 @@
+{
+  "id": "normalized_sgd_momentum",
+  "name": "正規化SGD＋慣性項 (Momentum Improves Normalized SGD)",
+  "short_name": "正規化SGD+慣性",
+  "year": 2020,
+  "citations": 200,
+  "categories": [
+    "高速化",
+    "学習安定化"
+  ],
+  "reference": "https://arxiv.org/abs/2002.03305",
+  "summary": "勾配をノルムで正規化して更新する正規化SGDは，大きなバッチを用いなければ収束が保証されない問題に対し，慣性項を正規化の前に適用することで，小さなバッチでも非凸問題の停留点への収束が保証されることを示した研究である．符号ベースやMuonなどの正規化型手法の理論的な背景の一つとなっている．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad {\\mathbf m}_t = \\beta {\\mathbf m}_{t-1} + (1 - \\beta) {\\mathbf g}_t, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\frac{{\\mathbf m}_t}{\\|{\\mathbf m}_t\\|}",
+  "parents": [
+    {
+      "id": "momentum",
+      "types": [
+        "normalization",
+        "momentum"
+      ],
+      "improvement": "慣性項の正規化による小さなバッチでの収束保証"
+    },
+    {
+      "id": "gradient_clipping",
+      "types": [
+        "normalization",
+        "stabilization"
+      ],
+      "improvement": "勾配ノルムによる更新量の制御の正規化への一般化"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [],
+    "hyperparameters": [
+      "η",
+      "β"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

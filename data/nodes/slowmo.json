@@ -1,0 +1,45 @@
+{
+  "id": "slowmo",
+  "name": "SlowMo (Slow Momentum)",
+  "short_name": "SlowMo",
+  "year": 2019,
+  "citations": 300,
+  "categories": [
+    "分散学習",
+    "高速化"
+  ],
+  "reference": "https://arxiv.org/abs/1910.00643",
+  "summary": "Local SGDなどの通信を減らした分散学習法の各ラウンドの後に，全ワーカーで平均したパラメータの変化量に対して外側の慣性項（遅い慣性項）を適用する枠組みである．内側の最適化手法によらず適用でき，通信効率を保ったまま精度を改善し，後のDiLoCoの外側最適化の考え方の先駆けとなった．",
+  "update_rule": "{\\mathbf x}_{t,\\tau} = \\frac{1}{K} \\sum_{k} {\\mathbf x}^k_{t,\\tau} \\;\\; (\\tau\\text{ステップのローカル更新後}), \\quad {\\mathbf u}_{t+1} = \\beta {\\mathbf u}_t + \\frac{1}{\\gamma_t} ({\\mathbf x}_{t,0} - {\\mathbf x}_{t,\\tau}), \\quad {\\mathbf x}_{t+1,0} = {\\mathbf x}_{t,0} - \\alpha \\gamma_t {\\mathbf u}_{t+1}",
+  "parents": [
+    {
+      "id": "local_sgd",
+      "types": [
+        "momentum"
+      ],
+      "improvement": "ラウンドごとの平均変化量への外側の慣性項の適用"
+    },
+    {
+      "id": "momentum",
+      "types": [
+        "momentum",
+        "communication"
+      ],
+      "improvement": "遅い時間スケールでの慣性項の導入"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "α",
+      "β",
+      "τ"
+    ],
+    "tasks": [
+      "distributed"
+    ]
+  }
+}

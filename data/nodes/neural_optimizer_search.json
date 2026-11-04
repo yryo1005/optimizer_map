@@ -1,0 +1,44 @@
+{
+  "id": "neural_optimizer_search",
+  "name": "Neural Optimizer Search (PowerSign / AddSign)",
+  "short_name": "Neural Optimizer Search",
+  "year": 2017,
+  "citations": 400,
+  "categories": [
+    "自動探索・メタ学習",
+    "符号ベース"
+  ],
+  "reference": "https://arxiv.org/abs/1709.07417",
+  "summary": "勾配や慣性項などの基本演算を組み合わせた更新則を数式（プログラム）として生成する制御器を強化学習で訓練し，新しい最適化手法を自動的に探索する手法である．発見された更新則のうち，勾配と慣性項の符号の一致度に応じて更新量を拡大・縮小するPowerSignとAddSignは，人手で設計された手法と同等以上の性能を示し，他のタスクへも転移した．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad \\text{(PowerSign)} \\;\\; {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\, \\alpha^{\\mathrm{sign}({\\mathbf g}_t) \\odot \\mathrm{sign}({\\mathbf m}_t)} \\odot {\\mathbf g}_t, \\quad \\text{(AddSign)} \\;\\; {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\, (\\alpha + \\mathrm{sign}({\\mathbf g}_t) \\odot \\mathrm{sign}({\\mathbf m}_t)) \\odot {\\mathbf g}_t",
+  "parents": [
+    {
+      "id": "l2l",
+      "types": [
+        "problem_transfer"
+      ],
+      "improvement": "ニューラルネットワークではなく解釈可能な数式としての更新則の強化学習による探索"
+    },
+    {
+      "id": "momentum",
+      "types": [
+        "momentum",
+        "normalization"
+      ],
+      "improvement": "勾配と慣性項の符号の一致度による更新量の調整"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "α"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

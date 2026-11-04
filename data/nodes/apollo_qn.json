@@ -1,0 +1,45 @@
+{
+  "id": "apollo_qn",
+  "name": "Apollo (Adaptive Parameter-wise Diagonal Quasi-Newton)",
+  "short_name": "Apollo（準ニュートン）",
+  "year": 2020,
+  "citations": 40,
+  "categories": [
+    "2次手法",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/2009.13586",
+  "summary": "ヘッセ行列を対角行列で近似し，その対角成分を弱いセカント条件に基づいてパラメータごとに逐次更新する対角準ニュートン法である．曲率の絶対値をとる整流により非凸問題での正定値性を保ち，Adam系と同程度の計算量・メモリで曲率情報を利用する．",
+  "update_rule": "{\\mathbf d}_t = {\\mathbf m}_t - {\\mathbf m}_{t-1}, \\quad {\\mathbf B}_t = {\\mathbf B}_{t-1} - \\frac{{\\mathbf d}_t^\\top \\Delta{\\mathbf w}_t + \\Delta{\\mathbf w}_t^\\top {\\mathbf B}_{t-1} \\Delta{\\mathbf w}_t}{\\|\\Delta{\\mathbf w}_t\\|_4^4 + \\epsilon} \\mathrm{diag}(\\Delta{\\mathbf w}_t^2), \\quad {\\mathbf D}_t = \\max(|{\\mathbf B}_t|, \\sigma), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\, {\\mathbf D}_t^{-1} {\\mathbf m}_t",
+  "parents": [
+    {
+      "id": "bfgs",
+      "types": [
+        "curvature",
+        "compression"
+      ],
+      "improvement": "対角行列への制限と弱いセカント条件による準ニュートン更新"
+    },
+    {
+      "id": "adam",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "慣性項付き勾配へのパラメータごとの前処理"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β",
+      "σ"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "alpha_svrg",
+  "name": "α-SVRG",
+  "short_name": "α-SVRG",
+  "year": 2023,
+  "citations": 30,
+  "categories": [
+    "勾配分散低減"
+  ],
+  "reference": "https://arxiv.org/abs/2311.05589",
+  "summary": "SVRGが深層学習で有効でない原因として，学習初期には勾配の分散を減らすが後半には逆に増やしてしまうことを示し，分散低減項に学習とともに線形に減衰する係数αを掛ける手法である．分散を最小にする係数はネットワークが深いほど，学習が進むほど小さくなるという分析に基づき，多様なアーキテクチャの画像分類でベースラインやSVRGより低い訓練損失を達成する．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_{i_t}({\\mathbf w}_t) - \\alpha_t \\left( \\nabla f_{i_t}(\\tilde{\\mathbf w}) - \\nabla F(\\tilde{\\mathbf w}) \\right), \\quad \\alpha_t = \\alpha_0 \\left( 1 - \\frac{t}{T} \\right), \\quad {\\mathbf w}_{t+1} = \\mathrm{Optimizer}({\\mathbf w}_t, {\\mathbf g}_t)",
+  "parents": [
+    {
+      "id": "svrg",
+      "types": [
+        "variance_reduction"
+      ],
+      "improvement": "分散低減項への線形に減衰する係数の導入による深層学習での有効化"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "α0"
+    ],
+    "tasks": [
+      "vision"
+    ]
+  }
+}

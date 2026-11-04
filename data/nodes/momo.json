@@ -1,0 +1,45 @@
+{
+  "id": "momo",
+  "name": "MoMo (Momentum Models for Adaptive Learning Rates)",
+  "short_name": "MoMo",
+  "year": 2023,
+  "citations": 50,
+  "categories": [
+    "学習率自動調整"
+  ],
+  "reference": "https://arxiv.org/abs/2305.07583",
+  "summary": "各反復でサンプルした損失と勾配の慣性項（移動平均）から損失関数のモデルを構築し，損失の既知の下界（通常は0）でモデルを切り詰めた上で最小化することで，Polyak型の適応的学習率を得る手法である．SGD-M版（MoMo）とAdam版（MoMo-Adam）があり，学習率の選択に対する頑健性を改善する．",
+  "update_rule": "\\bar f_t = \\beta \\bar f_{t-1} + (1 - \\beta) f_{i_t}({\\mathbf w}_t), \\quad {\\mathbf d}_t = \\beta {\\mathbf d}_{t-1} + (1 - \\beta) {\\mathbf g}_t, \\quad \\tau_t = \\min\\left( \\eta, \\, \\frac{(\\bar f_t + \\langle {\\mathbf d}_t, {\\mathbf w}_t \\rangle - \\gamma_t - f^*)_+}{\\|{\\mathbf d}_t\\|^2} \\right), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\tau_t {\\mathbf d}_t",
+  "parents": [
+    {
+      "id": "sps",
+      "types": [
+        "momentum",
+        "lr_automation"
+      ],
+      "improvement": "慣性項による損失・勾配のモデルを用いたPolyak型の学習率"
+    },
+    {
+      "id": "momentum",
+      "types": [
+        "momentum",
+        "lr_automation"
+      ],
+      "improvement": "慣性項付き手法への適応的学習率の導入"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "optax",
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

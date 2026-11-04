@@ -1,0 +1,36 @@
+{
+  "id": "alig",
+  "name": "ALI-G (Adaptive Learning-rates for Interpolation with Gradients)",
+  "short_name": "ALI-G",
+  "year": 2019,
+  "citations": 80,
+  "categories": [
+    "学習率自動調整"
+  ],
+  "reference": "https://arxiv.org/abs/1906.05661",
+  "summary": "過剰パラメータ化された深層ニューラルネットワークでは訓練損失をほぼ0にできる（補間条件）ことを利用し，最小損失を0とおいたPolyakステップサイズを上限付きで用いる手法である．単一のハイパーパラメータ（学習率の上限）のみで，調整済みのSGDに近い汎化性能を示す．",
+  "update_rule": "\\eta_t = \\min\\left( \\frac{f_{i_t}({\\mathbf w}_t)}{\\|\\nabla f_{i_t}({\\mathbf w}_t)\\|^2 + \\delta}, \\, \\eta_{\\max} \\right), \\quad {\\mathbf w}_{t+1} = \\Pi_\\Omega\\left( {\\mathbf w}_t - \\eta_t \\nabla f_{i_t}({\\mathbf w}_t) \\right)",
+  "parents": [
+    {
+      "id": "polyak_step",
+      "types": [
+        "lr_automation",
+        "stabilization"
+      ],
+      "improvement": "補間条件（最小損失0）の仮定と学習率の上限の導入"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η_max",
+      "δ"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

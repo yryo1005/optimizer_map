@@ -1,0 +1,44 @@
+{
+  "id": "fista",
+  "name": "FISTA (Fast Iterative Shrinkage-Thresholding Algorithm)",
+  "short_name": "FISTA",
+  "year": 2009,
+  "citations": 13000,
+  "categories": [
+    "高速化",
+    "正則化"
+  ],
+  "reference": "https://doi.org/10.1137/080716542",
+  "summary": "ISTAにNesterovの加速法を組み合わせ，前回までの反復点の外挿点で近接勾配ステップを行う手法である．1ステップあたりの計算量はISTAとほぼ同じまま，収束率をO(1/t)からO(1/t^2)へと改善する．",
+  "update_rule": "{\\mathbf w}_{t} = \\mathrm{prox}_{\\eta \\lambda \\|\\cdot\\|_1}\\left( {\\mathbf y}_t - \\eta \\nabla f({\\mathbf y}_t) \\right), \\quad s_{t+1} = \\frac{1 + \\sqrt{1 + 4 s_t^2}}{2}, \\quad {\\mathbf y}_{t+1} = {\\mathbf w}_t + \\frac{s_t - 1}{s_{t+1}} ({\\mathbf w}_t - {\\mathbf w}_{t-1})",
+  "parents": [
+    {
+      "id": "ista",
+      "types": [
+        "momentum"
+      ],
+      "improvement": "近接勾配法への加速の導入"
+    },
+    {
+      "id": "nesterov",
+      "types": [
+        "momentum",
+        "regularization"
+      ],
+      "improvement": "外挿点での勾配評価による加速の非平滑問題への拡張"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "λ"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

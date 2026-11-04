@@ -1,0 +1,36 @@
+{
+  "id": "sketchy",
+  "name": "Sketchy (Frequent Directions Shampoo)",
+  "short_name": "Sketchy",
+  "year": 2023,
+  "citations": 20,
+  "categories": [
+    "2次手法",
+    "メモリ効率"
+  ],
+  "reference": "https://arxiv.org/abs/2302.03764",
+  "summary": "全行列版AdaGradやShampooの前処理行列（勾配の外積の累積）の固有値スペクトルが少数の大きな値に集中することに着目し，ストリーミングの低ランク近似法であるFrequent Directionsで前処理行列を近似する手法である．Shampooの前処理行列のメモリを大幅に削減しつつ，同等の性能を示す．",
+  "update_rule": "{\\mathbf L}_t \\approx \\mathrm{FD}_\\ell({\\mathbf L}_{t-1}, {\\mathbf G}_t) + \\rho_t {\\mathbf I}, \\quad {\\mathbf R}_t \\approx \\mathrm{FD}_\\ell({\\mathbf R}_{t-1}, {\\mathbf G}_t^\\top) + \\rho'_t {\\mathbf I}, \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta \\, {\\mathbf L}_t^{-1/4} {\\mathbf G}_t {\\mathbf R}_t^{-1/4} \\quad (\\mathrm{FD}_\\ell : \\text{ランク}\\ell\\text{のFrequent Directions})",
+  "parents": [
+    {
+      "id": "shampoo",
+      "types": [
+        "compression"
+      ],
+      "improvement": "Frequent Directionsによる前処理行列の低ランク近似とメモリ削減"
+    }
+  ],
+  "practical": {
+    "state": "compressed",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "ランク"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

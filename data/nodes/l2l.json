@@ -1,0 +1,34 @@
+{
+  "id": "l2l",
+  "name": "Learning to Learn by Gradient Descent by Gradient Descent (L2L)",
+  "short_name": "L2L",
+  "year": 2016,
+  "citations": 2500,
+  "categories": [
+    "自動探索・メタ学習"
+  ],
+  "reference": "https://arxiv.org/abs/1606.04474",
+  "summary": "最適化手法の更新則そのものを，パラメータごとに勾配を入力として更新量を出力するLSTMで表現し，学習対象のタスク群に対する最適化性能が高くなるようにメタ学習する手法である．人手で設計された最適化手法を，類似したタスクにおいて上回ることを示し，学習された最適化手法（Learned Optimizer）の研究の起点となった．",
+  "update_rule": "\\begin{bmatrix} {\\mathbf u}_t \\\\ {\\mathbf h}_{t+1} \\end{bmatrix} = m(\\nabla f({\\mathbf w}_t), {\\mathbf h}_t; \\boldsymbol\\phi), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t + {\\mathbf u}_t, \\quad \\min_{\\boldsymbol\\phi} \\; \\mathbb{E}_f \\left[ \\sum_{t=1}^{T} \\omega_t f({\\mathbf w}_t) \\right]",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "problem_transfer"
+      ],
+      "improvement": "更新則のLSTMによるパラメータ化とメタ学習"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "メタ学習率"
+    ],
+    "tasks": [
+      "meta"
+    ]
+  }
+}

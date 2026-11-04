@@ -1,0 +1,39 @@
+{
+  "id": "grpo",
+  "name": "GRPO (Group Relative Policy Optimization)",
+  "short_name": "GRPO",
+  "year": 2024,
+  "citations": 1500,
+  "categories": [
+    "方策最適化",
+    "メモリ効率"
+  ],
+  "reference": "https://arxiv.org/abs/2402.03300",
+  "summary": "大規模言語モデルの強化学習において，PPOで必要な価値関数（クリティック）モデルを廃し，同じ入力に対して生成した複数の出力の報酬のグループ内での平均と標準偏差で正規化した値をアドバンテージとして用いる手法である．クリティックのメモリと計算を不要にし，数学的推論などの検証可能な報酬による言語モデルの学習で広く用いられている．",
+  "update_rule": "\\hat A_{i} = \\frac{r_i - \\mathrm{mean}(\\{r_j\\}_{j=1}^{G})}{\\mathrm{std}(\\{r_j\\}_{j=1}^{G})}, \\quad J(\\boldsymbol\\theta) = \\mathbb{E}\\left[ \\frac{1}{G} \\sum_{i=1}^{G} \\min\\left( \\rho_i \\hat A_i, \\mathrm{clip}(\\rho_i, 1 \\pm \\epsilon) \\hat A_i \\right) - \\beta \\, \\mathrm{KL}(\\pi_{\\boldsymbol\\theta} \\| \\pi_{\\mathrm{ref}}) \\right]",
+  "parents": [
+    {
+      "id": "ppo",
+      "types": [
+        "compression"
+      ],
+      "improvement": "価値関数の廃止とグループ内の相対的な報酬によるアドバンテージ推定"
+    }
+  ],
+  "practical": {
+    "state": "na",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "ε",
+      "β（KL係数）",
+      "G（グループサイズ）"
+    ],
+    "tasks": [
+      "rl",
+      "llm"
+    ]
+  },
+  "notes": "DeepSeekMathの論文の中で提案された．Citation数は論文全体の概算である．"
+}

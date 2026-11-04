@@ -1,0 +1,42 @@
+{
+  "id": "catalyst",
+  "name": "Catalyst",
+  "short_name": "Catalyst",
+  "year": 2015,
+  "citations": 600,
+  "categories": [
+    "高速化",
+    "勾配分散低減"
+  ],
+  "reference": "https://arxiv.org/abs/1506.02186",
+  "summary": "任意の線形収束する1次最適化手法（SAG，SAGA，SVRG等）を内側の解法として用い，近接点法の外側ループにNesterov型の外挿を加えることで，元の手法を汎用的に加速する枠組みである．条件数の悪い問題で特に大きな高速化をもたらす．",
+  "update_rule": "{\\mathbf w}_k \\approx \\arg\\min_{{\\mathbf w}} \\left\\{ F({\\mathbf w}) + \\frac{\\kappa}{2} \\|{\\mathbf w} - {\\mathbf y}_{k-1}\\|^2 \\right\\} \\;\\; (\\text{内側の解法 } \\mathcal{M} \\text{で近似}), \\quad {\\mathbf y}_k = {\\mathbf w}_k + \\beta_k ({\\mathbf w}_k - {\\mathbf w}_{k-1})",
+  "parents": [
+    {
+      "id": "nesterov",
+      "types": [
+        "momentum",
+        "regularization"
+      ],
+      "improvement": "近接点法の外側ループへの外挿による汎用的な加速"
+    },
+    {
+      "id": "svrg",
+      "types": [
+        "variance_reduction",
+        "momentum"
+      ],
+      "improvement": "線形収束する分散低減手法の内側の解法としての利用"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [],
+    "hyperparameters": [
+      "κ"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

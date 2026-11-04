@@ -1,0 +1,35 @@
+{
+  "id": "page",
+  "name": "PAGE (ProbAbilistic Gradient Estimator)",
+  "short_name": "PAGE",
+  "year": 2020,
+  "citations": 200,
+  "categories": [
+    "勾配分散低減"
+  ],
+  "reference": "https://arxiv.org/abs/2008.10898",
+  "summary": "SARAHの再帰的な勾配推定について，毎ステップ確率pで大きなミニバッチの勾配を計算し直し，確率1-pで前回の推定値に小さなミニバッチの勾配差を加える単一ループの手法である．非凸な有限和・オンライン問題の双方で，停留点を求めるための最適な計算量を達成する．",
+  "update_rule": "{\\mathbf g}_{t+1} = \\begin{cases} \\nabla f_{B}({\\mathbf w}_{t+1}) & (\\text{確率 } p) \\\\ {\\mathbf g}_t + \\nabla f_{b}({\\mathbf w}_{t+1}) - \\nabla f_{b}({\\mathbf w}_t) & (\\text{確率 } 1-p) \\end{cases}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta {\\mathbf g}_t",
+  "parents": [
+    {
+      "id": "sarah",
+      "types": [
+        "variance_reduction",
+        "stochastic"
+      ],
+      "improvement": "確率的な全勾配の再計算による単一ループ化と最適な計算量"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [],
+    "hyperparameters": [
+      "p",
+      "b",
+      "B"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

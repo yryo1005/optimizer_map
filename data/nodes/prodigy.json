@@ -1,0 +1,43 @@
+{
+  "id": "prodigy",
+  "name": "Prodigy",
+  "short_name": "Prodigy",
+  "year": 2023,
+  "citations": 200,
+  "categories": [
+    "学習率自動調整"
+  ],
+  "reference": "https://arxiv.org/abs/2306.06101",
+  "summary": "D-Adaptationにおける距離Dの推定を，推定値自体で重み付けした形に修正することで，推定値の増加を速め，学習率が適切な値に到達するまでの時間を短縮した手法である．Adam版はDiffusionモデルのLoRA学習などで学習率調整不要のオプティマイザとして広く利用されている．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad \\eta_t = \\frac{d_t^2}{\\sqrt{\\sum_{i \\le t} d_i^2 \\|{\\mathbf g}_i\\|^2}}, \\quad \\hat d_{t+1} = \\frac{\\sum_{i \\le t} \\eta_i \\langle {\\mathbf g}_i, {\\mathbf w}_0 - {\\mathbf w}_i \\rangle}{\\|\\sum_{i \\le t} \\eta_i {\\mathbf g}_i\\|}, \\quad d_{t+1} = \\max(d_t, \\hat d_{t+1}), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta_t {\\mathbf g}_t",
+  "parents": [
+    {
+      "id": "d_adaptation",
+      "types": [
+        "lr_automation"
+      ],
+      "improvement": "距離推定の推定値自身による重み付け（推定値の増加の高速化）"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "d0",
+      "β1",
+      "β2"
+    ],
+    "tasks": [
+      "finetune",
+      "general"
+    ]
+  },
+  "deep_dive": {
+    "why": "初期点から最適解までの距離を逐次推定し，それに比例した学習率を自動的に設定するため，学習率の探索がほぼ不要になる．",
+    "weaknesses": "推定値が大きくなりすぎると不安定になる場合がある．学習率スケジュール（減衰）は別途組み合わせる必要がある．",
+    "settings": "lr=1.0（倍率として扱う），d0=1e-6，β1=0.9，β2=0.999，safeguard_warmup=True（ウォームアップ併用時）．"
+  },
+  "notes": "更新式は勾配降下法版（Prodigy GD）の簡略表記である．"
+}

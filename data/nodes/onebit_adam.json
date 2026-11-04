@@ -1,0 +1,45 @@
+{
+  "id": "onebit_adam",
+  "name": "1-bit Adam",
+  "short_name": "1-bit Adam",
+  "year": 2021,
+  "citations": 150,
+  "categories": [
+    "分散学習",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/2102.02888",
+  "summary": "Adamは非線形な2次モーメントを含むため，誤差フィードバック付きの1bit圧縮をそのまま適用できない問題に対し，学習初期のウォームアップ期間に通常のAdamで2次モーメントを推定した後，それを固定して1次モーメントのみを誤差フィードバック付きの1bit圧縮で通信する手法である．Adamと同等の収束性を保ちつつ，通信量を最大5分の1程度に削減する．",
+  "update_rule": "{\\mathbf v} \\leftarrow {\\mathbf v}_{T_w} \\;\\; (\\text{ウォームアップ後に固定}), \\quad {\\mathbf m}^k_t = \\beta_1 {\\mathbf m}_{t-1} + (1 - \\beta_1) {\\mathbf g}^k_t, \\quad {\\mathbf m}_t = \\mathrm{EF\\text{-}1bit\\text{-}AllReduce}(\\{{\\mathbf m}^k_t\\}), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\frac{{\\mathbf m}_t}{\\sqrt{{\\mathbf v}} + \\epsilon}",
+  "parents": [
+    {
+      "id": "adam",
+      "types": [
+        "communication",
+        "compression"
+      ],
+      "improvement": "ウォームアップ後の2次モーメントの固定による線形化"
+    },
+    {
+      "id": "ef_signsgd",
+      "types": [
+        "compression",
+        "communication"
+      ],
+      "improvement": "1次モーメントの誤差フィードバック付き1bit圧縮通信"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "ウォームアップ長"
+    ],
+    "tasks": [
+      "llm",
+      "distributed"
+    ]
+  }
+}

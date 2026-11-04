@@ -1,0 +1,41 @@
+{
+  "id": "dog",
+  "name": "DoG (Distance over Gradients)",
+  "short_name": "DoG",
+  "year": 2023,
+  "citations": 100,
+  "categories": [
+    "学習率自動調整"
+  ],
+  "reference": "https://arxiv.org/abs/2302.12022",
+  "summary": "学習率を，初期点から現在までに到達した最大距離を，これまでの勾配ノルムの2乗和の平方根で割った値として設定する，学習率の調整が不要な手法である．確率的な凸最適化において，最適な学習率を用いたSGDに近い収束保証を持ち，深層学習でも調整済みのSGDに近い性能を示す．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad \\bar r_t = \\max\\left( \\max_{i \\le t} \\|{\\mathbf w}_i - {\\mathbf w}_0\\|, \\, r_\\epsilon \\right), \\quad \\eta_t = \\frac{\\bar r_t}{\\sqrt{\\sum_{i \\le t} \\|{\\mathbf g}_i\\|^2}}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta_t {\\mathbf g}_t",
+  "parents": [
+    {
+      "id": "adagrad",
+      "types": [
+        "lr_automation"
+      ],
+      "improvement": "AdaGrad-Norm型の分母と，初期点からの到達距離を分子とする学習率の自動設定"
+    },
+    {
+      "id": "adagrad_norm",
+      "types": [
+        "lr_automation"
+      ],
+      "improvement": "AdaGrad-Normの分子への初期点からの到達距離の導入"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "r_ε"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

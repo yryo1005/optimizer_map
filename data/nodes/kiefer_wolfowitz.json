@@ -1,0 +1,33 @@
+{
+  "id": "kiefer_wolfowitz",
+  "name": "Kiefer-Wolfowitz法 (Kiefer-Wolfowitz Stochastic Approximation)",
+  "short_name": "Kiefer-Wolfowitz法",
+  "year": 1952,
+  "citations": 3000,
+  "categories": [
+    "ゼロ次手法"
+  ],
+  "reference": "https://doi.org/10.1214/aoms/1177729392",
+  "summary": "勾配が直接観測できず，雑音を含む関数値のみが得られる状況で，各座標方向の有限差分により勾配を推定して確率的近似を行う手法である．Robbins-Monro法（SGD）を関数値のみから最大値・最小値を求める問題に拡張したもので，ゼロ次（勾配を用いない）最適化の起点となった．",
+  "update_rule": "\\hat g_{t,i} = \\frac{f({\\mathbf w}_t + c_t {\\mathbf e}_i) - f({\\mathbf w}_t - c_t {\\mathbf e}_i)}{2 c_t} \\;\\; (i = 1, \\dots, d), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta_t \\hat{\\mathbf g}_t",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "stochastic"
+      ],
+      "improvement": "勾配の代わりに関数値の有限差分による勾配推定を用いた確率的近似"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [],
+    "hyperparameters": [
+      "η_t",
+      "c_t"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

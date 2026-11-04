@@ -1,0 +1,32 @@
+{
+  "id": "nash_mtl",
+  "name": "Nash-MTL",
+  "short_name": "Nash-MTL",
+  "year": 2022,
+  "citations": 300,
+  "categories": [
+    "マルチタスク・多目的"
+  ],
+  "reference": "https://arxiv.org/abs/2202.01017",
+  "summary": "マルチタスク学習の勾配の結合を，各タスクを更新方向の決定に参加するプレイヤーとみなした交渉ゲームとして定式化し，ナッシュ交渉解として得られる重みでタスクの勾配を結合する手法である．どのタスクにも支配されないスケール不変な更新方向が得られ，多様なマルチタスク学習のベンチマークで高い性能を示す．",
+  "update_rule": "\\boldsymbol\\alpha^* : \\; ({\\mathbf G}^\\top {\\mathbf G}) \\boldsymbol\\alpha = 1 / \\boldsymbol\\alpha \\;\\; (\\text{要素ごと}), \\quad {\\mathbf d} = {\\mathbf G} \\boldsymbol\\alpha^* = \\sum_{k} \\alpha^*_k {\\mathbf g}_k, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\, {\\mathbf d}",
+  "parents": [
+    {
+      "id": "mgda",
+      "types": [
+        "problem_transfer"
+      ],
+      "improvement": "ナッシュ交渉解によるスケール不変なタスク勾配の結合"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [],
+    "tasks": [
+      "multitask"
+    ]
+  }
+}

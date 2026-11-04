@@ -1,0 +1,43 @@
+{
+  "id": "lbfgs",
+  "name": "L-BFGS法 (Limited-memory BFGS)",
+  "short_name": "L-BFGS法",
+  "year": 1989,
+  "citations": 9000,
+  "categories": [
+    "2次手法",
+    "メモリ効率"
+  ],
+  "reference": "https://doi.org/10.1007/BF01589116",
+  "summary": "BFGS法ではパラメータ数の2乗のサイズの近似行列を保持する必要がある問題に対し，直近m回分のパラメータの変化量と勾配の変化量のみを保持し，それらから近似行列と勾配の積を2重ループ再帰で直接計算する手法である．メモリ使用量をパラメータ数に比例する程度に抑え，大規模な問題に準ニュートン法を適用可能にした．",
+  "update_rule": "{\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta_t {\\mathbf H}^{(m)}_t \\nabla f({\\mathbf w}_t), \\quad {\\mathbf H}^{(m)}_t : \\{ ({\\mathbf s}_i, {\\mathbf y}_i) \\}_{i = t-m}^{t-1} \\text{から2重ループ再帰で暗黙的に構成}",
+  "parents": [
+    {
+      "id": "bfgs",
+      "types": [
+        "compression",
+        "curvature"
+      ],
+      "improvement": "直近m組の変化量のみを用いた近似行列の暗黙的な表現（メモリの制限）"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [
+      "pytorch",
+      "optax"
+    ],
+    "hyperparameters": [
+      "m（履歴の長さ）",
+      "直線探索の設定"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  },
+  "deep_dive": {
+    "why": "直近の m 組の変化量からヘッセ逆行列を暗黙的に近似し，メモリを O(md) に抑えつつ超1次収束に近い速さを得る．",
+    "weaknesses": "確率的勾配では曲率対が雑音で崩れ不安定になる．フルバッチ（または大きなバッチ）と直線探索が前提である．",
+    "settings": "m=5〜20，Wolfe 条件の直線探索．PyTorch の LBFGS は closure で損失を再評価する．"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "id": "onebit_lamb",
+  "name": "1-bit LAMB",
+  "short_name": "1-bit LAMB",
+  "year": 2021,
+  "citations": 30,
+  "categories": [
+    "分散学習",
+    "大規模バッチ"
+  ],
+  "reference": "https://arxiv.org/abs/2104.06069",
+  "summary": "1-bit Adamの誤差フィードバック付き1bit圧縮通信を，大規模バッチ学習で用いられるLAMBに拡張した手法である．LAMBの層ごとの信頼比が圧縮によって不安定になる問題に対し，ウォームアップ期間の信頼比の推移を利用して圧縮期間中の信頼比を推定することで，BERTの事前学習をLAMBと同等の精度で，通信量を大幅に削減して行う．",
+  "update_rule": "{\\mathbf m}_t = \\mathrm{EF\\text{-}1bit\\text{-}AllReduce}(\\{{\\mathbf m}^k_t\\}), \\quad r^\\ell_t = \\mathrm{clip}\\left( \\frac{\\|{\\mathbf w}^\\ell_t\\|}{\\|{\\mathbf u}^\\ell_t\\|} \\cdot c^\\ell_t, \\; r_{\\min}, r_{\\max} \\right), \\quad {\\mathbf w}^\\ell_{t+1} = {\\mathbf w}^\\ell_t - \\eta \\, r^\\ell_t \\, {\\mathbf u}^\\ell_t \\quad ({\\mathbf u} = {\\mathbf m} / \\sqrt{{\\mathbf v}_{\\mathrm{frozen}}})",
+  "parents": [
+    {
+      "id": "onebit_adam",
+      "types": [
+        "compression",
+        "communication"
+      ],
+      "improvement": "誤差フィードバック付き1bit圧縮通信の層ごとの適応的手法への拡張"
+    },
+    {
+      "id": "lamb",
+      "types": [
+        "communication"
+      ],
+      "improvement": "層ごとの信頼比の圧縮下での推定"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "ウォームアップ長"
+    ],
+    "tasks": [
+      "llm",
+      "distributed"
+    ]
+  }
+}

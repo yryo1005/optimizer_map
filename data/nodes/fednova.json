@@ -1,0 +1,35 @@
+{
+  "id": "fednova",
+  "name": "FedNova (Normalized Averaging)",
+  "short_name": "FedNova",
+  "year": 2020,
+  "citations": 1200,
+  "categories": [
+    "分散学習"
+  ],
+  "reference": "https://arxiv.org/abs/2007.07481",
+  "summary": "連合学習でクライアントごとにローカルステップ数が異なる場合，FedAvgはステップ数の多いクライアントの目的関数に偏った解（目的関数の不一致）に収束することを示し，各クライアントの更新量をそのローカルステップ数で正規化してから集約する手法である．目的関数の不一致を解消しつつ高速な収束を保つ．",
+  "update_rule": "{\\mathbf d}_k = \\frac{{\\mathbf w}_t - {\\mathbf w}^{k}_{t,\\tau_k}}{\\eta \\, \\|{\\mathbf a}_k\\|_1}, \\quad \\tau_{\\mathrm{eff}} = \\sum_{k} p_k \\|{\\mathbf a}_k\\|_1, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\, \\tau_{\\mathrm{eff}} \\sum_{k} p_k {\\mathbf d}_k",
+  "parents": [
+    {
+      "id": "fedavg",
+      "types": [
+        "normalization",
+        "communication"
+      ],
+      "improvement": "ローカルステップ数による更新量の正規化（目的関数の不一致の解消）"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η"
+    ],
+    "tasks": [
+      "distributed"
+    ]
+  }
+}

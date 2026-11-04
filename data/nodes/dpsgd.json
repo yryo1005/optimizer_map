@@ -1,0 +1,34 @@
+{
+  "id": "dpsgd",
+  "name": "D-PSGD (Decentralized Parallel SGD)",
+  "short_name": "D-PSGD",
+  "year": 2017,
+  "citations": 1500,
+  "categories": [
+    "分散学習"
+  ],
+  "reference": "https://arxiv.org/abs/1705.09056",
+  "summary": "中央のパラメータサーバーを持たず，各ワーカーがネットワーク上の近傍のワーカーとのみパラメータを平均（ゴシップ平均）しながらローカルにSGDを行う分散学習法である．通信が中央のノードに集中しないため，ネットワークの帯域が限られる環境や遅延の大きい環境で，集中型の手法より高速に学習できることを示した．",
+  "update_rule": "{\\mathbf w}^{k}_{t+1} = \\sum_{j \\in \\mathcal{N}(k)} W_{kj} \\, {\\mathbf w}^{j}_t - \\eta \\nabla f^{k}_t({\\mathbf w}^{k}_t) \\quad ({\\mathbf W} : \\text{二重確率な混合行列})",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "communication",
+        "averaging"
+      ],
+      "improvement": "近傍ノードとのゴシップ平均による中央サーバーを持たない分散化"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [],
+    "hyperparameters": [
+      "η",
+      "混合行列"
+    ],
+    "tasks": [
+      "distributed"
+    ]
+  }
+}

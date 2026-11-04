@@ -1,0 +1,34 @@
+{
+  "id": "spider",
+  "name": "SPIDER (Stochastic Path-Integrated Differential EstimatoR)",
+  "short_name": "SPIDER",
+  "year": 2018,
+  "citations": 700,
+  "categories": [
+    "勾配分散低減"
+  ],
+  "reference": "https://arxiv.org/abs/1807.01695",
+  "summary": "SARAHと同様の再帰的な勾配推定量を用い，正規化した勾配による更新と組み合わせることで，非凸な確率的最適化において停留点を見つけるための勾配計算回数が理論的な下限を達成することを示した手法である．",
+  "update_rule": "{\\mathbf v}_t = \\begin{cases} \\nabla f_{S_1}({\\mathbf w}_t) & (t \\bmod q = 0) \\\\ \\nabla f_{S_2}({\\mathbf w}_t) - \\nabla f_{S_2}({\\mathbf w}_{t-1}) + {\\mathbf v}_{t-1} & (\\mathrm{otherwise}) \\end{cases}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\frac{{\\mathbf v}_t}{\\|{\\mathbf v}_t\\|}",
+  "parents": [
+    {
+      "id": "sarah",
+      "types": [
+        "variance_reduction",
+        "normalization"
+      ],
+      "improvement": "正規化勾配による更新との組み合わせによる非凸問題での最適な計算量の達成"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [],
+    "hyperparameters": [
+      "ε",
+      "q"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

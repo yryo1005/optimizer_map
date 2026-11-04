@@ -1,0 +1,41 @@
+{
+  "id": "rda",
+  "name": "RDA (Regularized Dual Averaging)",
+  "short_name": "RDA",
+  "year": 2010,
+  "citations": 1500,
+  "categories": [
+    "オンライン学習",
+    "正則化"
+  ],
+  "reference": "https://jmlr.org/papers/v11/xiao10a.html",
+  "summary": "双対平均化法に正則化項を組み込み，過去の全勾配の平均と正則化項・強凸な近接項の和を最小化して次の点を決める手法である．FOBOSなどの近接SGDでは各ステップの学習率が小さくなると正則化による切り捨てが弱まり疎性が失われるのに対し，正則化項全体を毎回適用するため，より疎な解が得られる．",
+  "update_rule": "\\bar{\\mathbf g}_t = \\frac{1}{t} \\sum_{i=1}^{t} \\nabla f_i({\\mathbf w}_i), \\quad {\\mathbf w}_{t+1} = \\arg\\min_{{\\mathbf w}} \\left\\{ \\langle \\bar{\\mathbf g}_t, {\\mathbf w} \\rangle + \\lambda \\|{\\mathbf w}\\|_1 + \\frac{\\beta_t}{t} h({\\mathbf w}) \\right\\}",
+  "parents": [
+    {
+      "id": "dual_averaging",
+      "types": [
+        "regularization"
+      ],
+      "improvement": "正則化項の双対平均化への組み込み"
+    },
+    {
+      "id": "fobos",
+      "types": [
+        "regularization"
+      ],
+      "improvement": "正則化項の毎回の全適用による疎性の改善"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [],
+    "hyperparameters": [
+      "λ",
+      "β_t"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

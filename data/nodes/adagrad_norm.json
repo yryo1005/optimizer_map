@@ -1,0 +1,35 @@
+{
+  "id": "adagrad_norm",
+  "name": "AdaGrad-Norm",
+  "short_name": "AdaGrad-Norm",
+  "year": 2018,
+  "citations": 600,
+  "categories": [
+    "適応的学習率",
+    "学習率自動調整"
+  ],
+  "reference": "https://arxiv.org/abs/1806.01811",
+  "summary": "AdaGradのパラメータごとの学習率を，勾配ノルムの2乗の累積による単一のスカラーの学習率に簡略化した手法である．非凸な問題において，滑らかさの定数などを知らずとも，適切に調整したSGDとほぼ同等の収束率を達成することが示され，学習率調整不要の手法群の基盤となった．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad b_t^2 = b_{t-1}^2 + \\|{\\mathbf g}_t\\|^2, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\frac{\\eta}{b_t} {\\mathbf g}_t",
+  "parents": [
+    {
+      "id": "adagrad",
+      "types": [
+        "adaptive",
+        "lr_automation"
+      ],
+      "improvement": "勾配ノルムの累積による単一のスカラー学習率への簡略化"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [],
+    "hyperparameters": [
+      "η",
+      "b0"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

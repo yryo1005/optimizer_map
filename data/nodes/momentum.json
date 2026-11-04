@@ -1,0 +1,42 @@
+{
+  "id": "momentum",
+  "name": "モーメント法 (Momentum，Heavy Ball法)",
+  "short_name": "モーメント法",
+  "year": 1964,
+  "citations": 9000,
+  "categories": [
+    "高速化"
+  ],
+  "reference": "https://doi.org/10.1016/0041-5553(64)90137-5",
+  "summary": "勾配方向への更新に，過去の更新方向を一定の割合で保持する慣性項を加える手法である．谷状の目的関数において，勾配が小さい方向への更新を蓄積して加速し，振動しやすい方向への更新を打ち消すことで，SGDに比べ収束を高速化する．",
+  "update_rule": "{\\mathbf v}_{t+1} = \\beta {\\mathbf v}_t - \\eta \\nabla f_t({\\mathbf w}_t), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t + {\\mathbf v}_{t+1}",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "momentum"
+      ],
+      "improvement": "慣性項（過去の更新方向の蓄積）の追加"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "pytorch",
+      "optax",
+      "keras"
+    ],
+    "hyperparameters": [
+      "η",
+      "β"
+    ],
+    "tasks": [
+      "general"
+    ]
+  },
+  "deep_dive": {
+    "why": "勾配の指数移動平均を進む方向とするため，一貫した方向の成分は加速され，振動する成分は打ち消される．悪条件の谷で特に効果が大きい．",
+    "weaknesses": "確率的な設定では理論上の加速は保証されない．β を大きくすると行き過ぎ（オーバーシュート）が起きやすい．",
+    "settings": "β=0.9 が標準．学習率は慣性項なしの SGD より実効的に 1/(1−β) 倍になる点に注意する．"
+  }
+}

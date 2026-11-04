@@ -1,0 +1,32 @@
+{
+  "id": "ogd",
+  "name": "オンライン勾配降下法 (Online Gradient Descent)",
+  "short_name": "オンライン勾配降下法",
+  "year": 2003,
+  "citations": 3500,
+  "categories": [
+    "オンライン学習"
+  ],
+  "reference": "https://www.aaai.org/Papers/ICML/2003/ICML03-120.pdf",
+  "summary": "毎時刻異なる凸関数が敵対的に与えられるオンライン凸最適化の枠組みを定式化し，射影付きの勾配降下法が，学習率を時刻の平方根に反比例させることで，後から見た最良の固定解に対するリグレットをO(√T)に抑えられることを示した研究である．AdaGradやAdamの収束解析の基盤となるリグレット解析の出発点となった．",
+  "update_rule": "{\\mathbf w}_{t+1} = \\Pi_{\\mathcal{K}}\\left( {\\mathbf w}_t - \\eta_t \\nabla f_t({\\mathbf w}_t) \\right), \\quad \\eta_t = \\frac{1}{\\sqrt{t}}, \\quad \\mathrm{Regret}_T = \\sum_{t=1}^{T} f_t({\\mathbf w}_t) - \\min_{{\\mathbf w} \\in \\mathcal{K}} \\sum_{t=1}^{T} f_t({\\mathbf w}) = O(\\sqrt{T})",
+  "parents": [
+    {
+      "id": "gd",
+      "types": [
+        "reinterpretation"
+      ],
+      "improvement": "敵対的に変化する関数列に対するオンライン凸最適化とリグレット解析"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [],
+    "hyperparameters": [
+      "η_t"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

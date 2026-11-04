@@ -1,0 +1,45 @@
+{
+  "id": "normuon",
+  "name": "NorMuon (Neuron-wise Normalized Muon)",
+  "short_name": "NorMuon",
+  "year": 2025,
+  "citations": 20,
+  "categories": [
+    "2次手法",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/2510.05491",
+  "summary": "Muonの直交化は更新行列の条件数を改善する一方，ニューロン（行）ごとの更新量のノルムは大きくばらつき，一部のニューロンが学習を支配するという問題を指摘した手法である．直交化の後にニューロンごとの2次モーメントで行ごとに正規化することで，Muonとほぼ同じメモリで学習効率を改善する．",
+  "update_rule": "{\\mathbf O}_t = \\mathrm{NewtonSchulz5}({\\mathbf M}_t), \\quad {\\mathbf v}_t = \\beta_2 {\\mathbf v}_{t-1} + (1 - \\beta_2) \\, \\mathrm{mean}_{\\mathrm{cols}}({\\mathbf O}_t^2), \\quad \\hat{\\mathbf O}_t = \\mathrm{diag}\\left( \\frac{1}{\\sqrt{{\\mathbf v}_t} + \\epsilon} \\right) {\\mathbf O}_t, \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta \\frac{0.2 \\sqrt{mn}}{\\|\\hat{\\mathbf O}_t\\|_F} \\hat{\\mathbf O}_t",
+  "parents": [
+    {
+      "id": "muon",
+      "types": [
+        "adaptive",
+        "normalization"
+      ],
+      "improvement": "直交化後のニューロン（行）ごとの2次モーメントによる正規化"
+    },
+    {
+      "id": "adam_mini",
+      "types": [
+        "adaptive"
+      ],
+      "improvement": "ブロック（ニューロン）単位で共有した2次モーメントの利用"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "μ",
+      "β2"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  }
+}

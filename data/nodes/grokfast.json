@@ -1,0 +1,35 @@
+{
+  "id": "grokfast",
+  "name": "Grokfast",
+  "short_name": "Grokfast",
+  "year": 2024,
+  "citations": 60,
+  "categories": [
+    "高速化"
+  ],
+  "reference": "https://arxiv.org/abs/2405.20233",
+  "summary": "パラメータごとの勾配の時系列を信号とみなし，変化の速い成分が過学習に，遅い成分が汎化に寄与するという仮説に基づき，勾配の低周波成分（指数移動平均）を増幅して元の勾配に加える手法である．既存の任意の最適化手法の前段に適用でき，Grokking（遅延汎化）を大幅に加速する．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad \\boldsymbol\\mu_t = \\alpha \\boldsymbol\\mu_{t-1} + (1 - \\alpha) {\\mathbf g}_t, \\quad \\tilde{\\mathbf g}_t = {\\mathbf g}_t + \\lambda \\boldsymbol\\mu_t, \\quad {\\mathbf w}_{t+1} = \\mathrm{Optimizer}({\\mathbf w}_t, \\tilde{\\mathbf g}_t)",
+  "parents": [
+    {
+      "id": "momentum",
+      "types": [
+        "momentum"
+      ],
+      "improvement": "勾配の低周波成分（指数移動平均）の増幅による汎化の加速"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "α",
+      "λ"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "newton_muon",
+  "name": "Newton-Muon",
+  "short_name": "Newton-Muon",
+  "year": 2026,
+  "citations": 5,
+  "categories": [
+    "2次手法"
+  ],
+  "reference": "https://arxiv.org/abs/2604.01472",
+  "summary": "Muonを，入力データの幾何構造を無視した暗黙のニュートン型手法として解釈し，層への入力の2次モーメント行列による補正を加えた手法である．入力の2次モーメント行列とその逆行列は低頻度でのみ更新するため，1ステップあたりの計算量をAdamWやMuonに近く保ちつつ，GPT-2の事前学習でMuonより少ないステップ数で目標の損失に到達する．",
+  "update_rule": "{\\mathbf C}_t = \\mathbb{E}[{\\mathbf Z} {\\mathbf Z}^\\top] \\;\\; (\\text{入力の2次モーメント，低頻度で更新}), \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta \\, \\mathrm{msgn}\\left( {\\mathbf M}_t \\, {\\mathbf C}_t^{-1} \\right)",
+  "parents": [
+    {
+      "id": "muon",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "入力データの2次モーメントによるニュートン型の補正"
+    },
+    {
+      "id": "kfac",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "層への入力の共分散（K-FACのA因子に相当）による前処理"
+    }
+  ],
+  "practical": {
+    "state": "matrix",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "μ",
+      "更新頻度"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  }
+}

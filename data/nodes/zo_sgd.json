@@ -1,0 +1,34 @@
+{
+  "id": "zo_sgd",
+  "name": "ZO-SGD (Randomized Stochastic Gradient-Free Method, Ghadimi & Lan)",
+  "short_name": "ZO-SGD",
+  "year": 2013,
+  "citations": 1500,
+  "categories": [
+    "ゼロ次手法"
+  ],
+  "reference": "https://arxiv.org/abs/1309.5549",
+  "summary": "ガウス平滑化に基づくランダムな方向の有限差分による勾配推定を確率的勾配法に組み込み，非凸な確率的最適化問題に対して，関数値のみを用いた場合の停留点への収束の計算量を初めて示した研究である．ゼロ次最適化の非凸問題での理論の基盤となった．",
+  "update_rule": "{\\mathbf u}_t \\sim \\mathcal{N}({\\mathbf 0}, {\\mathbf I}), \\quad \\hat{\\mathbf g}_t = \\frac{F({\\mathbf w}_t + \\mu {\\mathbf u}_t, \\xi_t) - F({\\mathbf w}_t, \\xi_t)}{\\mu} {\\mathbf u}_t, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta_t \\hat{\\mathbf g}_t",
+  "parents": [
+    {
+      "id": "spsa",
+      "types": [
+        "stochastic",
+        "reinterpretation"
+      ],
+      "improvement": "ガウス平滑化による勾配推定と非凸問題での収束解析"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [],
+    "hyperparameters": [
+      "η",
+      "μ"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

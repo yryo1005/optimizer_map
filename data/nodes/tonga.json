@@ -1,0 +1,35 @@
+{
+  "id": "tonga",
+  "name": "TONGA (Topmoumoute Online Natural Gradient Algorithm)",
+  "short_name": "TONGA",
+  "year": 2007,
+  "citations": 300,
+  "categories": [
+    "2次手法"
+  ],
+  "reference": "https://www.microsoft.com/en-us/research/publication/topmoumoute-online-natural-gradient-algorithm/",
+  "summary": "汎化誤差を最もよく減少させる方向が，ベイズ・頻度論のいずれの観点からも勾配の共分散行列に基づく自然勾配方向になり得ることを示し，その共分散行列を低ランク＋ブロック対角でオンラインに近似する手法である．パラメータ数に線形な計算量でSGDより高速に収束する．",
+  "update_rule": "{\\mathbf C}_t = \\gamma {\\mathbf C}_{t-1} + {\\mathbf g}_t {\\mathbf g}_t^\\top \\;\\; (\\text{低ランク近似}), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\left( {\\mathbf C}_t + \\lambda {\\mathbf I} \\right)^{-1} {\\mathbf g}_t",
+  "parents": [
+    {
+      "id": "natural_gradient",
+      "types": [
+        "curvature",
+        "compression"
+      ],
+      "improvement": "勾配の共分散行列による自然勾配の低ランク・オンライン近似"
+    }
+  ],
+  "practical": {
+    "state": "compressed",
+    "implementations": [],
+    "hyperparameters": [
+      "γ",
+      "λ",
+      "ランク"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

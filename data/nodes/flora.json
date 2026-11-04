@@ -1,0 +1,37 @@
+{
+  "id": "flora",
+  "name": "Flora (Low-Rank Adapters Are Secretly Gradient Compressors)",
+  "short_name": "Flora",
+  "year": 2024,
+  "citations": 50,
+  "categories": [
+    "メモリ効率"
+  ],
+  "reference": "https://arxiv.org/abs/2402.03293",
+  "summary": "LoRAの更新が勾配のランダム射影による圧縮とみなせることを示し，その知見に基づき，勾配の蓄積や慣性項をランダム射影で低次元に圧縮して保持し，射影行列を定期的に再サンプリングする手法である．LoRAのような低ランク制約を課さずに高ランクの更新を実現しつつ，オプティマイザの状態量のメモリを削減する．",
+  "update_rule": "{\\mathbf A}_t \\sim \\mathcal{N}(0, 1/r) \\;\\; (\\text{定期的に再サンプリング}), \\quad {\\mathbf C}_t = \\beta {\\mathbf C}_{t-1} {\\mathbf A}_{t-1}^\\top {\\mathbf A}_t + (1 - \\beta) {\\mathbf G}_t {\\mathbf A}_t^\\top, \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta \\, {\\mathbf C}_t {\\mathbf A}_t",
+  "parents": [
+    {
+      "id": "adafactor",
+      "types": [
+        "compression"
+      ],
+      "improvement": "ランダム射影による慣性項・勾配蓄積の圧縮によるメモリ削減"
+    }
+  ],
+  "practical": {
+    "state": "compressed",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "ランク",
+      "再サンプリング間隔"
+    ],
+    "tasks": [
+      "finetune",
+      "llm"
+    ]
+  }
+}

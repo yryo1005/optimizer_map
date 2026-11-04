@@ -1,0 +1,42 @@
+{
+  "id": "powersgd",
+  "name": "PowerSGD",
+  "short_name": "PowerSGD",
+  "year": 2019,
+  "citations": 500,
+  "categories": [
+    "分散学習"
+  ],
+  "reference": "https://arxiv.org/abs/1905.13727",
+  "summary": "分散学習で送受信する勾配行列を，1ステップの冪乗反復による低ランク近似で圧縮する手法である．前回の近似結果を冪乗反復の初期値として再利用し（ウォームスタート），圧縮誤差を誤差フィードバックで次ステップに持ち越すことで，All-Reduceと互換な形で通信量を大幅に削減しつつ，SGDと同等の精度を保つ．PyTorchのDDP通信フックとして実装されている．",
+  "update_rule": "{\\mathbf M} = {\\mathbf G}_t + {\\mathbf E}_t, \\quad {\\mathbf P} = \\mathrm{AllReduce}({\\mathbf M} {\\mathbf Q}_{t-1}), \\;\\; \\hat{\\mathbf P} = \\mathrm{orth}({\\mathbf P}), \\quad {\\mathbf Q}_t = \\mathrm{AllReduce}({\\mathbf M}^\\top \\hat{\\mathbf P}), \\quad \\hat{\\mathbf G}_t = \\hat{\\mathbf P} {\\mathbf Q}_t^\\top, \\quad {\\mathbf E}_{t+1} = {\\mathbf M} - \\hat{\\mathbf G}_t",
+  "parents": [
+    {
+      "id": "ef_signsgd",
+      "types": [
+        "compression"
+      ],
+      "improvement": "誤差フィードバックの低ランク圧縮への適用"
+    },
+    {
+      "id": "qsgd",
+      "types": [
+        "compression",
+        "communication"
+      ],
+      "improvement": "量子化の代わりに冪乗反復による低ランク近似を用いた勾配圧縮"
+    }
+  ],
+  "practical": {
+    "state": "compressed",
+    "implementations": [
+      "pytorch"
+    ],
+    "hyperparameters": [
+      "ランク"
+    ],
+    "tasks": [
+      "distributed"
+    ]
+  }
+}

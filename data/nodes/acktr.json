@@ -1,0 +1,44 @@
+{
+  "id": "acktr",
+  "name": "ACKTR (Actor Critic using Kronecker-Factored Trust Region)",
+  "short_name": "ACKTR",
+  "year": 2017,
+  "citations": 700,
+  "categories": [
+    "方策最適化",
+    "2次手法"
+  ],
+  "reference": "https://arxiv.org/abs/1708.05144",
+  "summary": "K-FACによるフィッシャー情報行列のクロネッカー積近似を用いて，アクター（方策）とクリティック（価値関数）の双方に信頼領域付きの自然勾配更新を適用する手法である．TRPOのような共役勾配法の反復を不要にし，1次手法のActor-Criticと同程度の計算量で，より高いサンプル効率を達成する．",
+  "update_rule": "\\Delta\\boldsymbol\\theta = \\hat{\\mathbf F}^{-1} \\nabla_{\\boldsymbol\\theta} J \\;\\; (\\hat{\\mathbf F} : \\text{K-FAC近似}), \\quad \\eta = \\min\\left( \\eta_{\\max}, \\sqrt{\\frac{2\\delta}{\\Delta\\boldsymbol\\theta^\\top \\hat{\\mathbf F} \\Delta\\boldsymbol\\theta}} \\right), \\quad \\boldsymbol\\theta_{t+1} = \\boldsymbol\\theta_t + \\eta \\, \\Delta\\boldsymbol\\theta",
+  "parents": [
+    {
+      "id": "kfac",
+      "types": [
+        "curvature",
+        "problem_transfer"
+      ],
+      "improvement": "K-FACによる自然勾配の方策最適化への適用"
+    },
+    {
+      "id": "trpo",
+      "types": [
+        "stabilization"
+      ],
+      "improvement": "信頼領域によるステップ幅の制御"
+    }
+  ],
+  "practical": {
+    "state": "matrix",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "δ（信頼領域）"
+    ],
+    "tasks": [
+      "rl"
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "aggmo",
+  "name": "AggMo (Aggregated Momentum)",
+  "short_name": "AggMo",
+  "year": 2018,
+  "citations": 100,
+  "categories": [
+    "高速化"
+  ],
+  "reference": "https://arxiv.org/abs/1804.00325",
+  "summary": "減衰率の異なる複数の慣性項を並列に保持し，それらの平均で更新する手法である．大きな減衰率の慣性項による加速と，小さな減衰率の慣性項による振動の抑制を両立し，大きな減衰率でも学習が安定する．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad {\\mathbf v}^{(i)}_t = \\beta^{(i)} {\\mathbf v}^{(i)}_{t-1} - {\\mathbf g}_t \\;\\; (i = 1, \\dots, K), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t + \\frac{\\eta}{K} \\sum_{i=1}^{K} {\\mathbf v}^{(i)}_t",
+  "parents": [
+    {
+      "id": "momentum",
+      "types": [
+        "momentum"
+      ],
+      "improvement": "減衰率の異なる複数の慣性項の集約"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β(1..K)"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

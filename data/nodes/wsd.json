@@ -1,0 +1,48 @@
+{
+  "id": "wsd",
+  "name": "WSDスケジュール (Warmup-Stable-Decay)",
+  "short_name": "WSDスケジュール",
+  "year": 2024,
+  "citations": 400,
+  "categories": [
+    "学習率スケジュール"
+  ],
+  "reference": "https://arxiv.org/abs/2404.06395",
+  "summary": "学習率をウォームアップ後に一定値で長く保ち（安定期），学習の最後の短い期間（全体の1割程度）でのみ急速に減衰させるスケジュールである．コサイン減衰と異なり総ステップ数を事前に決める必要がなく，安定期のチェックポイントから減衰を始めることで，学習の継続やデータ量に関するスケーリング則の調査を少ない再学習で行える．",
+  "update_rule": "\\eta_t = \\begin{cases} \\frac{t}{T_w} \\eta & (t < T_w) \\\\ \\eta & (T_w \\le t < T_s) \\\\ f(t - T_s) \\, \\eta & (T_s \\le t \\le T) \\end{cases}, \\quad f : \\text{短期間での急速な減衰（指数・線形等）}",
+  "parents": [
+    {
+      "id": "linear_scaling_warmup",
+      "types": [
+        "lr_automation"
+      ],
+      "improvement": "ウォームアップ後の一定学習率の維持と終盤のみの減衰"
+    },
+    {
+      "id": "sgdr",
+      "types": [
+        "lr_automation"
+      ],
+      "improvement": "総ステップ数に依存するコサイン減衰の，減衰開始時刻の自由な選択への置き換え"
+    }
+  ],
+  "practical": {
+    "state": "na",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "ウォームアップ長",
+      "減衰期間の割合"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  },
+  "deep_dive": {
+    "why": "学習率を一定に保つ期間が長いため，任意のチェックポイントから短い減衰期間を加えるだけで良いモデルが得られ，学習の延長やスケーリング則の調査が容易になる．",
+    "weaknesses": "減衰期間の長さと形（線形・指数・1−√）に性能が依存する．",
+    "settings": "ウォームアップ 1〜2%，一定期間，最後の 10〜20% で減衰（1−√ 形も有効とされる）．"
+  },
+  "notes": "MiniCPMの論文の中で提案された．Citation数は論文全体の概算である．"
+}

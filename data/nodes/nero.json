@@ -1,0 +1,44 @@
+{
+  "id": "nero",
+  "name": "Nero (Neuronal Rotator)",
+  "short_name": "Nero",
+  "year": 2021,
+  "citations": 50,
+  "categories": [
+    "学習安定化",
+    "学習率自動調整"
+  ],
+  "reference": "https://arxiv.org/abs/2102.07227",
+  "summary": "ニューロン（重み行列の行）ごとに，入力重みベクトルの平均を0，ノルムを一定に保つ制約を課し，その超球面上で重みを回転させるように更新する手法である．重み減衰や学習率スケジュール，慣性項の調整なしに，ニューロンごとに正規化した相対的な更新を行い，多様なアーキテクチャで良好な性能を示す．",
+  "update_rule": "\\bar g_{t,i} = \\frac{{\\mathbf g}_{t,i}}{\\sqrt{v_{t,i}}}, \\;\\; v_{t,i} = \\beta v_{t-1,i} + (1 - \\beta) \\|{\\mathbf g}_{t,i}\\|^2, \\quad {\\mathbf w}_{t+1,i} = \\mathrm{proj}\\left( {\\mathbf w}_{t,i} - \\eta \\|{\\mathbf w}_{t,i}\\| \\bar g_{t,i} \\right), \\quad \\mathrm{proj} : \\text{平均0・ノルム一定への射影}",
+  "parents": [
+    {
+      "id": "fromage",
+      "types": [
+        "normalization"
+      ],
+      "improvement": "層単位からニューロン単位への相対的な更新の細分化と超球面上への射影"
+    },
+    {
+      "id": "lars",
+      "types": [
+        "normalization",
+        "adaptive"
+      ],
+      "improvement": "ニューロンごとのノルムに基づく更新量の制御"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

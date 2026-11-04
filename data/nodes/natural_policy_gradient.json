@@ -1,0 +1,34 @@
+{
+  "id": "natural_policy_gradient",
+  "name": "自然方策勾配法 (Natural Policy Gradient)",
+  "short_name": "自然方策勾配法",
+  "year": 2001,
+  "citations": 1500,
+  "categories": [
+    "方策最適化",
+    "2次手法"
+  ],
+  "reference": "https://papers.nips.cc/paper/2073-a-natural-policy-gradient",
+  "summary": "強化学習の方策勾配法に，方策（行動の確率分布）の構造に基づくフィッシャー情報行列による前処理を適用した自然勾配法である．方策のパラメータ化に依存しない更新が得られ，自然勾配の方向は貪欲な最適行動の選択に向かうことから方策反復法と関係づけられる．",
+  "update_rule": "{\\mathbf F}(\\boldsymbol\\theta) = \\mathbb{E}_{s, a \\sim \\pi_{\\boldsymbol\\theta}}\\left[ \\nabla \\log \\pi_{\\boldsymbol\\theta}(a|s) \\nabla \\log \\pi_{\\boldsymbol\\theta}(a|s)^\\top \\right], \\quad \\boldsymbol\\theta_{t+1} = \\boldsymbol\\theta_t + \\eta \\, {\\mathbf F}(\\boldsymbol\\theta_t)^{-1} \\nabla_{\\boldsymbol\\theta} J(\\boldsymbol\\theta_t)",
+  "parents": [
+    {
+      "id": "natural_gradient",
+      "types": [
+        "problem_transfer",
+        "curvature"
+      ],
+      "improvement": "方策の分布に基づくフィッシャー情報行列の強化学習への適用"
+    }
+  ],
+  "practical": {
+    "state": "matrix",
+    "implementations": [],
+    "hyperparameters": [
+      "η"
+    ],
+    "tasks": [
+      "rl"
+    ]
+  }
+}

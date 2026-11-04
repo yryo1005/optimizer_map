@@ -1,0 +1,35 @@
+{
+  "id": "polargrad",
+  "name": "PolarGrad",
+  "short_name": "PolarGrad",
+  "year": 2025,
+  "citations": 30,
+  "categories": [
+    "2次手法"
+  ],
+  "reference": "https://arxiv.org/abs/2505.21799",
+  "summary": "行列形状の勾配の極分解に基づく前処理付き最適化手法の族である．Muonを，勾配の極分解の直交因子のみを用いる特殊ケースと位置付け，直交因子を勾配の核ノルムでスケーリングすることで更新量の大きさの情報を回復する．極分解の計算には調整の少ない数値解法（QDWH等）を用いる．",
+  "update_rule": "{\\mathbf M}_t = {\\mathbf U}_t {\\mathbf H}_t \\;\\; (\\text{極分解}), \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta \\, \\|{\\mathbf M}_t\\|_{*} \\, {\\mathbf U}_t",
+  "parents": [
+    {
+      "id": "muon",
+      "types": [
+        "normalization",
+        "adaptive"
+      ],
+      "improvement": "極分解の直交因子への核ノルムによるスケーリングの導入"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  }
+}

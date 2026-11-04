@@ -1,0 +1,35 @@
+{
+  "id": "gluon",
+  "name": "Gluon",
+  "short_name": "Gluon",
+  "year": 2025,
+  "citations": 30,
+  "categories": [
+    "2次手法"
+  ],
+  "reference": "https://arxiv.org/abs/2505.13416",
+  "summary": "MuonやScionの既存の理論解析が，実際の層ごとのLMOの適用や層ごとの幾何構造を反映していない問題に対し，層ごとの一般化された滑らかさのモデルを導入したLMOベースの最適化手法の枠組みである．理論から導かれる層ごとのステップ幅が，実験的に調整された値とよく一致することを示した．",
+  "update_rule": "{\\mathbf W}^{i}_{t+1} = {\\mathbf W}^{i}_t + \\eta^i_t \\, \\mathrm{lmo}_{\\|\\cdot\\|_{(i)}}({\\mathbf M}^i_t), \\quad \\eta^i_t = \\frac{\\| \\nabla_i f({\\mathbf W}_t) \\|_{(i)\\star}}{L^0_i + L^1_i \\| \\nabla_i f({\\mathbf W}_t) \\|_{(i)\\star}}",
+  "parents": [
+    {
+      "id": "scion",
+      "types": [
+        "lr_automation",
+        "reinterpretation"
+      ],
+      "improvement": "層ごとの一般化された滑らかさに基づくステップ幅の理論的な導出"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [],
+    "hyperparameters": [
+      "層ごとのη",
+      "L0",
+      "L1"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "id": "ekfac",
+  "name": "EKFAC (Eigenvalue-corrected K-FAC)",
+  "short_name": "EKFAC",
+  "year": 2018,
+  "citations": 300,
+  "categories": [
+    "2次手法"
+  ],
+  "reference": "https://arxiv.org/abs/1806.03884",
+  "summary": "K-FACのクロネッカー積近似の固有基底を用い，その基底上での対角スケーリング（固有値）をクロネッカー積から求めるのではなく，勾配の2乗から直接推定し直す手法である．K-FACより正確なフィッシャー情報行列の近似が得られ，対角スケーリングは安価に頻繁な更新が可能である．SOAPの考え方の先駆けとなった．",
+  "update_rule": "{\\mathbf A} = {\\mathbf U}_A \\boldsymbol\\Lambda_A {\\mathbf U}_A^\\top, \\quad {\\mathbf S} = {\\mathbf U}_S \\boldsymbol\\Lambda_S {\\mathbf U}_S^\\top, \\quad {\\mathbf s}^* = \\mathbb{E}\\left[ \\left( {\\mathbf U}_S^\\top \\nabla_{\\mathbf W} f \\, {\\mathbf U}_A \\right)^2 \\right], \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta \\, {\\mathbf U}_S \\left( \\frac{{\\mathbf U}_S^\\top \\nabla_{\\mathbf W} f \\, {\\mathbf U}_A}{{\\mathbf s}^* + \\epsilon} \\right) {\\mathbf U}_A^\\top",
+  "parents": [
+    {
+      "id": "kfac",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "クロネッカー因子の固有基底上での対角スケーリングの直接推定"
+    }
+  ],
+  "practical": {
+    "state": "matrix",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "ダンピング",
+      "更新頻度"
+    ],
+    "tasks": [
+      "vision"
+    ]
+  }
+}

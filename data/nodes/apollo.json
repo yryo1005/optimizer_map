@@ -1,0 +1,47 @@
+{
+  "id": "apollo",
+  "name": "APOLLO (Approximated Gradient Scaling for Memory-Efficient LLM Optimization)",
+  "short_name": "APOLLO",
+  "year": 2024,
+  "citations": 60,
+  "categories": [
+    "メモリ効率",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/2412.05270",
+  "summary": "AdamWの要素ごとの学習率スケーリングは冗長であり，チャンネル（行・列）単位の粗いスケーリングで十分であるという観察に基づき，ランダム射影による低ランクの補助的なオプティマイザ状態からスケーリング係数を推定する手法である．SVDを必要とせず，ランク1版（APOLLO-Mini）はSGD並みのメモリでAdamWと同等以上の事前学習性能を示す．",
+  "update_rule": "{\\mathbf R}_t = {\\mathbf P}_t {\\mathbf G}_t \\;\\; ({\\mathbf P}_t : \\text{ランダム射影}), \\quad \\tilde{\\mathbf R}_t = \\mathrm{AdamW}({\\mathbf R}_t), \\quad s_j = \\frac{\\|\\tilde{\\mathbf R}_{t,:,j}\\|}{\\|{\\mathbf R}_{t,:,j}\\|}, \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta \\, {\\mathbf G}_t \\, \\mathrm{diag}({\\mathbf s})",
+  "parents": [
+    {
+      "id": "galore",
+      "types": [
+        "compression",
+        "stochastic"
+      ],
+      "improvement": "SVDのランダム射影への置き換えと，射影空間での推定値によるチャンネルごとのスケーリング"
+    },
+    {
+      "id": "adamw",
+      "types": [
+        "adaptive",
+        "compression"
+      ],
+      "improvement": "チャンネル単位の学習率スケーリングによる要素ごとの状態量の削減"
+    }
+  ],
+  "practical": {
+    "state": "compressed",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "ランク",
+      "β1",
+      "β2"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  }
+}

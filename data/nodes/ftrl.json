@@ -1,0 +1,62 @@
+{
+  "id": "ftrl",
+  "name": "FTRL-Proximal (Follow The Regularized Leader)",
+  "short_name": "FTRL-Proximal",
+  "year": 2013,
+  "citations": 1500,
+  "categories": [
+    "オンライン学習",
+    "正則化",
+    "適応的学習率"
+  ],
+  "reference": "https://doi.org/10.1145/2487575.2488200",
+  "summary": "オンライン学習において，過去のすべての勾配の線形近似に，L1正則化と各時刻の点からの近接項を加えた問題を閉形式で解いて更新する手法である．パラメータごとのAdaGrad型学習率と組み合わせることで，広告のクリック率予測のような超高次元・疎なデータに対し，精度を保ちつつ非常に疎なモデルを得られる．",
+  "update_rule": "{\\mathbf w}_{t+1} = \\arg\\min_{{\\mathbf w}} \\left\\{ {\\mathbf g}_{1:t}^\\top {\\mathbf w} + \\frac{1}{2} \\sum_{s=1}^{t} \\sigma_s \\|{\\mathbf w} - {\\mathbf w}_s\\|^2 + \\lambda_1 \\|{\\mathbf w}\\|_1 \\right\\}, \\quad \\sum_{s=1}^{t} \\sigma_{s,i} = \\frac{\\sqrt{\\sum_{s \\le t} g_{s,i}^2}}{\\eta}",
+  "parents": [
+    {
+      "id": "adagrad",
+      "types": [
+        "adaptive"
+      ],
+      "improvement": "パラメータごとのAdaGrad型学習率の利用"
+    },
+    {
+      "id": "dual_averaging",
+      "types": [
+        "regularization"
+      ],
+      "improvement": "過去の勾配の累積と近接項による閉形式の更新とL1正則化による疎性"
+    },
+    {
+      "id": "ogd",
+      "types": [
+        "regularization",
+        "reinterpretation"
+      ],
+      "improvement": "オンライン凸最適化の枠組みでの正則化付きリーダー追従"
+    },
+    {
+      "id": "rda",
+      "types": [
+        "regularization"
+      ],
+      "improvement": "正則化付き双対平均化による疎な解"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "optax",
+      "keras"
+    ],
+    "hyperparameters": [
+      "α",
+      "β",
+      "λ1",
+      "λ2"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

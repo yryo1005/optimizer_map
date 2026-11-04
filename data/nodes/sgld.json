@@ -1,0 +1,36 @@
+{
+  "id": "sgld",
+  "name": "SGLD (Stochastic Gradient Langevin Dynamics)",
+  "short_name": "SGLD",
+  "year": 2011,
+  "citations": 3000,
+  "categories": [
+    "ベイズ推論",
+    "平坦解探索"
+  ],
+  "reference": "https://www.stats.ox.ac.uk/~teh/research/compstats/WelTeh2011a.pdf",
+  "summary": "SGDの更新に，学習率に応じた大きさのガウス雑音を加えることで，学習率を減衰させるにつれて最適化から事後分布からのサンプリングへと滑らかに移行させる手法である．大規模データに対するベイズ推論を，SGDと同程度の計算量で可能にし，雑音を加えた最適化による平坦な解の探索の理論的な基盤ともなった．",
+  "update_rule": "{\\mathbf w}_{t+1} = {\\mathbf w}_t + \\frac{\\eta_t}{2} \\left( \\nabla \\log p({\\mathbf w}_t) + \\frac{N}{n} \\sum_{i=1}^{n} \\nabla \\log p(x_{t_i} | {\\mathbf w}_t) \\right) + \\boldsymbol\\xi_t, \\quad \\boldsymbol\\xi_t \\sim \\mathcal{N}({\\mathbf 0}, \\eta_t {\\mathbf I})",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "flatness",
+        "problem_transfer"
+      ],
+      "improvement": "学習率に応じたガウス雑音の付加によるサンプリングへの移行"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η_t"
+    ],
+    "tasks": [
+      "bayes"
+    ]
+  }
+}

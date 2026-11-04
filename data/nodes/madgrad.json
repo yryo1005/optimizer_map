@@ -1,0 +1,50 @@
+{
+  "id": "madgrad",
+  "name": "MADGRAD (Momentumized, Adaptive, Dual averaged GRADient)",
+  "short_name": "MADGRAD",
+  "year": 2021,
+  "citations": 100,
+  "categories": [
+    "適応的学習率",
+    "重み平均化"
+  ],
+  "reference": "https://arxiv.org/abs/2101.11075",
+  "summary": "AdaGradの双対平均化版に慣性項を組み合わせた手法である．勾配の累積和と勾配2乗の累積和の3乗根による正規化を用い，初期点からの変位として次の点を構成することで，画像分類・言語モデル・音声認識など多様なタスクでSGDやAdamと同等以上の性能を示す．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad \\lambda_t = \\eta \\sqrt{t+1}, \\quad {\\mathbf s}_t = {\\mathbf s}_{t-1} + \\lambda_t {\\mathbf g}_t, \\quad \\boldsymbol\\nu_t = \\boldsymbol\\nu_{t-1} + \\lambda_t {\\mathbf g}_t^2, \\quad {\\mathbf z}_{t+1} = {\\mathbf w}_0 - \\frac{{\\mathbf s}_t}{\\sqrt[3]{\\boldsymbol\\nu_t} + \\epsilon}, \\quad {\\mathbf w}_{t+1} = (1 - c) {\\mathbf w}_t + c \\, {\\mathbf z}_{t+1}",
+  "parents": [
+    {
+      "id": "adagrad",
+      "types": [
+        "adaptive"
+      ],
+      "improvement": "勾配2乗累積の3乗根による正規化"
+    },
+    {
+      "id": "dual_averaging",
+      "types": [
+        "averaging"
+      ],
+      "improvement": "双対平均化形式での更新"
+    },
+    {
+      "id": "momentum",
+      "types": [
+        "momentum"
+      ],
+      "improvement": "反復点の補間による慣性効果の導入"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "c"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

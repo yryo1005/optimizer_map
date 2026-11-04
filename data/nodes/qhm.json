@@ -1,0 +1,37 @@
+{
+  "id": "qhm",
+  "name": "QHM (Quasi-Hyperbolic Momentum) / QHAdam",
+  "short_name": "QHM / QHAdam",
+  "year": 2018,
+  "citations": 200,
+  "categories": [
+    "高速化"
+  ],
+  "reference": "https://arxiv.org/abs/1810.06801",
+  "summary": "慣性項による更新と現在の勾配による更新を重み付き平均する手法である．この単純な形式で，Nesterov法や他の多くの慣性項の変種を特殊ケースとして表現でき，Adamに同様の修正を加えたQHAdamも提案されている．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad {\\mathbf m}_t = \\beta {\\mathbf m}_{t-1} + (1 - \\beta) {\\mathbf g}_t, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\left[ (1 - \\nu) {\\mathbf g}_t + \\nu {\\mathbf m}_t \\right]",
+  "parents": [
+    {
+      "id": "momentum",
+      "types": [
+        "momentum",
+        "reinterpretation"
+      ],
+      "improvement": "慣性項と現在の勾配の重み付き平均（Nesterov法等の統一表現）"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β",
+      "ν"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

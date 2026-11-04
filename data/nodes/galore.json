@@ -1,0 +1,44 @@
+{
+  "id": "galore",
+  "name": "GaLore (Gradient Low-Rank Projection)",
+  "short_name": "GaLore",
+  "year": 2024,
+  "citations": 600,
+  "categories": [
+    "メモリ効率",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/2403.03507",
+  "summary": "重み行列の勾配が学習中に低ランク構造を持つことに着目し，勾配を定期的に計算した射影行列で低ランク部分空間へ射影した上で，その部分空間内でAdam等の最適化手法を実行する手法である．オプティマイザの状態量が低ランク空間の大きさで済むため，全パラメータを学習しつつメモリ使用量を大幅に削減でき，一般向けGPUでの大規模言語モデルの事前学習を可能にする．",
+  "update_rule": "{\\mathbf G}_t = \\nabla f_t({\\mathbf W}_t), \\quad {\\mathbf P}_t = \\mathrm{SVD}_r({\\mathbf G}_t) \\;\\; (T\\text{ステップごとに更新}), \\quad {\\mathbf R}_t = {\\mathbf P}_t^\\top {\\mathbf G}_t, \\quad {\\mathbf N}_t = \\mathrm{Adam}({\\mathbf R}_t), \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta \\, {\\mathbf P}_t {\\mathbf N}_t",
+  "parents": [
+    {
+      "id": "adam",
+      "types": [
+        "compression"
+      ],
+      "improvement": "勾配の低ランク部分空間への射影とその空間内での最適化状態の保持"
+    }
+  ],
+  "practical": {
+    "state": "compressed",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "ランク",
+      "T（射影の更新間隔）",
+      "α"
+    ],
+    "tasks": [
+      "llm",
+      "finetune"
+    ]
+  },
+  "deep_dive": {
+    "why": "勾配が低ランク構造を持つことを利用し，定期的に求めた部分空間に射影して最適化状態を保持するため，全パラメータの学習を少ないメモリで行える．",
+    "weaknesses": "SVD の計算コストがかかる．部分空間外の勾配成分が捨てられるため，ランクが小さすぎると性能が落ちる．",
+    "settings": "ランク 128〜512，射影の更新間隔 T=200，スケール α=0.25．"
+  }
+}

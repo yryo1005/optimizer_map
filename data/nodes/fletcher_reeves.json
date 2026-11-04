@@ -1,0 +1,36 @@
+{
+  "id": "fletcher_reeves",
+  "name": "非線形共役勾配法 (Nonlinear Conjugate Gradient, Fletcher-Reeves)",
+  "short_name": "非線形共役勾配法",
+  "year": 1964,
+  "citations": 4000,
+  "categories": [
+    "2次手法",
+    "高速化"
+  ],
+  "reference": "https://doi.org/10.1093/comjnl/7.2.149",
+  "summary": "線形方程式の解法である共役勾配法（Hestenes-Stiefel, 1952）を一般の非線形関数の最適化に拡張した手法である．現在の勾配と前回の探索方向を組み合わせて，互いに共役に近い探索方向を生成することで，ヘッセ行列を用いずに最急降下法より高速に収束する．",
+  "update_rule": "\\beta_t = \\frac{\\|\\nabla f({\\mathbf w}_t)\\|^2}{\\|\\nabla f({\\mathbf w}_{t-1})\\|^2}, \\quad {\\mathbf d}_t = -\\nabla f({\\mathbf w}_t) + \\beta_t {\\mathbf d}_{t-1}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t + \\alpha_t {\\mathbf d}_t \\;\\; (\\alpha_t : \\text{直線探索})",
+  "parents": [
+    {
+      "id": "gd",
+      "types": [
+        "curvature",
+        "momentum"
+      ],
+      "improvement": "前回の探索方向との共役性に基づく探索方向の生成"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "直線探索の設定"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

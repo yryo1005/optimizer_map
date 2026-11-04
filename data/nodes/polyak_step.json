@@ -1,0 +1,34 @@
+{
+  "id": "polyak_step",
+  "name": "Polyakステップサイズ (Polyak Step Size)",
+  "short_name": "Polyakステップサイズ",
+  "year": 1969,
+  "citations": 800,
+  "categories": [
+    "学習率自動調整"
+  ],
+  "reference": "https://doi.org/10.1016/0041-5553(69)90061-5",
+  "summary": "目的関数の最小値が既知である場合に，現在の関数値と最小値の差を勾配ノルムの2乗で割った値を学習率とする手法である．関数値の改善余地に応じて学習率が自動的に決まり，非平滑な凸関数を含め，学習率の調整なしに良好な収束性を示す．",
+  "update_rule": "\\eta_t = \\frac{f({\\mathbf w}_t) - f^*}{\\|\\nabla f({\\mathbf w}_t)\\|^2}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta_t \\nabla f({\\mathbf w}_t)",
+  "parents": [
+    {
+      "id": "gd",
+      "types": [
+        "lr_automation"
+      ],
+      "improvement": "最適値との差と勾配ノルムに基づく学習率の自動設定"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "optax"
+    ],
+    "hyperparameters": [
+      "f*（最小値）"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

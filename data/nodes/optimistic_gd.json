@@ -1,0 +1,42 @@
+{
+  "id": "optimistic_gd",
+  "name": "楽観的勾配法 (Optimistic Gradient Descent / Optimistic Adam)",
+  "short_name": "楽観的勾配法",
+  "year": 2017,
+  "citations": 600,
+  "categories": [
+    "ミニマックス最適化",
+    "オンライン学習"
+  ],
+  "reference": "https://arxiv.org/abs/1711.00141",
+  "summary": "GANの学習で生じる振動（極限周期）に対し，前ステップの勾配を予測値として用い，今回の勾配の2倍から前回の勾配を引いた方向に更新する楽観的ミラー降下法を適用した手法である．Extragradient法と同様の先読み効果を，1ステップあたり1回の勾配計算で実現し，双線形なゲームで最終反復が均衡に収束する．Adamに適用したOptimistic Adamも提案された．",
+  "update_rule": "{\\mathbf z}_{t+1} = {\\mathbf z}_t - 2 \\eta \\, F({\\mathbf z}_t) + \\eta \\, F({\\mathbf z}_{t-1})",
+  "parents": [
+    {
+      "id": "extragradient",
+      "types": [
+        "momentum"
+      ],
+      "improvement": "前ステップの勾配を予測値とした1回の勾配計算での先読み"
+    },
+    {
+      "id": "ogd",
+      "types": [
+        "problem_transfer"
+      ],
+      "improvement": "楽観的オンライン学習（予測を用いたミラー降下法）の鞍点問題への適用"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η"
+    ],
+    "tasks": [
+      "game"
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "id": "adamod",
+  "name": "AdaMod",
+  "short_name": "AdaMod",
+  "year": 2019,
+  "citations": 150,
+  "categories": [
+    "適応的学習率",
+    "学習安定化"
+  ],
+  "reference": "https://arxiv.org/abs/1910.12249",
+  "summary": "Adamの学習初期に適応的学習率が極端に大きくなる問題に対し，適応的学習率自体の指数移動平均を計算し，それを上限として学習率を切り詰める手法である．ウォームアップなしでも安定に学習でき，平滑化係数を0とするとAdamに一致する．",
+  "update_rule": "\\boldsymbol\\eta_t = \\frac{\\eta}{\\sqrt{\\hat{\\mathbf v}_t} + \\epsilon}, \\quad {\\mathbf s}_t = \\beta_3 {\\mathbf s}_{t-1} + (1 - \\beta_3) \\boldsymbol\\eta_t, \\quad \\hat{\\boldsymbol\\eta}_t = \\min(\\boldsymbol\\eta_t, {\\mathbf s}_t), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\hat{\\boldsymbol\\eta}_t \\odot \\hat{\\mathbf m}_t",
+  "parents": [
+    {
+      "id": "adam",
+      "types": [
+        "stabilization"
+      ],
+      "improvement": "適応的学習率の移動平均による上限の導入"
+    },
+    {
+      "id": "adabound",
+      "types": [
+        "stabilization"
+      ],
+      "improvement": "固定スケジュールの上下限の，適応的学習率自体に基づく上限への置き換え"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "β3"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

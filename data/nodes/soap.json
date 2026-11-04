@@ -1,0 +1,50 @@
+{
+  "id": "soap",
+  "name": "SOAP (ShampoO with Adam in the Preconditioner's eigenbasis)",
+  "short_name": "SOAP",
+  "year": 2024,
+  "citations": 150,
+  "categories": [
+    "2次手法",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/2409.11321",
+  "summary": "Shampooの前処理行列の固有基底で張られる回転した空間においてAdam（Adafactor）を実行することと，Shampooがほぼ等価であることを示し，これに基づく手法である．固有基底は低頻度でのみ更新し，その間は回転空間でAdamの2次モーメントを継続的に更新することで，Shampooより少ないハイパーパラメータと計算量で，より高い性能を示す．",
+  "update_rule": "{\\mathbf L}_t = \\beta_2 {\\mathbf L}_{t-1} + (1 - \\beta_2) {\\mathbf G}_t {\\mathbf G}_t^\\top, \\quad {\\mathbf R}_t = \\beta_2 {\\mathbf R}_{t-1} + (1 - \\beta_2) {\\mathbf G}_t^\\top {\\mathbf G}_t, \\quad {\\mathbf Q}_L, {\\mathbf Q}_R = \\mathrm{eigvec}({\\mathbf L}_t), \\mathrm{eigvec}({\\mathbf R}_t) \\;\\; (\\text{低頻度で更新}), \\quad {\\mathbf G}'_t = {\\mathbf Q}_L^\\top {\\mathbf G}_t {\\mathbf Q}_R, \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta \\, {\\mathbf Q}_L \\, \\mathrm{Adam}({\\mathbf G}'_t) \\, {\\mathbf Q}_R^\\top",
+  "parents": [
+    {
+      "id": "shampoo",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "前処理行列の固有基底による回転空間でのAdamの実行と，固有基底の低頻度更新"
+    },
+    {
+      "id": "adam",
+      "types": [
+        "adaptive"
+      ],
+      "improvement": "回転空間における対角の2次モーメント推定の利用"
+    }
+  ],
+  "practical": {
+    "state": "matrix",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "固有基底の更新頻度"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  },
+  "deep_dive": {
+    "why": "Shampoo の前処理行列の固有基底に回転した空間で Adam を実行するため，基底の更新頻度を下げても回転空間の2次モーメントが追従し，Shampoo より安定で調整が容易である．",
+    "weaknesses": "固有値分解（または QR）の計算コストとメモリは Shampoo と同程度に必要である．",
+    "settings": "β1=0.95，β2=0.95，固有基底の更新は 10 ステップごと，学習率は AdamW と同程度から探索する．"
+  }
+}

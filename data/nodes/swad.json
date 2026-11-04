@@ -1,0 +1,36 @@
+{
+  "id": "swad",
+  "name": "SWAD (Stochastic Weight Averaging Densely)",
+  "short_name": "SWAD",
+  "year": 2021,
+  "citations": 600,
+  "categories": [
+    "平坦解探索",
+    "重み平均化"
+  ],
+  "reference": "https://arxiv.org/abs/2102.08604",
+  "summary": "ドメイン汎化（学習時に見ていないドメインへの汎化）において平坦な解が有効であることを理論的に示し，SWAを周期的ではなく毎ステップ密に，かつ検証損失に基づいて過学習が始まる前の区間に限って重みを平均する手法である．複数のドメイン汎化ベンチマークで大きな性能改善を示した．",
+  "update_rule": "{\\mathbf w}_{\\mathrm{SWAD}} = \\frac{1}{t_e - t_s + 1} \\sum_{t = t_s}^{t_e} {\\mathbf w}_t \\quad (t_s, t_e : \\text{検証損失に基づく平均化の開始・終了ステップ})",
+  "parents": [
+    {
+      "id": "swa",
+      "types": [
+        "averaging",
+        "flatness"
+      ],
+      "improvement": "毎ステップの密な重み平均と検証損失に基づく平均区間の選択"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "平均の開始・終了"
+    ],
+    "tasks": [
+      "vision"
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "id": "amsgrad",
+  "name": "AMSGrad",
+  "short_name": "AMSGrad",
+  "year": 2018,
+  "citations": 3500,
+  "categories": [
+    "適応的学習率"
+  ],
+  "reference": "https://openreview.net/forum?id=ryQu7f-RZ",
+  "summary": "Adamが単純な凸問題でも収束しない反例を示し，その原因が2次モーメントの指数移動平均により実効的な学習率が増加し得ることにあると指摘した手法である．2次モーメントの過去の最大値を用いて学習率を正規化することで，実効的な学習率が単調非増加となり，収束性が保証される．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad {\\mathbf m}_t = \\beta_1 {\\mathbf m}_{t-1} + (1 - \\beta_1) {\\mathbf g}_t, \\quad {\\mathbf v}_t = \\beta_2 {\\mathbf v}_{t-1} + (1 - \\beta_2) {\\mathbf g}_t^2, \\quad \\hat{\\mathbf v}_t = \\max(\\hat{\\mathbf v}_{t-1}, {\\mathbf v}_t), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\frac{\\eta}{\\sqrt{\\hat{\\mathbf v}_t} + \\epsilon} {\\mathbf m}_t",
+  "parents": [
+    {
+      "id": "adam",
+      "types": [
+        "adaptive",
+        "stabilization"
+      ],
+      "improvement": "2次モーメントの過去の最大値による正規化（実効的な学習率の単調非増加化と収束保証）"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [
+      "pytorch",
+      "optax",
+      "keras"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "ε"
+    ],
+    "tasks": [
+      "general"
+    ]
+  },
+  "deep_dive": {
+    "why": "2次モーメントの過去の最大値を用いて実効的な学習率を単調非増加にすることで，Adam の収束しない反例を回避する．",
+    "weaknesses": "実際の深層学習では Adam との性能差は小さく，学習率が下がりすぎることがある．",
+    "settings": "Adam(amsgrad=True)．他は Adam と同じ．"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "hypergradient",
+  "name": "超勾配降下法 (Hypergradient Descent)",
+  "short_name": "超勾配降下法",
+  "year": 2017,
+  "citations": 300,
+  "categories": [
+    "学習率自動調整"
+  ],
+  "reference": "https://arxiv.org/abs/1703.04782",
+  "summary": "学習率そのものを最適化対象とし，損失の学習率に関する勾配（超勾配）が現在と直前の勾配の内積で安価に計算できることを利用して，学習中に学習率を勾配降下で更新する手法である．SGD，SGDN，Adamのいずれにも適用でき，初期の学習率への感度を大きく低減する．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad \\eta_t = \\eta_{t-1} + \\beta \\, {\\mathbf g}_t^\\top {\\mathbf g}_{t-1}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta_t {\\mathbf g}_t",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "lr_automation"
+      ],
+      "improvement": "学習率に関する超勾配による学習率のオンライン更新"
+    },
+    {
+      "id": "adam",
+      "types": [
+        "lr_automation"
+      ],
+      "improvement": "Adamの学習率への同一の超勾配更新の適用"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η0",
+      "β（超学習率）"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

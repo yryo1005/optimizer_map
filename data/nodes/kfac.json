@@ -1,0 +1,43 @@
+{
+  "id": "kfac",
+  "name": "K-FAC (Kronecker-Factored Approximate Curvature)",
+  "short_name": "K-FAC",
+  "year": 2015,
+  "citations": 1300,
+  "categories": [
+    "2次手法"
+  ],
+  "reference": "https://arxiv.org/abs/1503.05671",
+  "summary": "自然勾配法に必要なフィッシャー情報行列を，層ごとのブロック対角行列で近似し，さらに各ブロックを層への入力の共分散と出力側の勾配の共分散のクロネッカー積で近似する手法である．クロネッカー積の性質により，小さな行列の逆行列のみで自然勾配を計算でき，大規模なニューラルネットワークに自然勾配法を適用可能にした．",
+  "update_rule": "{\\mathbf F}_l \\approx {\\mathbf A}_{l-1} \\otimes {\\mathbf S}_l, \\quad {\\mathbf A}_{l-1} = \\mathbb{E}[{\\mathbf a}_{l-1} {\\mathbf a}_{l-1}^\\top], \\quad {\\mathbf S}_l = \\mathbb{E}[{\\mathbf g}_l {\\mathbf g}_l^\\top], \\quad {\\mathbf W}_{l,t+1} = {\\mathbf W}_{l,t} - \\eta \\, ({\\mathbf S}_l + \\gamma {\\mathbf I})^{-1} \\nabla_{{\\mathbf W}_l} f \\, ({\\mathbf A}_{l-1} + \\gamma {\\mathbf I})^{-1}",
+  "parents": [
+    {
+      "id": "natural_gradient",
+      "types": [
+        "curvature",
+        "compression"
+      ],
+      "improvement": "フィッシャー情報行列の層ごとのクロネッカー積近似による計算量の削減"
+    }
+  ],
+  "practical": {
+    "state": "matrix",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "ダンピング",
+      "更新頻度"
+    ],
+    "tasks": [
+      "vision",
+      "general"
+    ]
+  },
+  "deep_dive": {
+    "why": "フィッシャー情報行列を層ごとのクロネッカー積で近似することで，自然勾配を小さな行列の逆行列だけで計算できる．パラメータ化に依存しにくい更新が得られる．",
+    "weaknesses": "ダンピングの調整が難しく，畳み込みや Transformer の層では追加の近似が必要である．因子の逆行列計算の頻度と精度のトレードオフがある．",
+    "settings": "ダンピング 1e-3〜1e-1，因子の更新は 10〜100 ステップごと，学習率は SGD と同程度から探索．"
+  }
+}

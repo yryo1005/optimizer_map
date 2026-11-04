@@ -1,0 +1,43 @@
+{
+  "id": "reptile",
+  "name": "Reptile",
+  "short_name": "Reptile",
+  "year": 2018,
+  "citations": 1700,
+  "categories": [
+    "自動探索・メタ学習",
+    "重み平均化"
+  ],
+  "reference": "https://arxiv.org/abs/1803.02999",
+  "summary": "MAMLの2階微分を不要にした1次のメタ学習手法である．タスクごとに数ステップのSGDを行い，得られたパラメータの方向へ初期パラメータを少しずつ移動させるだけという単純な更新で，MAMLと同等の性能を示す．更新はタスク間で勾配の内積を大きくする（汎化を促す）効果を持つ．",
+  "update_rule": "\\tilde{\\boldsymbol\\theta} = \\mathrm{SGD}^{k}(\\mathcal{L}_{\\mathcal{T}}, \\boldsymbol\\theta), \\quad \\boldsymbol\\theta \\leftarrow \\boldsymbol\\theta + \\epsilon (\\tilde{\\boldsymbol\\theta} - \\boldsymbol\\theta)",
+  "parents": [
+    {
+      "id": "maml",
+      "types": [
+        "problem_transfer"
+      ],
+      "improvement": "2階微分を用いない1次のメタ更新への簡略化"
+    },
+    {
+      "id": "polyak_averaging",
+      "types": [
+        "averaging"
+      ],
+      "improvement": "内側の最適化の到達点への補間による平均化的な更新"
+    }
+  ],
+  "practical": {
+    "state": "na",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "ε",
+      "k"
+    ],
+    "tasks": [
+      "meta"
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "padam",
+  "name": "Padam (Partially Adaptive Momentum Estimation)",
+  "short_name": "Padam",
+  "year": 2018,
+  "citations": 400,
+  "categories": [
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/1806.06763",
+  "summary": "AMSGradの2次モーメントによる正規化の指数（平方根，すなわち1/2乗）を0から1/2の間の値pに一般化した手法である．pを小さくするほどSGDに近づくため，適応的手法の高速な収束とSGDの汎化性能の中間的な振る舞いを調整できる．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad \\hat{\\mathbf v}_t = \\max(\\hat{\\mathbf v}_{t-1}, {\\mathbf v}_t), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\frac{{\\mathbf m}_t}{\\hat{\\mathbf v}_t^{\\,p}} \\quad (0 < p \\le 1/2)",
+  "parents": [
+    {
+      "id": "amsgrad",
+      "types": [
+        "adaptive"
+      ],
+      "improvement": "2次モーメントによる正規化の指数の部分化（SGDとの中間）"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "p"
+    ],
+    "tasks": [
+      "vision"
+    ]
+  }
+}

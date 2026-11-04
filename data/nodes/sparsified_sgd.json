@@ -1,0 +1,40 @@
+{
+  "id": "sparsified_sgd",
+  "name": "メモリ付き疎化SGD (Sparsified SGD with Memory)",
+  "short_name": "疎化SGD",
+  "year": 2018,
+  "citations": 700,
+  "categories": [
+    "分散学習"
+  ],
+  "reference": "https://arxiv.org/abs/1809.07599",
+  "summary": "勾配の上位k成分のみ（またはランダムなk成分）を送信する疎化を，送信しなかった成分をローカルなメモリに蓄積して後のステップで加える誤差補償と組み合わせた手法に対し，SGDと同じ収束率が得られることを初めて理論的に示した研究である．",
+  "update_rule": "{\\mathbf p}_t = {\\mathbf m}_t + \\eta_t {\\mathbf g}_t, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\mathrm{top}_k({\\mathbf p}_t), \\quad {\\mathbf m}_{t+1} = {\\mathbf p}_t - \\mathrm{top}_k({\\mathbf p}_t)",
+  "parents": [
+    {
+      "id": "dgc",
+      "types": [
+        "compression",
+        "reinterpretation"
+      ],
+      "improvement": "疎化と誤差補償の組み合わせに対するSGDと同等の収束率の証明"
+    },
+    {
+      "id": "onebit_sgd",
+      "types": [
+        "compression"
+      ],
+      "improvement": "誤差フィードバック（メモリ）による圧縮誤差の補償"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [],
+    "hyperparameters": [
+      "k"
+    ],
+    "tasks": [
+      "distributed"
+    ]
+  }
+}

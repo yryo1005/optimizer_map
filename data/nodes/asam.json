@@ -1,0 +1,36 @@
+{
+  "id": "asam",
+  "name": "ASAM (Adaptive Sharpness-Aware Minimization)",
+  "short_name": "ASAM",
+  "year": 2021,
+  "citations": 600,
+  "categories": [
+    "平坦解探索",
+    "正則化"
+  ],
+  "reference": "https://arxiv.org/abs/2102.11600",
+  "summary": "SAMの鋭さの定義は固定半径の近傍に基づくため，重みのスケールを変えても関数が変わらないモデルでは鋭さの値が変化してしまう問題を指摘した手法である．重みの大きさに応じて近傍の形状を調整する適応的な鋭さを導入することで，スケール不変性を持たせ，汎化性能との相関を改善する．",
+  "update_rule": "{\\mathbf T}_{\\mathbf w} = \\mathrm{diag}(|{\\mathbf w}_t|), \\quad \\hat{\\boldsymbol\\epsilon}({\\mathbf w}_t) = \\rho \\frac{{\\mathbf T}_{\\mathbf w}^2 \\nabla f_t({\\mathbf w}_t)}{\\|{\\mathbf T}_{\\mathbf w} \\nabla f_t({\\mathbf w}_t)\\|}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\nabla f_t({\\mathbf w}_t + \\hat{\\boldsymbol\\epsilon}({\\mathbf w}_t))",
+  "parents": [
+    {
+      "id": "sam",
+      "types": [
+        "flatness"
+      ],
+      "improvement": "重みのスケールに応じた適応的な近傍（スケール不変な鋭さ）の導入"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "ρ",
+      "η"
+    ],
+    "tasks": [
+      "vision"
+    ]
+  }
+}

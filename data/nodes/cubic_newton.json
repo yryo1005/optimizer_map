@@ -1,0 +1,33 @@
+{
+  "id": "cubic_newton",
+  "name": "3次正則化ニュートン法 (Cubic Regularization of Newton's Method)",
+  "short_name": "3次正則化Newton法",
+  "year": 2006,
+  "citations": 1200,
+  "categories": [
+    "2次手法"
+  ],
+  "reference": "https://doi.org/10.1007/s10107-006-0706-8",
+  "summary": "ニュートン法の2次モデルに，ステップの大きさの3乗に比例する正則化項を加えたモデルを最小化して更新する手法である．非凸関数においても鞍点を回避して2次の停留点（局所最適解）に収束することが大域的に保証され，非凸最適化の計算量理論の基盤となった．",
+  "update_rule": "{\\mathbf w}_{t+1} = \\arg\\min_{{\\mathbf y}} \\left\\{ \\langle \\nabla f({\\mathbf w}_t), {\\mathbf y} - {\\mathbf w}_t \\rangle + \\frac{1}{2} \\langle \\nabla^2 f({\\mathbf w}_t) ({\\mathbf y} - {\\mathbf w}_t), {\\mathbf y} - {\\mathbf w}_t \\rangle + \\frac{M}{6} \\|{\\mathbf y} - {\\mathbf w}_t\\|^3 \\right\\}",
+  "parents": [
+    {
+      "id": "newton",
+      "types": [
+        "regularization",
+        "curvature"
+      ],
+      "improvement": "2次モデルへの3次の正則化項の追加による大域的収束と鞍点回避"
+    }
+  ],
+  "practical": {
+    "state": "matrix",
+    "implementations": [],
+    "hyperparameters": [
+      "M"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

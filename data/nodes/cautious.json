@@ -1,0 +1,47 @@
+{
+  "id": "cautious",
+  "name": "Cautious Optimizers (C-AdamW等)",
+  "short_name": "Cautious Optimizers",
+  "year": 2024,
+  "citations": 50,
+  "categories": [
+    "適応的学習率",
+    "高速化"
+  ],
+  "reference": "https://arxiv.org/abs/2411.16085",
+  "summary": "慣性項を持つ最適化手法において，更新方向と現在の勾配の符号が一致しない成分の更新を打ち消すマスクを適用する手法である．1行程度の修正で既存のAdamWやLionに適用でき，損失を単調に減少させる性質を保ちながら，大規模言語モデルの事前学習等を高速化する．",
+  "update_rule": "{\\mathbf u}_t = \\frac{\\hat{\\mathbf m}_t}{\\sqrt{\\hat{\\mathbf v}_t} + \\epsilon}, \\quad \\boldsymbol\\phi_t = \\mathbb{1}[{\\mathbf u}_t \\odot \\nabla f_t({\\mathbf w}_t) > 0], \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\frac{\\dim(\\boldsymbol\\phi_t)}{\\|\\boldsymbol\\phi_t\\|_0 + 1} (\\boldsymbol\\phi_t \\odot {\\mathbf u}_t)",
+  "parents": [
+    {
+      "id": "adamw",
+      "types": [
+        "normalization",
+        "stabilization"
+      ],
+      "improvement": "更新方向と勾配の符号が不一致な成分を打ち消すマスクの適用"
+    },
+    {
+      "id": "lion",
+      "types": [
+        "normalization",
+        "stabilization"
+      ],
+      "improvement": "符号ベースの手法への同一マスクの適用"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "λ"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  }
+}

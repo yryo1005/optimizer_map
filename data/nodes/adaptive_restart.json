@@ -1,0 +1,34 @@
+{
+  "id": "adaptive_restart",
+  "name": "適応的リスタート (Adaptive Restart for Accelerated Gradient)",
+  "short_name": "適応的リスタート",
+  "year": 2012,
+  "citations": 700,
+  "categories": [
+    "高速化"
+  ],
+  "reference": "https://arxiv.org/abs/1204.3982",
+  "summary": "Nesterovの加速勾配法は慣性により関数値が振動する（リップル）ことがあり，強凸性のパラメータを知らなければ最適な収束率が得られない問題に対し，関数値が増加した時点や勾配と更新方向が鋭角をなした時点で慣性をリセット（リスタート）する手法である．パラメータを知らなくても強凸問題で線形収束に近い性能を回復する．",
+  "update_rule": "\\text{if } f({\\mathbf w}_{t}) > f({\\mathbf w}_{t-1}) \\;\\; \\text{or} \\;\\; \\nabla f({\\mathbf y}_{t-1})^\\top ({\\mathbf w}_t - {\\mathbf w}_{t-1}) > 0 : \\;\\; \\theta_t \\leftarrow 1, \\; {\\mathbf y}_t \\leftarrow {\\mathbf w}_t \\quad (\\text{慣性のリセット})",
+  "parents": [
+    {
+      "id": "nesterov",
+      "types": [
+        "momentum",
+        "stabilization"
+      ],
+      "improvement": "関数値・勾配に基づく慣性の適応的なリセット"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [],
+    "hyperparameters": [
+      "η",
+      "再起動条件"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

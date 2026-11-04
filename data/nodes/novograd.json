@@ -1,0 +1,42 @@
+{
+  "id": "novograd",
+  "name": "NovoGrad",
+  "short_name": "NovoGrad",
+  "year": 2019,
+  "citations": 300,
+  "categories": [
+    "大規模バッチ",
+    "メモリ効率",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/1905.11286",
+  "summary": "Adamのパラメータごとの2次モーメントを，層ごとの勾配ノルムの2乗の指数移動平均（層ごとに1つのスカラー）に置き換えた手法である．層ごとに正規化した勾配に分離型の重み減衰を加えてから慣性項を計算することで，メモリ使用量を削減しつつ，大規模バッチでの音声認識・言語モデルの学習を安定化する．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad v^l_t = \\beta_2 v^l_{t-1} + (1 - \\beta_2) \\|{\\mathbf g}^l_t\\|^2, \\quad {\\mathbf m}^l_t = \\beta_1 {\\mathbf m}^l_{t-1} + \\left( \\frac{{\\mathbf g}^l_t}{\\sqrt{v^l_t} + \\epsilon} + \\lambda {\\mathbf w}^l_t \\right), \\quad {\\mathbf w}^l_{t+1} = {\\mathbf w}^l_t - \\eta \\, {\\mathbf m}^l_t",
+  "parents": [
+    {
+      "id": "adamw",
+      "types": [
+        "adaptive",
+        "compression"
+      ],
+      "improvement": "層ごとの勾配ノルムによる2次モーメントと，正規化後の勾配への重み減衰の導入"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "optax",
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "λ"
+    ],
+    "tasks": [
+      "vision",
+      "general"
+    ]
+  }
+}

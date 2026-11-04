@@ -1,0 +1,38 @@
+{
+  "id": "mezo",
+  "name": "MeZO (Memory-efficient Zeroth-order Optimizer)",
+  "short_name": "MeZO",
+  "year": 2023,
+  "citations": 400,
+  "categories": [
+    "ゼロ次手法",
+    "メモリ効率"
+  ],
+  "reference": "https://arxiv.org/abs/2305.17333",
+  "summary": "SPSAによるゼロ次の勾配推定を大規模言語モデルのファインチューニングに適用し，ランダムな摂動ベクトルを乱数シードから毎回再生成することで，推論時と同じメモリ量のみで学習を行う手法である．誤差逆伝播を一切用いずに，事前学習済みモデルの微調整で逆伝播によるファインチューニングに近い性能を示した．",
+  "update_rule": "{\\mathbf z} \\sim \\mathcal{N}({\\mathbf 0}, {\\mathbf I}) \\;\\; (\\text{シードから再生成}), \\quad \\hat{\\mathbf g}_t = \\frac{f_B({\\mathbf w}_t + \\epsilon {\\mathbf z}) - f_B({\\mathbf w}_t - \\epsilon {\\mathbf z})}{2 \\epsilon} {\\mathbf z}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\hat{\\mathbf g}_t",
+  "parents": [
+    {
+      "id": "spsa",
+      "types": [
+        "compression",
+        "stochastic"
+      ],
+      "improvement": "乱数シードの再利用によるインプレースな摂動と大規模言語モデルへの適用"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "ε"
+    ],
+    "tasks": [
+      "finetune",
+      "llm"
+    ]
+  }
+}

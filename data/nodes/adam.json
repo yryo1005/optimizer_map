@@ -1,0 +1,52 @@
+{
+  "id": "adam",
+  "name": "Adam (Adaptive Moment Estimation)",
+  "short_name": "Adam",
+  "year": 2014,
+  "citations": 190000,
+  "categories": [
+    "適応的学習率",
+    "高速化"
+  ],
+  "reference": "https://arxiv.org/abs/1412.6980",
+  "summary": "モーメント法が導入する勾配の1次モーメント（慣性項）と，RMSpropが導入する勾配の2次モーメント（学習率のスケジューリング）の両方を組み合わせた手法である．さらに，学習初期にモーメントの推定値が0に偏るバイアスを補正する機構を導入しており，幅広いタスクで安定して高速に収束するため，深層学習における最も標準的な最適化手法の一つとなっている．",
+  "update_rule": "{\\mathbf m}_t = \\beta_1 {\\mathbf m}_{t-1} + (1 - \\beta_1) \\nabla f_t({\\mathbf w}_t), \\quad {\\mathbf v}_t = \\beta_2 {\\mathbf v}_{t-1} + (1 - \\beta_2) \\nabla f_t({\\mathbf w}_t)^2, \\quad \\hat{\\mathbf m}_t = \\frac{{\\mathbf m}_t}{1 - \\beta_1^t}, \\quad \\hat{\\mathbf v}_t = \\frac{{\\mathbf v}_t}{1 - \\beta_2^t}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\frac{\\eta}{\\sqrt{\\hat{\\mathbf v}_t} + \\epsilon} \\hat{\\mathbf m}_t",
+  "parents": [
+    {
+      "id": "momentum",
+      "types": [
+        "momentum"
+      ],
+      "improvement": "1次モーメント（慣性項）の導入とバイアス補正"
+    },
+    {
+      "id": "rmsprop",
+      "types": [
+        "adaptive"
+      ],
+      "improvement": "2次モーメントによる学習率スケジューリングの導入とバイアス補正"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "pytorch",
+      "optax",
+      "keras"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "ε"
+    ],
+    "tasks": [
+      "general"
+    ]
+  },
+  "deep_dive": {
+    "why": "慣性項（1次モーメント）による雑音の平滑化と，2次モーメントによるパラメータごとのスケール調整を組み合わせ，更新幅がおおよそ η に有界となる．ハイパーパラメータの既定値で広く動作する．",
+    "weaknesses": "単純な凸問題でも収束しない反例がある．L2 正則化との相性が悪く，画像分類では SGD に汎化で劣ることがある．状態量がパラメータの2倍のメモリを要する．",
+    "settings": "η=1e-3（Transformer では 1e-4〜3e-4），β1=0.9，β2=0.999（大規模学習では 0.95），ε=1e-8．"
+  }
+}

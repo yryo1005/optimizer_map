@@ -1,0 +1,45 @@
+{
+  "id": "psgld",
+  "name": "pSGLD (Preconditioned SGLD)",
+  "short_name": "pSGLD",
+  "year": 2015,
+  "citations": 500,
+  "categories": [
+    "ベイズ推論",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/1512.07666",
+  "summary": "SGLDでは全パラメータに同じ大きさのステップと雑音を用いるため，曲率がパラメータごとに大きく異なる深層ニューラルネットワークでは混合が遅い問題に対し，RMSpropと同じ対角の前処理行列でステップ幅と雑音の大きさをパラメータごとに調整する手法である．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad {\\mathbf V}_t = \\alpha {\\mathbf V}_{t-1} + (1 - \\alpha) {\\mathbf g}_t^2, \\quad {\\mathbf D}_t = \\mathrm{diag}\\left( \\frac{1}{\\lambda + \\sqrt{{\\mathbf V}_t}} \\right), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\frac{\\eta}{2} {\\mathbf D}_t {\\mathbf g}_t + \\mathcal{N}({\\mathbf 0}, \\eta {\\mathbf D}_t)",
+  "parents": [
+    {
+      "id": "sgld",
+      "types": [
+        "adaptive"
+      ],
+      "improvement": "対角前処理によるパラメータごとのステップ幅と雑音の調整"
+    },
+    {
+      "id": "rmsprop",
+      "types": [
+        "adaptive",
+        "problem_transfer"
+      ],
+      "improvement": "RMSprop型の前処理行列のサンプリング手法への導入"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "α",
+      "λ"
+    ],
+    "tasks": [
+      "bayes"
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "fedavg",
+  "name": "FedAvg (Federated Averaging)",
+  "short_name": "FedAvg",
+  "year": 2016,
+  "citations": 20000,
+  "categories": [
+    "分散学習",
+    "重み平均化"
+  ],
+  "reference": "https://arxiv.org/abs/1602.05629",
+  "summary": "データを各端末（クライアント）に置いたまま学習する連合学習のために，各クライアントでローカルなデータを用いて複数ステップのSGDを行い，サーバーでそれらのパラメータを平均する手法である．通信の頻度を大幅に減らしつつ，データが非独立同一分布（非IID）であっても実用的な精度を達成する．",
+  "update_rule": "{\\mathbf w}^{k}_{t,0} = {\\mathbf w}_t, \\quad {\\mathbf w}^{k}_{t,i+1} = {\\mathbf w}^{k}_{t,i} - \\eta \\nabla f^{k}({\\mathbf w}^{k}_{t,i}) \\;\\; (i = 0, \\dots, E-1), \\quad {\\mathbf w}_{t+1} = \\sum_{k=1}^{K} \\frac{n_k}{n} {\\mathbf w}^{k}_{t,E}",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "communication",
+        "averaging"
+      ],
+      "improvement": "各クライアントでの複数ステップのローカル更新とサーバーでのパラメータ平均"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "E（ローカルエポック）",
+      "K"
+    ],
+    "tasks": [
+      "distributed"
+    ]
+  },
+  "deep_dive": {
+    "why": "各クライアントで複数ステップ学習してから平均するため，通信回数を大幅に減らせる．データを端末に置いたまま学習できる．",
+    "weaknesses": "クライアント間でデータ分布が異なると，ローカル更新が偏り収束が遅くなる（クライアントドリフト）．",
+    "settings": "ローカルエポック E=1〜5，各ラウンドの参加クライアントは全体の 10% 程度．"
+  }
+}

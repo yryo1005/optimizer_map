@@ -1,0 +1,38 @@
+{
+  "id": "gradient_norm_penalty",
+  "name": "勾配ノルムペナルティ (Penalizing Gradient Norm)",
+  "short_name": "勾配ノルムペナルティ",
+  "year": 2022,
+  "citations": 200,
+  "categories": [
+    "平坦解探索",
+    "正則化"
+  ],
+  "reference": "https://arxiv.org/abs/2202.03599",
+  "summary": "損失関数に勾配ノルムのペナルティを加えて，リプシッツ定数の小さい平坦な解へ誘導する手法である．ペナルティ項の勾配を，勾配方向に摂動させた点での勾配との差分（有限差分）で近似することで，ヘッセ行列を計算せずに効率的に最適化でき，SAMはその特殊ケースとみなせる．",
+  "update_rule": "\\tilde f({\\mathbf w}) = f({\\mathbf w}) + \\lambda \\|\\nabla f({\\mathbf w})\\|, \\quad \\nabla \\tilde f({\\mathbf w}_t) \\approx (1 - \\alpha) \\nabla f({\\mathbf w}_t) + \\alpha \\nabla f\\left( {\\mathbf w}_t + r \\frac{\\nabla f({\\mathbf w}_t)}{\\|\\nabla f({\\mathbf w}_t)\\|} \\right), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\nabla \\tilde f({\\mathbf w}_t)",
+  "parents": [
+    {
+      "id": "sam",
+      "types": [
+        "flatness",
+        "reinterpretation"
+      ],
+      "improvement": "勾配ノルムのペナルティとしての一般化（SAMとの補間）"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "λ",
+      "r",
+      "α"
+    ],
+    "tasks": [
+      "vision"
+    ]
+  }
+}

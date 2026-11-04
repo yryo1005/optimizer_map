@@ -1,0 +1,40 @@
+{
+  "id": "maml",
+  "name": "MAML (Model-Agnostic Meta-Learning)",
+  "short_name": "MAML",
+  "year": 2017,
+  "citations": 13000,
+  "categories": [
+    "自動探索・メタ学習"
+  ],
+  "reference": "https://arxiv.org/abs/1703.03400",
+  "summary": "多様なタスクに対して，少数のデータで数ステップの勾配降下を行うだけで高い性能が得られるような初期パラメータを学習するメタ学習手法である．内側ループのタスクごとの勾配降下の結果に対する損失を，外側ループで初期パラメータについて微分（2階微分を含む）して最適化する．",
+  "update_rule": "\\boldsymbol\\theta'_i = \\boldsymbol\\theta - \\alpha \\nabla_{\\boldsymbol\\theta} \\mathcal{L}_{\\mathcal{T}_i}(\\boldsymbol\\theta), \\quad \\boldsymbol\\theta \\leftarrow \\boldsymbol\\theta - \\beta \\nabla_{\\boldsymbol\\theta} \\sum_{\\mathcal{T}_i} \\mathcal{L}_{\\mathcal{T}_i}(\\boldsymbol\\theta'_i)",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "problem_transfer"
+      ],
+      "improvement": "勾配降下の結果を微分する2重ループによる初期パラメータのメタ学習"
+    }
+  ],
+  "practical": {
+    "state": "na",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "α（内側）",
+      "β（外側）"
+    ],
+    "tasks": [
+      "meta"
+    ]
+  },
+  "deep_dive": {
+    "why": "少数ステップの勾配降下で多様なタスクに適応できる初期値を，その適応後の性能を直接最適化することで学習する．",
+    "weaknesses": "2階微分が必要で計算・メモリが重く，学習が不安定になりやすい（1次近似や Reptile が用いられる）．",
+    "settings": "内側 α=0.01〜0.4（1〜5 ステップ），外側 Adam β=1e-3．"
+  }
+}

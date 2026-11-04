@@ -1,0 +1,38 @@
+{
+  "id": "rprop",
+  "name": "Rprop (Resilient Backpropagation)",
+  "short_name": "Rprop",
+  "year": 1993,
+  "citations": 5000,
+  "categories": [
+    "符号ベース",
+    "適応的学習率"
+  ],
+  "reference": "https://doi.org/10.1109/ICNN.1993.298623",
+  "summary": "勾配の大きさを用いず，勾配の符号のみを用いてパラメータごとのステップ幅を更新する手法である．前回と今回の勾配の符号が一致すればステップ幅を拡大し，反転すれば縮小することで，勾配の大きさのばらつきに影響されずに各パラメータの学習率を自動調整する．フルバッチ学習を前提とした手法である．",
+  "update_rule": "\\Delta_{t,i} = \\begin{cases} \\eta^{+} \\Delta_{t-1,i} & (g_{t,i} \\, g_{t-1,i} > 0) \\\\ \\eta^{-} \\Delta_{t-1,i} & (g_{t,i} \\, g_{t-1,i} < 0) \\\\ \\Delta_{t-1,i} & (\\mathrm{otherwise}) \\end{cases}, \\quad w_{t+1,i} = w_{t,i} - \\mathrm{sign}(g_{t,i}) \\, \\Delta_{t,i}",
+  "parents": [
+    {
+      "id": "sgd",
+      "types": [
+        "normalization",
+        "adaptive"
+      ],
+      "improvement": "勾配の符号のみを用いたパラメータごとのステップ幅の適応的調整"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "pytorch"
+    ],
+    "hyperparameters": [
+      "η+",
+      "η−",
+      "ステップ幅の範囲"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

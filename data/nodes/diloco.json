@@ -1,0 +1,62 @@
+{
+  "id": "diloco",
+  "name": "DiLoCo (Distributed Low-Communication Training)",
+  "short_name": "DiLoCo",
+  "year": 2023,
+  "citations": 300,
+  "categories": [
+    "分散学習",
+    "重み平均化"
+  ],
+  "reference": "https://arxiv.org/abs/2311.08105",
+  "summary": "接続の弱い計算資源の島（アイランド）間で言語モデルを学習するため，各ワーカーが内側の最適化手法としてAdamWで数百ステップ学習した後，パラメータの変化量を外側の勾配とみなしてNesterov型の慣性項で更新する，FedAvgの変種である．同期型の学習と同等の性能を，通信量を500分の1に抑えて達成した．",
+  "update_rule": "{\\mathbf w}^{k} \\leftarrow \\mathrm{AdamW}^{H}({\\mathbf w}_t; D_k) \\;\\; (H\\text{ステップ}), \\quad \\Delta_t = \\frac{1}{K} \\sum_{k=1}^{K} ({\\mathbf w}_t - {\\mathbf w}^{k}), \\quad {\\mathbf w}_{t+1} = \\mathrm{Nesterov}({\\mathbf w}_t, \\Delta_t)",
+  "parents": [
+    {
+      "id": "fedavg",
+      "types": [
+        "communication",
+        "averaging"
+      ],
+      "improvement": "長い内側ステップ数と外側の最適化手法によるパラメータ変化量の集約"
+    },
+    {
+      "id": "adamw",
+      "types": [
+        "communication"
+      ],
+      "improvement": "内側の最適化手法としての利用"
+    },
+    {
+      "id": "nesterov",
+      "types": [
+        "momentum",
+        "communication"
+      ],
+      "improvement": "外側の最適化手法としてのNesterov型慣性項の利用"
+    },
+    {
+      "id": "slowmo",
+      "types": [
+        "momentum",
+        "communication"
+      ],
+      "improvement": "外側の慣性項（Nesterov）による平均変化量の更新"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "内側η",
+      "外側η",
+      "H（内側ステップ数）"
+    ],
+    "tasks": [
+      "llm",
+      "distributed"
+    ]
+  }
+}

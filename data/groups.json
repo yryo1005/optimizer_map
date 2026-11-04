@@ -1,0 +1,74 @@
+[
+  {
+    "id": "acceleration",
+    "label": "高速化・慣性・平均化",
+    "color": {
+      "light": "#2a78d6",
+      "dark": "#3987e5"
+    },
+    "order": 1
+  },
+  {
+    "id": "adaptive",
+    "label": "適応的学習率・符号ベース",
+    "color": {
+      "light": "#eb6834",
+      "dark": "#d95926"
+    },
+    "order": 2
+  },
+  {
+    "id": "second_order",
+    "label": "2次手法・行列前処理",
+    "color": {
+      "light": "#1baf7a",
+      "dark": "#199e70"
+    },
+    "order": 3
+  },
+  {
+    "id": "variance",
+    "label": "分散低減・ゼロ次",
+    "color": {
+      "light": "#eda100",
+      "dark": "#c98500"
+    },
+    "order": 4
+  },
+  {
+    "id": "generalization",
+    "label": "汎化・正則化・ベイズ",
+    "color": {
+      "light": "#e87ba4",
+      "dark": "#d55181"
+    },
+    "order": 5
+  },
+  {
+    "id": "scale",
+    "label": "メモリ・大規模・分散",
+    "color": {
+      "light": "#008300",
+      "dark": "#008300"
+    },
+    "order": 6
+  },
+  {
+    "id": "lr_design",
+    "label": "学習率設計・安定化・オンライン",
+    "color": {
+      "light": "#6250d6",
+      "dark": "#9085e9"
+    },
+    "order": 7
+  },
+  {
+    "id": "applied",
+    "label": "応用（ゲーム・強化学習・多目的・メタ）",
+    "color": {
+      "light": "#e34948",
+      "dark": "#e66767"
+    },
+    "order": 8
+  }
+]

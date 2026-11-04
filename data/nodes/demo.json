@@ -1,0 +1,45 @@
+{
+  "id": "demo",
+  "name": "DeMo (Decoupled Momentum Optimization)",
+  "short_name": "DeMo",
+  "year": 2024,
+  "citations": 40,
+  "categories": [
+    "分散学習"
+  ],
+  "reference": "https://arxiv.org/abs/2411.19870",
+  "summary": "データ並列学習における勾配のAll-Reduceを廃し，各アクセラレータが独立に慣性項を保持した上で，慣性項に離散コサイン変換を適用し，変化の速い上位の成分のみを抽出して同期する手法である．同期した成分は慣性項から差し引いて誤差フィードバックとして扱い，AdamWと同等の性能を保ちつつ，GPUあたりの通信量を数十分の1に削減する．",
+  "update_rule": "{\\mathbf m}^k_t = \\beta {\\mathbf m}^k_{t-1} + {\\mathbf g}^k_t, \\quad {\\mathbf q}^k_t = \\mathrm{top}_k(\\mathrm{DCT}({\\mathbf m}^k_t)), \\quad {\\mathbf m}^k_t \\leftarrow {\\mathbf m}^k_t - \\mathrm{DCT}^{-1}({\\mathbf q}^k_t), \\quad {\\mathbf Q}_t = \\mathrm{DCT}^{-1}(\\mathrm{AllGather}(\\{ {\\mathbf q}^k_t \\})), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\, \\mathrm{sign}({\\mathbf Q}_t)",
+  "parents": [
+    {
+      "id": "dgc",
+      "types": [
+        "compression",
+        "communication"
+      ],
+      "improvement": "上位成分のみの同期と残差の慣性項への保持（周波数領域での疎化）"
+    },
+    {
+      "id": "signsgd",
+      "types": [
+        "normalization"
+      ],
+      "improvement": "同期した成分の符号による更新"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β",
+      "top-k"
+    ],
+    "tasks": [
+      "llm",
+      "distributed"
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "saf",
+  "name": "SAF (Sharpness-Aware Training for Free)",
+  "short_name": "SAF",
+  "year": 2022,
+  "citations": 100,
+  "categories": [
+    "平坦解探索"
+  ],
+  "reference": "https://arxiv.org/abs/2205.14083",
+  "summary": "SAMの2回目の勾配計算を不要にするため，鋭さの代理指標として，現在と過去のエポックにおける出力の差（KLダイバージェンス）を損失に加える手法である．過去の出力を保持しておくことで追加の勾配計算なしに鋭さを抑制し，ベースの最適化手法とほぼ同じ計算コストでSAMと同等の汎化性能を得る．",
+  "update_rule": "\\tilde f({\\mathbf w}_t) = f({\\mathbf w}_t) + \\lambda \\frac{1}{\\tau} \\mathrm{KL}\\left( \\frac{\\mathbf{y}^{(e - \\tilde E)}}{\\tau} \\, \\Big\\| \\, \\frac{\\mathbf{y}^{(e)}({\\mathbf w}_t)}{\\tau} \\right), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\nabla \\tilde f({\\mathbf w}_t)",
+  "parents": [
+    {
+      "id": "sam",
+      "types": [
+        "flatness"
+      ],
+      "improvement": "過去の出力との差を代理指標とした追加の勾配計算なしの鋭さの抑制"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "λ",
+      "τ"
+    ],
+    "tasks": [
+      "vision"
+    ]
+  }
+}

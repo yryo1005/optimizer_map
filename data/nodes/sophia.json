@@ -1,0 +1,52 @@
+{
+  "id": "sophia",
+  "name": "Sophia (Second-order Clipped Stochastic Optimization)",
+  "short_name": "Sophia",
+  "year": 2023,
+  "citations": 300,
+  "categories": [
+    "2次手法",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/2305.14342",
+  "summary": "大規模言語モデルの事前学習に向けて，ヘッセ行列の対角推定値を数ステップごとに更新し，その指数移動平均で慣性項を割った値を要素ごとにクリッピングして更新する手法である．曲率の大きい方向では小さく，平坦な方向では大きく更新しつつ，クリッピングにより非凸な領域や推定誤差による過大な更新を防ぐことで，Adamに比べ学習ステップ数を削減する．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad {\\mathbf m}_t = \\beta_1 {\\mathbf m}_{t-1} + (1 - \\beta_1) {\\mathbf g}_t, \\quad {\\mathbf h}_t = \\beta_2 {\\mathbf h}_{t-k} + (1 - \\beta_2) \\hat{\\mathbf h}_t \\;\\; (k\\text{ステップごと}), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\lambda {\\mathbf w}_t - \\eta \\, \\mathrm{clip}\\left( \\frac{{\\mathbf m}_t}{\\max(\\gamma {\\mathbf h}_t, \\epsilon)}, 1 \\right)",
+  "parents": [
+    {
+      "id": "adahessian",
+      "types": [
+        "curvature",
+        "stabilization"
+      ],
+      "improvement": "ヘッセ対角推定の間欠的な更新と，要素ごとのクリッピングによる安定化"
+    },
+    {
+      "id": "adamw",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "2次モーメントの曲率推定への置き換えと分離型重み減衰の維持"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "γ",
+      "k"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  },
+  "deep_dive": {
+    "why": "ヘッセ対角の推定で慣性項を割ることで曲率の大きい方向の更新を抑え，要素ごとのクリッピングで推定誤差や非凸性による過大な更新を防ぐ．",
+    "weaknesses": "ヘッセ推定のための追加計算が必要である．後続の大規模な比較では AdamW に対する優位が小さいとの報告もある．",
+    "settings": "β1=0.96，β2=0.99，ρ（γ）=0.03〜0.05，ヘッセ推定は k=10 ステップごと．"
+  }
+}

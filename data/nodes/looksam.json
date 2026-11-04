@@ -1,0 +1,38 @@
+{
+  "id": "looksam",
+  "name": "LookSAM",
+  "short_name": "LookSAM",
+  "year": 2022,
+  "citations": 200,
+  "categories": [
+    "平坦解探索",
+    "大規模バッチ"
+  ],
+  "reference": "https://arxiv.org/abs/2203.02714",
+  "summary": "SAMの摂動点での勾配計算を毎ステップではなく数ステップごとにのみ行い，その間は以前に求めたSAM勾配の通常勾配に直交する成分を再利用する手法である．SAMとほぼ同等の汎化性能を保ちつつ計算コストを大幅に削減し，層ごとの学習率スケーリングと組み合わせて大規模バッチでのViTの学習を可能にした．",
+  "update_rule": "{\\mathbf g}_s = \\nabla f({\\mathbf w}_t + \\hat{\\boldsymbol\\epsilon}), \\;\\; {\\mathbf g}_v = {\\mathbf g}_s - \\frac{\\langle {\\mathbf g}_s, \\nabla f({\\mathbf w}_t) \\rangle}{\\|\\nabla f({\\mathbf w}_t)\\|^2} \\nabla f({\\mathbf w}_t) \\;\\; (t \\bmod k = 0), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\left( \\nabla f({\\mathbf w}_t) + \\alpha \\frac{\\|\\nabla f({\\mathbf w}_t)\\|}{\\|{\\mathbf g}_v\\|} {\\mathbf g}_v \\right)",
+  "parents": [
+    {
+      "id": "sam",
+      "types": [
+        "flatness",
+        "stochastic"
+      ],
+      "improvement": "摂動点での勾配計算の間引きと直交成分の再利用"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "ρ",
+      "k",
+      "α"
+    ],
+    "tasks": [
+      "vision"
+    ]
+  }
+}

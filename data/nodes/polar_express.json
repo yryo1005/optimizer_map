@@ -1,0 +1,34 @@
+{
+  "id": "polar_express",
+  "name": "Polar Express",
+  "short_name": "Polar Express",
+  "year": 2025,
+  "citations": 30,
+  "categories": [
+    "2次手法"
+  ],
+  "reference": "https://arxiv.org/abs/2505.16932",
+  "summary": "Muonの直交化（極分解の直交因子の計算）に用いる反復法について，各反復の多項式をミニマックス最適化で決めることで，最悪ケースの誤差を最小にする反復法を提案した研究である．Newton-Schulz反復と同様に行列積のみで計算でき，bfloat16での数値的な問題にも対処しており，MuonでGPT-2を学習した際に他の手法より低い検証損失を示す．",
+  "update_rule": "{\\mathbf X}_0 = \\frac{{\\mathbf M}}{\\|{\\mathbf M}\\|_F}, \\quad {\\mathbf X}_{k+1} = p_k({\\mathbf X}_k) = a_k {\\mathbf X}_k + b_k {\\mathbf X}_k {\\mathbf X}_k^\\top {\\mathbf X}_k + c_k ({\\mathbf X}_k {\\mathbf X}_k^\\top)^2 {\\mathbf X}_k, \\quad p_k = \\arg\\min_{p} \\max_{x \\in [\\ell_k, u_k]} |1 - p(x)|",
+  "parents": [
+    {
+      "id": "muon",
+      "types": [
+        "normalization"
+      ],
+      "improvement": "ミニマックス最適な反復ごとの多項式による直交化の高精度化"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "反復数"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  }
+}

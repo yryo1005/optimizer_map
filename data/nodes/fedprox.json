@@ -1,0 +1,35 @@
+{
+  "id": "fedprox",
+  "name": "FedProx",
+  "short_name": "FedProx",
+  "year": 2018,
+  "citations": 5000,
+  "categories": [
+    "分散学習",
+    "正則化"
+  ],
+  "reference": "https://arxiv.org/abs/1812.06127",
+  "summary": "連合学習においてクライアント間でデータ分布や計算能力が大きく異なる場合に，FedAvgのローカル更新がグローバルモデルから大きく乖離して収束が不安定になる問題に対し，ローカルの目的関数にグローバルモデルからの距離に関する近接項を加える手法である．クライアントごとに異なる量のローカル計算を許容しつつ，収束を安定化する．",
+  "update_rule": "{\\mathbf w}^{k}_{t+1} \\approx \\arg\\min_{{\\mathbf w}} \\left\\{ f_k({\\mathbf w}) + \\frac{\\mu}{2} \\|{\\mathbf w} - {\\mathbf w}_t\\|^2 \\right\\}, \\quad {\\mathbf w}_{t+1} = \\sum_{k} \\frac{n_k}{n} {\\mathbf w}^{k}_{t+1}",
+  "parents": [
+    {
+      "id": "fedavg",
+      "types": [
+        "regularization"
+      ],
+      "improvement": "ローカル目的関数へのグローバルモデルとの近接項の追加"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "μ"
+    ],
+    "tasks": [
+      "distributed"
+    ]
+  }
+}

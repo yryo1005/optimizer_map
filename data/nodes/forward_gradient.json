@@ -1,0 +1,33 @@
+{
+  "id": "forward_gradient",
+  "name": "Forward Gradient (Gradients without Backpropagation)",
+  "short_name": "Forward Gradient",
+  "year": 2022,
+  "citations": 200,
+  "categories": [
+    "ゼロ次手法",
+    "メモリ効率"
+  ],
+  "reference": "https://arxiv.org/abs/2202.08587",
+  "summary": "ランダムな方向ベクトルに対する方向微分を自動微分の順方向モードで1回の順伝播と同時に計算し，その方向微分と方向ベクトルの積を勾配の不偏推定量として用いる手法である．誤差逆伝播を必要とせず，有限差分によるゼロ次手法と異なり厳密な方向微分を用いるため推定の偏りがない．",
+  "update_rule": "{\\mathbf v} \\sim \\mathcal{N}({\\mathbf 0}, {\\mathbf I}), \\quad d = \\nabla f({\\mathbf w}_t)^\\top {\\mathbf v} \\;\\; (\\text{順方向モード自動微分}), \\quad {\\mathbf g}_t = d \\, {\\mathbf v}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta {\\mathbf g}_t",
+  "parents": [
+    {
+      "id": "spsa",
+      "types": [
+        "stochastic"
+      ],
+      "improvement": "有限差分の代わりに順方向モード自動微分による厳密な方向微分を用いた勾配推定"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [],
+    "hyperparameters": [
+      "η"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

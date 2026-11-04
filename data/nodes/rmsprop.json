@@ -1,0 +1,52 @@
+{
+  "id": "rmsprop",
+  "name": "RMSprop (Root Mean Square Propagation)",
+  "short_name": "RMSprop",
+  "year": 2012,
+  "citations": 22000,
+  "categories": [
+    "適応的学習率"
+  ],
+  "reference": "http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf",
+  "summary": "AdaGradが学習開始からの勾配2乗を単純に累積するため，学習が進むにつれ学習率が過度に減衰する問題を解決する手法である．勾配の2乗の指数移動平均（直近の勾配を重視した移動平均）を用いて学習率をスケジューリングすることで，非定常な目的関数に対しても学習率が過度に減衰しないようにする．",
+  "update_rule": "{\\mathbf r}_t = \\rho {\\mathbf r}_{t-1} + (1 - \\rho) \\nabla f_t({\\mathbf w}_t)^2, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\frac{\\eta}{\\sqrt{{\\mathbf r}_t} + \\epsilon} \\nabla f_t({\\mathbf w}_t)",
+  "parents": [
+    {
+      "id": "adagrad",
+      "types": [
+        "adaptive"
+      ],
+      "improvement": "勾配2乗の指数移動平均による学習率スケジューリングへの変更"
+    },
+    {
+      "id": "rprop",
+      "types": [
+        "adaptive",
+        "stochastic"
+      ],
+      "improvement": "ミニバッチ学習に適用可能な勾配の大きさによる正規化（符号のみの利用からの拡張）"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "pytorch",
+      "optax",
+      "keras"
+    ],
+    "hyperparameters": [
+      "η",
+      "ρ",
+      "ε"
+    ],
+    "tasks": [
+      "general"
+    ]
+  },
+  "deep_dive": {
+    "why": "勾配2乗の指数移動平均で正規化するため，勾配の大きさのスケールが層やパラメータで異なっても更新幅がそろう．AdaGrad の学習率の減衰を回避する．",
+    "weaknesses": "バイアス補正がなく，学習初期の推定が不安定になりやすい．ε の値が実効的な学習率に影響する．",
+    "settings": "η=1e-3，ρ=0.9〜0.99，ε=1e-8（TensorFlow 系は ε を平方根の内側に置く実装差に注意）．強化学習で多用された．"
+  },
+  "notes": "論文ではなくHintonのCoursera講義資料（Lecture 6e）で提案されたため，Citation数は講義資料を引用する文献数の概算である．"
+}

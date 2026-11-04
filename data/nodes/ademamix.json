@@ -1,0 +1,45 @@
+{
+  "id": "ademamix",
+  "name": "AdEMAMix",
+  "short_name": "AdEMAMix",
+  "year": 2024,
+  "citations": 80,
+  "categories": [
+    "適応的学習率",
+    "高速化"
+  ],
+  "reference": "https://arxiv.org/abs/2409.03137",
+  "summary": "単一の指数移動平均による1次モーメントでは，直近の勾配を重視すること（速い減衰）と，古い勾配を長く活用すること（遅い減衰）を両立できない問題に対し，減衰率の異なる2つの指数移動平均を混合する手法である．非常に長い時間スケールの勾配情報を活用することで，大規模言語モデルの学習を高速化し，忘却も抑制する．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad {\\mathbf m}^{(1)}_t = \\beta_1 {\\mathbf m}^{(1)}_{t-1} + (1 - \\beta_1) {\\mathbf g}_t, \\quad {\\mathbf m}^{(2)}_t = \\beta_3 {\\mathbf m}^{(2)}_{t-1} + (1 - \\beta_3) {\\mathbf g}_t, \\quad {\\mathbf v}_t = \\beta_2 {\\mathbf v}_{t-1} + (1 - \\beta_2) {\\mathbf g}_t^2, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\left( \\frac{\\hat{\\mathbf m}^{(1)}_t + \\alpha {\\mathbf m}^{(2)}_t}{\\sqrt{\\hat{\\mathbf v}_t} + \\epsilon} + \\lambda {\\mathbf w}_t \\right)",
+  "parents": [
+    {
+      "id": "adamw",
+      "types": [
+        "momentum"
+      ],
+      "improvement": "減衰率の異なる2つの1次モーメント（速い・遅い指数移動平均）の混合"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [
+      "optax",
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "β3",
+      "α"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  },
+  "deep_dive": {
+    "why": "減衰の遅い慣性項により非常に古い勾配の情報も活用しつつ，速い慣性項で直近の変化に追従するため，同じ計算量でより少ないトークン数で同等の性能に到達する．",
+    "weaknesses": "β3 と α のウォームアップスケジュールが必要で，ハイパーパラメータが増える．",
+    "settings": "β3=0.9999，α=5〜8，β3 と α は学習の前半で徐々に増やす．"
+  }
+}

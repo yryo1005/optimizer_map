@@ -1,0 +1,33 @@
+{
+  "id": "lawa",
+  "name": "LAWA (Latest Weight Averaging)",
+  "short_name": "LAWA",
+  "year": 2022,
+  "citations": 80,
+  "categories": [
+    "重み平均化"
+  ],
+  "reference": "https://arxiv.org/abs/2209.14981",
+  "summary": "学習中の直近k個のエポック終了時点の重みを平均する手法である．学習率を大きく保ったままでも，直近の重みの平均が学習率を減衰させた場合に近い性能を示すことから，ImageNetやBERTの学習において，同じ性能に到達するまでの学習時間を大幅に短縮できることを示した．",
+  "update_rule": "{\\mathbf w}_{\\mathrm{LAWA}} = \\frac{1}{k} \\sum_{j = e-k+1}^{e} {\\mathbf w}^{(j)} \\quad ({\\mathbf w}^{(j)} : \\text{エポック } j \\text{ 終了時の重み})",
+  "parents": [
+    {
+      "id": "swa",
+      "types": [
+        "averaging"
+      ],
+      "improvement": "直近の少数のチェックポイントのみの平均による学習の早期化"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [],
+    "hyperparameters": [
+      "k（平均するチェックポイント数）"
+    ],
+    "tasks": [
+      "vision",
+      "llm"
+    ]
+  }
+}

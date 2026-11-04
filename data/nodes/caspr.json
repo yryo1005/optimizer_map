@@ -1,0 +1,35 @@
+{
+  "id": "caspr",
+  "name": "CASPR (Combining Axes Preconditioners through Kronecker Approximation)",
+  "short_name": "CASPR",
+  "year": 2024,
+  "citations": 30,
+  "categories": [
+    "2次手法"
+  ],
+  "reference": "https://proceedings.iclr.cc/paper_files/paper/2024/hash/df927a06a0d9f5f06d9cd4a91ce58e56-Abstract-Conference.html",
+  "summary": "行列形状のパラメータの各軸（行・列）ごとの前処理行列を，Shampooのクロネッカー積ではなくクロネッカー和に基づいて組み合わせる手法である．全行列版AdaGradの勾配2次モーメント行列をShampooやAdamより正確に近似でき，同程度の計算量で言語モデルの学習性能を改善する．",
+  "update_rule": "{\\mathbf L}_t = {\\mathbf L}_{t-1} + {\\mathbf G}_t {\\mathbf G}_t^\\top, \\;\\; {\\mathbf R}_t = {\\mathbf R}_{t-1} + {\\mathbf G}_t^\\top {\\mathbf G}_t, \\quad \\mathrm{vec}({\\mathbf W}_{t+1}) = \\mathrm{vec}({\\mathbf W}_t) - \\eta \\left( {\\mathbf R}_t^{1/2} \\oplus {\\mathbf L}_t^{1/2} \\right)^{-1} \\mathrm{vec}({\\mathbf G}_t) \\quad ({\\mathbf A} \\oplus {\\mathbf B} = {\\mathbf A} \\otimes {\\mathbf I} + {\\mathbf I} \\otimes {\\mathbf B} : \\text{クロネッカー和})",
+  "parents": [
+    {
+      "id": "shampoo",
+      "types": [
+        "curvature"
+      ],
+      "improvement": "軸ごとの前処理行列のクロネッカー和による結合"
+    }
+  ],
+  "practical": {
+    "state": "matrix",
+    "implementations": [],
+    "hyperparameters": [
+      "η",
+      "β",
+      "ε"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  },
+  "notes": "arXiv版が見つからなかったためICLR 2024の会議録を参照した．更新式は簡略表記である．"
+}

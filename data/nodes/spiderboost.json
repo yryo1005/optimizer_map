@@ -1,0 +1,34 @@
+{
+  "id": "spiderboost",
+  "name": "SpiderBoost",
+  "short_name": "SpiderBoost",
+  "year": 2018,
+  "citations": 300,
+  "categories": [
+    "勾配分散低減"
+  ],
+  "reference": "https://arxiv.org/abs/1810.10690",
+  "summary": "SPIDERは理論的に最適な計算量を持つ一方，正規化した非常に小さなステップ幅を必要とし実用上遅い問題に対し，同じ再帰的な勾配推定を用いたまま，正規化を行わない大きな一定のステップ幅で同じ最適な計算量を達成できることを示した手法である．近接作用素を用いた非平滑な正則化項にも対応する．",
+  "update_rule": "{\\mathbf v}_t = \\begin{cases} \\nabla f({\\mathbf w}_t) & (t \\bmod q = 0) \\\\ \\nabla f_{S}({\\mathbf w}_t) - \\nabla f_{S}({\\mathbf w}_{t-1}) + {\\mathbf v}_{t-1} & (\\mathrm{otherwise}) \\end{cases}, \\quad {\\mathbf w}_{t+1} = \\mathrm{prox}_{\\eta h}({\\mathbf w}_t - \\eta {\\mathbf v}_t), \\quad \\eta = \\frac{1}{2L}",
+  "parents": [
+    {
+      "id": "spider",
+      "types": [
+        "variance_reduction",
+        "lr_automation"
+      ],
+      "improvement": "正規化なしの大きな一定ステップ幅での最適な計算量の達成"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [],
+    "hyperparameters": [
+      "η",
+      "q"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

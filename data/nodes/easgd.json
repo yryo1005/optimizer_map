@@ -1,0 +1,43 @@
+{
+  "id": "easgd",
+  "name": "EASGD (Elastic Averaging SGD)",
+  "short_name": "EASGD",
+  "year": 2014,
+  "citations": 900,
+  "categories": [
+    "分散学習",
+    "重み平均化"
+  ],
+  "reference": "https://arxiv.org/abs/1412.6651",
+  "summary": "各ワーカーのローカルなパラメータと，サーバーが保持する中心のパラメータとを弾性的な力（2乗距離のペナルティ）で結び付けながら学習する分散学習法である．ワーカーが中心から離れて探索することを許容しつつ通信を減らし，非同期・同期の双方で，Downpour SGDより安定して高い性能を示す．",
+  "update_rule": "{\\mathbf x}^{k}_{t+1} = {\\mathbf x}^{k}_{t} - \\eta \\nabla f_k({\\mathbf x}^{k}_t) - \\alpha ({\\mathbf x}^{k}_t - \\tilde{\\mathbf x}_t), \\quad \\tilde{\\mathbf x}_{t+1} = \\tilde{\\mathbf x}_t + \\alpha \\sum_{k=1}^{K} ({\\mathbf x}^{k}_t - \\tilde{\\mathbf x}_t)",
+  "parents": [
+    {
+      "id": "downpour_sgd",
+      "types": [
+        "communication",
+        "averaging"
+      ],
+      "improvement": "中心パラメータとの弾性的な結合による探索と通信削減"
+    },
+    {
+      "id": "polyak_averaging",
+      "types": [
+        "averaging",
+        "communication"
+      ],
+      "improvement": "ワーカーのパラメータの平均への弾性的な引き寄せ"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [],
+    "hyperparameters": [
+      "η",
+      "α"
+    ],
+    "tasks": [
+      "distributed"
+    ]
+  }
+}

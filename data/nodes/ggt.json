@@ -1,0 +1,36 @@
+{
+  "id": "ggt",
+  "name": "GGT (Full-Matrix Adaptive Regularization)",
+  "short_name": "GGT",
+  "year": 2018,
+  "citations": 100,
+  "categories": [
+    "2次手法",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/1806.02958",
+  "summary": "全行列版AdaGradは理論的には優れるが，パラメータ数の2乗のサイズの行列とその逆平方根の計算が必要で実用的でない問題に対し，直近の少数の勾配からなる低ランク行列を用いて，その逆平方根を小さな行列の固有値分解から効率的に計算する手法である．GPU上で全行列の適応的正則化を実用的なコストで実現した．",
+  "update_rule": "{\\mathbf G}_t = [{\\mathbf g}_t, \\beta {\\mathbf g}_{t-1}, \\dots, \\beta^{r-1} {\\mathbf g}_{t-r+1}], \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\left( ({\\mathbf G}_t {\\mathbf G}_t^\\top)^{1/2} + \\epsilon {\\mathbf I} \\right)^{-1} {\\mathbf g}_t \\;\\; (r \\times r \\text{行列の固有値分解で計算})",
+  "parents": [
+    {
+      "id": "adagrad",
+      "types": [
+        "curvature",
+        "compression"
+      ],
+      "improvement": "直近の勾配の窓による低ランク化での全行列版の実用化"
+    }
+  ],
+  "practical": {
+    "state": "more",
+    "implementations": [],
+    "hyperparameters": [
+      "η",
+      "r（窓の長さ）",
+      "β"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

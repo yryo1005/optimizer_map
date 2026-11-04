@@ -1,0 +1,44 @@
+{
+  "id": "local_sgd",
+  "name": "Local SGD",
+  "short_name": "Local SGD",
+  "year": 2018,
+  "citations": 1200,
+  "categories": [
+    "分散学習"
+  ],
+  "reference": "https://arxiv.org/abs/1805.09767",
+  "summary": "複数のワーカーがそれぞれ独立に複数ステップのSGDを行い，一定間隔でのみパラメータを平均する分散学習法の収束解析を与えた研究である．通信回数を大幅に削減しても，ワーカー数に対して線形な高速化（ミニバッチSGDと同等の収束率）が得られることを示した．",
+  "update_rule": "{\\mathbf w}^{k}_{t+1} = \\begin{cases} \\frac{1}{K} \\sum_{j=1}^{K} \\left( {\\mathbf w}^{j}_t - \\eta \\nabla f^{j}_t({\\mathbf w}^{j}_t) \\right) & (t + 1 \\bmod H = 0) \\\\ {\\mathbf w}^{k}_t - \\eta \\nabla f^{k}_t({\\mathbf w}^{k}_t) & (\\mathrm{otherwise}) \\end{cases}",
+  "parents": [
+    {
+      "id": "fedavg",
+      "types": [
+        "reinterpretation",
+        "communication"
+      ],
+      "improvement": "独立同一分布のデータ並列設定での収束解析と線形な高速化の保証"
+    },
+    {
+      "id": "easgd",
+      "types": [
+        "averaging",
+        "communication"
+      ],
+      "improvement": "ワーカー間の周期的なパラメータの平均化"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "H（同期間隔）"
+    ],
+    "tasks": [
+      "distributed"
+    ]
+  }
+}

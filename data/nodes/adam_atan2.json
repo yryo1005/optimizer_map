@@ -1,0 +1,40 @@
+{
+  "id": "adam_atan2",
+  "name": "Adam-atan2",
+  "short_name": "Adam-atan2",
+  "year": 2024,
+  "citations": 150,
+  "categories": [
+    "適応的学習率",
+    "学習安定化"
+  ],
+  "reference": "https://arxiv.org/abs/2407.05872",
+  "summary": "Adamのゼロ除算を防ぐためのεは，勾配が非常に小さい場合やモデルの大規模化に伴い更新量の大きさを変化させ，ハイパーパラメータの転移を妨げる．本手法は，除算とεを逆正接関数atan2に置き換えることで，εを不要にし，スケール不変で有界な更新量を得る．",
+  "update_rule": "{\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\, a \\cdot \\mathrm{atan2}(\\hat{\\mathbf m}_t, \\, b \\sqrt{\\hat{\\mathbf v}_t})",
+  "parents": [
+    {
+      "id": "adam",
+      "types": [
+        "stabilization"
+      ],
+      "improvement": "除算とεの逆正接関数（atan2）による置き換え"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "a",
+      "b"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  },
+  "notes": "大規模なパラメータ化と最適化手法のスケーリング則に関する論文（Everett et al., 2024）の中で提案された．Citation数は論文全体の概算である．"
+}

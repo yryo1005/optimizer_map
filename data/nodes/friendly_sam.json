@@ -1,0 +1,36 @@
+{
+  "id": "friendly_sam",
+  "name": "F-SAM (Friendly Sharpness-Aware Minimization)",
+  "short_name": "F-SAM",
+  "year": 2024,
+  "citations": 50,
+  "categories": [
+    "平坦解探索"
+  ],
+  "reference": "https://arxiv.org/abs/2403.12350",
+  "summary": "SAMの汎化性能の向上は，敵対的摂動に含まれるミニバッチ固有の確率的勾配の雑音成分によるものであり，全勾配の成分はむしろ汎化を損なうことを示した手法である．過去の確率的勾配の指数移動平均で全勾配を推定して摂動から差し引き，雑音成分のみで摂動を構成することで，SAMより高い汎化性能と頑健性を示す．",
+  "update_rule": "{\\mathbf m}_t = \\lambda {\\mathbf m}_{t-1} + (1 - \\lambda) {\\mathbf g}_t, \\quad {\\mathbf d}_t = {\\mathbf g}_t - \\sigma {\\mathbf m}_t, \\quad \\hat{\\boldsymbol\\epsilon} = \\rho \\frac{{\\mathbf d}_t}{\\|{\\mathbf d}_t\\|}, \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\eta \\nabla f_B({\\mathbf w}_t + \\hat{\\boldsymbol\\epsilon})",
+  "parents": [
+    {
+      "id": "sam",
+      "types": [
+        "flatness"
+      ],
+      "improvement": "摂動からの全勾配成分（移動平均推定）の除去"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "ρ",
+      "λ",
+      "σ"
+    ],
+    "tasks": [
+      "vision"
+    ]
+  }
+}

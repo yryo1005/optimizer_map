@@ -1,0 +1,37 @@
+{
+  "id": "fromage",
+  "name": "Fromage (Frobenius Matched Gradient Descent)",
+  "short_name": "Fromage",
+  "year": 2020,
+  "citations": 100,
+  "categories": [
+    "学習安定化",
+    "大規模バッチ"
+  ],
+  "reference": "https://arxiv.org/abs/2002.03432",
+  "summary": "深いネットワークの2つのパラメータ間の距離を層ごとの相対的な変化で測る「深い相対的信頼」の概念を導入し，各層の更新量を重みのノルムに対する相対的な大きさとして制御する手法である．重みの大きさが更新で変わらないよう補正項を加えることで，学習率の調整なしに多様なタスクで安定に学習する．",
+  "update_rule": "{\\mathbf W}^\\ell_{t+1} = \\frac{1}{\\sqrt{1 + \\eta^2}} \\left( {\\mathbf W}^\\ell_t - \\eta \\frac{\\|{\\mathbf W}^\\ell_t\\|_F}{\\|{\\mathbf G}^\\ell_t\\|_F} {\\mathbf G}^\\ell_t \\right)",
+  "parents": [
+    {
+      "id": "lars",
+      "types": [
+        "normalization",
+        "reinterpretation"
+      ],
+      "improvement": "層ごとの相対的な更新量の理論的な正当化（深い相対的信頼）とノルムの保存"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "optax",
+      "library"
+    ],
+    "hyperparameters": [
+      "η"
+    ],
+    "tasks": [
+      "general"
+    ]
+  }
+}

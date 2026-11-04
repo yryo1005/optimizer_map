@@ -1,0 +1,39 @@
+{
+  "id": "muonclip",
+  "name": "MuonClip (Muon + QK-Clip)",
+  "short_name": "MuonClip",
+  "year": 2025,
+  "citations": 300,
+  "categories": [
+    "学習安定化",
+    "2次手法"
+  ],
+  "reference": "https://arxiv.org/abs/2507.20534",
+  "summary": "Muonで大規模言語モデルを学習する際に，Attentionのロジット（クエリとキーの内積）が爆発して学習が不安定になる問題に対し，各更新の後にヘッドごとの最大ロジットを監視し，閾値を超えた場合にクエリ・キーの射影重みを縮小するQK-Clipを組み合わせた手法である．1兆パラメータ規模のMoEモデル（Kimi K2）を損失スパイクなしで学習した．",
+  "update_rule": "{\\mathbf W}_{t+1} = \\mathrm{Muon}({\\mathbf W}_t), \\quad S^h_{\\max} = \\max_{i,j} \\frac{{\\mathbf q}^h_i \\cdot {\\mathbf k}^h_j}{\\sqrt{d}}, \\quad {\\mathbf W}^h_q \\leftarrow \\sqrt{\\gamma_h} \\, {\\mathbf W}^h_q, \\;\\; {\\mathbf W}^h_k \\leftarrow \\sqrt{\\gamma_h} \\, {\\mathbf W}^h_k, \\quad \\gamma_h = \\min\\left( 1, \\frac{\\tau}{S^h_{\\max}} \\right)",
+  "parents": [
+    {
+      "id": "moonlight_muon",
+      "types": [
+        "stabilization"
+      ],
+      "improvement": "Attentionロジットの上限によるクエリ・キー重みの事後的な縮小（QK-Clip）"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "μ",
+      "λ",
+      "τ（ロジット上限）"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  },
+  "notes": "Kimi K2の技術報告書の中で提案された．Citation数は報告書全体の概算である．"
+}

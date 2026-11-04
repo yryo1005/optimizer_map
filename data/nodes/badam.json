@@ -1,0 +1,45 @@
+{
+  "id": "badam",
+  "name": "BAdam (Block Coordinate Adam)",
+  "short_name": "BAdam",
+  "year": 2024,
+  "citations": 50,
+  "categories": [
+    "メモリ効率"
+  ],
+  "reference": "https://arxiv.org/abs/2404.02827",
+  "summary": "モデルのパラメータを複数のブロック（層のまとまり）に分割し，ブロック座標降下法の枠組みで1つのブロックのみを一定ステップ数Adamで更新して次のブロックへ移る手法である．オプティマイザの状態量と勾配は現在のブロック分のみ保持すればよいため，単一のGPUで数十億パラメータのモデルの全パラメータ学習を可能にする．",
+  "update_rule": "\\text{for } i = 1, \\dots, D : \\;\\; {\\mathbf w}_{\\pi_i} \\leftarrow \\mathrm{Adam}^{K}({\\mathbf w}_{\\pi_i}; {\\mathbf w}_{-\\pi_i} \\text{は固定}), \\quad (\\pi : \\text{ブロックの順序}, \\; K : \\text{ブロックあたりのステップ数})",
+  "parents": [
+    {
+      "id": "adam",
+      "types": [
+        "compression",
+        "stochastic"
+      ],
+      "improvement": "ブロック座標降下法による状態量の削減"
+    },
+    {
+      "id": "coordinate_descent",
+      "types": [
+        "stochastic",
+        "compression"
+      ],
+      "improvement": "ブロック座標降下法の枠組みの利用"
+    }
+  ],
+  "practical": {
+    "state": "compressed",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "ブロック数",
+      "K"
+    ],
+    "tasks": [
+      "finetune"
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "id": "spam",
+  "name": "SPAM (Spike-Aware Adam with Momentum Reset)",
+  "short_name": "SPAM",
+  "year": 2025,
+  "citations": 40,
+  "categories": [
+    "学習安定化",
+    "適応的学習率"
+  ],
+  "reference": "https://arxiv.org/abs/2501.06842",
+  "summary": "大規模言語モデルの学習で生じる，通常の数百倍から千倍にも達する勾配スパイクがAdamのモーメントに蓄積して長期間悪影響を及ぼす問題に対し，モーメントを定期的にリセットし，2次モーメントに基づく閾値で突出した勾配成分を適応的に縮小する手法である．",
+  "update_rule": "{\\mathbf g}_t = \\nabla f_t({\\mathbf w}_t), \\quad \\tilde g_{t,i} = \\begin{cases} \\mathrm{sign}(g_{t,i}) \\sqrt{\\theta v_{t-1,i}} & (g_{t,i}^2 > \\theta v_{t-1,i}) \\\\ g_{t,i} & (\\mathrm{otherwise}) \\end{cases}, \\quad {\\mathbf m}_t, {\\mathbf v}_t \\leftarrow {\\mathbf 0} \\;\\; (t \\bmod \\Delta T = 0), \\quad {\\mathbf w}_{t+1} = \\mathrm{Adam}({\\mathbf w}_t, \\tilde{\\mathbf g}_t)",
+  "parents": [
+    {
+      "id": "adam",
+      "types": [
+        "stabilization"
+      ],
+      "improvement": "モーメントの定期的なリセット"
+    },
+    {
+      "id": "gradient_clipping",
+      "types": [
+        "stabilization"
+      ],
+      "improvement": "2次モーメントに基づく成分ごとのスパイク検出と縮小"
+    }
+  ],
+  "practical": {
+    "state": "two",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "θ（スパイク閾値）",
+      "ΔT（リセット間隔）"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  }
+}

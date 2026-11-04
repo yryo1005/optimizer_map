@@ -1,0 +1,41 @@
+{
+  "id": "terngrad",
+  "name": "TernGrad",
+  "short_name": "TernGrad",
+  "year": 2017,
+  "citations": 1000,
+  "categories": [
+    "分散学習"
+  ],
+  "reference": "https://arxiv.org/abs/1705.07878",
+  "summary": "勾配を，各成分をその最大絶対値で正規化した確率で−1，0，+1の3値に確率的に量子化して通信する手法である．量子化は不偏であり，層ごとのスケーリングと勾配クリッピングを組み合わせることで，通信量を大幅に削減しつつ，収束保証と精度を保つ．",
+  "update_rule": "s_t = \\|{\\mathbf g}_t\\|_\\infty, \\quad \\tilde{\\mathbf g}_t = s_t \\cdot \\mathrm{sign}({\\mathbf g}_t) \\odot {\\mathbf b}_t, \\quad b_{t,i} \\sim \\mathrm{Bernoulli}\\left( \\frac{|g_{t,i}|}{s_t} \\right), \\quad {\\mathbf w}_{t+1} = {\\mathbf w}_t - \\frac{\\eta}{K} \\sum_{k} \\tilde{\\mathbf g}^k_t",
+  "parents": [
+    {
+      "id": "qsgd",
+      "types": [
+        "compression"
+      ],
+      "improvement": "3値への不偏な確率的量子化"
+    },
+    {
+      "id": "onebit_sgd",
+      "types": [
+        "compression"
+      ],
+      "improvement": "1bitから3値への量子化レベルの拡張（誤差フィードバックの代わりに不偏量子化）"
+    }
+  ],
+  "practical": {
+    "state": "none",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η"
+    ],
+    "tasks": [
+      "distributed"
+    ]
+  }
+}

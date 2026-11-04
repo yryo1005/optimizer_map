@@ -1,0 +1,37 @@
+{
+  "id": "accelerated_sgd",
+  "name": "ASGD (Accelerated Stochastic Gradient Descent, Jain et al.)",
+  "short_name": "ASGD",
+  "year": 2017,
+  "citations": 200,
+  "categories": [
+    "高速化"
+  ],
+  "reference": "https://arxiv.org/abs/1704.08227",
+  "summary": "確率的勾配の設定ではHeavy Ball法やNesterov法がSGDに対して加速しないことを示した上で，確率的な設定でも理論的に加速が得られる慣性項付きの手法を提案した研究である．統計的条件数に基づくパラメータ設定により，最小2乗回帰でSGDより速い収束を達成する．",
+  "update_rule": "\\bar{\\mathbf w}_t = \\alpha {\\mathbf w}_t + (1 - \\alpha) {\\mathbf v}_t, \\quad {\\mathbf w}_{t+1} = \\bar{\\mathbf w}_t - \\delta \\nabla f_t(\\bar{\\mathbf w}_t), \\quad {\\mathbf v}_{t+1} = \\beta \\bar{\\mathbf w}_t + (1 - \\beta) {\\mathbf v}_t - \\gamma \\nabla f_t(\\bar{\\mathbf w}_t)",
+  "parents": [
+    {
+      "id": "nesterov",
+      "types": [
+        "momentum",
+        "reinterpretation"
+      ],
+      "improvement": "確率的勾配の雑音を考慮した加速法の再設計"
+    }
+  ],
+  "practical": {
+    "state": "one",
+    "implementations": [],
+    "hyperparameters": [
+      "η",
+      "α",
+      "β",
+      "γ",
+      "δ"
+    ],
+    "tasks": [
+      "convex"
+    ]
+  }
+}

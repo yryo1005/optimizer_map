@@ -1,0 +1,54 @@
+{
+  "id": "conda",
+  "name": "Conda (Column-Normalized Adam)",
+  "short_name": "Conda",
+  "year": 2025,
+  "citations": 10,
+  "categories": [
+    "適応的学習率",
+    "2次手法"
+  ],
+  "reference": "https://arxiv.org/abs/2509.24218",
+  "summary": "Adamの更新量はスペクトル的な条件数が悪く，Muonは全方向を一様に正規化するためAdamの要素ごとの適応性を失うという両者の欠点に対し，更新量を直交部分空間に射影した上で，射影後の勾配の2次モーメントを用いて列ごとに正規化する手法である．Adamの適応性を保ちつつ穏やかなスペクトル正規化を導入し，LLaMA・GPT-2の事前学習でAdamWより2倍以上高速に収束する．",
+  "update_rule": "{\\mathbf U}_t = \\mathrm{SVD}_{\\mathrm{left}}({\\mathbf M}_t) \\;\\; (\\text{低頻度で更新}), \\quad \\tilde{\\mathbf M}_t = {\\mathbf U}_t^\\top {\\mathbf M}_t, \\quad \\tilde{\\mathbf V}_t = \\beta_2 \\tilde{\\mathbf V}_{t-1} + (1 - \\beta_2) ({\\mathbf U}_t^\\top {\\mathbf G}_t)^2, \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta \\, {\\mathbf U}_t \\frac{\\tilde{\\mathbf M}_t}{\\sqrt{\\tilde{\\mathbf V}_t} + \\epsilon}",
+  "parents": [
+    {
+      "id": "adamw",
+      "types": [
+        "normalization",
+        "compression"
+      ],
+      "improvement": "直交部分空間に射影した勾配での要素ごとの正規化"
+    },
+    {
+      "id": "muon",
+      "types": [
+        "normalization"
+      ],
+      "improvement": "全方向一様ではない穏やかなスペクトル正規化"
+    },
+    {
+      "id": "galore",
+      "types": [
+        "compression"
+      ],
+      "improvement": "勾配のSVDに基づく射影行列の低頻度での更新"
+    }
+  ],
+  "practical": {
+    "state": "matrix",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "β1",
+      "β2",
+      "射影の更新頻度"
+    ],
+    "tasks": [
+      "llm"
+    ]
+  },
+  "notes": "更新式は論文の手続きを簡略化した表記である．"
+}

@@ -1,0 +1,47 @@
+{
+  "id": "dion",
+  "name": "Dion (Distributed Orthonormalized Updates)",
+  "short_name": "Dion",
+  "year": 2025,
+  "citations": 50,
+  "categories": [
+    "2次手法",
+    "分散学習"
+  ],
+  "reference": "https://arxiv.org/abs/2504.05295",
+  "summary": "Muonの直交化は行列全体を必要とするため，パラメータを分割して保持する分散学習（FSDP，テンソル並列）では各デバイスで冗長な計算や通信が生じる問題に対し，Newton-Schulz反復の代わりに慣性項バッファに対する償却された冪乗反復による低ランクの直交化を用いる手法である．誤差フィードバックで低ランク近似の誤差を慣性項に戻すことで，性能を保ちつつ大規模化での実行時間を短縮する．",
+  "update_rule": "{\\mathbf B}_t = {\\mathbf M}_{t-1} + {\\mathbf G}_t, \\quad {\\mathbf P}_t = {\\mathbf B}_t {\\mathbf Q}_{t-1}, \\;\\; {\\mathbf P}_t \\leftarrow \\mathrm{orth}({\\mathbf P}_t), \\quad {\\mathbf R}_t = {\\mathbf B}_t^\\top {\\mathbf P}_t, \\quad {\\mathbf M}_t = {\\mathbf B}_t - (1 - \\mu) {\\mathbf P}_t {\\mathbf R}_t^\\top, \\quad {\\mathbf Q}_t = \\mathrm{normalize}({\\mathbf R}_t), \\quad {\\mathbf W}_{t+1} = {\\mathbf W}_t - \\eta \\sqrt{m/n} \\, {\\mathbf P}_t {\\mathbf Q}_t^\\top",
+  "parents": [
+    {
+      "id": "muon",
+      "types": [
+        "compression",
+        "communication"
+      ],
+      "improvement": "冪乗反復による低ランク直交化と誤差フィードバックによる分散環境への対応"
+    },
+    {
+      "id": "powersgd",
+      "types": [
+        "compression",
+        "normalization"
+      ],
+      "improvement": "冪乗反復による低ランク近似と誤差フィードバックの直交化への応用"
+    }
+  ],
+  "practical": {
+    "state": "compressed",
+    "implementations": [
+      "library"
+    ],
+    "hyperparameters": [
+      "η",
+      "ランク",
+      "μ"
+    ],
+    "tasks": [
+      "llm",
+      "distributed"
+    ]
+  }
+}
